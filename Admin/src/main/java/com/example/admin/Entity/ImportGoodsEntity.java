@@ -20,5 +20,5 @@ public class ImportGoodsEntity {
 
     private int quantity;
 
-    private Long totalPrice;
+    private double totalPrice;
 }

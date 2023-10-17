@@ -16,7 +16,7 @@ public class ReviewEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
-    private Long rate;
+    private int rate;
 
     private String content;
 

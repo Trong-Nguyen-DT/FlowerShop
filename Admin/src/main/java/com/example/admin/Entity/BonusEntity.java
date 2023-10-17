@@ -20,5 +20,5 @@ public class BonusEntity {
     @DateTimeFormat(pattern = "MM/yyyy")
     private LocalDate monthBonus;
 
-    private Long bonusMoney;
+    private double bonusMoney;
 }
