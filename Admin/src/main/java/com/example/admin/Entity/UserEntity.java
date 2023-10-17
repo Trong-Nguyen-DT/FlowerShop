@@ -2,12 +2,16 @@ package com.example.admin.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
