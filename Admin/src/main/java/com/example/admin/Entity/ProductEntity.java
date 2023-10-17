@@ -16,9 +16,9 @@ public class ProductEntity {
 
     private String name;
 
-    private Long original_price;
+    private double original_price;
 
-    private Long price;
+    private double price;
 
     private String description;
 
@@ -28,7 +28,7 @@ public class ProductEntity {
 
     private String sub_info;
 
-    private Long overall_rating;
+    private int overall_rating;
 
     private Long discount;
 

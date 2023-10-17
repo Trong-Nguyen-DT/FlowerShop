@@ -16,11 +16,11 @@ public class OrderEntity {
 
     private LocalDateTime orderDateTime;
 
-    private Long totalPrice;
+    private double totalPrice;
 
-    private Long discount;
+    private double discount;
 
-    private Long amount;
+    private double amount;
 
     private Boolean confirmed;
 
