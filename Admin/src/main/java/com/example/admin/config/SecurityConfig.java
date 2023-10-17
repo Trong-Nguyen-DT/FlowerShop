@@ -51,8 +51,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                                 auth.requestMatchers("/admin*")
                                         .hasRole("ADMIN")
-//                                        .requestMatchers("/staff*")
-//                                        .hasRole("STAFF")
+                                        .requestMatchers("/staff*")
+                                        .hasAnyRole("ADMIN", "STAFF")
 //                        .requestMatchers("/anonymous*")
 //                        .anonymous()
                                         .requestMatchers("/login*")
