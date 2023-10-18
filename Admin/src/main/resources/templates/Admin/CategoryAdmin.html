@@ -80,8 +80,8 @@
                 </li>
 
                 <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores Staff
+                    <a th:href="@{/admin/category/restore}">
+                        Restores Category
                     </a>
                 </li>
             </ul>
@@ -199,8 +199,8 @@
                     <tr>
                         <td th:text="${cate.id}"></td>
                         <td th:text="${cate.name}"></td>
-                        <td><button class="btn-click"> <a> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-                        <td><button class="btn-click"> <a> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
                     </tr>
                     </tbody>
                 </table>
