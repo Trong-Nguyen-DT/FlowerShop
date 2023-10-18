@@ -25,4 +25,30 @@ public class CategoryServiceImpl implements CategoryService {
     public void addCategory(Category category) {
         categoryRepository.save(CategoryConverter.toEntity(category));
     }
+
+    @Override
+    public Category getCategoryById(Long categoryId) {
+        return CategoryConverter.toModel(categoryRepository.findById(categoryId).orElseThrow());
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        CategoryEntity categoryEntity = categoryRepository.findById(category.getId()).orElseThrow();
+        categoryEntity.setName(category.getName());
+        categoryRepository.save(categoryEntity);
+    }
+
+    @Override
+    public void deleteCategoryById(Long categoryId) {
+        CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow();
+        categoryEntity.setDeleted(true);
+        categoryRepository.save(categoryEntity);
+    }
+
+    @Override
+    public void restoreCategoryById(Long categoryId) {
+        CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow();
+        categoryEntity.setDeleted(false);
+        categoryRepository.save(categoryEntity);
+    }
 }

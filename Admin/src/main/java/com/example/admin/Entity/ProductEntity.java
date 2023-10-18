@@ -30,7 +30,7 @@ public class ProductEntity {
 
     private int overall_rating;
 
-    private Long discount;
+    private double discount;
 
     private String image1;
 

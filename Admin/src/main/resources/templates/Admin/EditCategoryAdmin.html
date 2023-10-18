@@ -186,8 +186,9 @@
                 Add Category
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/category/add}" th:method="post" th:object="${category}">
+                <form th:action="@{/admin/category/edit}" th:method="post" th:object="${category}">
                     <table>
+                        <input type="hidden" th:field="*{id}">
                         <tr>
                             <th>
                                 <label>Name:</label>
@@ -197,7 +198,7 @@
                             </td>
                         </tr>
                     </table>
-                    <button type="submit">ADD</button>
+                    <button type="submit">Update</button>
                 </form>
             </div>
         </div>
