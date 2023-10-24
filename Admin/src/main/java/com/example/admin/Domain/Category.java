@@ -18,3 +18,4 @@ public class Category {
 
     private boolean deleted;
 }
+
