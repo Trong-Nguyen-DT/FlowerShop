@@ -2,12 +2,16 @@ package com.example.admin.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "products")
+@Getter
+@Setter
 public class ProductEntity {
 
     @Id

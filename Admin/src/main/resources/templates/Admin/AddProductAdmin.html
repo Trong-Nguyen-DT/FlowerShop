@@ -130,7 +130,7 @@
                 </li>
                 <li>
                     <a th:href="@{/admin/product/restore}">
-                        restore <products></products>
+                        restore
                     </a>
                 </li>
             </ul>
@@ -190,8 +190,8 @@
             <div class="box-header">
                 Add Category
             </div>
-            <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/category/add}" th:method="post" th:object="${category}">
+            <div  class="box-body overflow-scroll">
+                <form id="product-form" th:action="@{/admin/product/add}" th:method="post" th:object="${product}">
                     <table>
                         <tr>
                             <th>
@@ -201,8 +201,116 @@
                                 <input type="text" th:field="*{name}">
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                <label>Original Price:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{original_price}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Discount:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{discount}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Description:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{description}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Detail:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{details}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Delivery:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{delivery}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Sub Info:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{sub_info}">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                <label>Image 1:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{image1}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 2:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{image2}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 3:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{image3}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 4:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{image4}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 5:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{image5}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Number of Flower Type: </label>
+                            </th>
+                            <td>
+                                <input type="number" id="number-type" name="numberType">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Number of Flowers: </label>
+                            </th>
+                            <td>
+                                <input type="number" id="number-flower" name="numberFlower">
+                            </td>
+                        </tr>
+                        <tr><div id="select-container"></div></tr>
                     </table>
-                    <button type="submit">ADD</button>
+                    <button id="add-button" type="submit">ADD</button>
+
+
                 </form>
             </div>
         </div>
@@ -220,22 +328,61 @@
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
 
-    <!--    <script>-->
-    <!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
-    <!--            var selectedCategoryId = this.value;-->
-    <!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
-    <!--            // Ví dụ sử dụng Fetch API:-->
-    <!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
-    <!--                .then(response => response.json())-->
-    <!--                .then(data => {-->
-    <!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
-    <!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
-    <!--                })-->
-    <!--                .catch(error => {-->
-    <!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
-    <!--                });-->
-    <!--        });-->
-    <!--    </script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('number-type').addEventListener('input', function() {
+            var numberTypeValue = parseInt(this.value);
+            var selectContainer = document.getElementById('select-container');
+
+            // Xóa các select cũ
+            while (selectContainer.firstChild) {
+                selectContainer.removeChild(selectContainer.firstChild);
+            }
+
+            // Gọi API để lấy danh sách các items
+            $.get('/api/items', function(data) {
+                for (var i = 0; i < numberTypeValue; i++) {
+                    var select = document.createElement('select');
+                    select.name = 'flowerTypes[' + i + ']';
+
+                    // Thêm các option từ dữ liệu API vào đây
+                    $.each(data, function(index, item) {
+                        var option = document.createElement('option');
+                        option.value = item.id;
+                        option.text = item.name;
+                        select.appendChild(option);
+                    });
+
+                    selectContainer.appendChild(select);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        document.getElementById('product-form').addEventListener('submit', function() {
+            var selectedItems = [];
+
+            // Lặp qua tất cả các select box
+            var selects = document.querySelectorAll('select[name^="flowerTypes"]');
+            selects.forEach(function(select) {
+                var selectedOption = select.options[select.selectedIndex];
+                selectedItems.push(selectedOption.value);
+            });
+
+            // Tạo một input ẩn để chứa danh sách các ID item
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'selectedItems';
+            input.value = JSON.stringify(selectedItems);
+
+            // Thêm input vào form
+            this.appendChild(input);
+        });
+
+    </script>
+
+
 </div>
 </body>
 

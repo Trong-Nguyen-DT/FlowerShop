@@ -78,7 +78,7 @@ public class SecurityConfig {
                                 .deleteCookies("JSESSIONID")
 //                        .logoutSuccessHandler(logoutSuccessHandler())
                 )
-//                .rememberMe(me -> {}) //TODO search them tren mang
+//                .rememberMe(me -> {})
         ;
 
 //        http.addFilterBefore(filter(), UsernamePasswordAuthenticationFilter.class);

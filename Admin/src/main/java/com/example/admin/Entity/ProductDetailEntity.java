@@ -2,9 +2,13 @@ package com.example.admin.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "product_detail")
+@Getter
+@Setter
 public class ProductDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
