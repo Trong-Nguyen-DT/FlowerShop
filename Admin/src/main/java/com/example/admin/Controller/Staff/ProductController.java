@@ -9,12 +9,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("staff")
-public class StaffHomeController {
+public class ProductController {
     @Autowired
     private ProductService productService;
-    @GetMapping()
-    public String showStaffHome(Model model){
+    @GetMapping("product")
+    public String listCategory(Model model) {
         model.addAttribute("products", productService.getAllProduct());
         return "Staff/Products";
     }
+
+//    @GetMapping("product/add")
+//    public String showAddCategory(Model model) {
+//        model.addAttribute("product", new Category());
+//        return "Staff/AddProductAdmin";
+//    }
+
+//    @PostMapping("product/add")
+//    public String addCategory(@ModelAttribute Category category) {
+//        categoryService.addCategory(category);
+//        return "redirect:/admin/product";
+//    }
 }
