@@ -1,11 +1,10 @@
-package com.example.admin.Entity;
+package com.example.customer.entity;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

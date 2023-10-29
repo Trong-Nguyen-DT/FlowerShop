@@ -1,28 +1,24 @@
-package com.example.admin.Entity;
+package com.example.customer.entity;
 
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "import_goods")
+@Table(name = "inventories")
 @Getter
 @Setter
-public class ImportGoodsEntity {
+public class InventoryEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime timeImport;
-
-    @ManyToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
     private ItemEntity itemEntity;
 
     private int quantity;
 
-    private double totalPrice;
 }
