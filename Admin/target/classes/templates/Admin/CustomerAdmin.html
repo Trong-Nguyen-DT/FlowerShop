@@ -14,7 +14,6 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -188,7 +187,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Customer
+                Customers
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -198,23 +197,17 @@
                         <th>Full Name</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Password</th>
+                        <th>Detail</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody  th:each="customer : ${customers}"  >
                     <tr>
                         <td th:text="${customer.id}"></td>
                         <td th:text="${customer.full_name}"></td>
                         <td th:text="${customer.address}"></td>
                         <td th:text="${customer.phone}"></td>
-                        <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
-                        <td th:text="${customer.email}"></td>
-                        <td th:text="${customer.username}"></td>
-                        <td th:text="${customer.password}"></td>
-
+                        <td><a th:href="@{'/admin/customer/detail/' + ${customer.id}}" style="color: blue"> Detail  </a> </td>
+<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>-->
                     </tr>
                     </tbody>
                 </table>
