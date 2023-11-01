@@ -14,8 +14,7 @@ public class CustomerConverter {
         customer.setPassword(customerEntity.getPassword());
         customer.setUsername(customerEntity.getUsername());
         customer.setPhone(customerEntity.getPhone());
-        customer.setDeleted(customerEntity.isDeleted());
-        //customer.setCustomers(customerEntity.getCustomerEntities().stream().map(CustomerConverter::toModel).toList());
+//      customer.setCustomers(customerEntity.getCustomerEntities().stream().map(CustomerConverter::toModel).toList());
         return customer;
     }
 
@@ -28,8 +27,6 @@ public class CustomerConverter {
         customerEntity.setPassword(customer.getPassword());
         customerEntity.setPhone(customer.getPhone());
         customerEntity.setUsername(customer.getUsername());
-        customerEntity.setDeleted(false);
-        //categoryEntity.setDeleted(false);
         return customerEntity;
     }
 }

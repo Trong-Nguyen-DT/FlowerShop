@@ -31,8 +31,6 @@ public class CustomerEntity {
 
     private String email;
 
-    private boolean deleted;
-
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;
 

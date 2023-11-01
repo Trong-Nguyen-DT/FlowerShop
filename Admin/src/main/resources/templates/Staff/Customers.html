@@ -51,7 +51,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each = "customer : ${customers}" th:if="${customer.deleted == false}">
+        <tr th:each = "customer : ${customers}">
             <td th:text="${customer.id}"></td>
             <td th:text="${customer.full_name}"></td>
             <td th:text="${customer.address}"></td>
