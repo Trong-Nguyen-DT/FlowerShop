@@ -3,8 +3,6 @@ package com.example.admin.Domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 public class Product {
@@ -19,7 +17,7 @@ public class Product {
 
     private String details; // chi tiết
 
-    private Long discount;// giảm giá
+    private double discount;// giảm giá
 
     private String image1;
 
@@ -31,11 +29,11 @@ public class Product {
 
     private String image5;
 
-    private Long original_price;// giá gốc
+    private double original_price;// giá gốc
 
-    private Long overall_rating;// trung bình sao
+    private int overall_rating;// trung bình sao
 
-    private Long price; // Giá
+    private double price; // Giá
 
     private String sub_info; // Thông tin phụ
 

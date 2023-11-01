@@ -22,8 +22,11 @@ public class ImageController {
     @GetMapping("/images/{filename:.+}")
     public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
         try {
+            System.out.println(filename);
             Path path = Paths.get(imagePath, filename);
+            System.out.println(path);
             Resource file = new UrlResource(path.toUri());
+            System.out.println(file);
 
             if (file.exists() || file.isReadable()) {
                 return ResponseEntity.ok().body(file);
