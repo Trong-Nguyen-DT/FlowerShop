@@ -31,7 +31,7 @@ public class ProductController {
 
     @GetMapping()
     public String listProduct(Model model) {
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("product", productService.getAllProduct());
         return "Admin/ProductAdmin";
     }
 
@@ -43,7 +43,7 @@ public class ProductController {
 
     @PostMapping("add")
     @Transactional
-    public String addProduct(@ModelAttribute("product") Product product, @RequestParam("selectedItems") String selectedItems, @RequestParam("numberFlower") int numberFlower) {
+    public String addProduct(@ModelAttribute("products") Product product, @RequestParam("selectedItems") String selectedItems, @RequestParam("numberFlower") int numberFlower) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             List<Long> idList = objectMapper.readValue(selectedItems, new TypeReference<List<Long>>() {});

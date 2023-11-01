@@ -195,6 +195,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Image</th>
+                        <th>Detail</th>
                         <th>Restore</th>
 
                     </tr>
@@ -203,6 +205,8 @@
                     <tr>
                         <td th:text="${cate.id}"></td>
                         <td th:text="${cate.name}"></td>
+                        <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
+                        <td th:text="${cate.detail}"></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/restore/' + ${cate.id}}"> <i class="fa-solid fa-trash-can-arrow-up"></i>  </a> </button></td>
                     </tr>
                     </tbody>

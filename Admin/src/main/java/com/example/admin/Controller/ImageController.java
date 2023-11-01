@@ -24,9 +24,9 @@ public class ImageController {
         try {
             System.out.println(filename);
             Path path = Paths.get(imagePath, filename);
-            System.out.println(path);
+//            System.out.println(path);
             Resource file = new UrlResource(path.toUri());
-            System.out.println(file);
+//            System.out.println(file);
 
             if (file.exists() || file.isReadable()) {
                 return ResponseEntity.ok().body(file);

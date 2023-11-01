@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("staff")
-public class CustomerController {
+public class StaffCustomerController {
     @Autowired
     private CustomerService customerService;
 
