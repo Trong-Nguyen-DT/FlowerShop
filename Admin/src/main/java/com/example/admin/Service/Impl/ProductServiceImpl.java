@@ -16,6 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
     @Override
     public List<Product> getAllProduct() {
         return productRepository.findAll().stream().map(ProductConverter::toModel).toList();
