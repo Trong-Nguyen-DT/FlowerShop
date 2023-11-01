@@ -10,6 +10,8 @@ public class CategoryConverter {
         category.setId(categoryEntity.getId());
         category.setName(categoryEntity.getName());
         category.setDeleted(categoryEntity.isDeleted());
+        category.setImage(categoryEntity.getImage());
+        category.setDetail(categoryEntity.getDetail());
 //        category.setProducts(categoryEntity.getProductEntities().stream().map(ProductConverter::toModel).toList());
         return category;
     }
