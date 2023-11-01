@@ -32,7 +32,7 @@ public class ProductEntity {
 
     private String sub_info;
 
-    private int overall_rating;
+    private double overall_rating;
 
     private double discount;
 

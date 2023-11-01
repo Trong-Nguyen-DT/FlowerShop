@@ -3,6 +3,9 @@ package com.example.admin.Domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
+
 @Getter
 @Setter
 public class Product {
@@ -11,13 +14,21 @@ public class Product {
 
     private String name;
 
-    private String delivery;//Vận chuyển
+    private double original_price;
 
-    private String description;// Miêu tả
+    private double price;
 
-    private String details; // chi tiết
+    private String description;
 
-    private double discount;// giảm giá
+    private String details;
+
+    private String delivery;
+
+    private String sub_info;
+
+    private double overall_rating;
+
+    private double discount;
 
     private String image1;
 
@@ -29,14 +40,11 @@ public class Product {
 
     private String image5;
 
-    private double original_price;// giá gốc
+    private boolean deleted;
 
-    private int overall_rating;// trung bình sao
+    private List<Review> reviewEntities;
 
-    private double price; // Giá
+    private List<Category> categoryEntities;
 
-    private String sub_info; // Thông tin phụ
-
-    private boolean deleted; // Đã xóa
+    private List<ProductDetail> productDetailEntities;
 }
-

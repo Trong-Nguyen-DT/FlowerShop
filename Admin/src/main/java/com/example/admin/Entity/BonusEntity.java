@@ -2,12 +2,16 @@ package com.example.admin.Entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "bonus")
+@Getter
+@Setter
 public class BonusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -99,12 +99,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a th:href="@{/admin/product/add}">
                         Add Product
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a th:href="@{/admin/product/restore}">
                         Restore Product
                     </a>
                 </li>
@@ -195,17 +195,33 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Original Price</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Description</th>
+                        <th>Details</th>
+                        <th>Delivery</th>
+                        <th>Sub Info</th>
+                        <th>Overall Rating</th>
                         <th>Edit</th>
                         <th>Delete</th>
 
                     </tr>
                     </thead>
-                    <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == false}"  >
+                    <tbody  th:each="prod : ${products}" th:if="${prod.deleted == false}"  >
                     <tr>
-                        <td th:text="${cate.id}"></td>
-                        <td th:text="${cate.name}"></td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+                        <td th:text="${prod.id}"></td>
+                        <td th:text="${prod.name}"></td>
+                        <td th:text="${prod.original_price}"></td>
+                        <td th:text="${prod.price}"></td>
+                        <td th:text="${prod.discount}"></td>
+                        <td th:text="${prod.description}"></td>
+                        <td th:text="${prod.details}"></td>
+                        <td th:text="${prod.delivery}"></td>
+                        <td th:text="${prod.sub_info}"></td>
+                        <td th:text="${prod.overall_rating}"></td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${prod.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/product/delete/' + ${prod.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
                     </tr>
                     </tbody>
                 </table>

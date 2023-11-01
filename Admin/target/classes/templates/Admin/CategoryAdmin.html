@@ -89,18 +89,23 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
-                <span>project</span>
+                <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#">
-                        list
+                    <a th:href="@{/admin/product}">
+                        Products
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        add project
+                    <a th:href="@{/admin/product/add}">
+                        Add Product
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/product/restore}">
+                        Restore Product
                     </a>
                 </li>
             </ul>
