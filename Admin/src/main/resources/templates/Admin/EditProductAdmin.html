@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -188,36 +189,87 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Customer
+                Edit Product
             </div>
             <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${customer.id}"></td>
-                        <td th:text="${customer.full_name}"></td>
-                        <td th:text="${customer.address}"></td>
-                        <td th:text="${customer.phone}"></td>
-                        <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
-                        <td th:text="${customer.email}"></td>
-                        <td th:text="${customer.username}"></td>
-                        <td th:text="${customer.password}"></td>
-
-                    </tr>
-                    </tbody>
-                </table>
+                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}">
+                    <table>
+                        <input type="hidden" th:field="*{id}">
+                        <tr>
+                            <th>
+                                <label>Name:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{name}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Original price:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{original_price}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Discount:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{discount}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 1:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{image1}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 2:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{image2}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 3:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{image3}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 4:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{image4}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Image 5:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{image5}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Detail:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{details}">
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">Update</button>
+                </form>
             </div>
         </div>
 

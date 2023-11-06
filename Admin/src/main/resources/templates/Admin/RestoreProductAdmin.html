@@ -14,7 +14,6 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -82,7 +81,7 @@
 
                 <li>
                     <a th:href="@{/admin/category/restore}">
-                        Restores Category
+                        Restore Category
                     </a>
                 </li>
             </ul>
@@ -188,33 +187,39 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Customer
+                Products
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Password</th>
+                        <th>Name</th>
+                        <th>Original Price</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Description</th>
+                        <th>Details</th>
+                        <th>Delivery</th>
+                        <th>Sub Info</th>
+                        <th>Overall Rating</th>
+                        <th>Restore</th>
+
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody  th:each="prod : ${products}" th:if="${prod.deleted == true}"  >
                     <tr>
-                        <td th:text="${customer.id}"></td>
-                        <td th:text="${customer.full_name}"></td>
-                        <td th:text="${customer.address}"></td>
-                        <td th:text="${customer.phone}"></td>
-                        <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
-                        <td th:text="${customer.email}"></td>
-                        <td th:text="${customer.username}"></td>
-                        <td th:text="${customer.password}"></td>
-
+                        <td th:text="${prod.id}"></td>
+                        <td th:text="${prod.name}"></td>
+                        <td th:text="${prod.original_price}"></td>
+                        <td th:text="${prod.price}"></td>
+                        <td th:text="${prod.discount}"></td>
+                        <td th:text="${prod.description}"></td>
+                        <td th:text="${prod.details}"></td>
+                        <td th:text="${prod.delivery}"></td>
+                        <td th:text="${prod.sub_info}"></td>
+                        <td th:text="${prod.overall_rating}"></td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/product/restore/' + ${prod.id}}"> <i class="fa-solid fa-trash-can-arrow-up"></i>  </a> </button></td>
                     </tr>
                     </tbody>
                 </table>
