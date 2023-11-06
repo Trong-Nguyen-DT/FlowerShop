@@ -8,13 +8,15 @@ public class ItemConverter {
         Item item = new Item();
         item.setId(itemEntity.getId());
         item.setName(itemEntity.getName());
+        item.setImage(itemEntity.getImage());
         item.setDeleted(itemEntity.isDeleted());
         return item;
     }
-    public static ItemEntity toModel(Item item){
+    public static ItemEntity toEntity(Item item){
         ItemEntity itemEntity = new ItemEntity();
         itemEntity.setId(item.getId());
         itemEntity.setName(item.getName());
+        itemEntity.setImage(item.getImage());
         itemEntity.setDeleted(false);
         return itemEntity;
     }

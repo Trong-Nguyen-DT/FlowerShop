@@ -89,6 +89,30 @@
     <li class="sidebar-submenu">
       <a href="#" class="sidebar-menu-dropdown">
         <i class='bx bx-category'></i>
+        <span>Item</span>
+        <div class="dropdown-icon"></div>
+      </a>
+      <ul class="sidebar-menu sidebar-menu-dropdown-content">
+        <li>
+          <a th:href="@{/admin/item}">
+            Items
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/item/add}">
+            Add Item
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/item/restore}">
+            Restore Item
+          </a>
+        </li>
+      </ul>
+    </li>
+    <li class="sidebar-submenu">
+      <a href="#" class="sidebar-menu-dropdown">
+        <i class='bx bx-category'></i>
         <span>Product</span>
         <div class="dropdown-icon"></div>
       </a>
@@ -187,7 +211,7 @@
   <div class="box">
     <div class="box-body overflow-scroll">
       <div class="box-header">
-        Categories
+        Items
       </div>
       <div class="box-body overflow-scroll">
         <table>
@@ -196,19 +220,17 @@
             <th>ID</th>
             <th>Name</th>
             <th>Image</th>
-            <th>Detail</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
           </thead>
-          <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == false}"  >
+          <tbody  th:each="item : ${items}" th:if="${item.deleted == false}"  >
           <tr>
-            <td th:text="${cate.id}"></td>
-            <td th:text="${cate.name}"></td>
-            <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
-            <td th:text="${cate.detail}"></td>
-            <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-            <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.name}"></td>
+            <td> <img th:src="@{'/images/' + ${item.image}}"></td>
+            <td><button class="btn-click"> <a th:href="@{'/admin/item/edit/' + ${item.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+            <td><button class="btn-click"> <a th:href="@{'/admin/item/delete/' + ${item.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
           </tr>
           </tbody>
         </table>
