@@ -14,6 +14,7 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -81,7 +82,7 @@
 
                 <li>
                     <a th:href="@{/admin/category/restore}">
-                        Restore Category
+                        Restores Category
                     </a>
                 </li>
             </ul>
@@ -187,7 +188,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Categories
+                Detail Product
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -195,18 +196,43 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Image</th>
-                        <th>Detail</th>
-                        <th>Restore</th>
+                        <th>Original price</th>
+                        <th>Discount</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Overall rating</th>
+                        <th>Delivery</th>
+                        <th>Sub info</th>
+                        <th>Image1</th>
+                        <th>Image2</th>
+                        <th>Image3</th>
+                        <th>Image4</th>
+                        <th>Image5</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     </thead>
-                    <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == true}"  >
+                    <tbody>
                     <tr>
-                        <td th:text="${cate.id}"></td>
-                        <td th:text="${cate.name}"></td>
-                        <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
-                        <td th:text="${cate.detail}"></td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/category/restore/' + ${cate.id}}"> <i class="fa-solid fa-trash-can-arrow-up"></i>  </a> </button></td>
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.original_price}"></td>
+                        <td th:text="${product.discount}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td th:text="${product.description}"></td>
+                        <td th:text="${product.overall_rating}"></td>
+                        <td th:text="${product.sub_info}"></td>
+                        <td th:text="${product.delivery}"></td>
+                        <td> <img th:src="@{'/images/' + ${product.image1}}"></td>
+                        <td> <img th:src="@{'/images/' + ${product.image2}}"></td>
+                        <td> <img th:src="@{'/images/' + ${product.image3}}"></td>
+                        <td> <img th:src="@{'/images/' + ${product.image4}}"></td>
+                        <td> <img th:src="@{'/images/' + ${product.image5}}"></td>
+                        <td><a th:href="@{'/admin/product/detail/' + ${product.id}}" style="color: blue"> Detail  </a> </td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -216,32 +242,32 @@
     </div>
     <!-- END ORDERS TABLE -->
 
-<!-- END MAIN CONTENT -->
+    <!-- END MAIN CONTENT -->
 
-<div class="overlay"></div>
+    <div class="overlay"></div>
 
-<!-- SCRIPT -->
-<!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
+    <!-- SCRIPT -->
+    <!-- APEX CHART -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- APP JS -->
+    <script th:src="@{/js/app.js}"></script>
 
-<!--    <script>-->
-<!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
-<!--            var selectedCategoryId = this.value;-->
-<!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
-<!--            // Ví dụ sử dụng Fetch API:-->
-<!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
-<!--                .then(response => response.json())-->
-<!--                .then(data => {-->
-<!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
-<!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
-<!--                });-->
-<!--        });-->
-<!--    </script>-->
+    <!--    <script>-->
+    <!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
+    <!--            var selectedCategoryId = this.value;-->
+    <!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
+    <!--            // Ví dụ sử dụng Fetch API:-->
+    <!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
+    <!--                .then(response => response.json())-->
+    <!--                .then(data => {-->
+    <!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
+    <!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
+    <!--                })-->
+    <!--                .catch(error => {-->
+    <!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
+    <!--                });-->
+    <!--        });-->
+    <!--    </script>-->
 </div>
 </body>
 
