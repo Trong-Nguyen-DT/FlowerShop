@@ -273,7 +273,6 @@
                                 <input type="text" th:field="*{sub_info}">
                             </td>
                         </tr>
-
                         <tr>
                             <th>
                                 <label>Image 1:</label>
@@ -314,22 +313,56 @@
                                 <input type="file" th:field="*{image5}">
                             </td>
                         </tr>
-                        <tr>
+                        <tr th:each="item : ${items}" th:if="${item.deleted == false}">
                             <th>
-                                <label>Number of Flower Type: </label>
+                                <label>Item:</label>
                             </th>
                             <td>
-                                <input type="number" id="number-type" name="numberType">
+                                <select name="itemIDs" id="item" multiple="multiple">
+                                    <th:block >
+                                        <option th:value="${item.id}" th:text="${item.name}"></option>
+                                    </th:block >
+                                </select>
                             </td>
-                        </tr>
-                        <tr>
                             <th>
-                                <label>Number of Flowers: </label>
+                                <label>Quantity:</label>
                             </th>
                             <td>
                                 <input type="number" id="number-flower" name="numberFlower">
                             </td>
                         </tr>
+                        <tr th:each="category : ${categories}" th:if="${category.deleted == false}">
+                            <th>
+                                <label>Category:</label>
+                            </th>
+                            <td>
+                                <select name="categoryIDs" multiple="multiple">
+                                    <!-- Thêm các option từ danh sách categories -->
+                                    <th:block >
+                                        <option th:value="${category.id}" th:text="${category.name}"></option>
+                                    </th:block>
+                                </select>
+                            </td>
+                        </tr>
+
+
+
+                        <!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Number of Flower Type: </label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <input type="number" id="number-type" name="numberType">-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Number of Flowers: </label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <input type="number" id="number-flower2" name="numberFlower">-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         <tr><div id="select-container"></div></tr>
                     </table>
                     <button id="add-button" type="submit">ADD</button>
@@ -353,33 +386,166 @@
     <script th:src="@{/js/app.js}"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!--    <script>-->
+<!--        document.getElementById('product-form').addEventListener('submit', function(event) {-->
+<!--            event.preventDefault(); // Ngăn chặn biểu mẫu được submit mặc định-->
+
+<!--            var itemObjects = [];-->
+<!--            var selects = document.querySelectorAll('select[name="item"]');-->
+<!--            selects.forEach(function(select) {-->
+<!--                var selectedItemId = select.value;-->
+<!--                var quantityInput = select.closest('tr').querySelector('input[name="numberFlower"]');-->
+<!--                var quantityValue = quantityInput.value;-->
+<!--                var itemObject = { id: selectedItemId, quantity: quantityValue };-->
+<!--                itemObjects.push(itemObject);-->
+<!--            });-->
+
+<!--            var categoryIDs = [];-->
+<!--            var categorySelect = document.querySelector('select[name="categoryIDs"]');-->
+<!--            var selectedCategories = categorySelect.selectedOptions;-->
+<!--            selectedCategories.forEach(function(option) {-->
+<!--                categoryIDs.push(option.value);-->
+<!--            });-->
+
+<!--            var productDTO = {-->
+<!--                product: {-->
+<!--                    // Thêm các thuộc tính của product từ form-->
+<!--                    name: document.querySelector('input[name="name"]').value,-->
+<!--                    original_price: document.querySelector('input[name="original_price"]').value,-->
+<!--                    discount: document.querySelector('input[name="discount"]').value,-->
+<!--                    description: document.querySelector('input[name="description"]').value,-->
+<!--                    details: document.querySelector('input[name="details"]').value,-->
+<!--                    delivery: document.querySelector('input[name="delivery"]').value,-->
+<!--                    sub_info: document.querySelector('input[name="sub_info"]').value,-->
+<!--                    image1: document.querySelector('input[name="image1"]').value,-->
+<!--                    image2: document.querySelector('input[name="image2"]').value,-->
+<!--                    image3: document.querySelector('input[name="image3"]').value,-->
+<!--                    image4: document.querySelector('input[name="image4"]').value,-->
+<!--                    image5: document.querySelector('input[name="image5"]').value-->
+<!--                },-->
+<!--                selectedItems: itemObjects,-->
+<!--                categoryIDs: categoryIDs-->
+<!--            };-->
+
+<!--            var input = document.createElement('input');-->
+<!--            input.type = 'hidden';-->
+<!--            input.name = 'productDTO';-->
+<!--            input.value = JSON.stringify(productDTO);-->
+<!--            this.appendChild(input);-->
+
+<!--            this.submit();-->
+<!--        });-->
+
+
+<!--    </script>-->
+<!--    <script>-->
+<!--        document.getElementById('product-form').addEventListener('submit', function(event) {-->
+<!--            event.preventDefault();-->
+
+<!--            var productDTO = {-->
+<!--                product: {-->
+<!--                    name: document.querySelector('input[name="name"]').value,-->
+<!--                    original_price: document.querySelector('input[name="original_price"]').value,-->
+<!--                    discount: document.querySelector('input[name="discount"]').value,-->
+<!--                    description: document.querySelector('input[name="description"]').value,-->
+<!--                    details: document.querySelector('input[name="details"]').value,-->
+<!--                    delivery: document.querySelector('input[name="delivery"]').value,-->
+<!--                    sub_info: document.querySelector('input[name="sub_info"]').value,-->
+<!--                    image1: document.querySelector('input[name="image1"]').value,-->
+<!--                    image2: document.querySelector('input[name="image2"]').value,-->
+<!--                    image3: document.querySelector('input[name="image3"]').value,-->
+<!--                    image4: document.querySelector('input[name="image4"]').value,-->
+<!--                    image5: document.querySelector('input[name="image5"]').value,-->
+<!--                },-->
+<!--                selectedItems: [{-->
+<!--                    id: document.querySelector('select[name="itemIDs"]').value,-->
+<!--                    quantity: document.querySelector('input[name="numberFlower"]').value-->
+<!--                }],-->
+<!--                categoryIDs: Array.from(document.querySelectorAll('select[name="categoryIDs"] option:checked')).map(option => option.value)-->
+<!--            };-->
+
+<!--            fetch('/admin/product/add-product', {-->
+<!--                method: 'POST',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json'-->
+<!--                },-->
+<!--                body: JSON.stringify(productDTO)-->
+<!--            })-->
+<!--                .then(response => response.json())-->
+<!--                .then(data => {-->
+<!--                    console.log(data);-->
+<!--                })-->
+<!--                .catch(error => {-->
+<!--                    console.error('Error:', error);-->
+<!--                });-->
+<!--        });-->
+
+<!--    </script>-->
     <script>
-        document.getElementById('number-type').addEventListener('input', function() {
-            var numberTypeValue = parseInt(this.value);
-            var selectContainer = document.getElementById('select-container');
+        document.getElementById('product-form').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-            // Xóa các select cũ
-            while (selectContainer.firstChild) {
-                selectContainer.removeChild(selectContainer.firstChild);
-            }
+            // Lấy danh sách các select box
+            var selectBoxes = document.querySelectorAll('select[name="itemIDs"]');
 
-            // Gọi API để lấy danh sách các items
-            $.get('/api/items', function(data) {
-                for (var i = 0; i < numberTypeValue; i++) {
-                    var select = document.createElement('select');
-                    select.name = 'flowerTypes[' + i + ']';
+            // Tạo mảng để lưu trữ các selectedItems
+            var selectedItems = [];
 
-                    // Thêm các option từ dữ liệu API vào đây
-                    $.each(data, function(index, item) {
-                        var option = document.createElement('option');
-                        option.value = item.id;
-                        option.text = item.name;
-                        select.appendChild(option);
-                    });
+            // Lặp qua mỗi select box
+            selectBoxes.forEach(function(selectBox) {
+                var id = selectBox.value;
+                var quantity = selectBox.closest('tr').querySelector('input[name="numberFlower"]').value;
 
-                    selectContainer.appendChild(select);
+                // Kiểm tra xem đã chọn id và quantity chưa
+                if (id && quantity) {
+                    // Tạo đối tượng mới và thêm vào mảng selectedItems
+                    var selectedItem = {
+                        id: id,
+                        quantity: quantity
+                    };
+                    selectedItems.push(selectedItem);
                 }
             });
+
+            // Lấy giá trị categoryIDs từ các option đã chọn
+            var categoryIDs = Array.from(document.querySelectorAll('select[name="categoryIDs"] option:checked')).map(option => option.value);
+
+            // Tạo đối tượng productDTO
+            var productDTO = {
+                product: {
+                    name: document.querySelector('input[name="name"]').value,
+                    original_price: document.querySelector('input[name="original_price"]').value,
+                    discount: document.querySelector('input[name="discount"]').value,
+                    description: document.querySelector('input[name="description"]').value,
+                    details: document.querySelector('input[name="details"]').value,
+                    delivery: document.querySelector('input[name="delivery"]').value,
+                    sub_info: document.querySelector('input[name="sub_info"]').value,
+                    image1: document.querySelector('input[name="image1"]').value,
+                    image2: document.querySelector('input[name="image2"]').value,
+                    image3: document.querySelector('input[name="image3"]').value,
+                    image4: document.querySelector('input[name="image4"]').value,
+                    image5: document.querySelector('input[name="image5"]').value,
+                },
+                selectedItems: selectedItems,
+                categoryIDs: categoryIDs
+            };
+
+            // Gửi dữ liệu đến API sử dụng Fetch API hoặc jQuery.ajax
+            fetch('/admin/product/add-product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(productDTO)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         });
     </script>
 

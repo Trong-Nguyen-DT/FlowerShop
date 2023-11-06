@@ -1,9 +1,10 @@
 package com.example.admin.Controller.Admin;
 
-
-import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.Item;
 import com.example.admin.Entity.ProductEntity;
+import com.example.admin.Service.CategoryService;
+import com.example.admin.Service.ItemService;
 import com.example.admin.Service.ProductDetailService;
 import com.example.admin.Service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,7 +29,13 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
+    private ItemService itemService;
+
+    @Autowired
     private ProductDetailService productDetailService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping()
     public String listProduct(Model model) {
@@ -39,6 +46,8 @@ public class ProductController {
     @GetMapping("add")
     public String showAddProduct(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("items", itemService.getAllItem());
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "Admin/AddProductAdmin";
     }
 

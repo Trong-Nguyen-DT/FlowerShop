@@ -89,6 +89,30 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
+                <span>Item</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/item}">
+                        Items
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/item/add}">
+                        Add Item
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/item/restore}">
+                        Restore Item
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -198,7 +222,6 @@
                         <th>Image</th>
                         <th>Detail</th>
                         <th>Restore</th>
-
                     </tr>
                     </thead>
                     <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == true}"  >
