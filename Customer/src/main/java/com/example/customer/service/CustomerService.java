@@ -9,4 +9,8 @@ public interface CustomerService {
     boolean checkUsername(String username);
 
     void createCustomer(Customer customer);
+
+    void changePassword(Customer customer);
+
+    Customer getCustomerByUsername(String name);
 }

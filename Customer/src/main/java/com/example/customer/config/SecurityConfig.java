@@ -13,29 +13,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user1 = User.withUsername("user1")
-//                .password(passwordEncoder().encode("user1Pass"))
-//                .roles("USER")
-//                .build();
-//        UserDetails user2 = User.withUsername("user2")
-//                .password(passwordEncoder().encode("user2Pass"))
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.withUsername("admin")
-//                .password(passwordEncoder().encode("adminPass"))
-//                .roles("ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user1, user2, admin);
-//    }
-
-//    @Primary
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new CustomUserDetailService();
-//    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -47,15 +24,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                    auth.requestMatchers("/login*", "/css/**", "/images/**", "/js/**")
+                    auth.requestMatchers("/login/*", "/css/**", "/images/**", "/js/**")
                             .permitAll()
-                            .requestMatchers("/", "/home/**", "/product/**", "/login-customer/**", "category", "/about/**", "/contact/**").permitAll()
+                            .requestMatchers("/","/customer/**", "/product/**", "/login-customer/**","/perform_login/**", "register/**", "/category/**", "/verify-email/**", "/forgot-password/**", "/my/**", "/contact/**", "my")
+                            .permitAll()
                             .anyRequest()
                             .authenticated()
                 )
                 .formLogin(formLogin -> formLogin.loginPage("/login")
-                        .loginProcessingUrl("/perform_login")
-                        .defaultSuccessUrl("/")
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("/log").permitAll()
                         .failureUrl("/login?error=true")
 
                 )

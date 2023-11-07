@@ -2,7 +2,9 @@ package com.example.customer.service.Impl;
 
 import com.example.customer.converter.CustomerConverter;
 import com.example.customer.domain.Customer;
+import com.example.customer.entity.CartEntity;
 import com.example.customer.entity.CustomerEntity;
+import com.example.customer.repository.CartRepository;
 import com.example.customer.repository.CustomerRepository;
 import com.example.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CartRepository cartRepository;
+
     @Override
     public Customer checkCustomer(String username, String password) {
         CustomerEntity customerEntity = customerRepository.findByUsername(username).orElse(null);
@@ -39,6 +45,27 @@ public class CustomerServiceImpl implements CustomerService {
         customerEntity.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerEntity.setEmail(customer.getEmail());
         customerEntity.setPhone(customer.getPhone());
-        customerRepository.save(customerEntity);
+        customerEntity = customerRepository.save(customerEntity);
+        CartEntity cartEntity = new CartEntity();
+        cartEntity.setCustomerEntity(customerEntity);
+        cartRepository.save(cartEntity);
+    }
+
+    @Override
+    public void changePassword(Customer customer) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(customer.getUsername()).orElse(null);
+        if (customerEntity != null) {
+            customerEntity.setPassword(passwordEncoder.encode(customer.getPassword()));
+            customerRepository.save(customerEntity);
+        }
+    }
+
+    @Override
+    public Customer getCustomerByUsername(String name) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElse(null);
+        if (customerEntity != null) {
+             return CustomerConverter.toModel(customerEntity);
+        }
+        return null;
     }
 }
