@@ -23,6 +23,8 @@ public class UserEntity {
 
     private String fullName;
 
+    private String image;
+
     private String phone;
 
     private String address;

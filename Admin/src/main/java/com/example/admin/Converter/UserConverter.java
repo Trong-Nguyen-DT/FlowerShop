@@ -10,6 +10,7 @@ public class UserConverter {
         user.setUsername(userEntity.getUsername());
         user.setPassword(userEntity.getPassword());
         user.setFullName(userEntity.getFullName());
+        user.setImage(userEntity.getImage());
         user.setPhone(userEntity.getPhone());
         user.setAddress(userEntity.getAddress());
         user.setBirthday(userEntity.getBirthday());
@@ -25,6 +26,7 @@ public class UserConverter {
         userEntity.setUsername(user.getUsername());
         userEntity.setPassword(user.getPassword());
         userEntity.setFullName(user.getFullName());
+        userEntity.setImage(user.getImage());
         userEntity.setPhone(user.getPhone());
         userEntity.setAddress(user.getAddress());
         userEntity.setBirthday(user.getBirthday());

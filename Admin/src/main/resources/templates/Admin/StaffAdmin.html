@@ -235,7 +235,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Products
+                Staffs
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -245,11 +245,8 @@
                         <th>FullName</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        <th>Birthday</th>
                         <th>Salary</th>
-                        <th>Role</th>
-                        <th>Username</th>
-                        <th>Password</th>
+                        <th>Detail</th>
                         <th>Edit</th>
                         <th>Delete</th>
 
@@ -261,11 +258,8 @@
                         <td th:text="${user.fullName}"></td>
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.address}"></td>
-                        <td th:text="${user.birthday}"></td>
                         <td th:text="${user.salary}"></td>
-                        <td th:text="${user.role}"></td>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user.password}"></td>
+                        <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> Detail  </a> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/edit/' + ${user.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
                     </tr>

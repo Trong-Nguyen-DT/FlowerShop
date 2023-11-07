@@ -58,7 +58,7 @@ public class ProductController {
         try {
             List<Long> idList = objectMapper.readValue(selectedItems, new TypeReference<List<Long>>() {});
             ProductEntity productEntity = productService.addProduct(product);
-            productDetailService.addProductDetail(productEntity, idList, numberFlower);
+//            productDetailService.addProductDetail(productEntity, idList, numberFlower);
         } catch (IOException e) {
             e.printStackTrace();
         }

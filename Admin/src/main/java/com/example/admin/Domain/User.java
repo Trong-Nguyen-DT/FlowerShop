@@ -18,6 +18,8 @@ public class User {
 
     private String fullName;
 
+    private String image;
+
     private String phone;
 
     private String address;

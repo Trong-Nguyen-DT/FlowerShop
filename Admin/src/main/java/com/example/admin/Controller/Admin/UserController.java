@@ -1,6 +1,7 @@
 package com.example.admin.Controller.Admin;
 
 import com.example.admin.Domain.User;
+import com.example.admin.Entity.UserEntity;
 import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,21 +34,29 @@ public class UserController {
         model.addAttribute("user", new User());
         return "Admin/AddStaffAdmin";
     }
-
     @PostMapping("add")
     public String addStaff(@ModelAttribute User user) {
         userService.addStaff(user);
         return "redirect:/admin/staff";
     }
-
+    @GetMapping("detail/{id}")
+    public String showDetailStaff(@PathVariable String id, Model model) {
+        Long userId = Long.parseLong(id);
+        model.addAttribute("user", userService.getStaffById(userId));
+        return "Admin/ViewDetailStaffAdmin";
+    }
+    @PostMapping("detail")
+    public String detailStaff(@ModelAttribute User user) {
+        userService.detailStaff(user);
+        return "redirect:/admin/staff";
+    }
     @GetMapping("edit/{id}")
     public String showEditStaff(@PathVariable String id, Model model) {
         Long userId = Long.parseLong(id);
         model.addAttribute("user", userService.getStaffById(userId));
         return "Admin/EditStaffAdmin";
     }
-
-    @PostMapping("edit")
+        @PostMapping("edit")
     public String editStaff(@ModelAttribute User user) {
         userService.updateStaff(user);
         return "redirect:/admin/staff";

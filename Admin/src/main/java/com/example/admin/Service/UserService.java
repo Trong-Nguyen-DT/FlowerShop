@@ -1,6 +1,8 @@
 package com.example.admin.Service;
 
+import com.example.admin.Domain.Customer;
 import com.example.admin.Domain.User;
+import com.example.admin.Entity.ProductEntity;
 
 import java.util.List;
 
@@ -10,8 +12,9 @@ public interface UserService {
 
     User getStaffById(Long userId);
 
-    void updateStaff(User user);
+    void detailStaff(User user);
 
+    void updateStaff(User user);
 
     void deleteStaffById(Long userId);
 
