@@ -18,12 +18,11 @@ public class ProductAPIController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<Product>> getAllProduct() {
         List<Product> products = productService.getAllProduct();
         return ResponseEntity.ok().body(products);
     }
-
     @GetMapping("search-category")
     public ResponseEntity<List<Product>> getAllProductByCategory(@RequestBody int id) {
         Long categoryId = (long) id;

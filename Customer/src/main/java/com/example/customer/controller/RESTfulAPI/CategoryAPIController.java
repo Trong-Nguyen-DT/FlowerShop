@@ -17,7 +17,7 @@ public class CategoryAPIController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping()
+    @GetMapping("")
     public ResponseEntity<List<Category>> getAllCategory() {
         List<Category> categories = categoryService.getAllCategory();
         return ResponseEntity.ok().body(categories);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="catalog/view/stylesheet/fonts/fontawesome/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" href="../static/css/home.css">
     <title>Trang chủ</title>
 </head>
 <body>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="logo">
-            <img th:src="@{/images/logo.png}">
+            <img src="../static/image/logo.png">
         </div>
 
         <div class="search">
@@ -111,48 +111,36 @@
             <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
         </div>
 
-        <div class="register_Login">
-        <form class="register">
-            <h5>BẠN LÀ KHÁCH HÀNG MỚI</h5>
-            <h6>Đăng ký tài khoản</h6>
-            <p>Bằng cách tạo tài khoản, bạn sẽ có thể mua sắm nhanh hơn, cập nhật trạng thái đơn hàng và theo dõi các đơn hàng bạn đã thực hiện trước đó.
-
-            </p>
-            <button th:href="@{/register}" type="submit">Tiếp tục</button>
-        </form>
-
-    <form class="login_Customer" action="perform_login" method="post">
-        <div class="left">
-            <h5>ĐĂNG NHẬP</h5>
-            <div class="login">
-                <h6>Địa chỉ Email</h6>
-                <input type="text" class="form-control" id="tk"  name="username" aria-describedby="tkHelp"
-                       placeholder="Địa chỉ Email" autofocus>
+        <div class="productList">
+            <h3 class="category" id="category">dsjkhjks</h3>
+            <div class="arrange">
+                <select class="form-select form-select-lm" aria-label="Small select example">
+                    <option selected>Sắp xếp theo</option>
+                    <option value="1">Gía</option>
+                    <option value="2">Tên</option>
+                </select>
+                <select class="form-select form-select-lm" aria-label="Small select example">
+                    <option selected>Số lượng</option>
+                    <option value="1">12</option>
+                    <option value="2">24</option>
+                </select>
             </div>
-            <div class="login">
-                <h6>Mật khẩu</h6>
-                <input type="password" class="form-control" id="pw" name="password" aria-describedby="pwHelp"
-                       placeholder="Mật khẩu">
-            </div>
-            <div class="group-button">
-                <button type="submit">Login</button>
+            <div class="item_Product" id="item_Product">
+                <img src="">
+                <p id="nameProduct"></p>
+                <p id="price_Product"></p>
+                <input type="button" value="ĐẶT HÀNG">
             </div>
         </div>
-<!--        <div class="right">-->
-<!--            <img th:src="@{/images/login.png}" alt="">-->
-<!--        </div>-->
-    </form>
-        </div>
+
     </div>
-
 </main>
 
 <footer>
 
-
     <div class="infoShop">
         <div class="column1">
-            <img th:src="/images/logo.png">
+            <img src="../static/image/logo.png">
             <p>Hotline: 19008479-2892467</p>
             <p>Email: BoCongAnh@Flowers.vn</p>
         </div>
@@ -204,5 +192,78 @@
         </div>
     </div>
 </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const categoryList = document.getElementById("categoryList");
+        const productList = document.querySelector(".productList");
+        const categoryTitle = document.getElementById("categoryTitle");
+        const productTemplate = document.getElementById("item_Product");
+
+        // Hàm tạo mục danh mục và thêm sự kiện click
+        function createCategoryItem(category) {
+            const categoryItem = document.createElement("li");
+            categoryItem.classList.add("nav-item");
+
+            const categoryLink = document.createElement("a");
+            categoryLink.classList.add("nav-link");
+            categoryLink.textContent = category.name;
+            categoryLink.href = `#`;
+
+            categoryLink.addEventListener("click", () => {
+                displayProductsForCategory(category);
+            });
+
+            categoryItem.appendChild(categoryLink);
+            categoryList.appendChild(categoryItem);
+        }
+
+        function displayProductsForCategory(category) {
+            // Cập nhật tiêu đề danh mục
+            categoryTitle.textContent = category.name;
+
+            // Xóa sản phẩm trước đó
+            document.querySelectorAll('.item_Product:not(:first-child)').forEach(item => item.remove());
+
+            // Lặp qua các sản phẩm trong danh mục và hiển thị
+            category.productEntities.forEach((product) => {
+                // Clone sản phẩm mẫu
+                const productItem = productTemplate.cloneNode(true);
+                productItem.style.display = "block"; // Hiển thị sản phẩm (mẫu ban đầu có thể được ẩn)
+
+                // Tạo và điền thông tin sản phẩm
+                productItem.querySelector("#productImage").src = product.image1;
+                productItem.querySelector("#productName").textContent = product.name;
+                productItem.querySelector("#productPrice").textContent = product.price;
+                // Thêm sản phẩm vào danh sách
+                productList.appendChild(productItem);
+            });
+        }
+
+        // Lấy danh mục và điền danh sách danh mục
+        fetch("/category")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                // Hiển thị danh mục
+                data.forEach((category) => {
+                    createCategoryItem(category);
+                });
+
+                // Hiển thị tất cả sản phẩm ban đầu khi danh mục đã được tải
+                const allCategory = { name: "Tất cả sản phẩm", productEntities: data.flatMap(category => category.productEntities) };
+                displayProductsForCategory(allCategory);
+            })
+            .catch((error) => {
+                console.error("Lỗi lấy dữ liệu danh mục:", error);
+            });
+    });
+
+</script>
+
 </body>
 </html>
