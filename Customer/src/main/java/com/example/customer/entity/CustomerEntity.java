@@ -36,4 +36,7 @@ public class CustomerEntity {
 
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities;
+
+    @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL)
+    private CartEntity cartEntity;
 }
