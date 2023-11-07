@@ -19,4 +19,37 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllStaff() {
         return userRepository.findAll().stream().map(UserConverter::toModel).toList();
     }
+    @Override
+    public void addStaff(User user) {
+        userRepository.save(UserConverter.toEntity(user));
+    }
+    @Override
+    public User getStaffById(Long userId) {
+        return UserConverter.toModel(userRepository.findById(userId).orElseThrow());
+    }
+    @Override
+    public void updateStaff(User user) {
+        UserEntity userEntity = userRepository.findById(user.getId()).orElseThrow();
+        userEntity.setFullName(user.getFullName());
+        userEntity.setUsername(user.getUsername());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setPhone(user.getPhone());
+        userEntity.setAddress(user.getAddress());
+        userEntity.setBirthday(user.getBirthday());
+        userEntity.setSalary(user.getSalary());
+        userEntity.setRole(user.getRole());
+        userRepository.save(userEntity);
+    }
+    @Override
+    public void deleteStaffById(Long userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow();
+        userEntity.setDeleted(true);
+        userRepository.save(userEntity);
+    }
+    @Override
+    public void restoreStaffById(Long userId) {
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow();
+        userEntity.setDeleted(false);
+        userRepository.save(userEntity);
+    }
 }

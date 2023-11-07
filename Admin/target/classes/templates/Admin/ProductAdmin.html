@@ -88,6 +88,30 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>User</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Users
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add User
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores User
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>

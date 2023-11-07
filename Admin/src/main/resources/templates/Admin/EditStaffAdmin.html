@@ -14,6 +14,7 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -235,42 +236,55 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Products
+                Edit Staff
             </div>
             <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>FullName</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Birthday</th>
-                        <th>Salary</th>
-                        <th>Role</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-
-                    </tr>
-                    </thead>
-                    <tbody  th:each="user : ${users}" th:if="${user.deleted == false}"  >
-                    <tr>
-                        <td th:text="${user.id}"></td>
-                        <td th:text="${user.fullName}"></td>
-                        <td th:text="${user.phone}"></td>
-                        <td th:text="${user.address}"></td>
-                        <td th:text="${user.birthday}"></td>
-                        <td th:text="${user.salary}"></td>
-                        <td th:text="${user.role}"></td>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user.password}"></td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/staff/edit/' + ${user.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
-                    </tr>
-                    </tbody>
-                </table>
+                <form th:action="@{/admin/staff/edit}" th:method="post" th:object="${user}">
+                    <table>
+                        <input type="hidden" th:field="*{id}">
+                        <tr>
+                            <th>
+                                <label>Name:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{fullName}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Address:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{address}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Birthday:</label>
+                            </th>
+                            <td>
+                                <input type="date" th:field="*{birthday}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Username:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{username}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Password:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{password}">
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">Update</button>
+                </form>
             </div>
         </div>
 
