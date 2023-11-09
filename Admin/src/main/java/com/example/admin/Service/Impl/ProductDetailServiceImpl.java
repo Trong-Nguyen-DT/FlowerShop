@@ -3,7 +3,6 @@ package com.example.admin.Service.Impl;
 import com.example.admin.Converter.CustomerConverter;
 import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Domain.ProductDetail;
-import com.example.admin.Entity.ProductDetailEntity;
 import com.example.admin.Repository.ProductDetailRepository;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.ProductDetailService;
@@ -30,8 +29,8 @@ public class ProductDetailServiceImpl implements ProductDetailService {
         return productDetailRepository.findAllByProductEntity(productRepository.findById(productId).orElseThrow()).stream().map(ProductDetailConverter::toModel).toList();
     }
 
-    @Override
-    public ProductDetailEntity getProductDetailById(Long productId) {
-        return null;
-    }
+//    @Override
+//    public ProductDetail getProductDetailById(Long productId) {
+//        return null;
+//    }
 }

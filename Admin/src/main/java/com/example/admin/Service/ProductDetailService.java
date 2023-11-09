@@ -11,7 +11,7 @@ import java.util.List;
 public interface ProductDetailService {
     List<ProductDetail> getAllProductDetail();
 
-    ProductDetailEntity getProductDetailById(Long productId);
+//    ProductDetail getProductDetailById(Long id);
 
     List<ProductDetail> getProductDetailsByProductId(Long productId);
 
