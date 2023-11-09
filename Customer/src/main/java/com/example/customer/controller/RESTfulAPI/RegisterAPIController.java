@@ -8,12 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("register")
-public class RegisterController {
+@RequestMapping("api/register")
+public class RegisterAPIController {
 
     @Autowired
     private CustomerService customerService;
-
 
     @PostMapping()
     public ResponseEntity<BodyResponse> register(@RequestBody Customer customer) {

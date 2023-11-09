@@ -2,31 +2,54 @@ package com.example.customer.controller.RESTfulAPI;
 
 
 import com.example.customer.domain.Customer;
-import com.example.customer.responseBody.LoginRequest;
+import com.example.customer.remote.LoginRemote;
+import com.example.customer.responseBody.CustomerResponse;
+import com.example.customer.service.CustomUserDetailService;
 import com.example.customer.service.CustomerService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("login-customer")
+@RequestMapping("api/login-customer")
 public class LoginAPIController {
 
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private LoginRemote loginRemote;
+
     @PostMapping()
-    public ResponseEntity<LoginRequest> login(@RequestParam String username, String password) {
-        LoginRequest loginRequest = new LoginRequest();
-        Customer customer = customerService.checkCustomer(username, password);
-        if (customer != null) {
-            loginRequest.setSuccess(true);
-            loginRequest.setMessage("success");
-            loginRequest.setResult(customer);
+    public ResponseEntity<CustomerResponse> login(@RequestBody Customer customer) {
+        Customer customerTrue = customerService.checkCustomer(customer.getUsername(), customer.getPassword());
+        CustomerResponse customerResponse = new CustomerResponse();
+        HttpHeaders responseHeaders = new HttpHeaders();
+
+        if (customerTrue != null) {
+            HttpHeaders loginHeaders = loginRemote.sendPostRequestLogin(customer.getUsername(), customer.getPassword());
+            // Set cookie if present
+            if (loginHeaders.containsKey("Set-Cookie")) {
+                String cookie = loginHeaders.getFirst("Set-Cookie");
+                responseHeaders.set("Set-Cookie", cookie);
+            }
+
+            customerResponse.setSuccess(true);
+            customerResponse.setMessage("success");
+            customerResponse.setResult(customerTrue);
         } else {
-            loginRequest.setSuccess(false);
-            loginRequest.setMessage("Invalid username or password");
+            customerResponse.setSuccess(false);
+            customerResponse.setMessage("Invalid username or password");
         }
-        return ResponseEntity.ok().body(loginRequest);
+
+        // Return the ResponseEntity with the custom headers and the body
+        return ResponseEntity.ok().headers(responseHeaders).body(customerResponse);
     }
+
 }

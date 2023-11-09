@@ -26,14 +26,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                     auth.requestMatchers("/login/*", "/css/**", "/images/**", "/js/**")
                             .permitAll()
-                            .requestMatchers("/","/customer/**", "/product/**", "/login-customer/**","/perform_login/**", "register/**", "/category/**", "/verify-email/**", "/forgot-password/**", "/my/**", "/contact/**", "my")
+                            .requestMatchers("/","/customer/**",  "/api/**", "register/**", "/product/**", "/category/**", "/verify-email/**", "/forgot-password/**", "/my/**", "my")
                             .permitAll()
                             .anyRequest()
                             .authenticated()
                 )
                 .formLogin(formLogin -> formLogin.loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/log").permitAll()
+                        .loginProcessingUrl("/perform_login")
+                        .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
 
                 )

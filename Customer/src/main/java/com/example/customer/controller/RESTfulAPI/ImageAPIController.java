@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @RestController
-public class ImageController {
+public class ImageAPIController {
 
     @Value("${imagePath}")
     private String imagePath;
