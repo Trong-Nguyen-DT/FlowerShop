@@ -39,12 +39,12 @@ public class ProductConverter {
         entity.setSub_info(product.getSub_info());
         entity.setOverall_rating(product.getOverall_rating());
         entity.setDiscount(product.getDiscount());
-        product.setImage1(product.getImage1());
-        product.setImage2(product.getImage2());
-        product.setImage3(product.getImage3());
-        product.setImage4(product.getImage4());
-        product.setImage5(product.getImage5());
-        product.setDeleted(false);
+        entity.setImage1(product.getImage1());
+        entity.setImage2(product.getImage2());
+        entity.setImage3(product.getImage3());
+        entity.setImage4(product.getImage4());
+        entity.setImage5(product.getImage5());
+        entity.setDeleted(false);
         return entity;
     }
 }

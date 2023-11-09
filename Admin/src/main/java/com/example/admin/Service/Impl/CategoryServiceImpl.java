@@ -35,6 +35,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void updateCategory(Category category) {
         CategoryEntity categoryEntity = categoryRepository.findById(category.getId()).orElseThrow();
         categoryEntity.setName(category.getName());
+        categoryEntity.setImage(category.getImage());
+        categoryEntity.setDetail(category.getDetail());
         categoryRepository.save(categoryEntity);
     }
 

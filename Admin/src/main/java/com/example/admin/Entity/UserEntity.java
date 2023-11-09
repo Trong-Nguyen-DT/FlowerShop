@@ -23,6 +23,8 @@ public class UserEntity {
 
     private String fullName;
 
+    private String image;
+
     private String phone;
 
     private String address;
@@ -37,4 +39,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;
+
+
 }

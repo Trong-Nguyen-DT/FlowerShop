@@ -16,6 +16,10 @@ public class Category {
 
     private List<Product> products;
 
+    private String image;
+
     private boolean deleted;
+
+    private String detail;
 }
 

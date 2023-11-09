@@ -25,5 +25,9 @@ public class CategoryEntity {
     )
     private List<ProductEntity> productEntities;
 
+    private String image;
+
     private boolean deleted;
+
+    private String detail;
 }

@@ -2,6 +2,7 @@ package com.example.admin.Controller.Admin;
 
 import com.example.admin.Domain.Category;
 import com.example.admin.Service.CategoryService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -88,6 +88,54 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>User</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Users
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add User
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores User
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
+                <span>Item</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/item}">
+                        Items
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/item/add}">
+                        Add Item
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/item/restore}">
+                        Restore Item
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
@@ -187,7 +235,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Categories
+                Products
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -203,6 +251,7 @@
                         <th>Delivery</th>
                         <th>Sub Info</th>
                         <th>Overall Rating</th>
+                        <th>Product details</th>
                         <th>Edit</th>
                         <th>Delete</th>
 
@@ -220,6 +269,7 @@
                         <td th:text="${prod.delivery}"></td>
                         <td th:text="${prod.sub_info}"></td>
                         <td th:text="${prod.overall_rating}"></td>
+                        <td><a th:href="@{'/admin/product/detail/' + ${prod.id}}" style="color: blue"> Details  </a> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${prod.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/product/delete/' + ${prod.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
                     </tr>

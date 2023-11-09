@@ -1,9 +1,15 @@
 package com.example.admin.Service;
 
+import com.example.admin.Domain.Customer;
+import com.example.admin.Domain.Item;
+import com.example.admin.Domain.ProductDetail;
 import com.example.admin.Entity.ProductEntity;
 
 import java.util.List;
 
 public interface ProductDetailService {
-    void addProductDetail(ProductEntity productEntity, List<Long> idList, int quantityFlower);
+//    List<ProductDetail> getAllProductDetail();
+
+//    void detailProduct(Item item);
+//    void addProductDetail(ProductEntity productEntity, List<Long> idList, int quantityFlower);
 }

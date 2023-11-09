@@ -31,7 +31,6 @@ public class CustomerEntity {
 
     private String email;
 
-
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;
 

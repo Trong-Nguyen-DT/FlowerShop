@@ -48,13 +48,48 @@ public class ProductEntity {
 
     private boolean deleted;
 
+//    @Transient
+    private double finalPrice;
+
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities;
 
     @ManyToMany(mappedBy = "productEntities", fetch = FetchType.EAGER)
     private List<CategoryEntity> categoryEntities;
 
-    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductDetailEntity> productDetailEntities;
+//    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<ProductDetailEntity> productDetailEntities;
+
+//    // Nhiều ProductDetailEntity cho mỗi ProductEntity
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//    private List<ProductDetailEntity> productDetails;
+
+    public double getOriginal_price() {
+        return original_price;
+    }
+
+    public void setOriginal_price(double original_price) {
+        this.original_price = original_price;
+        updateFinalPrice();
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+        updateFinalPrice();
+    }
+
+    @PreUpdate
+    public void updateFinalPrice() {
+        this.finalPrice = calculateFinalPrice();
+        this.price = finalPrice; // Cập nhật trường price khi finalPrice thay đổi
+    }
+
+    private double calculateFinalPrice() {
+        return original_price - ((original_price * discount) / 100);
+    }
 
 }

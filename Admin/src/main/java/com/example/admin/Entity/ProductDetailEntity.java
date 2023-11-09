@@ -16,11 +16,11 @@ public class ProductDetailEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
-    private ItemEntity itemsEntity;
+    private ItemEntity items;
 
     private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private ProductEntity productEntity;
+    private ProductEntity product;
 }
