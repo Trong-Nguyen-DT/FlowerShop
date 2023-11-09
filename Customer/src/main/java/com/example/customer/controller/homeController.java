@@ -7,7 +7,7 @@ import java.text.ParsePosition;
 
 @Controller
 public class homeController {
-    @GetMapping("home")
+    @GetMapping()
     public  String home()
     {
         return "home";

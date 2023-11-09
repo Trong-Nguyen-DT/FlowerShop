@@ -4,16 +4,10 @@ package com.example.customer.controller.RESTfulAPI;
 import com.example.customer.domain.Customer;
 import com.example.customer.remote.LoginRemote;
 import com.example.customer.responseBody.CustomerResponse;
-import com.example.customer.service.CustomUserDetailService;
 import com.example.customer.service.CustomerService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
