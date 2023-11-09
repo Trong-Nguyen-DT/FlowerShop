@@ -10,8 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("verify-email")
-public class MailController {
+@RequestMapping("api/verify-email")
+public class MailAPIController {
 
     @Autowired
     private MailService mailService;
