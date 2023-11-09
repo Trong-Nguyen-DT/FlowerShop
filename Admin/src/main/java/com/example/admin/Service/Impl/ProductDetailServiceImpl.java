@@ -1,60 +1,37 @@
 package com.example.admin.Service.Impl;
 
+import com.example.admin.Converter.CustomerConverter;
 import com.example.admin.Converter.ProductDetailConverter;
-import com.example.admin.Domain.Customer;
 import com.example.admin.Domain.ProductDetail;
-import com.example.admin.Entity.ItemEntity;
 import com.example.admin.Entity.ProductDetailEntity;
-import com.example.admin.Entity.ProductEntity;
-import com.example.admin.Repository.ItemRepository;
 import com.example.admin.Repository.ProductDetailRepository;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.ProductDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Service
 public class ProductDetailServiceImpl implements ProductDetailService {
-//
-//    @Autowired
-//    private ItemRepository itemRepository;
-//
-//    @Autowired
-//    private ProductDetailRepository productDetailRepository;
-//
-//    @Override
-//    public List<ProductDetail> getAllProductDetail() {
-//        return productDetailRepository.findAll().stream().map(ProductDetailConverter::toModel).toList();
-//    }
 
-//    @Override
-//    public void addProductDetail(ProductEntity productEntity, List<Long> idList, int quantityFlower) {
-//        int totalItems = idList.size();
-//        int maxQuantityPerItem = quantityFlower / totalItems;
-//
-//        List<Integer> quantities = new ArrayList<>();
-//
-//        for (int i = 0; i < totalItems - 1; i++) {
-//            int randomQuantity = (int) (Math.random() * maxQuantityPerItem) + 1;
-//            quantities.add(randomQuantity);
-//        }
-//
-//        int lastQuantity = quantityFlower - quantities.stream().mapToInt(Integer::intValue).sum();
-//        quantities.add(lastQuantity);
-//
-//        for (int i = 0; i < totalItems; i++) {
-//            ProductDetailEntity productDetailEntity = new ProductDetailEntity();
-//            ItemEntity item = itemRepository.findById(idList.get(i)).orElseThrow();
-//            productDetailEntity.setQuantity(quantities.get(i));
-//            productDetailEntity.setItemsEntity(item);
-//            productDetailEntity.setProductEntity(productEntity);
-//            productDetailRepository.save(productDetailEntity);
-//        }
-//    }
+    @Autowired
+    private ProductDetailRepository productDetailRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Override
+    public List<ProductDetail> getAllProductDetail() {
+        return productDetailRepository.findAll().stream().map(ProductDetailConverter::toModel).toList();
+    }
+    public List<ProductDetail>  getProductDetailsByProductId(Long productId) {
+        return productDetailRepository.findAllByProductEntity(productRepository.findById(productId).orElseThrow()).stream().map(ProductDetailConverter::toModel).toList();
+    }
+
+    @Override
+    public ProductDetailEntity getProductDetailById(Long productId) {
+        return null;
+    }
 }
