@@ -14,9 +14,10 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -58,7 +59,7 @@
         </li>
         <li>
             <a th:href="@{/admin/importGood}">
-                <!--            <a th:href="@{/admin/importGood/add}">-->
+<!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -249,88 +250,78 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Staff
+                Add Import goods
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/staff/add}" th:method="post" th:object="${user}">
-                    <table>
-                        <tr>
-                            <th>
-                                <label>Username:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{username}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Password:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{password}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Full name:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{fullName}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Image:</label>
-                            </th>
-                            <td>
-                                <input type="file" th:field="*{image}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Phone:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{phone}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Address:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{address}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Birthday:</label>
-                            </th>
-                            <td>
-                                <input type="date" th:field="*{birthday}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Salary:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{salary}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Role:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{role}">
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="submit">ADD</button>
-                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name Item</th>
+                        <th>Time import</th>
+                        <th>Quantity</th>
+                        <th>Total price</th>
+
+                    </tr>
+                    </thead>
+                    <tbody  th:each="importG : ${importGoods}"  >
+                    <tr>
+                        <td th:text="${importG.id}"></td>
+                        <td th:text="${importG.item.name}"></td>
+                        <td th:text="${importG.timeImport}"></td>
+                        <td th:text="${importG.quantity}"></td>
+                        <td th:text="${importG.totalPrice}"></td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
+
+
+
+
+
+<!--            <div class="box-body overflow-scroll">-->
+<!--                <form th:action="@{/admin/importGood/add}" th:method="post" th:object="${importGood}">-->
+<!--                    <table>-->
+<!--                        <tr th:each="item : ${items}">-->
+<!--                            <th>-->
+<!--                                <label>Name item:</label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <select name="itemIDs" id="item" multiple="multiple">-->
+<!--                                    <th:block >-->
+<!--                                        <option th:value="${item.id}" th:text="${item.name}"></option>-->
+<!--                                    </th:block >-->
+<!--                                </select>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Quantity:</label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <input type="text" th:field="*{quantity}">-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Time Import:</label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <input type="date" th:field="*{timeImport}">-->
+<!--                            </td>-->
+<!--                        </tr>-->
+
+<!--                    </table>-->
+<!--                    <button type="submit">ADD</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+<!--            <input type="text" id="itemName" name="itemName" style="width: 300px;" />-->
+
 
     </div>
     <!-- END ORDERS TABLE -->
@@ -361,7 +352,25 @@
     <!--                });-->
     <!--        });-->
     <!--    </script>-->
-</div>
+
+
+
+<!--        <script>-->
+<!--            $(document).ready(function () {-->
+<!--                $("#itemName").select2({-->
+<!--                    ajax: {-->
+<!--                        url: "/searchItemNames",-->
+<!--                        dataType: 'json',-->
+<!--                        processResults: function (data) {-->
+<!--                            return {-->
+<!--                                results: data-->
+<!--                            };-->
+<!--                        },-->
+<!--                        cache: true-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+        </script>
 </body>
 
 </html>
