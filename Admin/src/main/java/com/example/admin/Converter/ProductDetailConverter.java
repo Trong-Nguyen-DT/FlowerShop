@@ -30,6 +30,7 @@ public class ProductDetailConverter {
 
     public static ProductDetailEntity toEntity(ProductDetail productDetail) {
         ProductDetailEntity productDetailEntity = new ProductDetailEntity();
+        productDetailEntity.setId(productDetail.getId());
         productDetailEntity.setQuantity(productDetail.getQuantity());
 
         // Chuyển đổi thông tin từ ProductDetail (nếu có)

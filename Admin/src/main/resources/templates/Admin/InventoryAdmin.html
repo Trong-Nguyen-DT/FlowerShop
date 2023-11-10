@@ -81,7 +81,7 @@
 
                 <li>
                     <a th:href="@{/admin/category/restore}">
-                        Restore Category
+                        Restores Category
                     </a>
                 </li>
             </ul>
@@ -241,38 +241,22 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Products
+                Inventories
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Original Price</th>
-                        <th>Price</th>
-                        <th>Discount</th>
-                        <th>Description</th>
-                        <th>Details</th>
-                        <th>Delivery</th>
-                        <th>Sub Info</th>
-                        <th>Overall Rating</th>
-                        <th>Restore</th>
+                        <th>Name Item</th>
+                        <th>Quantity</th>
                     </tr>
                     </thead>
-                    <tbody  th:each="prod : ${products}" th:if="${prod.deleted == true}"  >
+                    <tbody  th:each="inven : ${inventories}"  >
                     <tr>
-                        <td th:text="${prod.id}"></td>
-                        <td th:text="${prod.name}"></td>
-                        <td th:text="${prod.original_price}"></td>
-                        <td th:text="${prod.price}"></td>
-                        <td th:text="${prod.discount}"></td>
-                        <td th:text="${prod.description}"></td>
-                        <td th:text="${prod.details}"></td>
-                        <td th:text="${prod.delivery}"></td>
-                        <td th:text="${prod.sub_info}"></td>
-                        <td th:text="${prod.overall_rating}"></td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/product/restore/' + ${prod.id}}"> <i class="fa-solid fa-trash-can-arrow-up"></i>  </a> </button></td>
+                        <td th:text="${inven.id}"></td>
+                        <td th:text="${inven.itemId.name}"></td>
+                        <td th:text="${inven.quantity}"></td>
                     </tr>
                     </tbody>
                 </table>
