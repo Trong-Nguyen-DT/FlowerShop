@@ -33,9 +33,9 @@ public class ImportGoodsController {
         importGoodsService.addImportGoods(importGood);
         return "redirect:/admin/importGood";
     }
-    @GetMapping("/searchItemNames")
-    public List<String> searchItemNames(@RequestParam String item) {
-        // Gọi service để truy vấn cơ sở dữ liệu và trả về danh sách các tên item phù hợp.
-        return importGoodsService.searchItemNames(item);
-    }
+//    @GetMapping("/searchItemNames")
+//    public List<String> searchItemNames(@RequestParam String item) {
+//        // Gọi service để truy vấn cơ sở dữ liệu và trả về danh sách các tên item phù hợp.
+//        return importGoodsService.searchItemNames(item);
+//    }
 }
