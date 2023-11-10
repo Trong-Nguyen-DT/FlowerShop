@@ -2,6 +2,7 @@ package com.example.admin.Service;
 
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Entity.ProductDetailEntity;
 import com.example.admin.Entity.ProductEntity;
 
 import java.util.List;
@@ -21,4 +22,5 @@ public interface ProductService {
     void deleteProductById(Long productId);
 
     void restoreProductById(Long productId);
+
 }

@@ -3,6 +3,7 @@ package com.example.admin.Service.Impl;
 import com.example.admin.Converter.ProductConverter;
 import com.example.admin.Domain.Product;
 import com.example.admin.Entity.CategoryEntity;
+import com.example.admin.Entity.ProductDetailEntity;
 import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.ProductService;

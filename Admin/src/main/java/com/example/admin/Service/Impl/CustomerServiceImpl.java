@@ -2,7 +2,6 @@ package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.CustomerConverter;
 import com.example.admin.Domain.Customer;
-import com.example.admin.Entity.CustomerEntity;
 import com.example.admin.Repository.CustomerRepository;
 import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
