@@ -74,6 +74,10 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public boolean updateQuantityItem(String name, CartItem item) {
+        if (item.getQuantity() == 0) {
+            deleteItem(name, item.getId());
+            return true;
+        }
         if (checkCartItemByCustomer(name, item.getId())) {
             CartItemEntity cartItemEntity = cartItemRepository.findById(item.getId()).orElseThrow();
             cartItemEntity.setQuantity(item.getQuantity());

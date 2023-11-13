@@ -1,18 +1,36 @@
 package com.example.customer.controller.RESTfulAPI;
 
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.customer.domain.Otp;
+import com.example.customer.responseBody.BodyResponse;
+import com.example.customer.service.CustomerService;
+import com.example.customer.service.OtpService;
+import com.example.customer.validator.CustomerValidate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/verify")
 public class VerifyOPTController {
 
+    @Autowired
+    private OtpService otpService;
+
+    @Autowired
+    private CustomerValidate customerValidate;
+
     @PostMapping("otp")
-    public String verifyOTP() {
-
-
-        return "";
+    public ResponseEntity<BodyResponse> verifyOTP(@RequestBody Otp otp) {
+        BodyResponse response = new BodyResponse();
+        if (otpService.verifyOTP(otp)) {
+            response.setSuccess(true);
+            response.setMessage("success");
+        } else {
+            response.setSuccess(false);
+            response.setMessage("incorrect OTP");
+        }
+        return ResponseEntity.ok(response);
     }
 }

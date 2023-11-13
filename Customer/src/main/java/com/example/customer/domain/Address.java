@@ -12,8 +12,6 @@ import java.util.List;
 public class Address {
     private Long id;
 
-    private Customer customerEntity;
-
     private City city;
 
     private District district;
