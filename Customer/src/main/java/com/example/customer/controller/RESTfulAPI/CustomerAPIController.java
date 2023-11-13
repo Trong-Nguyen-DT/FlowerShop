@@ -46,11 +46,6 @@ public class CustomerAPIController {
         CustomerResponse customerResponse = new CustomerResponse();
         String name = customerValidate.validateCustomer();
         if (name != null ) {
-            System.out.println("Phone: " + newCustomer.getPhone());
-            System.out.println("name: " + newCustomer.getFullName());
-            System.out.println("email: " + newCustomer.getEmail());
-            System.out.println("sex: " + newCustomer.isSex());
-            System.out.println("birth: " + newCustomer.getBirth());
             Customer customer = customerService.updateCustomer(name, newCustomer);
             customerResponse.setSuccess(true);
             customerResponse.setMessage("success");

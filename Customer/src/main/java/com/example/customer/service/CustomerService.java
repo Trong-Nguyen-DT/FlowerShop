@@ -1,6 +1,7 @@
 package com.example.customer.service;
 
 import com.example.customer.domain.Customer;
+import com.example.customer.domain.Otp;
 
 public interface CustomerService {
     Customer checkCustomer(String username, String password);

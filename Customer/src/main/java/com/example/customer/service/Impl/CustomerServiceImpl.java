@@ -2,6 +2,7 @@ package com.example.customer.service.Impl;
 
 import com.example.customer.converter.CustomerConverter;
 import com.example.customer.domain.Customer;
+import com.example.customer.domain.Otp;
 import com.example.customer.entity.CartEntity;
 import com.example.customer.entity.CustomerEntity;
 import com.example.customer.repository.CartRepository;

@@ -38,7 +38,6 @@ public class CartAPIController {
     @GetMapping("add/{id}")
     public ResponseEntity<BodyResponse> addItem(@PathVariable Long id) {
         String name = customerValidate.validateCustomer();
-        System.out.println(name);
         BodyResponse response = new BodyResponse();
         if (name != null) {
             cartService.addItem(name ,id);

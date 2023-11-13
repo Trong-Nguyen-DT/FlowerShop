@@ -33,8 +33,6 @@ public class CustomerEntity {
 
     private LocalDate birth;
 
-    private String shortTimeOTP;
-
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AddressEntity> addressEntities;
 
