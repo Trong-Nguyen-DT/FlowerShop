@@ -5,7 +5,6 @@ import com.example.customer.domain.Customer;
 public interface CustomerService {
     Customer checkCustomer(String username, String password);
 
-
     boolean checkUsername(String username);
 
     void createCustomer(Customer customer);
@@ -13,4 +12,6 @@ public interface CustomerService {
     void changePassword(Customer customer);
 
     Customer getCustomerByUsername(String name);
+
+    Customer updateCustomer(String name, Customer newCustomer);
 }

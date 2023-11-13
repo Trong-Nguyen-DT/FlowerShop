@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -26,10 +27,16 @@ public class CustomerEntity {
 
     private String fullName;
 
-    private String address;
-
     private String email;
 
+    private boolean sex;
+
+    private LocalDate birth;
+
+    private String shortTimeOTP;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AddressEntity> addressEntities;
 
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;

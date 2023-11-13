@@ -41,7 +41,7 @@ public class MailAPIController {
             String otp = mailService.sendEmail(customerTrue.getEmail());
             emailResponse.setSuccess(true);
             emailResponse.setMessage(otp);
-
+            System.out.println(otp);
         } else {
             emailResponse.setSuccess(false);
             emailResponse.setMessage("Account name has been taken");

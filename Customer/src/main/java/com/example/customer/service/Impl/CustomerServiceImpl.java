@@ -68,4 +68,15 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return null;
     }
+
+    @Override
+    public Customer updateCustomer(String name, Customer newCustomer) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        customerEntity.setPhone(newCustomer.getPhone());
+        customerEntity.setFullName(newCustomer.getFullName());
+        customerEntity.setEmail(newCustomer.getEmail());
+        customerEntity.setSex(newCustomer.isSex());
+        customerEntity.setBirth(newCustomer.getBirth());
+        return CustomerConverter.toModel(customerRepository.save(customerEntity));
+    }
 }
