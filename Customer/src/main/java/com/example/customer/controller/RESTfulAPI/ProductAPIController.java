@@ -15,10 +15,16 @@ public class ProductAPIController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("")
+    @GetMapping()
     public ResponseEntity<List<Product>> getAllProduct() {
         List<Product> products = productService.getAllProduct();
         return ResponseEntity.ok().body(products);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
     }
     @GetMapping("search-category")
     public ResponseEntity<List<Product>> getAllProductByCategory(@RequestBody int id) {

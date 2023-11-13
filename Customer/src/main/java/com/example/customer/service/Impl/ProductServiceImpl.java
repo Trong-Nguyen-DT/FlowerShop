@@ -32,4 +32,9 @@ public class ProductServiceImpl implements ProductService {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow();
         return productRepository.findAllByCategoryEntities(categoryEntity).stream().map(ProductConverter::toModel).toList();
     }
+
+    @Override
+    public Product getProductById(Long id) {
+        return ProductConverter.toModel(productRepository.findById(id).orElseThrow());
+    }
 }
