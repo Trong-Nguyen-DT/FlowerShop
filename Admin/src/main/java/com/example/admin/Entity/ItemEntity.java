@@ -16,12 +16,5 @@ public class ItemEntity {
 
     private String name;
 
-    private String image;
-
     private boolean deleted;
-
-    // Nhiều ProductDetailEntity cho mỗi ItemEntity
-//    @ManyToOne
-//    @JoinColumn(name = "product_detail_id")
-//    private ProductDetailEntity productDetail
 }

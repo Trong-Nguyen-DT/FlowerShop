@@ -1,9 +1,9 @@
 package com.example.admin.Converter;
 
 import com.example.admin.Domain.ProductDetail;
+import com.example.admin.Entity.ItemEntity;
 import com.example.admin.Entity.ProductDetailEntity;
 import com.example.admin.Entity.ProductEntity;
-import com.example.admin.Entity.ItemEntity;
 
 public class ProductDetailConverter {
     public static ProductDetail toModel(ProductDetailEntity productDetailEntity) {
@@ -19,7 +19,7 @@ public class ProductDetailConverter {
         }
 
         // Chuyển đổi thông tin từ ItemEntity (nếu có)
-        ItemEntity itemEntity = productDetailEntity.getItemEntity();
+        ItemEntity itemEntity = productDetailEntity.getItemsEntity();
         if (itemEntity != null) {
             productDetail.setItemId(itemEntity.getId());
             // Thêm các trường khác nếu cần
@@ -46,7 +46,7 @@ public class ProductDetailConverter {
             ItemEntity itemEntity = new ItemEntity();
             itemEntity.setId(productDetail.getItemId());
             // Thêm các trường khác nếu cần
-            productDetailEntity.setItemEntity(itemEntity);
+            productDetailEntity.setItemsEntity(itemEntity);
         }
 
         return productDetailEntity;

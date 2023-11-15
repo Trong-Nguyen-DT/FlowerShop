@@ -1,9 +1,7 @@
 package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.UserConverter;
-import com.example.admin.Domain.Customer;
 import com.example.admin.Domain.User;
-import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Entity.UserEntity;
 import com.example.admin.Repository.UserRepository;
 import com.example.admin.Service.UserService;

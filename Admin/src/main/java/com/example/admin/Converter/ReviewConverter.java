@@ -14,22 +14,22 @@ public class ReviewConverter {
         review.setContent(reviewEntity.getContent());
 
         review.setProduct(ProductConverter.toModel(reviewEntity.getProductEntity()));
-        review.setCustomer(CustomerConverter.toModel(reviewEntity.getCustomerEntity()));
+//        review.setCustomer(CustomerConverter.toModel(reviewEntity.getCustomerEntity()));
 
         return review;
     }
 
-    public static ReviewEntity toEntity(Review review) {
-        ReviewEntity reviewEntity = new ReviewEntity();
-        reviewEntity.setId(review.getId());
-        reviewEntity.setName(reviewEntity.getName());
-        reviewEntity.setDate(reviewEntity.getDate());
-        reviewEntity.setRate(review.getRate());
-        reviewEntity.setContent(review.getContent());
-
-        reviewEntity.setCustomerEntity(CustomerConverter.toEntity(review.getCustomer()));
-        reviewEntity.setProductEntity(ProductConverter.toEntity(review.getProduct()));
-
-        return reviewEntity;
-    }
+//    public static ReviewEntity toEntity(Review review) {
+//        ReviewEntity reviewEntity = new ReviewEntity();
+//        reviewEntity.setId(review.getId());
+//        reviewEntity.setName(reviewEntity.getName());
+//        reviewEntity.setDate(reviewEntity.getDate());
+//        reviewEntity.setRate(review.getRate());
+//        reviewEntity.setContent(review.getContent());
+//
+//        reviewEntity.setCustomerEntity(CustomerConverter.toEntity(review.getCustomer()));
+//        reviewEntity.setProductEntity(ProductConverter.toEntity(review.getProduct()));
+//
+//        return reviewEntity;
+//    }
 }

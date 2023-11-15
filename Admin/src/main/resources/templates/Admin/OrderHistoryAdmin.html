@@ -204,12 +204,6 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/orderHistory}">
-                <i class='bx bx-mail-send'></i>
-                <span>OrderHistory</span>
-            </a>
-        </li>
-        <li>
             <a th:href="@{/admin/inventory}">
                 <i class='bx bx-mail-send'></i>
                 <span>Inventory</span>
@@ -277,12 +271,12 @@
 
                     </tr>
                     </thead>
-                    <tbody  th:each="order : ${orderHistories}"  >
-                    <tr>
+                    <tbody>
+                    <tr th:each="order : ${orderHistories}">
                         <td th:text="${order.id}"></td>
-<!--                        <td th:text="${order.fullNameStaff}"></td>-->
-<!--                        <td th:text="${order.fullNameStaff}"></td>-->
-<!--                        <td th:text="${order.phoneCustomer}"></td>-->
+                        <!--                        <td th:text="${order.fullNameStaff}"></td>-->
+                        <!--                        <td th:text="${order.fullNameStaff}"></td>-->
+                        <!--                        <td th:text="${order.phoneCustomer}"></td>-->
                         <td th:text="${order.orderDateTime}"></td>
                         <td th:text="${order.totalPrice}"></td>
 

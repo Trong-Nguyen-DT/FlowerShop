@@ -20,7 +20,7 @@ public class ReviewEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
 
-    private double rate;
+    private int rate;
 
     private String content;
 

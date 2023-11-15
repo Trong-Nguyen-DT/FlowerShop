@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -31,4 +32,6 @@ public class OrderHistory {
     private String phoneCustomer;
 
     private String emailCustomer;
+
+    private List<OrderDetailHistory> orderDetailHistories;
 }

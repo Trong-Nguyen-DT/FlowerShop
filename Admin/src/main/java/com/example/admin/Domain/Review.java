@@ -1,9 +1,5 @@
 package com.example.admin.Domain;
 
-
-import com.example.admin.Entity.CustomerEntity;
-import com.example.admin.Entity.ProductEntity;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +12,7 @@ public class Review {
 
     private Product product;
 
-    private double rate;
+    private int rate;
 
     private String content;
 

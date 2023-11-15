@@ -1,14 +1,11 @@
 package com.example.admin.Controller.Admin;
 
 import com.example.admin.Domain.Product;
-import com.example.admin.Domain.Item;
 import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Service.CategoryService;
 import com.example.admin.Service.ItemService;
 import com.example.admin.Service.ProductDetailService;
 import com.example.admin.Service.ProductService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.transaction.Transactional;
@@ -51,19 +48,6 @@ public class ProductController {
         return "Admin/AddProductAdmin";
     }
 
-    @PostMapping("add")
-    @Transactional
-    public String addProduct(@ModelAttribute("product") Product product, @RequestParam("selectedItems") String selectedItems, @RequestParam("numberFlower") int numberFlower) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            List<Long> idList = objectMapper.readValue(selectedItems, new TypeReference<List<Long>>() {});
-            ProductEntity productEntity = productService.addProduct(product);
-//            productDetailService.addProductDetail(productEntity, idList, numberFlower);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "redirect:/admin/product";
-    }
 
 
     // Xem chi tiết sản phẩm
@@ -90,17 +74,17 @@ public class ProductController {
 //        // Cập nhật thông tin sản phẩm
 //        return "redirect:/admin/product";
 //    }
-    @GetMapping("edit/{productId}")
-    public String showEditProduct(@PathVariable String productId, Model model) {
-        Long editProductId = Long.parseLong(productId);
-        model.addAttribute("product", productService.getProductById(editProductId));
-        return "Admin/EditProductAdmin";
-    }
-    @PostMapping("edit")
-    public String editProduct(@ModelAttribute Product product) {
-        productService.updateProduct(product);
-        return "redirect:/admin/product";
-    }
+//    @GetMapping("edit/{productId}")
+//    public String showEditProduct(@PathVariable String productId, Model model) {
+//        Long editProductId = Long.parseLong(productId);
+//        model.addAttribute("product", productService.getProductById(editProductId));
+//        return "Admin/EditProductAdmin";
+//    }
+//    @PostMapping("edit")
+//    public String editProduct(@ModelAttribute Product product) {
+//        productService.updateProduct(product);
+//        return "redirect:/admin/product";
+//    }
 //    @PostMapping("edit/{productId}")
 //    @Transactional
 //    public String editProduct(@PathVariable("productId") Long productId, @ModelAttribute("product") Product updatedProduct) {

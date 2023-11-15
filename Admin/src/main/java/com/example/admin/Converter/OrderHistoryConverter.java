@@ -6,7 +6,6 @@ import com.example.admin.Entity.OrderHistoryEntity;
 public class OrderHistoryConverter {
     public static OrderHistory toModel(OrderHistoryEntity orderHistoryEntity) {
         OrderHistory orderHistory = new OrderHistory();
-
         orderHistory.setId(orderHistoryEntity.getId());
         orderHistory.setDiscount(orderHistoryEntity.getDiscount());
         orderHistory.setOrderDateTime(orderHistoryEntity.getOrderDateTime());
