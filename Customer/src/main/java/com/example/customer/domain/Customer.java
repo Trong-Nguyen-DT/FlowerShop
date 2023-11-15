@@ -29,7 +29,7 @@ public class Customer {
 
     private boolean sex;
 
-    private LocalDate birth;
+    private LocalDate birthday;
 
     private List<OrderHistory> orders;
 

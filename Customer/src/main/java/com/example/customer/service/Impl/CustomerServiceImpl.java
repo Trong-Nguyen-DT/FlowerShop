@@ -77,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
         customerEntity.setFullName(newCustomer.getFullName());
         customerEntity.setEmail(newCustomer.getEmail());
         customerEntity.setSex(newCustomer.isSex());
-        customerEntity.setBirth(newCustomer.getBirth());
+        customerEntity.setBirthday(newCustomer.getBirthday());
         return CustomerConverter.toModel(customerRepository.save(customerEntity));
     }
 }

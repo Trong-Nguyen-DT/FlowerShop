@@ -31,7 +31,7 @@ public class CustomerEntity {
 
     private boolean sex;
 
-    private LocalDate birth;
+    private LocalDate birthday;
 
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AddressEntity> addressEntities;

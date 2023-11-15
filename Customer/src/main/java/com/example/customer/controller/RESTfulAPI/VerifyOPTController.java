@@ -18,9 +18,6 @@ public class VerifyOPTController {
     @Autowired
     private OtpService otpService;
 
-    @Autowired
-    private CustomerValidate customerValidate;
-
     @PostMapping("otp")
     public ResponseEntity<BodyResponse> verifyOTP(@RequestBody Otp otp) {
         BodyResponse response = new BodyResponse();
