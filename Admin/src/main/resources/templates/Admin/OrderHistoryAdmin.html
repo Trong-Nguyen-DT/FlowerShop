@@ -59,7 +59,7 @@
         </li>
         <li>
             <a th:href="@{/admin/importGood}">
-<!--            <a th:href="@{/admin/importGood/add}">-->
+                <!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -262,27 +262,29 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Import goods
+                Order History
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name Item</th>
-                        <th>Time import</th>
-                        <th>Quantity</th>
+<!--                        <th>NameStaff</th>-->
+<!--                        <th>Name customer</th>-->
+<!--                        <th>Phone customer</th>-->
+                        <th>Date</th>
                         <th>Total price</th>
 
                     </tr>
                     </thead>
-                    <tbody  th:each="importG : ${importGoods}"  >
+                    <tbody  th:each="order : ${orderHistories}"  >
                     <tr>
-                        <td th:text="${importG.id}"></td>
-                        <td th:text="${importG.item.name}"></td>
-                        <td th:text="${importG.timeImport}"></td>
-                        <td th:text="${importG.quantity}"></td>
-                        <td th:text="${importG.totalPrice}"></td>
+                        <td th:text="${order.id}"></td>
+<!--                        <td th:text="${order.fullNameStaff}"></td>-->
+<!--                        <td th:text="${order.fullNameStaff}"></td>-->
+<!--                        <td th:text="${order.phoneCustomer}"></td>-->
+                        <td th:text="${order.orderDateTime}"></td>
+                        <td th:text="${order.totalPrice}"></td>
 
                     </tr>
                     </tbody>
@@ -293,95 +295,95 @@
 
 
 
-<!--            <div class="box-body overflow-scroll">-->
-<!--                <form th:action="@{/admin/importGood/add}" th:method="post" th:object="${importGood}">-->
-<!--                    <table>-->
-<!--                        <tr th:each="item : ${items}">-->
-<!--                            <th>-->
-<!--                                <label>Name item:</label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <select name="itemIDs" id="item" multiple="multiple">-->
-<!--                                    <th:block >-->
-<!--                                        <option th:value="${item.id}" th:text="${item.name}"></option>-->
-<!--                                    </th:block >-->
-<!--                                </select>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <th>-->
-<!--                                <label>Quantity:</label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <input type="text" th:field="*{quantity}">-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <th>-->
-<!--                                <label>Time Import:</label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <input type="date" th:field="*{timeImport}">-->
-<!--                            </td>-->
-<!--                        </tr>-->
+            <!--            <div class="box-body overflow-scroll">-->
+            <!--                <form th:action="@{/admin/importGood/add}" th:method="post" th:object="${importGood}">-->
+            <!--                    <table>-->
+            <!--                        <tr th:each="item : ${items}">-->
+            <!--                            <th>-->
+            <!--                                <label>Name item:</label>-->
+            <!--                            </th>-->
+            <!--                            <td>-->
+            <!--                                <select name="itemIDs" id="item" multiple="multiple">-->
+            <!--                                    <th:block >-->
+            <!--                                        <option th:value="${item.id}" th:text="${item.name}"></option>-->
+            <!--                                    </th:block >-->
+            <!--                                </select>-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                        <tr>-->
+            <!--                            <th>-->
+            <!--                                <label>Quantity:</label>-->
+            <!--                            </th>-->
+            <!--                            <td>-->
+            <!--                                <input type="text" th:field="*{quantity}">-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
+            <!--                        <tr>-->
+            <!--                            <th>-->
+            <!--                                <label>Time Import:</label>-->
+            <!--                            </th>-->
+            <!--                            <td>-->
+            <!--                                <input type="date" th:field="*{timeImport}">-->
+            <!--                            </td>-->
+            <!--                        </tr>-->
 
-<!--                    </table>-->
-<!--                    <button type="submit">ADD</button>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--            <input type="text" id="itemName" name="itemName" style="width: 300px;" />-->
+            <!--                    </table>-->
+            <!--                    <button type="submit">ADD</button>-->
+            <!--                </form>-->
+            <!--            </div>-->
+            <!--        </div>-->
 
 
-    </div>
-    <!-- END ORDERS TABLE -->
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
-
-    <!--    <script>-->
-    <!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
-    <!--            var selectedCategoryId = this.value;-->
-    <!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
-    <!--            // Ví dụ sử dụng Fetch API:-->
-    <!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
-    <!--                .then(response => response.json())-->
-    <!--                .then(data => {-->
-    <!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
-    <!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
-    <!--                })-->
-    <!--                .catch(error => {-->
-    <!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
-    <!--                });-->
-    <!--        });-->
-    <!--    </script>-->
+            <!--            <input type="text" id="itemName" name="itemName" style="width: 300px;" />-->
 
 
+        </div>
+        <!-- END ORDERS TABLE -->
 
-<!--        <script>-->
-<!--            $(document).ready(function () {-->
-<!--                $("#itemName").select2({-->
-<!--                    ajax: {-->
-<!--                        url: "/searchItemNames",-->
-<!--                        dataType: 'json',-->
-<!--                        processResults: function (data) {-->
-<!--                            return {-->
-<!--                                results: data-->
-<!--                            };-->
-<!--                        },-->
-<!--                        cache: true-->
-<!--                    }-->
-<!--                });-->
-<!--            });-->
+        <!-- END MAIN CONTENT -->
+
+        <div class="overlay"></div>
+
+        <!-- SCRIPT -->
+        <!-- APEX CHART -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <!-- APP JS -->
+        <script th:src="@{/js/app.js}"></script>
+
+        <!--    <script>-->
+        <!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
+        <!--            var selectedCategoryId = this.value;-->
+        <!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
+        <!--            // Ví dụ sử dụng Fetch API:-->
+        <!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
+        <!--                .then(response => response.json())-->
+        <!--                .then(data => {-->
+        <!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
+        <!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
+        <!--                })-->
+        <!--                .catch(error => {-->
+        <!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
+        <!--                });-->
+        <!--        });-->
+        <!--    </script>-->
+
+
+
+        <!--        <script>-->
+        <!--            $(document).ready(function () {-->
+        <!--                $("#itemName").select2({-->
+        <!--                    ajax: {-->
+        <!--                        url: "/searchItemNames",-->
+        <!--                        dataType: 'json',-->
+        <!--                        processResults: function (data) {-->
+        <!--                            return {-->
+        <!--                                results: data-->
+        <!--                            };-->
+        <!--                        },-->
+        <!--                        cache: true-->
+        <!--                    }-->
+        <!--                });-->
+        <!--            });-->
         </script>
 </body>
 

@@ -4,11 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Setter
 @Getter
-public class Order {
+public class OrderHistory {
     private Long id;
 
     private LocalDateTime orderDateTime;
@@ -19,11 +18,17 @@ public class Order {
 
     private double amount;
 
-    private Boolean confirmed;
+    private Long userId;
 
-    private Boolean status;
+    private String fullNameStaff;
 
-    private User user;
+    private String role;
 
-    private Customer customer;
+    private Long customerId;
+
+    private String fullNameCustomer;
+
+    private String phoneCustomer;
+
+    private String emailCustomer;
 }

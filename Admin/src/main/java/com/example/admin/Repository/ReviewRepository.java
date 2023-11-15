@@ -1,9 +1,9 @@
 package com.example.admin.Repository;
 
-import com.example.admin.Entity.UserEntity;
+import com.example.admin.Entity.ReviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface StaffRepository extends JpaRepository<UserEntity, Long> {
+public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
 }
