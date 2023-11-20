@@ -194,76 +194,81 @@
 </footer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const categoryList = document.getElementById("categoryList");
-        const productList = document.querySelector(".productList");
-        const categoryTitle = document.getElementById("categoryTitle");
-        const productTemplate = document.getElementById("item_Product");
+    document.addEventListener('DOMContentLoaded', function () {
+        // Replace the URL with the actual URL of your API endpoint
+        const apiUrl = 'api/category';
+        const categoryTitleContainer = document.getElementById('categoryTitleContainer');
+        const categoryList = document.getElementById('categoryList');
 
-        // Hàm tạo mục danh mục và thêm sự kiện click
-        function createCategoryItem(category) {
-            const categoryItem = document.createElement("li");
-            categoryItem.classList.add("nav-item");
+        // Function to fetch and display products for a given category
+        function fetchAndDisplayProducts(categoryId, productListContainer) {
+            // Replace the URL with the actual URL of your product API endpoint
+            const productApiUrl = `api/search-category/${categoryId}`;
 
-            const categoryLink = document.createElement("a");
-            categoryLink.classList.add("nav-link");
-            categoryLink.textContent = category.name;
-            categoryLink.href = `#`;
+            // Fetch data from the product API
+            fetch(productApiUrl)
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('productList');
+                    productList.innerHTML = ''; // Clear existing products
 
-            categoryLink.addEventListener("click", () => {
-                displayProductsForCategory(category);
-            });
-
-            categoryItem.appendChild(categoryLink);
-            categoryList.appendChild(categoryItem);
+                    products.forEach(product => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = product.name; // Assuming 'name' is the property representing the product name
+                        productList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching products:', error));
         }
 
-        function displayProductsForCategory(category) {
-            // Cập nhật tiêu đề danh mục
-            categoryTitle.textContent = category.name;
+        // Fetch data from the category API
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved data and update the UI
+                data.forEach((category, index) => {
+                    // Update category list
+                    const listItem = document.createElement('li');
+                    listItem.className = 'nav-item';
 
-            // Xóa sản phẩm trước đó
-            document.querySelectorAll('.item_Product:not(:first-child)').forEach(item => item.remove());
+                    const link = document.createElement('a');
+                    link.className = 'nav-link';
+                    link.href = '#';
+                    link.textContent = category.name; // Assuming 'name' is the property representing the category name
 
-            // Lặp qua các sản phẩm trong danh mục và hiển thị
-            category.productEntities.forEach((product) => {
-                // Clone sản phẩm mẫu
-                const productItem = productTemplate.cloneNode(true);
-                productItem.style.display = "block"; // Hiển thị sản phẩm (mẫu ban đầu có thể được ẩn)
+                    // Event listener to fetch and display products for the selected category
+                    link.addEventListener('click', function () {
+                        // Clear existing products
+                        categoryTitleContainer.innerHTML = '';
 
-                // Tạo và điền thông tin sản phẩm
-                productItem.querySelector("#productImage").src = product.image1;
-                productItem.querySelector("#productName").textContent = product.name;
-                productItem.querySelector("#productPrice").textContent = product.price;
-                // Thêm sản phẩm vào danh sách
-                productList.appendChild(productItem);
-            });
-        }
+                        const productListContainer = document.createElement('div');
+                        productListContainer.className = 'productList';
+                        categoryTitleContainer.appendChild(productListContainer);
 
-        // Lấy danh mục và điền danh sách danh mục
-        fetch("/category")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                // Hiển thị danh mục
-                data.forEach((category) => {
-                    createCategoryItem(category);
+                        // Create an h3 element for the category title
+                        const categoryTitleInSection = document.createElement('h3');
+                        categoryTitleInSection.className = 'category';
+                        categoryTitleInSection.textContent = category.name; // Assuming 'name' is the property representing the category name
+
+                        // Append the category title to the productList section
+                        categoryTitleContainer.appendChild(categoryTitleInSection);
+
+                        // Fetch and display products for the selected category
+                        fetchAndDisplayProducts(category.id, productListContainer);
+                    });
+
+                    listItem.appendChild(link);
+                    categoryList.appendChild(listItem);
+
+                    // If it's the first category, fetch and display its products by default
+                    if (index === 0) {
+                        link.click();
+                    }
                 });
-
-                // Hiển thị tất cả sản phẩm ban đầu khi danh mục đã được tải
-                const allCategory = { name: "Tất cả sản phẩm", productEntities: data.flatMap(category => category.productEntities) };
-                displayProductsForCategory(allCategory);
             })
-            .catch((error) => {
-                console.error("Lỗi lấy dữ liệu danh mục:", error);
-            });
+            .catch(error => console.error('Error fetching data:', error));
     });
 
 </script>
-
 </body>
 </html>
