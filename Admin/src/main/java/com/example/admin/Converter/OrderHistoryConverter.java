@@ -11,7 +11,6 @@ public class OrderHistoryConverter {
         orderHistory.setOrderDateTime(orderHistoryEntity.getOrderDateTime());
         orderHistory.setTotalPrice(orderHistoryEntity.getTotalPrice());
         orderHistory.setAmount(orderHistoryEntity.getAmount());
-        orderHistory.setRole(orderHistoryEntity.getRole());
         orderHistory.setCustomerId(orderHistoryEntity.getCustomerId());
         orderHistory.setEmailCustomer(orderHistoryEntity.getEmailCustomer());
         orderHistory.setPhoneCustomer(orderHistoryEntity.getPhoneCustomer());
@@ -27,7 +26,6 @@ public class OrderHistoryConverter {
         orderHistoryEntity.setId(orderHistory.getId());
         orderHistoryEntity.setAmount(orderHistory.getAmount());
         orderHistoryEntity.setDiscount(orderHistory.getDiscount());
-        orderHistoryEntity.setRole(orderHistory.getRole());
         orderHistoryEntity.setOrderDateTime(orderHistory.getOrderDateTime());
         orderHistoryEntity.setEmailCustomer(orderHistory.getEmailCustomer());
         orderHistoryEntity.setUserId(orderHistory.getUserId());

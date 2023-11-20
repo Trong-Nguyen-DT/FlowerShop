@@ -13,4 +13,7 @@ import java.util.List;
 public interface OrderService {
     List<OrderHistory> getAllOrderHistory();
 
+    List<OrderHistory> getOrderByTime(LocalDateTime startTime, LocalDateTime endTime);
+
+
 }

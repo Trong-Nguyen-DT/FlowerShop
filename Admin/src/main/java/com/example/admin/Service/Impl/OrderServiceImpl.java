@@ -9,6 +9,7 @@ import com.example.admin.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -19,6 +20,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderHistory> getAllOrderHistory() {
         return orderHistoryRepository.findAll().stream().map(OrderHistoryConverter::toModel).toList();
+    }
+    @Override
+    public List<OrderHistory> getOrderByTime(LocalDateTime startTime, LocalDateTime endTime) {
+        return orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(startTime, endTime).stream().map(OrderHistoryConverter::toModel).toList();
     }
 
 
