@@ -77,31 +77,29 @@
     </div>
 </nav>
 
-<section>
-    <div class="container_section">
-        <ul class="nav nav-tabs" id="categoryList">
-    </ul>
-    </div>
-</section>
+        <section>
+            <div class="container_section">
+                <ul id="categoryList" class="nav nav-tabs"></ul>
+            </div>
+        </section>
 
-<main>
-    <div class="container_main">
-        <div class="panel">
-        <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
-        <img th:src="@{/images/panelHoa.png}">
-    </div>
-
-    <div class="productList">
-        <h3 class="category" id="categoryTitle"></h3>
-        <div class="item_Product" id="item_Product">
-            <img src="" id="productImage">
-            <p id="productName"></p>
-            <p id="productPrice"></p>
-            <input type="button" value="ĐẶT HÀNG">
+    <main>
+        <div class="container_main">
+            <div class="panel">
+            <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
+            <img th:src="@{/images/panelHoa.png}">
         </div>
-    </div>
-    </div>
-</main>
+
+            <div class="productList_Category" id="categoryTitleContainer">
+<!--                <h3 class="category" id="categoryTitle"></h3>-->
+<!--                <div class="item_ProductOfCategory" id="item_ProductOfCategory">-->
+<!--                    <ul id="category"></ul>-->
+<!--                <ul id="productList"></ul>-->
+
+            </div>
+        </div>
+        </div>
+    </main>
 
 <footer>
         <div class="column">
@@ -220,110 +218,154 @@
 </footer>
 
 </body>
-<<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const categoryList = document.getElementById("categoryList");
-        const productList = document.querySelector(".productList");
-        const categoryTitle = document.getElementById("categoryTitle");
-        const productTemplate = document.getElementById("item_Product");
+<!-- Your HTML code remains unchanged -->
 
-        // Hàm tạo mục danh mục và thêm sự kiện click
-        function createCategoryItem(category) {
-            const categoryItem = document.createElement("li");
-            categoryItem.classList.add("nav-item");
+<!-- Your HTML code remains unchanged -->
 
-            const categoryLink = document.createElement("a");
-            categoryLink.classList.add("nav-link");
-            categoryLink.textContent = category.name;
-            categoryLink.href = `#`;
+<!-- HTML của bạn không thay đổi -->
 
-            categoryLink.addEventListener("click", () => {
-                displayProductsForCategory(category);
-            });
+<script>
 
-            categoryItem.appendChild(categoryLink);
-            categoryList.appendChild(categoryItem);
+    document.addEventListener('DOMContentLoaded', function () {
+        const categoryApiUrl = 'api/category';
+        const productApiUrl = 'api/product/search-category';
+        const categoryTitleContainer = document.getElementById('categoryTitleContainer');
+        const categoryList = document.getElementById('categoryList');
+        const productListContainer = document.getElementById('productList');
+
+        function fetchAndDisplayAllProducts() {
+            fetch(categoryApiUrl)
+                .then(response => response.json())
+                .then(categories => {
+                    categories.forEach(category => {
+                        // Display categories
+                        const categoryListItem = createCategoryListItem(category);
+                        categoryList.appendChild(categoryListItem);
+
+                        fetch(`${productApiUrl}/${category.id}`)
+                            .then(response => response.json())
+                            .then(products => {
+                                displayCategoryAndProducts(category, products);
+                            })
+                            .catch(error => console.error('Lỗi khi lấy sản phẩm:', error));
+                    });
+                })
+                .catch(error => console.error('Lỗi khi lấy dữ liệu danh mục:', error));
         }
 
-        function displayProductsForCategory(category) {
-            // Cập nhật tiêu đề danh mục
-            categoryTitle.textContent = category.name;
+        function createCategoryListItem(category) {
+            const listItem = document.createElement('li');
+            listItem.className = 'nav-item';
 
-            // Xóa sản phẩm trước đó
-            document.querySelectorAll('.item_Product:not(#item_Product)').forEach(item => item.remove());
+            const link = document.createElement('a');
+            link.className = 'nav-link';
+            link.href = '#';
+            link.textContent = category.name;
 
-            // Lặp qua các sản phẩm trong danh mục và hiển thị
-            category.productEntities.forEach((product) => {
-                // Clone sản phẩm mẫu
-                const productItem = productTemplate.cloneNode(true);
-                productItem.style.display = "block"; // Hiển thị sản phẩm (mẫu ban đầu có thể được ẩn)
+            // Sự kiện để fetch và hiển thị sản phẩm cho danh mục đã chọn
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                categoryTitleContainer.innerHTML = '';
+                productListContainer.innerHTML = '';
 
-                // Tạo và điền thông tin sản phẩm
-                productItem.querySelector("#productImage").src = product.image1;
-                productItem.querySelector("#productName").textContent = product.name;
-                productItem.querySelector("#productPrice").textContent = product.price;
-                // Thêm sản phẩm vào danh sách
-                productList.appendChild(productItem);
+                const categoryTitle = createCategoryTitle(category);
+                categoryTitleContainer.appendChild(categoryTitle);
+
+                fetchProductsAndDisplay(category.id);
             });
+
+
+            listItem.appendChild(link);
+            return listItem;
         }
 
-        // Lấy danh mục và điền danh sách danh mục
-        fetch("/category")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                // Hiển thị danh mục
-                data.forEach((category) => {
-                    createCategoryItem(category);
+
+            function displayCategoryAndProducts(category, products) {
+                const categoryTitle = createCategoryTitle(category);
+                categoryTitleContainer.appendChild(categoryTitle);
+
+                const categoryList = createCategoryList();
+
+                products.forEach(product => {
+                    const listItem = document.createElement('li');
+
+                    listItem.addEventListener('click', function () {
+                        redirectToProductDetail(product.id);
+                    });
+
+                    const productLink = document.createElement('a');
+
+                    const productImage = document.createElement('img');
+                    productImage.src = product.image;
+                    productImage.className = 'imageProduct';
+                    productLink.appendChild(productImage);
+
+                    const productName = document.createElement('p');
+                    productName.textContent = product.name;
+                    productName.className = 'nameProduct';
+                    productLink.appendChild(productName);
+
+                    const productPrice = document.createElement('p');
+                    productPrice.textContent = product.price;
+                    productPrice.className = 'priceProduct';
+                    productLink.appendChild(productPrice);
+
+                    const productButton = document.createElement('input');
+                    productButton.type = 'button'
+                    productButton.value = "ĐẶT HÀNG"
+                    productLink.appendChild(productButton);
+
+                    // <input type="button" value="ĐẶT HÀNG">
+
+                    listItem.appendChild(productLink);
+                    categoryList.appendChild(listItem);
                 });
 
-                // Hiển thị tất cả sản phẩm ban đầu khi danh mục đã được tải
-                const allCategory = {
-                    name: "Tất cả sản phẩm",
-                    productEntities: data.flatMap((category) => category.productEntities),
-                };
-                displayProductsForCategory(allCategory);
-            })
-            .catch((error) => {
-                console.error("Lỗi lấy dữ liệu danh mục:", error);
-            });
+                categoryTitleContainer.appendChild(categoryList);
+            }
 
-        // Hàm để hiển thị danh sách sản phẩm lên trang web
-        function displayProducts(products) {
-            const productListContainer = document.querySelector(".productList");
-            const itemProductContainer = document.getElementById("item_Product");
-
-            products.forEach((product) => {
-                const productElement = itemProductContainer.cloneNode(true);
-
-                // Đặt thông tin sản phẩm trong các phần tử HTML tương ứng
-                productElement.querySelector("#productImage").src = product.imageUrl;
-                productElement.querySelector("#productName").textContent = product.name;
-                productElement.querySelector("#productPrice").textContent = `Price: $${product.price}`;
-
-                // Thêm sản phẩm vào danh sách sản phẩm
-                productListContainer.appendChild(productElement);
-            });
-
-            // Xóa mẫu sản phẩm gốc
-            itemProductContainer.style.display = "none";
+        function redirectToProductDetail(productId) {
+            // Gọi API để lấy thông tin sản phẩm
+            fetch(`/api/product/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(product => {
+                    // Chuyển hướng đến trang chi tiết với thông tin sản phẩm
+                    window.location.href = `/product/detail?id=${product.id}&name=${product.name}&price=${product.price}`;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gọi API để lấy thông tin sản phẩm:', error);
+                    // Xử lý lỗi nếu cần
+                });
         }
 
-        // Gọi API để lấy danh sách tất cả các sản phẩm và hiển thị chúng lên trang web
-        fetch('/product')
-            .then(response => response.json())
-            .then(products => {
-                // Hiển thị danh sách sản phẩm lên trang web
-                displayProducts(products);
-            })
-            .catch(error => console.error('Error fetching products:', error));
+
+        function createCategoryList() {
+            const categoryList = document.createElement('ul');
+            categoryList.id = 'category';
+            return categoryList;
+        }
+
+        function createCategoryTitle(category) {
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.className = 'category';
+            categoryTitle.textContent = category.name;
+            return categoryTitle;
+        }
+
+        // Call fetchAndDisplayAllProducts to initiate the process
+        fetchAndDisplayAllProducts();
     });
 
-</script>
 
+
+
+
+
+</script>
 
 </html>

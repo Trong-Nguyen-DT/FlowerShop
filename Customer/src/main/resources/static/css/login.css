@@ -50,7 +50,7 @@ nav {
     display: flex;
     justify-content: center; /* Căn giữa theo chiều ngang */
     align-items: center; /* Căn giữa theo chiều dọc */
-    height: 80px; /* Điều chỉnh chiều cao của nav nếu cần */
+
 
 }
 .container_nav
@@ -69,14 +69,17 @@ nav {
 {
     width: 15%;
 }
-.logo
-{
+.logo {
     width: 50%;
+    position: relative;
 }
-.logo img
-{
+
+.logo img {
     width: 100%;
-    height: 200px;
+    height: 162px; /* Để bảo đảm tỷ lệ khung hình chính xác */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .search-container {
     position: relative;
@@ -145,7 +148,6 @@ main
 {
     display: flex;
     justify-content: center;
-    padding-bottom: 10%;
 }
 .container_main
 {
@@ -200,6 +202,7 @@ main
     margin-top: 3%;
 }
 
+
 footer {
     display: flex;
     flex-direction: column;
@@ -209,21 +212,7 @@ footer {
     padding: 20px 0;
 }
 
-.column {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
 
-.column .column_left,
-.column .column_right {
-    width: 49%;
-}
-
-.column .column_left img {
-    width: 80%;
-}
 
 .infoShop {
     width: 90%;
