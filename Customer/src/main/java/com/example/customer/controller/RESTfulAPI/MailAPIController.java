@@ -5,7 +5,6 @@ import com.example.customer.domain.Customer;
 import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.service.CustomerService;
 import com.example.customer.service.MailService;
-import com.example.customer.service.OtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +18,6 @@ public class MailAPIController {
 
     @Autowired
     private CustomerService customerService;
-
-    @Autowired
-    private OtpService otpService;
 
     @PostMapping("register")
     public ResponseEntity<BodyResponse> verifyEmail(@RequestBody Customer customer) {

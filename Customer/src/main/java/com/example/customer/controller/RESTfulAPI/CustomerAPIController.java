@@ -2,14 +2,15 @@ package com.example.customer.controller.RESTfulAPI;
 
 
 import com.example.customer.domain.Customer;
+import com.example.customer.requestBody.CustomerRequest;
+import com.example.customer.requestBody.PasswordRequest;
+import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.responseBody.CustomerResponse;
 import com.example.customer.service.CustomerService;
 import com.example.customer.validator.CustomerValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -42,7 +43,7 @@ public class CustomerAPIController {
     }
 
     @PostMapping("update")
-    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody Customer newCustomer) {
+    public ResponseEntity<CustomerResponse> updateCustomer(@RequestBody CustomerRequest newCustomer) {
         CustomerResponse customerResponse = new CustomerResponse();
         String name = customerValidate.validateCustomer();
         if (name != null ) {
@@ -53,5 +54,24 @@ public class CustomerAPIController {
             return ResponseEntity.ok(customerResponse);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @PostMapping("change-password")
+    public ResponseEntity<BodyResponse> changePassword(@RequestBody PasswordRequest passwordRequest) {
+        String name = customerValidate.validateCustomer();
+        if (name == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        BodyResponse response = new BodyResponse();
+        if (customerService.updatePassword(name, passwordRequest)) {
+            response.setSuccess(true);
+            response.setMessage("success");
+
+        } else {
+            response.setSuccess(false);
+            response.setMessage("incorrect password");
+        }
+        return ResponseEntity.ok(response);
+
     }
 }

@@ -2,7 +2,6 @@ package com.example.customer.service.Impl;
 
 import com.example.customer.entity.OTPEntity;
 import com.example.customer.repository.OtpRepository;
-import com.example.customer.requestBody.EmailRequest;
 import com.example.customer.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

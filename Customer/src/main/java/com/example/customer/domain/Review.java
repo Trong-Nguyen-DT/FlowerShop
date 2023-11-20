@@ -1,10 +1,6 @@
 package com.example.customer.domain;
 
 
-import com.example.customer.entity.CustomerEntity;
-import com.example.customer.entity.ProductEntity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -5,7 +5,6 @@ import com.example.customer.domain.Cart;
 import com.example.customer.domain.CartItem;
 import com.example.customer.entity.CartEntity;
 import com.example.customer.entity.CartItemEntity;
-import com.example.customer.entity.CustomerEntity;
 import com.example.customer.entity.ProductEntity;
 import com.example.customer.repository.CartItemRepository;
 import com.example.customer.repository.CartRepository;
@@ -15,7 +14,6 @@ import com.example.customer.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

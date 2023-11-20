@@ -5,12 +5,9 @@ import com.example.customer.domain.CartItem;
 import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.service.CartService;
 import com.example.customer.validator.CustomerValidate;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
