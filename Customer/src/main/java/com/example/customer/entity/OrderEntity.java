@@ -1,6 +1,8 @@
 package com.example.customer.entity;
 
 
+import com.example.customer.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +31,12 @@ public class OrderEntity {
 
     private Boolean status;
 
+    private String note;
+
+    private String informationRelated;
+
+    private OrderStatus orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -38,5 +46,6 @@ public class OrderEntity {
     private CustomerEntity customerEntity;
 
     @OneToMany(mappedBy = "orderEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<OrderDetailEntity> orderDetails;
 }

@@ -9,7 +9,6 @@ import com.example.customer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,5 +30,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProductByCategory(Long categoryId) {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow();
         return productRepository.findAllByCategoryEntities(categoryEntity).stream().map(ProductConverter::toModel).toList();
+    }
+
+    @Override
+    public Product getProductById(Long id) {
+        return ProductConverter.toModel(productRepository.findById(id).orElseThrow());
     }
 }

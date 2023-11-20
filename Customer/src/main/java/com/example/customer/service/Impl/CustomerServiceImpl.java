@@ -6,10 +6,18 @@ import com.example.customer.entity.CartEntity;
 import com.example.customer.entity.CustomerEntity;
 import com.example.customer.repository.CartRepository;
 import com.example.customer.repository.CustomerRepository;
+import com.example.customer.requestBody.CustomerRequest;
+import com.example.customer.requestBody.PasswordRequest;
 import com.example.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -22,6 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Value("${imagePath}")
+    private String imagePath;
+
+    @Value("${imagePathCustomer}")
+    private String imagePathCustomer;
 
     @Override
     public Customer checkCustomer(String username, String password) {
@@ -67,5 +81,39 @@ public class CustomerServiceImpl implements CustomerService {
              return CustomerConverter.toModel(customerEntity);
         }
         return null;
+    }
+
+    @Override
+    public Customer updateCustomer(String name, CustomerRequest newCustomer) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        customerEntity.setPhone(newCustomer.getPhone());
+        customerEntity.setFullName(newCustomer.getFullName());
+        customerEntity.setEmail(newCustomer.getEmail());
+        customerEntity.setSex(newCustomer.isSex());
+        customerEntity.setBirthday(newCustomer.getBirthday());
+        if (newCustomer.getAvatar() != null) {
+            File avatarFile = new File(imagePath + "imagesCustomer/" + customerEntity.getId() + ".png");
+            // Tiếp tục xử lý upload file như bạn đã làm trong đoạn mã trước đó
+            try (OutputStream os = new FileOutputStream(avatarFile)) {
+                os.write(newCustomer.getAvatar());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            customerEntity.setAvatar(customerEntity.getId().toString() + ".png");
+
+        }
+        CustomerEntity returnCustomer = customerRepository.save(customerEntity);
+        return CustomerConverter.toModel(returnCustomer);
+    }
+
+    @Override
+    public boolean updatePassword(String name, PasswordRequest passwordRequest) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElse(null);
+        if (customerEntity != null && passwordEncoder.matches(passwordRequest.getOldPassword(), customerEntity.getPassword())) {
+            customerEntity.setPassword(passwordEncoder.encode(passwordRequest.getNewPassword()));
+            customerRepository.save(customerEntity);
+            return true;
+        }
+        return false;
     }
 }

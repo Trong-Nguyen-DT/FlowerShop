@@ -134,6 +134,9 @@
                     <input type="password" class="form-control" id="pw" name="password" aria-describedby="pwHelp"
                            placeholder="Mật khẩu">
                 </div>
+                <div class="login">
+                   <a th:href="@{/customer/forgotPassword}">QUÊN MẬT KHẨU</a>
+                </div>
                 <div class="group-button">
                     <button type="submit">Login</button>
                 </div>
@@ -149,10 +152,9 @@
 
     <footer>
 
-
         <div class="infoShop">
             <div class="column1">
-                <img th:src="/images/logo.png">
+                <img th:src="@{/images-customer/logo.png}">
                 <p>Hotline: 19008479-2892467</p>
                 <p>Email: BoCongAnh@Flowers.vn</p>
             </div>
@@ -204,5 +206,7 @@
             </div>
         </div>
     </footer>
+
+
 </body>
 </html>

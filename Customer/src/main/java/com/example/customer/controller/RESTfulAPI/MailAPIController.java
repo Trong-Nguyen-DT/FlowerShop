@@ -23,9 +23,9 @@ public class MailAPIController {
     public ResponseEntity<BodyResponse> verifyEmail(@RequestBody Customer customer) {
         BodyResponse emailResponse = new BodyResponse();
         if (customerService.checkUsername(customer.getUsername())) {
-            String otp = mailService.sendEmail(customer.getEmail());
+            Long otpCode = mailService.sendEmail(customer.getEmail());
             emailResponse.setSuccess(true);
-            emailResponse.setMessage(otp);
+            emailResponse.setMessage(otpCode.toString());
         } else {
             emailResponse.setSuccess(false);
             emailResponse.setMessage("Account name has been taken");
@@ -38,10 +38,9 @@ public class MailAPIController {
         BodyResponse emailResponse = new BodyResponse();
         Customer customerTrue = customerService.getCustomerByUsername(customer.getUsername());
         if (customerTrue != null) {
-            String otp = mailService.sendEmail(customerTrue.getEmail());
+            Long otpCode = mailService.sendEmail(customerTrue.getEmail());
             emailResponse.setSuccess(true);
-            emailResponse.setMessage(otp);
-
+            emailResponse.setMessage(otpCode.toString());
         } else {
             emailResponse.setSuccess(false);
             emailResponse.setMessage("Account name has been taken");
