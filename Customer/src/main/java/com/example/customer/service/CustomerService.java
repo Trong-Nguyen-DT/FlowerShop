@@ -1,7 +1,10 @@
 package com.example.customer.service;
 
 import com.example.customer.domain.Customer;
-import com.example.customer.domain.Otp;
+import com.example.customer.requestBody.CustomerRequest;
+import com.example.customer.requestBody.PasswordRequest;
+
+import java.io.IOException;
 
 public interface CustomerService {
     Customer checkCustomer(String username, String password);
@@ -14,5 +17,7 @@ public interface CustomerService {
 
     Customer getCustomerByUsername(String name);
 
-    Customer updateCustomer(String name, Customer newCustomer);
+    Customer updateCustomer(String name, CustomerRequest newCustomer);
+
+    boolean updatePassword(String name, PasswordRequest passwordRequest);
 }
