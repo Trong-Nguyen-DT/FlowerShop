@@ -3,37 +3,21 @@ package com.example.customer.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 public class Order {
-    private Long id;
-
-    private LocalDateTime orderDateTime;
-
-    private double totalPrice;
-
-    private double discount;
-
-    private double amount;
-
-    private double subPrice;
-
-    private double shipPrice;
-
-    private String note;
-
-    private Address address;
-
-    List<OrderDetail> orderDetails;
-
-    private Voucher voucher;
-
-    private boolean shipping;
-
-    private boolean paymentOnline;
-
+    private Long orderCode;
+    private Long amount;
+    private String description;
+    private Long customer_id;
+    private String buyerName;
+    private String buyerPhone;
+    private String returnUrl;
+    private String cancelUrl;
+    private String signature;
+    private long expiredAt;
+    private List<OrderDetail> items;
 
 }
