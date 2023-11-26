@@ -27,8 +27,6 @@ public class OrderHistoryEntity {
 
     private String fullNameStaff;
 
-    private String role;
-
     private Long customerId;
 
     private String fullNameCustomer;
