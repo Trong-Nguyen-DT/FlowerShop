@@ -286,9 +286,9 @@
                         <td th:unless="${order.getCustomerId() == null}">
                             <span th:each="cus:${customers}" th:if="${cus.id== order.customerId}" th:text="${cus.fullName}"></span>
                         </td>
+                        <td th:text="${order.phoneCustomer}"></td>
                         <td th:text="${order.orderDateTime}"></td>
                         <td th:text="${order.amount}"></td>
-                        <td th:text="${order.phoneCustomer}"></td>
                         <td th:text="${order.totalPrice}"></td>
 <!--                        <td><a th:href="@{'/admin/orderdetail/' + ${order.id}}"><i class="fa-solid fa-magnifying-glass"></i></a> </td>-->
                     </tr>
