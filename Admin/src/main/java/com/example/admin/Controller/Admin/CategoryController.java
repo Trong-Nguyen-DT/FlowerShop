@@ -21,7 +21,6 @@ public class CategoryController {
         model.addAttribute("categories", categoryService.getAllCategory());
         return "Admin/CategoryAdmin";
     }
-
     @GetMapping("add")
     public String showAddCategory(Model model) {
         model.addAttribute("category", new Category());

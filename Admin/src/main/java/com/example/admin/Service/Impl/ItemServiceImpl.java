@@ -34,7 +34,6 @@ public class ItemServiceImpl implements ItemService {
     public void updateItem(Item item) {
         ItemEntity itemEntity = itemRepository.findById(item.getId()).orElseThrow();
         itemEntity.setName(item.getName());
-        itemEntity.setImage(item.getImage());
         itemRepository.save(itemEntity);
     }
 

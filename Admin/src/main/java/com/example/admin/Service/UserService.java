@@ -1,8 +1,6 @@
 package com.example.admin.Service;
 
-import com.example.admin.Domain.Customer;
 import com.example.admin.Domain.User;
-import com.example.admin.Entity.ProductEntity;
 
 import java.util.List;
 

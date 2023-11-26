@@ -16,7 +16,7 @@ public class ProductDetailEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id")
-    private ItemEntity itemEntity;
+    private ItemEntity itemsEntity;
 
     private int quantity;
 

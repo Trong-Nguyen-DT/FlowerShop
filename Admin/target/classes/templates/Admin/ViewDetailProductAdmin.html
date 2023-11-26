@@ -14,7 +14,6 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -54,6 +53,13 @@
             <a href="#">
                 <i class='bx bx-shopping-bag'></i>
                 <span>sales</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/admin/importGood}">
+                <!--            <a th:href="@{/admin/importGood/add}">-->
+                <i class='bx bx-shopping-bag'></i>
+                <span>Import Goods</span>
             </a>
         </li>
         <li>
@@ -190,6 +196,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/review}">
+                <i class='bx bx-mail-send'></i>
+                <span>Review</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/inventory}">
                 <i class='bx bx-mail-send'></i>
                 <span>Inventory</span>
@@ -263,8 +275,8 @@
                         <th>Image4</th>
                         <th>Image5</th>
                         <th>Details</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+<!--                        <th>Edit</th>-->
+<!--                        <th>Delete</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -284,8 +296,8 @@
                         <td> <img th:src="@{'/images/' + ${product.image4}}"></td>
                         <td> <img th:src="@{'/images/' + ${product.image5}}"></td>
                         <td><a th:href="@{'/admin/productDetail/' + ${product.id}}" style="color: blue"> Detail  </a> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i></a></button> </td>-->
+<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i> </a></button></td>-->
 
                     </tr>
                     </tbody>

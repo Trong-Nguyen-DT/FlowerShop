@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -27,13 +27,21 @@ public class CustomerEntity {
 
     private String fullName;
 
-    private String address;
-
     private String email;
+
+    private boolean sex;
+
+    private LocalDate birthday;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AddressEntity> addressEntities;
 
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;
 
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities;
+
+    @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL)
+    private CartEntity cartEntity;
 }

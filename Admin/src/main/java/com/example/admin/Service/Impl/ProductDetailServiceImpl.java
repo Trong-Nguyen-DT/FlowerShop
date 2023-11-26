@@ -1,6 +1,5 @@
 package com.example.admin.Service.Impl;
 
-import com.example.admin.Converter.CustomerConverter;
 import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Domain.ProductDetail;
 import com.example.admin.Repository.ProductDetailRepository;
