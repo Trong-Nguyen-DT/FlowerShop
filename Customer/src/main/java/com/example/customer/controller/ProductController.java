@@ -16,18 +16,9 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/detail")
-    public String productDetail(@RequestParam Long id, Model model) {
-        Product product = productService.getProductById(id);
-
-        // Đặt thông tin sản phẩm vào model
-        model.addAttribute("idProduct", product.getId());
-        model.addAttribute("productName", product.getName());
-        model.addAttribute("productPrice", product.getPrice());
-
-        // Trả về tên của view (trang chi tiết sản phẩm)
+    @GetMapping("/detail/{id}")
+    public String productDetail(@PathVariable Long id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
         return "product_Detail";
     }
-
-
 }

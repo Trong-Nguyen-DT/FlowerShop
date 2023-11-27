@@ -112,23 +112,41 @@
         </div>
 
         <div class="register_Login">
-            <h3>Quên mật khẩu?</h3>
-            <h5>Nhập địa chỉ e-mail được liên kết với tài khoản của bạn. Nhấp vào gửi để có một liên kết đặt lại mật khẩu được gửi qua email cho bạn.</h5>
-            <h4>Địa chỉ email của bạn</h4>
-            <form class="forgotPassword" id="forgotPassword" onsubmit="submitForm(); return false;">
+            <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+            <h5>Nếu bạn đã có tài khoản với chúng tôi, vui lòng đăng nhập tại trang đăng nhập .</h5>
+            <form class="register" id="registrationForm"  onsubmit="submitForm(); return false;">
+                <h4>Thông tin cá nhân của bạn</h4>
                 <div class="login">
-                    <h6>Username:</h6>
+                    <h6>Họ tên</h6>
                     <input type="text" class="form-control" id="name"  name="username" aria-describedby="tkHelp"
                            placeholder="Họ tên" autofocus>
                 </div>
-
+                <div class="login">
+                    <h6>Email</h6>
+                    <input type="text" class="form-control" id="tk"  name="email" aria-describedby="tkHelp"
+                           placeholder="Email" autofocus>
+                </div>
+                <div class="login">
+                    <h6>Điện thoại</h6>
+                    <input type="text" class="form-control" id="phone" name="phone" autocomplete="tel" aria-describedby="tkHelp" placeholder="Điện thoại" autofocus>
+                </div>
+                <h4>Mật khẩu của bạn</h4>
+                <div class="login">
+                    <h6>Mật khẩu</h6>
+                    <input type="password" class="form-control" id="pw" name="password" aria-describedby="pwHelp" placeholder="Mật khẩu" autocomplete="current-password">
+                </div>
 
                 <div class="group-button">
-                    <button type="submit">Tiếp tục</button>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Tôi đã đọc và đồng ý với <a href="">Điều khoản và điều kiện</a>
+                        </label>
+                    </div>
+                    <button type="submit" >Đăng ký</button>
                 </div>
             </form>
 
-            <!-- Thêm form xác nhận OTP -->
             <form class="otp" id="otpForm" style="display: none;">
                 <h4>Nhập OTP</h4>
                 <div class="login">
@@ -139,23 +157,6 @@
                 </div>
                 <button type="button" id="confirmOTPButton">Xác nhận OTP</button>
             </form>
-
-            <form class="newPassword" id="newPassword">
-                <input type="text" class="form-control" id="newPasswordUsername" name="username" aria-describedby="tkHelp" placeholder="Họ tên" autofocus  autocomplete="username">
-
-                <div class="login">
-                    <h6>Mật khẩu</h6>
-                    <input type="password" class="form-control" id="password" name="password" aria-describedby="pwHelp" placeholder="Mật khẩu" autocomplete="current-password">
-                </div>
-                <div class="login">
-                    <h6>Xác nhận mật khẩu</h6>
-                    <input type="password" class="form-control" id="re_password" name="re_password" aria-describedby="pwHelp" placeholder="Mật khẩu" autocomplete="current-password">
-                </div>
-                <div class="group-button">
-                    <button type="submit" id="confirmChangePassword">Xác nhận</button>
-                </div>
-            </form>
-
 
         </div>
     </div>
@@ -218,154 +219,100 @@
         </div>
     </div>
 </footer>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Hide OTP form and new password form initially
-        document.getElementById('otpForm').style.display = 'none';
-        document.getElementById('newPassword').style.display = 'none';
-
-        // Display forgotPassword form
-        document.getElementById('forgotPassword').style.display = 'block';
-    });
-
-    var passwordData = {};
-
     function submitForm() {
-
-        var form = document.getElementById('forgotPassword');
+        var form = document.getElementById('registrationForm');
         var formData = new FormData(form);
 
-        console.log("Before fetch");
-
-        fetch('api/verify-email/forgot', {
+        console.log("trước fetch")
+        fetch('api/verify-email/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(Object.fromEntries(formData)),
         })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
-                console.log(data);
-                if (data.success) {
-                    console.log('Đăng ký thành công. OTP:', data.message);
-
-                    passwordData = {
-                        username: formData.get('username'),  // Include username in passwordData
-                        password: formData.get('password'),
-                        phone: formData.get('phone'),
-                        email: formData.get('email')
-                    };
-
-                    // Hide forgotPassword form and display OTP form
-                    form.style.display = 'none';
-                    document.getElementById('otpForm').style.display = 'block';
-                    document.getElementById('idOTP').value = data.message;
-                    document.getElementById('newPasswordUsername').value = passwordData.username;
-                } else {
-                    console.error('Đăng ký thất bại:', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+                console.log(data)
+    //             if (data.success) {
+    //                 // Xử lý thành công, ví dụ: hiển thị thông báo thành công hoặc chuyển hướng đến trang khác
+    //                 console.log('Đăng ký thành công. OTP:', data.message);
+    //
+    //                 // Thiết lập giá trị cho trường ẩn 'idOTP'
+    //                 document.getElementById('idOTP').value = data.message;
+    //                 sessionStorage.setItem('registrationData', JSON.stringify(Object.fromEntries(formData)));
+    //
+    //                 // Ẩn form đăng ký
+    //                 form.style.display = 'none';
+    //
+    //                 // Hiển thị form OTP
+    //                 var otpForm = document.getElementById('otpForm');
+    //                 otpForm.style.display = 'block';
+    //             } else {
+    //                 // Xử lý thất bại, ví dụ: hiển thị thông báo lỗi
+    //                 console.error('Đăng ký thất bại:', data.message);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Xử lý lỗi, ví dụ: hiển thị thông báo lỗi
+    //             console.error('Lỗi:', error);
             });
     }
-
-    document.getElementById('confirmOTPButton').addEventListener('click', function () {
-        var otpInputValue = document.getElementById('otpInput').value;
-        var otpIdValue = document.getElementById('idOTP').value;
-
-        submitOTP(otpInputValue, otpIdValue);
-    });
-
-    function submitOTP(otp, id) {
-        var form = document.getElementById('otpForm');
-        var formData = {
-            otp: otp,
-            id: id
-        };
-
-        fetch('api/verify/otp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP Error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    console.log('Xác nhận OTP thành công. Đang chuyển hướng đến trang xác nhận đăng ký.');
-                    form.style.display = 'none';
-                    document.getElementById('newPassword').style.display = 'block';
-                } else {
-                    console.error('Xác nhận OTP thất bại:', data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-
-    document.getElementById('confirmChangePassword').addEventListener('click', function () {
-        var password = document.getElementById('password').value;
-        var rePassword = document.getElementById('re_password').value;
-        var userName = document.getElementById('newPasswordUsername').value;
-
-        if (password === rePassword) {
-            submitChangePassword(userName, password);
-        } else {
-            console.log('Mật khẩu và xác nhận mật khẩu không khớp.');
-            event.preventDefault();
-            document.getElementById('newPassword').style.display = 'block';
-            document.getElementById('otpForm').style.display = 'none';
-        }
-
-    });
-
-    function submitChangePassword(userName, password) {
-        var dataRequest = {
-            username : userName,
-            password: password
-        };
-
-        fetch('api/forgot-password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataRequest),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP Error! Status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.success) {
-                     // This line redirects to '/login'
-                    console.log('Xác nhận đổi mật khẩu thành công. Đang chuyển hướng đến trang xác nhận đăng ký.');
-                    showPage();
-                } else {
-                    console.error('Xác nhận đổi mật khẩu thất bại:', data.message);
-                    window.location.href = '/';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                window.location.href = '/register';
-            });
-    }
-    function showPage() {
-        window.location.replace('/login');
-    }
+    //
+    // document.getElementById('confirmOTPButton').addEventListener('click', function () {
+    //     // Lấy giá trị OTP được nhập
+    //     var otpInputValue = document.getElementById('otpInput').value;
+    //     var otpIdValue = document.getElementById('idOTP').value;
+    //     console.log(otpInputValue)
+    //     console.log(otpIdValue)
+    //
+    //     // Gọi hàm để gửi OTP lên server để xử lý
+    //     submitOTP(otpInputValue, otpIdValue);
+    // });
+    //
+    // function submitOTP(otp, id) {
+    //     // Xây dựng body của request
+    //     var formData = {
+    //         otp: otp,
+    //         id: id
+    //     };
+    //
+    //     // Gửi request POST đến endpoint 'api/verify/otp'
+    //     fetch('api/verify/otp', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(formData),
+    //     })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 throw new Error(`Lỗi HTTP! Trạng thái: ${response.status}`);
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             if (data.success) {
+    //                 // Xử lý thành công, ví dụ: hiển thị thông báo thành công hoặc chuyển hướng đến trang khác
+    //                 console.log('Xác nhận OTP thành công. Đang chuyển hướng đến trang xác nhận đăng ký.');
+    //                 showConfirmationPage();
+    //             } else {
+    //                 // Xử lý thất bại, ví dụ: hiển thị thông báo lỗi
+    //                 console.error('Xác nhận OTP thất bại:', data.message);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             // Xử lý lỗi không phải JSON hoặc lỗi mạng
+    //             console.error('Lỗi:', error);
+    //         });
+    // }
+    //
+    // function showConfirmationPage() {
+    //     window.location.href = `/register/confirm`;
+    // }
 </script>
+
+
 </body>
 </html>
