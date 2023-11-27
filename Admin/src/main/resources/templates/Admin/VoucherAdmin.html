@@ -168,6 +168,25 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
+                <span>Voucher</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/voucher}">
+                        Vouchers
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/voucher/add}">
+                        Add Voucher
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
                 <span>e-commerce</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -254,51 +273,37 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Product
+                Staffs
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Original price</th>
-                        <th>Discount</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Overall rating</th>
-                        <th>Delivery</th>
-                        <th>Sub info</th>
-                        <th>Image1</th>
-                        <th>Image2</th>
-                        <th>Image3</th>
-                        <th>Image4</th>
-                        <th>Image5</th>
-                        <th>Details</th>
-<!--                        <th>Edit</th>-->
+                        <th>Code</th>
+                        <th>Condition Price</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Usage limit</th>
+                        <th>Percentage</th>
+<!--                        <th>Detail</th>-->
+                        <th>Edit</th>
 <!--                        <th>Delete</th>-->
+
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody  th:each="voucher : ${vouchers}" th:if="${voucher.expired == false}"  >
                     <tr>
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.original_price}"></td>
-                        <td th:text="${product.discount}"></td>
-                        <td th:text="${product.price}"></td>
-                        <td th:text="${product.description}"></td>
-                        <td th:text="${product.overall_rating}"></td>
-                        <td th:text="${product.sub_info}"></td>
-                        <td th:text="${product.delivery}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image1}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image2}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image3}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image4}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image5}}"></td>
-                        <td><a th:href="@{'/admin/productDetail/' + ${product.id}}" style="color: blue"> Detail  </a> </td>
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i></a></button> </td>-->
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i> </a></button></td>-->
-
+                        <td th:text="${voucher.id}"></td>
+                        <td th:text="${voucher.code}"></td>
+                        <td th:text="${voucher.conditionPrice}"></td>
+                        <td th:text="${voucher.startDate}"></td>
+                        <td th:text="${voucher.endDate}"></td>
+                        <td th:text="${voucher.usageLimit}"></td>
+                        <td th:text="${voucher.percentage}"></td>
+<!--                        <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> Detail  </a> </td>-->
+                        <td><button class="btn-click"> <a th:href="@{'/admin/voucher/edit/' + ${voucher.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>-->
                     </tr>
                     </tbody>
                 </table>

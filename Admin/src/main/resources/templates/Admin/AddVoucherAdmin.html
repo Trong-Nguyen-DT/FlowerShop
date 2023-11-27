@@ -14,6 +14,7 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -168,6 +169,25 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
+                <span>Voucher</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/voucher}">
+                        Vouchers
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/voucher/add}">
+                        Add Voucher
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
                 <span>e-commerce</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -254,54 +274,67 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Product
+                Add Staff
             </div>
             <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Original price</th>
-                        <th>Discount</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Overall rating</th>
-                        <th>Delivery</th>
-                        <th>Sub info</th>
-                        <th>Image1</th>
-                        <th>Image2</th>
-                        <th>Image3</th>
-                        <th>Image4</th>
-                        <th>Image5</th>
-                        <th>Details</th>
-<!--                        <th>Edit</th>-->
-<!--                        <th>Delete</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.original_price}"></td>
-                        <td th:text="${product.discount}"></td>
-                        <td th:text="${product.price}"></td>
-                        <td th:text="${product.description}"></td>
-                        <td th:text="${product.overall_rating}"></td>
-                        <td th:text="${product.sub_info}"></td>
-                        <td th:text="${product.delivery}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image1}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image2}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image3}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image4}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image5}}"></td>
-                        <td><a th:href="@{'/admin/productDetail/' + ${product.id}}" style="color: blue"> Detail  </a> </td>
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i></a></button> </td>-->
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i> </a></button></td>-->
+                <form th:action="@{/admin/voucher/add}" th:method="post" th:object="${voucher}">
+                    <table>
+                        <tr>
+                            <th>
+                                <label>Code:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{code}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Condition price:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{conditionPrice}">
+                            </td>
+                        </tr>
+                        <!-- Label cho checkbox -->
+<!--                        <label for="expiredCheckbox">Expired:</label>-->
 
-                    </tr>
-                    </tbody>
-                </table>
+                        <!-- Checkbox để chọn giá trị true/false -->
+<!--                        <input type="checkbox" id="expiredCheckbox" name="expired" onchange="updateExpiredValue()">-->
+                        <tr>
+                            <th>
+                                <label>Start Date:</label>
+                            </th>
+                            <td>
+                                <input type="date" th:field="*{startDate}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>End Date:</label>
+                            </th>
+                            <td>
+                                <input type="date" th:field="*{endDate}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Percentage:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{percentage}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Usage Limit:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{usageLimit}">
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">ADD</button>
+                </form>
             </div>
         </div>
 
@@ -318,6 +351,18 @@
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
 </div>
+<!--<script>-->
+<!--    // Hàm xử lý sự kiện khi giá trị checkbox thay đổi-->
+<!--    function updateExpiredValue() {-->
+<!--        // Lấy giá trị của checkbox-->
+<!--        var isExpired = document.getElementById("expiredCheckbox").checked;-->
+
+<!--        // Log giá trị để kiểm tra-->
+<!--        console.log("Expired value:", isExpired);-->
+
+<!--        // Ở đây, bạn có thể thực hiện các thao tác khác nếu cần-->
+<!--    }-->
+<!--</script>-->
 </body>
 
 </html>
