@@ -64,14 +64,17 @@
             <img th:src="@{/images/logo.png}">
         </div>
 
-        <div class="search">
+        <div class="search" >
             <input class="form-control form-control-mg" type="text" placeholder="Tìm kiếm" aria-label=".form-control-mg example" >
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 50 50">
                 <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
             </svg>
         </div>
         <div class="cart">
-            <span class="material-symbols-outlined">shopping_cart</span>
+            <a id="cartIcon">
+                <span class="material-symbols-outlined">shopping_cart</span>
+                <span id="cartItemCount">0</span>
+            </a>
         </div>
     </div>
 </nav>
@@ -114,11 +117,12 @@
 
 <div class="product_Detail">
     <div class="column_left">
-        <img th:src="@{/images/thach_thao_tim.png}">
+        <input type="hidden" th:value="${product.id}" id="id">
+        <img th:src="@{'/images/' + ${product.image1}}" alt="java">
     </div>
     <div class="column_right">
-        <h3 th:text="${productName}"></h3>
-        <h4 th:text="${productPrice}"></h4>
+        <h3 th:text="${product.name}"></h3>
+        <h4 th:text="${product.price}"></h4>
 
         <p id="amount">Khuyến mãi: </p>
         <p><span>Gọi ngay:</span><span class="phone"> 42678899</span></p>
@@ -155,23 +159,35 @@
         <p>Vận chuyển: Miễn phí giao hoa khu vực nội thành TP.HCM & Hà Nội</p>
         <div class="ship">
 
-        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+        <select class="city form-select form-select-lg mb-3" aria-label="Large select example">
             <option selected>Đà Nẵng</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
-        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+        <select class="district form-select form-select-lg mb-3" aria-label="Large select example">
             <option selected>Hải Châu</option>
             <option value="1">One</option>
             <option value="2">Two</option>
             <option value="3">Three</option>
         </select>
+
+            <select class="ward form-select form-select-lg mb-3" aria-label="Large select example">
+                <option selected>Thuận Phước</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+
+        <div class="group-button">
+            <input type="text" placeholder="Địa chỉ">
         </div>
 
         <div class="group-button">
             <input class="form-control form-control-mg" type="number" placeholder="1" aria-label=".form-control-lg example">
-            <button type="submit" onclick="submitForm()">Đặt Hàng</button>
+            <button id="cartButton" type="submit" onclick="submitForm()">Giỏ Hàng</button>
+<!--            <button type="submit" onclick="submitForm()">Đặt Hàng</button>-->
         </div>
     </div>
 </div>
@@ -192,6 +208,7 @@
 
     <div class="relatedProduct">
         <h3>Sản phẩm liên quan</h3>
+    </div>
     </div>
 </main>
 <footer>
@@ -250,10 +267,72 @@
         </div>
     </div>
 </footer>
-
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Hàm gọi API để thêm sản phẩm vào giỏ hàng
+        function addToCart(productId) {
+            const apiUrl = '/api/cart/add/';
+
+            return fetch(apiUrl + productId, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Item added to the cart successfully');
+                    } else {
+                        console.log('Failed to add item to the cart');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    console.log('An error occurred while adding the item to the cart');
+                });
+        }
+
+        // Hàm gọi API để xem giỏ hàng và cập nhật số lượng sản phẩm trong giỏ hàng
+        function viewCart() {
+            const apiUrl = '/api/cart';
+
+            return fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Failed to fetch cart data');
+                })
+                .then(cartItems => {
+                    console.log('Cart items:', cartItems);
+                    const totalQuantity = cartItems.reduce((total, item) => total + item.quality, 0);
+
+                    document.getElementById('cartItemCount').innerText = totalQuantity.toString();
+                    console.log('Tổng số lượng sản phẩm trong giỏ hàng: ' + totalQuantity);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        viewCart();
+
+        document.getElementById('cartButton').addEventListener('click', function() {
+            var productId = document.getElementById('id').value;
+            console.log("id:", productId);
+            addToCart(productId);
+        });
+
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            viewCart();
+            window.location.href = '/cart';
+        });
+    });
 
 </script>
-
 </body>
 </html>
