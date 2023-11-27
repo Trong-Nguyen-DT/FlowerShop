@@ -274,17 +274,18 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Staff
+                Add Voucher
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/voucher/add}" th:method="post" th:object="${voucher}">
+                <form th:action="@{/admin/voucher/add}" th:method="post" th:object="${voucher}" onsubmit="return validateForm()">
                     <table>
                         <tr>
                             <th>
                                 <label>Code:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{code}">
+                                <input type="text" th:field="*{code}" id="code">
+                                <span id="codeError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -292,28 +293,26 @@
                                 <label>Condition price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{conditionPrice}">
-                            </td>
-                        </tr>
-                        <!-- Label cho checkbox -->
-<!--                        <label for="expiredCheckbox">Expired:</label>-->
-
-                        <!-- Checkbox để chọn giá trị true/false -->
-<!--                        <input type="checkbox" id="expiredCheckbox" name="expired" onchange="updateExpiredValue()">-->
-                        <tr>
-                            <th>
-                                <label>Start Date:</label>
-                            </th>
-                            <td>
-                                <input type="date" th:field="*{startDate}">
+                                <input type="text" th:field="*{conditionPrice}" id="conditionPrice">
+                                <span id="conditionPriceError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>End Date:</label>
+                                <label>Start date:</label>
                             </th>
                             <td>
-                                <input type="date" th:field="*{endDate}">
+                                <input type="date" th:field="*{startDate}" id="startDate">
+                                <span id="startDateError" style="color: red;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>End date:</label>
+                            </th>
+                            <td>
+                                <input type="date" th:field="*{endDate}" id="endDate">
+                                <span id="endDateError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -321,15 +320,28 @@
                                 <label>Percentage:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{percentage}">
+                                <input type="text" th:field="*{percentage}" id="percentage">
+                                <span id="percentageError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Usage Limit:</label>
+                                <label>Usage limit:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{usageLimit}">
+                                <input type="text" th:field="*{usageLimit}" id="usageLimit">
+                                <span id="usageLimitError" style="color: red;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Voucher types:</label>
+                            </th>
+                            <td>
+                                <select th:field="*{type}">
+                                    <option th:each="type : ${voucherTypes}" th:text="${type.name}" th:value="${type.name}" id="voucherTypes"></option>
+                                    <span id="voucherTypesError" style="color: red;"></span>
+                                </select>
                             </td>
                         </tr>
                     </table>
@@ -350,19 +362,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/addAndEditVoucher.js}"></script>
 </div>
-<!--<script>-->
-<!--    // Hàm xử lý sự kiện khi giá trị checkbox thay đổi-->
-<!--    function updateExpiredValue() {-->
-<!--        // Lấy giá trị của checkbox-->
-<!--        var isExpired = document.getElementById("expiredCheckbox").checked;-->
-
-<!--        // Log giá trị để kiểm tra-->
-<!--        console.log("Expired value:", isExpired);-->
-
-<!--        // Ở đây, bạn có thể thực hiện các thao tác khác nếu cần-->
-<!--    }-->
-<!--</script>-->
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 package com.example.admin.Domain;
 
+import com.example.admin.enums.VoucherType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +19,5 @@ public class Voucher {
     private boolean conditionsPaymentOnline;
     private double conditionPrice;
     private boolean expired;
+    private VoucherType type;
 }

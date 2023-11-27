@@ -273,7 +273,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Staffs
+                Vouchers
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -292,7 +292,7 @@
 
                     </tr>
                     </thead>
-                    <tbody  th:each="voucher : ${vouchers}" th:if="${voucher.expired == false}"  >
+                    <tbody  th:each="voucher : ${vouchers}"  >
                     <tr>
                         <td th:text="${voucher.id}"></td>
                         <td th:text="${voucher.code}"></td>
