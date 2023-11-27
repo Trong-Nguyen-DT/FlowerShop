@@ -1,13 +1,13 @@
-package com.example.customer.responseBody;
+package com.example.customer.Payment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class BodyResponsePayment {
+public class BodyResponse {
     private String code;
     private String desc;
-    private DataResponsePayment data;
+    private DataResponse data;
     private String signature;
 }

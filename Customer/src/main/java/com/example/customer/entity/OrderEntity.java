@@ -37,6 +37,12 @@ public class OrderEntity {
 
     private OrderStatus orderStatus;
 
+    private boolean shipping;
+
+    private double shipPrice;
+
+    private boolean paymentOnline;
+
     @ManyToOne
     @JoinColumn(name = "address_id")
     private AddressEntity addressEntity;
@@ -44,12 +50,6 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "voucher_id")
     private VoucherEntity voucherEntity;
-
-    private boolean shipping;
-
-    private double shipPrice;
-
-    private boolean paymentOnline;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

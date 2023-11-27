@@ -1,14 +1,14 @@
-package com.example.customer.domain;
-
+package com.example.customer.Payment;
 
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-public class OrderDetail {
-    private Long id;
+public class DataRequest {
     private String name;
-    private double price;
+    private long price;
     private int quantity;
 }

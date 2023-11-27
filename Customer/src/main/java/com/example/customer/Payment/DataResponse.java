@@ -1,11 +1,11 @@
-package com.example.customer.responseBody;
+package com.example.customer.Payment;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class DataResponsePayment {
+public class DataResponse {
     private String bin;
     private String accountNumber;
     private String accountName;
