@@ -14,7 +14,6 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -274,86 +273,40 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Staff
+                Vouchers
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/staff/add}" th:method="post" th:object="${user}">
-                    <table>
-                        <tr>
-                            <th>
-                                <label>Username:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{username}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Password:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{password}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Full name:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{fullName}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Image:</label>
-                            </th>
-                            <td>
-                                <input type="file" th:field="*{image}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Phone:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{phone}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Address:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{address}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Birthday:</label>
-                            </th>
-                            <td>
-                                <input type="date" th:field="*{birthday}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Salary:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{salary}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Role:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{role}">
-                            </td>
-                        </tr>
-                    </table>
-                    <button type="submit">ADD</button>
-                </form>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Code</th>
+                        <th>Condition Price</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Usage limit</th>
+                        <th>Percentage</th>
+<!--                        <th>Detail</th>-->
+                        <th>Edit</th>
+<!--                        <th>Delete</th>-->
+
+                    </tr>
+                    </thead>
+                    <tbody  th:each="voucher : ${vouchers}"  >
+                    <tr>
+                        <td th:text="${voucher.id}"></td>
+                        <td th:text="${voucher.code}"></td>
+                        <td th:text="${voucher.conditionPrice}"></td>
+                        <td th:text="${voucher.startDate}"></td>
+                        <td th:text="${voucher.endDate}"></td>
+                        <td th:text="${voucher.usageLimit}"></td>
+                        <td th:text="${voucher.percentage}"></td>
+<!--                        <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> Detail  </a> </td>-->
+                        <td><button class="btn-click"> <a th:href="@{'/admin/voucher/edit/' + ${voucher.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>-->
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

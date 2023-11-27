@@ -274,85 +274,79 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Staff
+                Edit Voucher
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/staff/add}" th:method="post" th:object="${user}">
+                <form th:action="@{/admin/voucher/edit}" th:method="post" th:object="${voucher}" onsubmit="return validateForm()">
                     <table>
+                        <input type="hidden" name="id" th:value="${voucher.id}" />
                         <tr>
                             <th>
-                                <label>Username:</label>
+                                <label>Code:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{username}">
+                                <input type="text" th:field="*{code}" id="code">
+                                <span id="codeError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Password:</label>
+                                <label>Condition price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{password}">
+                                <input type="text" th:field="*{conditionPrice}" id="conditionPrice">
+                                <span id="conditionPriceError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Full name:</label>
+                                <label>Start Date:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{fullName}">
+                                <input type="date" th:field="*{startDate}" id="startDate">
+                                <span id="startDateError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Image:</label>
+                                <label>End Date:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image}">
+                                <input type="date" th:field="*{endDate}" id="endDate">
+                                <span id="endDateError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Phone:</label>
+                                <label>Percentage:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{phone}">
+                                <input type="text" th:field="*{percentage}" id="percentage">
+                                <span id="percentageError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Address:</label>
+                                <label>Usage Limit:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{address}">
+                                <input type="text" th:field="*{usageLimit}" id="usageLimit">
+                                <span id="usageLimitError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                <label>Birthday:</label>
+                                <label>Voucher types:</label>
                             </th>
                             <td>
-                                <input type="date" th:field="*{birthday}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Salary:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{salary}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <label>Role:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{role}">
+                                <select th:field="*{type}">
+                                    <option th:each="type : ${voucherTypes}" th:text="${type.name}" th:value="${type.name}" id="voucherTypes"></option>
+                                    <span id="voucherTypesError" style="color: red;"></span>
+                                </select>
                             </td>
                         </tr>
                     </table>
-                    <button type="submit">ADD</button>
+                    <button type="submit">Update</button>
                 </form>
             </div>
         </div>
@@ -369,6 +363,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/addAndEditVoucher.js}"></script>
 </div>
 </body>
 
