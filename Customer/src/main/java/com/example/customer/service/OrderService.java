@@ -1,12 +1,13 @@
 package com.example.customer.service;
 
-import com.example.customer.responseBody.DataResponsePayment;
+import com.example.customer.Payment.DataResponse;
+import com.example.customer.domain.Order;
 import com.example.customer.responseBody.BodyOrder;
 
 public interface OrderService {
-    Long createOrder(BodyOrder order, String name);
+    Long createOrder(Order order, String name);
 
-    DataResponsePayment createQrPayment(Long orderId);
+    DataResponse createQrPayment(Long orderId);
 
-    BodyOrder returnCheckout(BodyOrder orderRequest, String name);
+    Order returnCheckout(Order orderRequest, String name);
 }

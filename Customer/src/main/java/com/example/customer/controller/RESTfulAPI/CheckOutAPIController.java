@@ -1,5 +1,6 @@
 package com.example.customer.controller.RESTfulAPI;
 
+import com.example.customer.domain.Order;
 import com.example.customer.responseBody.BodyOrder;
 import com.example.customer.service.OrderService;
 import com.example.customer.validator.CustomerValidate;
@@ -18,9 +19,9 @@ public class CheckOutAPIController {
     private CustomerValidate customerValidate;
 
     @PostMapping()
-    public ResponseEntity<BodyOrder> checkout(@RequestBody BodyOrder orderRequest) {
+    public ResponseEntity<Order> checkout(@RequestBody Order orderRequest) {
         String name = customerValidate.validateCustomer();
-        BodyOrder response = orderService.returnCheckout(orderRequest, name);
+        Order response = orderService.returnCheckout(orderRequest, name);
         return ResponseEntity.ok(response);
     }
 }

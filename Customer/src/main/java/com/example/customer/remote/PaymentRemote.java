@@ -1,8 +1,9 @@
 package com.example.customer.remote;
 
+import com.example.customer.Payment.BodyRequest;
 import com.example.customer.domain.Order;
-import com.example.customer.responseBody.BodyResponsePayment;
-import com.example.customer.responseBody.DataResponsePayment;
+import com.example.customer.Payment.BodyResponse;
+import com.example.customer.Payment.DataResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class PaymentRemote {
-    public DataResponsePayment getQrFromOtherClient(Order requestBody) {
+    public DataResponse getQrFromOtherClient(BodyRequest requestBody) {
         String url =  UriComponentsBuilder.newInstance()
                 .scheme("https")
                 .host("api-merchant.payos.vn")
@@ -27,11 +28,11 @@ public class PaymentRemote {
         headers.set("x-api-key", "f13eb249-fa4d-4a01-95f6-3656f8d81406");
 
 
-        HttpEntity<Order> requestEntity = new HttpEntity<>(requestBody, headers);
+        HttpEntity<BodyRequest> requestEntity = new HttpEntity<>(requestBody, headers);
 
         RestOperations restOperations = new RestTemplate();
 
-        BodyResponsePayment x = restOperations.postForEntity(url, requestEntity, BodyResponsePayment.class).getBody();
+        BodyResponse x = restOperations.postForEntity(url, requestEntity, BodyResponse.class).getBody();
         assert x != null;
         return x.getData();
     }

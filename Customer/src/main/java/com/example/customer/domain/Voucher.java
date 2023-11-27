@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Setter
 public class Voucher {
     private Long id;
+    private String title;
     private String code;
     private double percentage;
     private int usageLimit;

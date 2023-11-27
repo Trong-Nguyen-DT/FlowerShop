@@ -7,6 +7,7 @@ public class VoucherConverter {
     public static Voucher toModel(VoucherEntity voucherEntity) {
         Voucher voucher = new Voucher();
         voucher.setId(voucherEntity.getId());
+        voucher.setTitle(voucherEntity.getTitle());
         voucher.setCode(voucherEntity.getCode());
         voucher.setPercentage(voucherEntity.getPercentage());
         voucher.setUsageLimit(voucherEntity.getUsageLimit());
