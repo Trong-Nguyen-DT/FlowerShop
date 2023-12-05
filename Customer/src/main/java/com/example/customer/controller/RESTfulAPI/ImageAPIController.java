@@ -7,13 +7,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
 @RestController
+@RequestMapping("images")
 public class ImageAPIController {
 
     @Value("${imagePath}")
@@ -23,12 +25,11 @@ public class ImageAPIController {
     private String imagePathCustomer;
 
 
-    @GetMapping("/images/{filename:.+}")
+    @GetMapping("/product/{filename:.+}")
     public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
         try {
             Path path = Paths.get(imagePath, filename);
             Resource file = new UrlResource(path.toUri());
-
             if (file.exists() || file.isReadable()) {
                 return ResponseEntity.ok().body(file);
             } else {
@@ -39,7 +40,7 @@ public class ImageAPIController {
         }
     }
 
-    @GetMapping("/images-customer/{filename:.+}")
+    @GetMapping("/customer/{filename:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) {
         try {
             Path path = Paths.get(imagePathCustomer, filename);

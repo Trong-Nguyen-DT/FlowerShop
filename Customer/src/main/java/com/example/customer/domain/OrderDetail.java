@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderDetail {
+    private Long id;
     private String name;
-    private long price;
+    private double price;
     private int quantity;
 }

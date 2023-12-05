@@ -1,18 +1,17 @@
 package com.example.customer.service.Impl;
 
-import com.example.customer.converter.CartConverter;
+import com.example.customer.Payment.BodyRequest;
+import com.example.customer.Payment.DataRequest;
+import com.example.customer.converter.OrderConverter;
 import com.example.customer.converter.SignatureGenerator;
 import com.example.customer.converter.VoucherConverter;
 import com.example.customer.domain.Order;
-import com.example.customer.domain.OrderDetail;
-import com.example.customer.domain.Voucher;
 import com.example.customer.entity.*;
 import com.example.customer.enums.OrderStatus;
 import com.example.customer.remote.CurrencyConverterRemote;
 import com.example.customer.remote.PaymentRemote;
 import com.example.customer.repository.*;
-import com.example.customer.responseBody.DataResponsePayment;
-import com.example.customer.responseBody.BodyOrder;
+import com.example.customer.Payment.DataResponse;
 import com.example.customer.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,23 +47,23 @@ public class OrderServiceImpl implements OrderService {
     private PaymentRemote paymentRemote;
 
     @Override
-    public Long createOrder(BodyOrder order, String name) {
+    public Long createOrder(Order order, String name) {
         OrderEntity orderEntity = saveOrder(order, name);
         saveOrderDetail(orderEntity);
         return orderEntity.getId();
     }
 
     @Override
-    public DataResponsePayment createQrPayment(Long orderId) {
+    public DataResponse createQrPayment(Long orderId) {
         OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow();
-        Order order = setOrder(orderEntity);
-        return paymentRemote.getQrFromOtherClient(order);
+        BodyRequest bodyRequest = setOrder(orderEntity);
+        return paymentRemote.getQrFromOtherClient(bodyRequest);
     }
 
     @Override
-    public BodyOrder returnCheckout(BodyOrder orderRequest, String name) {
+    public Order returnCheckout(Order orderRequest, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
-        orderRequest.setCartItems(CartConverter.toModel(customerEntity.getCartEntity()).getCartItems());
+        orderRequest.setItems(customerEntity.getCartEntity().getCartItemEntities().stream().map(OrderConverter::cartItemToOrderDetail).toList());
         orderRequest.setShipPrice(1);
         double totalPrice = getTotalPrice(customerEntity);
         orderRequest.setTotalPrice(totalPrice);
@@ -83,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
         return orderRequest;
     }
 
-    private OrderEntity saveOrder(BodyOrder order, String name) {
+    private OrderEntity saveOrder(Order order, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setOrderDateTime(LocalDateTime.now());
@@ -122,8 +121,8 @@ public class OrderServiceImpl implements OrderService {
         }
     }
 
-    private Order setOrder(OrderEntity orderEntity) {
-        Order order = new Order();
+    private BodyRequest setOrder(OrderEntity orderEntity) {
+        BodyRequest order = new BodyRequest();
         order.setOrderCode(555 + orderEntity.getId());
         order.setAmount(usdToVND(orderEntity.getAmount()));
         order.setDescription("hoa hồng");
@@ -148,16 +147,16 @@ public class OrderServiceImpl implements OrderService {
         return order;
     }
 
-    private List<OrderDetail> setItems(OrderEntity orderEntity) {
-        List<OrderDetail> orderDetails = new ArrayList<>();
+    private List<DataRequest> setItems(OrderEntity orderEntity) {
+        List<DataRequest> dataRequests = new ArrayList<>();
         for (OrderDetailEntity entity: orderDetailRepository.findAllByOrderEntity(orderEntity)) {
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setName(entity.getProductEntity().getName());
-            orderDetail.setPrice(usdToVND(entity.getProductEntity().getPrice()));
-            orderDetail.setQuantity(entity.getQuantity());
-            orderDetails.add(orderDetail);
+            DataRequest data = new DataRequest();
+            data.setName(entity.getProductEntity().getName());
+            data.setPrice(usdToVND(entity.getProductEntity().getPrice()));
+            data.setQuantity(entity.getQuantity());
+            dataRequests.add(data);
         }
-        return orderDetails;
+        return dataRequests;
     }
 
     private Long usdToVND(double amountUSD) {

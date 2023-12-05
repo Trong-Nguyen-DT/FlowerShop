@@ -1,5 +1,6 @@
 package com.example.customer.responseBody;
 
+import com.example.customer.Payment.DataResponse;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +9,5 @@ import lombok.Setter;
 public class ResponsePayment {
     private boolean success;
     private String message;
-    private DataResponsePayment data;
+    private DataResponse data;
 }
