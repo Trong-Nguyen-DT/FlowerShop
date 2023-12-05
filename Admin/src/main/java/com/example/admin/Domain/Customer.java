@@ -1,12 +1,5 @@
 package com.example.admin.Domain;
 
-import com.example.admin.Entity.AddressEntity;
-import com.example.admin.Entity.CartEntity;
-import com.example.admin.Entity.OrderEntity;
-import com.example.admin.Entity.ReviewEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
 

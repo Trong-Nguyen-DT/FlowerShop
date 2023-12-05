@@ -15,6 +15,7 @@ public class VoucherEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String title;
     private String icon;
     private String code;
     private double percentage;
