@@ -169,6 +169,25 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
+                <span>Voucher</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/voucher}">
+                        Vouchers
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/voucher/add}">
+                        Add Voucher
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
                 <span>e-commerce</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -429,102 +448,6 @@
     <script th:src="@{/js/app.js}"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!--    <script>-->
-<!--        document.getElementById('product-form').addEventListener('submit', function(event) {-->
-<!--            event.preventDefault(); // Ngăn chặn biểu mẫu được submit mặc định-->
-
-<!--            var itemObjects = [];-->
-<!--            var selects = document.querySelectorAll('select[name="item"]');-->
-<!--            selects.forEach(function(select) {-->
-<!--                var selectedItemId = select.value;-->
-<!--                var quantityInput = select.closest('tr').querySelector('input[name="numberFlower"]');-->
-<!--                var quantityValue = quantityInput.value;-->
-<!--                var itemObject = { id: selectedItemId, quantity: quantityValue };-->
-<!--                itemObjects.push(itemObject);-->
-<!--            });-->
-
-<!--            var categoryIDs = [];-->
-<!--            var categorySelect = document.querySelector('select[name="categoryIDs"]');-->
-<!--            var selectedCategories = categorySelect.selectedOptions;-->
-<!--            selectedCategories.forEach(function(option) {-->
-<!--                categoryIDs.push(option.value);-->
-<!--            });-->
-
-<!--            var productDTO = {-->
-<!--                product: {-->
-<!--                    // Thêm các thuộc tính của product từ form-->
-<!--                    name: document.querySelector('input[name="name"]').value,-->
-<!--                    original_price: document.querySelector('input[name="original_price"]').value,-->
-<!--                    discount: document.querySelector('input[name="discount"]').value,-->
-<!--                    description: document.querySelector('input[name="description"]').value,-->
-<!--                    details: document.querySelector('input[name="details"]').value,-->
-<!--                    delivery: document.querySelector('input[name="delivery"]').value,-->
-<!--                    sub_info: document.querySelector('input[name="sub_info"]').value,-->
-<!--                    image1: document.querySelector('input[name="image1"]').value,-->
-<!--                    image2: document.querySelector('input[name="image2"]').value,-->
-<!--                    image3: document.querySelector('input[name="image3"]').value,-->
-<!--                    image4: document.querySelector('input[name="image4"]').value,-->
-<!--                    image5: document.querySelector('input[name="image5"]').value-->
-<!--                },-->
-<!--                selectedItems: itemObjects,-->
-<!--                categoryIDs: categoryIDs-->
-<!--            };-->
-
-<!--            var input = document.createElement('input');-->
-<!--            input.type = 'hidden';-->
-<!--            input.name = 'productDTO';-->
-<!--            input.value = JSON.stringify(productDTO);-->
-<!--            this.appendChild(input);-->
-
-<!--            this.submit();-->
-<!--        });-->
-
-
-<!--    </script>-->
-<!--    <script>-->
-<!--        document.getElementById('product-form').addEventListener('submit', function(event) {-->
-<!--            event.preventDefault();-->
-
-<!--            var productDTO = {-->
-<!--                product: {-->
-<!--                    name: document.querySelector('input[name="name"]').value,-->
-<!--                    original_price: document.querySelector('input[name="original_price"]').value,-->
-<!--                    discount: document.querySelector('input[name="discount"]').value,-->
-<!--                    description: document.querySelector('input[name="description"]').value,-->
-<!--                    details: document.querySelector('input[name="details"]').value,-->
-<!--                    delivery: document.querySelector('input[name="delivery"]').value,-->
-<!--                    sub_info: document.querySelector('input[name="sub_info"]').value,-->
-<!--                    image1: document.querySelector('input[name="image1"]').value,-->
-<!--                    image2: document.querySelector('input[name="image2"]').value,-->
-<!--                    image3: document.querySelector('input[name="image3"]').value,-->
-<!--                    image4: document.querySelector('input[name="image4"]').value,-->
-<!--                    image5: document.querySelector('input[name="image5"]').value,-->
-<!--                },-->
-<!--                selectedItems: [{-->
-<!--                    id: document.querySelector('select[name="itemIDs"]').value,-->
-<!--                    quantity: document.querySelector('input[name="numberFlower"]').value-->
-<!--                }],-->
-<!--                categoryIDs: Array.from(document.querySelectorAll('select[name="categoryIDs"] option:checked')).map(option => option.value)-->
-<!--            };-->
-
-<!--            fetch('/admin/product/add-product', {-->
-<!--                method: 'POST',-->
-<!--                headers: {-->
-<!--                    'Content-Type': 'application/json'-->
-<!--                },-->
-<!--                body: JSON.stringify(productDTO)-->
-<!--            })-->
-<!--                .then(response => response.json())-->
-<!--                .then(data => {-->
-<!--                    console.log(data);-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Error:', error);-->
-<!--                });-->
-<!--        });-->
-
-<!--    </script>-->
     <script>
         document.getElementById('product-form').addEventListener('submit', function(event) {
             event.preventDefault();

@@ -168,6 +168,25 @@
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-category'></i>
+                <span>Voucher</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/voucher}">
+                        Vouchers
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/voucher/add}">
+                        Add Voucher
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-category'></i>
                 <span>e-commerce</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -292,23 +311,6 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <!-- APP JS -->
 <script th:src="@{/js/app.js}"></script>
-
-<!--    <script>-->
-<!--        document.getElementById('categorySelect').addEventListener('change', function() {-->
-<!--            var selectedCategoryId = this.value;-->
-<!--            // Gửi yêu cầu tìm kiếm dựa trên selectedCategoryId bằng AJAX-->
-<!--            // Ví dụ sử dụng Fetch API:-->
-<!--            fetch('/adminhome/product?category_id=' + selectedCategoryId)-->
-<!--                .then(response => response.json())-->
-<!--                .then(data => {-->
-<!--                    // Xử lý dữ liệu trả về và cập nhật giao diện người dùng-->
-<!--                    // Ví dụ: hiển thị danh sách sản phẩm-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Lỗi khi gửi yêu cầu: ' + error);-->
-<!--                });-->
-<!--        });-->
-<!--    </script>-->
 </div>
 </body>
 
