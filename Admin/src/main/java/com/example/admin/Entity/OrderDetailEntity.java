@@ -20,5 +20,6 @@ public class OrderDetailEntity {
     @ManyToOne
     @JoinColumn(name = "productId")
     private ProductEntity productEntity;
+
     private int quantity;
 }

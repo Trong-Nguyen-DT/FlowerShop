@@ -15,7 +15,6 @@ public class CustomerConverter {
         customer.setPhone(customerEntity.getPhone());
         customer.setSex(customerEntity.isSex());
 
-        customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
         customer.setOrders(customerEntity.getOrderEntities().stream().map(OrderConverter::OrderEntitytoOrderHistory).toList());
         customer.setReviews((customerEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList()));
         return customer;
