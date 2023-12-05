@@ -13,7 +13,7 @@ public class OrderDetailHistoryEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "orderId")
+    @JoinColumn(name = "orderHistoryId")  // Đổi tên trường để tương thích với OrderEntity
     private OrderHistoryEntity orderHistoryEntity;
 
     private Long productId;

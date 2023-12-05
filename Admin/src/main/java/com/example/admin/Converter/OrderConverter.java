@@ -6,22 +6,36 @@ import com.example.admin.Entity.OrderEntity;
 import com.example.admin.Entity.OrderHistoryEntity;
 
 public class OrderConverter {
+    public static OrderHistory toModelHistory(OrderHistoryEntity orderHistoryEntity) {
+        OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setId(orderHistoryEntity.getId());
+        orderHistory.setAmount(orderHistoryEntity.getAmount());
+        orderHistory.setOrderDateTime(orderHistoryEntity.getOrderDateTime());
+        orderHistory.setFullNameStaff(orderHistoryEntity.getFullNameStaff());
+        orderHistory.setEmailCustomer(orderHistoryEntity.getEmailCustomer());
+        orderHistory.setPhoneCustomer(orderHistoryEntity.getPhoneCustomer());
+        orderHistory.setDiscount(orderHistoryEntity.getDiscount());
+        orderHistory.setTotalPrice(orderHistoryEntity.getTotalPrice());
+        orderHistory.setUserId(orderHistoryEntity.getUserId());
+        orderHistory.setCustomerId(orderHistoryEntity.getCustomerId());
+        orderHistory.setFullNameCustomer(orderHistoryEntity.getFullNameCustomer());
+        orderHistory.setOrderDetailHistories(orderHistoryEntity.getOrderDetailHistoryEntities().stream().map(OrderDetailHistoryConverter::toModel).toList());
+
+//        orderHistory.setUser(UserConverter.toModel(orderHistoryEntity.getUserEntity()));
+//        orderHistory.setCustomer(CustomerConverter.toModel(orderHistoryEntity.getCustomerEntity()));
+
+        return orderHistory;
+    }
+
     public static Order toModel(OrderEntity orderEntity) {
         Order order = new Order();
         order.setId(orderEntity.getId());
         order.setAmount(orderEntity.getAmount());
-        order.setOrderDateTime(orderEntity.getOrderDateTime());
-        order.setConfirmed(orderEntity.getConfirmed());
-        order.setStatus(orderEntity.getStatus());
         order.setDiscount(orderEntity.getDiscount());
         order.setTotalPrice(orderEntity.getTotalPrice());
 
-        order.setUser(UserConverter.toModel(orderEntity.getUserEntity()));
-        order.setCustomer(CustomerConverter.toModel(orderEntity.getCustomerEntity()));
-
         return order;
     }
-
     public static OrderHistory OrderEntitytoOrderHistory(OrderEntity orderEntity){
         OrderHistory orderHistory = new OrderHistory();
         orderHistory.setId(orderEntity.getId());
@@ -31,7 +45,6 @@ public class OrderConverter {
         orderHistory.setAmount(orderEntity.getAmount());
         orderHistory.setUserId(orderEntity.getUserEntity().getId());
         orderHistory.setFullNameStaff(orderEntity.getUserEntity().getFullName());
-        orderHistory.setRole(orderEntity.getUserEntity().getRole());
         orderHistory.setCustomerId(orderEntity.getCustomerEntity().getId());
         orderHistory.setFullNameCustomer(orderEntity.getCustomerEntity().getFullName());
         orderHistory.setPhoneCustomer(orderEntity.getCustomerEntity().getPhone());
@@ -40,21 +53,4 @@ public class OrderConverter {
 
         return orderHistory;
     }
-//    public static OrderHistory toModelOrderHistory(OrderHistoryEntity entity) {
-//        OrderHistory orderHistory = new OrderHistory();
-//        orderHistory.setId(entity.getId());
-//        orderHistory.setOrderDateTime(entity.getOrderDateTime());
-//        orderHistory.setTotalPrice(entity.getTotalPrice());
-//        orderHistory.setDiscount(entity.getDiscount());
-//        orderHistory.setAmount(entity.getAmount());
-//        orderHistory.setUserId(entity.getUserId());
-//        orderHistory.setFullNameStaff(entity.getFullNameStaff());
-//        orderHistory.setRole(entity.getRole());
-//        orderHistory.setCustomerId(orderHistory.getCustomerId());
-//        orderHistory.setFullNameCustomer(entity.getFullNameCustomer());
-//        orderHistory.setPhoneCustomer(entity.getPhoneCustomer());
-//        orderHistory.setEmailCustomer(entity.getEmailCustomer());
-//        orderHistory.setOrderDetailHistories(entity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
-//        return orderHistory;
-//    }
 }
