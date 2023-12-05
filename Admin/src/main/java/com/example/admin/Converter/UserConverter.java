@@ -17,7 +17,8 @@ public class UserConverter {
         user.setSalary(userEntity.getSalary());
         user.setRole(userEntity.getRole());
         user.setDeleted(userEntity.getDeleted());
-//        user.setOrderEntities(userEntity.getOderEntities().stream().map(OderConverter::toModel).toList());
+        user.setOrders(userEntity.getOrderEntities().stream().map(OrderConverter::toModel).toList());
+
         return user;
     }
     public static UserEntity toEntity(User user){

@@ -1,7 +1,12 @@
 package com.example.admin.Converter;
 
 import com.example.admin.Domain.Category;
+import com.example.admin.Domain.Review;
 import com.example.admin.Entity.CategoryEntity;
+import com.example.admin.Entity.ReviewEntity;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CategoryConverter {
     public static Category toModel(CategoryEntity categoryEntity) {
@@ -22,5 +27,11 @@ public class CategoryConverter {
         categoryEntity.setDeleted(false);
         categoryEntity.setDetail(category.getDetail());
         return categoryEntity;
+    }
+
+    public static List<CategoryEntity> toEntityList(List<Category> categories) {
+        return categories.stream()
+                .map(CategoryConverter::toEntity)
+                .collect(Collectors.toList());
     }
 }

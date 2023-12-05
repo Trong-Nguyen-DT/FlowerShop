@@ -10,20 +10,14 @@ import java.util.List;
 @Getter
 public class Order {
     private Long id;
-
-    private LocalDateTime orderDateTime;
-
     private double totalPrice;
-
     private double discount;
-
     private double amount;
-
-    private Boolean confirmed;
-
-    private Boolean status;
-
-    private User user;
-
-    private Customer customer;
+    private String note;
+    private double shipPrice;
+    private boolean paymentOnline;
+    private Long addressId;
+    private Long voucherId;
+    private List<Voucher> vouchers;
+    private List<OrderDetail> items;
 }
