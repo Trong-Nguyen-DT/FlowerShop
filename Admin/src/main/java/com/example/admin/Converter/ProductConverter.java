@@ -22,9 +22,11 @@ public class ProductConverter {
         product.setImage4(productEntity.getImage4());
         product.setImage5(productEntity.getImage5());
         product.setDeleted(productEntity.isDeleted());
-//        product.setCategoryEntities(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
-//        product.setReviewEntities(productEntity.getReviewEntities());
-//        product.setProductDetailEntities(productEntity.getProductDetailEntities());
+
+        product.setCategoryEntities(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
+        product.setReviewEntities(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
+        product.setProductDetailEntities(productEntity.getProductDetailEntities().stream().map(ProductDetailConverter::toModel).toList());
+
         return product;
     }
 
@@ -45,6 +47,12 @@ public class ProductConverter {
         entity.setImage4(product.getImage4());
         entity.setImage5(product.getImage5());
         entity.setDeleted(false);
+
+        entity.setReviewEntities(ReviewConverter.toEntityList(product.getReviewEntities()));
+        entity.setCategoryEntities(CategoryConverter.toEntityList(product.getCategoryEntities()));
+        entity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetailEntities()));
+
+
         return entity;
     }
 }

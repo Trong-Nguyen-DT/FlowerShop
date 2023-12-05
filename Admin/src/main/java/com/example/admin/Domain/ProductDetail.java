@@ -9,9 +9,9 @@ import lombok.Setter;
 public class ProductDetail {
     private Long id;
 
-    private Long itemId;
+    private Item item;
 
-    private Long productId;
+    private Product product;
 
     private int quantity;
 }

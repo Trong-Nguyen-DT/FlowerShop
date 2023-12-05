@@ -8,11 +8,7 @@ public class CustomerConverter {
         Customer customer = new Customer();
         customer.setId(customerEntity.getId());
         customer.setUsername(customerEntity.getUsername());
-        if (customerEntity.getAvatar() == null) {
-            customer.setAvatar(null);
-        } else {
-            customer.setAvatar(customerEntity.getAvatar());
-        }
+        customer.setAvatar(customerEntity.getAvatar());
         customer.setPhone(customerEntity.getPhone());
         customer.setFullName(customerEntity.getFullName());
         customer.setEmail(customerEntity.getEmail());
@@ -20,6 +16,8 @@ public class CustomerConverter {
         customer.setBirthday(customerEntity.getBirthday());
         customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
         customer.setReviews((customerEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList()));
+        customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
+        customer.setOrders(customerEntity.getOrderEntities().stream().map(OrderConverter::toModel).toList());
         return customer;
     }
 

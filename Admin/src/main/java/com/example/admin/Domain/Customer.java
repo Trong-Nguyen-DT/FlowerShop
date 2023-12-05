@@ -1,5 +1,7 @@
 package com.example.admin.Domain;
 
+import com.example.admin.Entity.AddressEntity;
+import com.example.admin.Entity.OrderEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,7 +32,7 @@ public class Customer {
 
     private LocalDate birthday;
 
-    private List<OrderHistory> orders;
+    private List<Order> orders;
 
     private List<Review> reviews;
 }
