@@ -281,7 +281,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Image</th>
                         <th>Restore</th>
 
                     </tr>
@@ -290,7 +289,6 @@
                     <tr>
                         <td th:text="${item.id}"></td>
                         <td th:text="${item.name}"></td>
-                        <td> <img th:src="@{'/images/' + ${item.image}}"></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/item/restore/' + ${item.id}}"> <i class="fa-solid fa-trash-can-arrow-up"></i>  </a> </button></td>
                     </tr>
                     </tbody>

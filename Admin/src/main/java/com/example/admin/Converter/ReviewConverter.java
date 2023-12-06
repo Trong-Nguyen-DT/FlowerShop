@@ -16,7 +16,7 @@ public class ReviewConverter {
         review.setRate(reviewEntity.getRate());
         review.setContent(reviewEntity.getContent());
 
-        review.setProduct(ProductConverter.toModel(reviewEntity.getProductEntity()));
+//        review.setProduct(ProductConverter.toModel(reviewEntity.getProductEntity()));
 //        review.setCustomer(CustomerConverter.toModel(reviewEntity.getCustomerEntity()));
 
         return review;
@@ -30,14 +30,14 @@ public class ReviewConverter {
         reviewEntity.setRate(review.getRate());
         reviewEntity.setContent(review.getContent());
 
-        reviewEntity.setCustomerEntity(CustomerConverter.toEntity(review.getCustomer()));
-        reviewEntity.setProductEntity(ProductConverter.toEntity(review.getProduct()));
+//        reviewEntity.setCustomerEntity(CustomerConverter.toEntity(review.getCustomer()));
+//        reviewEntity.setProductEntity(ProductConverter.toEntity(review.getProduct()));
 
         return reviewEntity;
     }
-    public static List<ReviewEntity> toEntityList(List<Review> reviews) {
-        return reviews.stream()
-                .map(ReviewConverter::toEntity)
-                .collect(Collectors.toList());
-    }
+//    public static List<ReviewEntity> toEntityList(List<Review> reviews) {
+//        return reviews.stream()
+//                .map(ReviewConverter::toEntity)
+//                .collect(Collectors.toList());
+//    }
 }

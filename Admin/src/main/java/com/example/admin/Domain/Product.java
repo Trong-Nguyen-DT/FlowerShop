@@ -42,9 +42,9 @@ public class Product {
 
     private boolean deleted;
 
-    private List<Review> reviewEntities;
+    private List<Review> reviews;
 
-    private List<Category> categoryEntities;
+    private List<Category> categories;
 
-    private List<ProductDetail> productDetailEntities;
+    private List<ProductDetail> productDetails;
 }

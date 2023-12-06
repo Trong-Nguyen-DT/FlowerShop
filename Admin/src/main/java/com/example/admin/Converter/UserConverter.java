@@ -8,7 +8,6 @@ public class UserConverter {
         User user = new User();
         user.setId(userEntity.getId());
         user.setUsername(userEntity.getUsername());
-        user.setPassword(userEntity.getPassword());
         user.setFullName(userEntity.getFullName());
         user.setImage(userEntity.getImage());
         user.setPhone(userEntity.getPhone());

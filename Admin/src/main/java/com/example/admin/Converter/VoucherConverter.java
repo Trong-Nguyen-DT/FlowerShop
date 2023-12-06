@@ -7,6 +7,7 @@ public class VoucherConverter {
     public static Voucher toModel(VoucherEntity voucherEntity) {
         Voucher voucher = new Voucher();
         voucher.setId(voucherEntity.getId());
+        voucher.setTitle(voucherEntity.getTitle());
         voucher.setCode(voucherEntity.getCode());
         voucher.setIcon(voucherEntity.getIcon());
         voucher.setConditionsPaymentOnline(voucherEntity.isConditionsPaymentOnline());
@@ -21,6 +22,7 @@ public class VoucherConverter {
     public static VoucherEntity toEntity(Voucher voucher){
         VoucherEntity voucherEntity = new VoucherEntity();
         voucherEntity.setId(voucher.getId());
+        voucherEntity.setTitle(voucher.getTitle());
         voucherEntity.setCode(voucher.getCode());
         voucherEntity.setIcon(voucher.getIcon());
         voucherEntity.setConditionsPaymentOnline(voucher.isConditionsPaymentOnline());

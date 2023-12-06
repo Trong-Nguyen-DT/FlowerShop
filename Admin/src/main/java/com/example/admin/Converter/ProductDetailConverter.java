@@ -13,8 +13,8 @@ public class ProductDetailConverter {
         productDetail.setId(productDetailEntity.getId());
         productDetail.setQuantity(productDetailEntity.getQuantity());
 
-        productDetail.setProduct(ProductConverter.toModel(productDetailEntity.getProductEntity()));
-        productDetail.setItem(ItemConverter.toModel(productDetailEntity.getItemsEntity()));
+//        productDetail.setProduct(ProductConverter.toModel(productDetailEntity.getProductEntity()));
+//        productDetail.setItem(ItemConverter.toModel(productDetailEntity.getItemsEntity()));
 
         return productDetail;
     }
@@ -24,8 +24,8 @@ public class ProductDetailConverter {
         productDetailEntity.setId(productDetail.getId());
         productDetailEntity.setQuantity(productDetail.getQuantity());
 
-        productDetailEntity.setProductEntity(ProductConverter.toEntity(productDetail.getProduct()));
-        productDetailEntity.setItemsEntity(ItemConverter.toEntity(productDetail.getItem()));
+//        productDetailEntity.setProductEntity(ProductConverter.toEntity(productDetail.getProduct()));
+//        productDetailEntity.setItemsEntity(ItemConverter.toEntity(productDetail.getItem()));
 
         return productDetailEntity;
     }

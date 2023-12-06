@@ -16,6 +16,8 @@ import lombok.Setter;
 public class Address {
     private Long id;
 
+    private Customer customer;
+
     private String city;
 
     private String district;
