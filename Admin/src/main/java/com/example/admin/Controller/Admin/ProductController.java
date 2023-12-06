@@ -1,5 +1,6 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
 import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Service.CategoryService;
@@ -13,8 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -37,83 +43,46 @@ public class ProductController {
     @GetMapping()
     public String listProduct(Model model) {
         model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "Admin/ProductAdmin";
     }
-
     @GetMapping("add")
-    public String showAddProduct(Model model) {
-        model.addAttribute("product", new Product());
-        model.addAttribute("items", itemService.getAllItem());
-        model.addAttribute("categories", categoryService.getAllCategory());
+    public String showProduct(Model model){
+        List<Category> categories = categoryService.getAllCategory();
+        model.addAttribute("product", new Product()); // Thay vì new ProductController()
+        model.addAttribute("categories", categories);
+
         return "Admin/AddProductAdmin";
     }
-
-
-
-    // Xem chi tiết sản phẩm
-    @GetMapping("detail/{productId}")
-    public String viewProduct(@PathVariable("productId") Long productId, Model model) {
-        ProductEntity productEntity = productService.getProductById(productId);
-        model.addAttribute("product", productEntity);
-        // Các thông tin khác cần hiển thị
-        return "Admin/ViewDetailProductAdmin";
-    }
-
-    // Chỉnh sửa sản phẩm
-//    @GetMapping("edit/{productId}")
-//    public String showEditProduct(@PathVariable("productId") Long productId, Model model) {
-//        ProductEntity productEntity = productService.getProductById(productId);
-//        model.addAttribute("product", productEntity);
-//        // Các thông tin khác cần hiển thị
-//        return "Admin/EditProductAdmin";
-//    }
-//    @PostMapping("edit/{productId}")
-//    @Transactional
-//    public String editProduct(@PathVariable("productId") Long productId, @ModelAttribute("product") Product updatedProduct) {
-//        productService.updateProduct(productId, updatedProduct);
-//        // Cập nhật thông tin sản phẩm
-//        return "redirect:/admin/product";
-//    }
-//    @GetMapping("edit/{productId}")
-//    public String showEditProduct(@PathVariable String productId, Model model) {
-//        Long editProductId = Long.parseLong(productId);
-//        model.addAttribute("product", productService.getProductById(editProductId));
-//        return "Admin/EditProductAdmin";
-//    }
-//    @PostMapping("edit")
-//    public String editProduct(@ModelAttribute Product product) {
-//        productService.updateProduct(product);
-//        return "redirect:/admin/product";
-//    }
-//    @PostMapping("edit/{productId}")
-//    @Transactional
-//    public String editProduct(@PathVariable("productId") Long productId, @ModelAttribute("product") Product updatedProduct) {
-//        productService.updateProduct(productId, updatedProduct);
-//        // Cập nhật thông tin sản phẩm
-//        return "redirect:/admin/product";
-//    }
-
-    // Xóa sản phẩm
-//    @GetMapping("delete/{productId}")
-//    @Transactional
-//    public String deleteProduct(@PathVariable("productId") Long productId) {
-//        productService.deleteProduct(productId);
-//        // Xóa sản phẩm
-//        return "redirect:/admin/product";
-//    }
-    @GetMapping("delete/{productId}")
-    public String deleteProduct(@PathVariable String productId) {
-        Long deProductId = Long.parseLong(productId);
-        productService.deleteProductById(deProductId);
+    @PostMapping("add")
+    public String addProduct(@ModelAttribute Product product){
+        productService.addProduct(product);
         return "redirect:/admin/product";
     }
 
+    @GetMapping("edit/{id}")
+    public String showEditProduct(@PathVariable String id, Model model) {
+        Long productId = Long.parseLong(id);
+        model.addAttribute("product", productService.getProductById(productId));
+        return "Admin/EditProductAdmin";
+    }
+
+    @PostMapping("edit")
+    public String editProduct(@ModelAttribute Product product) {
+        productService.updateProduct(product);
+        return "redirect:/admin/product";
+    }
+    @GetMapping("delete/{id}")
+    public String deleteProduct(@PathVariable String id) {
+        Long productId = Long.parseLong(id);
+        productService.deleteProductById(productId);
+        return "redirect:/admin/product";
+    }
     @GetMapping("restore")
     public String listProductRestore(Model model) {
         model.addAttribute("products", productService.getAllProduct());
         return "Admin/RestoreProductAdmin";
     }
-
     @GetMapping("restore/{id}")
     public String restoreProduct(@PathVariable String id) {
         Long productId = Long.parseLong(id);

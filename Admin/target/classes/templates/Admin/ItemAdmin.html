@@ -281,7 +281,6 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Image</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -289,8 +288,7 @@
           <tbody  th:each="item : ${items}" th:if="${item.deleted == false}"  >
           <tr>
             <td th:text="${item.id}"></td>
-            <td th:text="${item.name}"></td>
-            <td> <img th:src="@{'/images/' + ${item.image}}"></td>
+            <td th:text="${item.name}" id="adc"></td>
             <td><button class="btn-click"> <a th:href="@{'/admin/item/edit/' + ${item.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
             <td><button class="btn-click"> <a th:href="@{'/admin/item/delete/' + ${item.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
           </tr>

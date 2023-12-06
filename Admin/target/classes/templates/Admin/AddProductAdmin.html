@@ -15,8 +15,10 @@
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" th:href="@{/css/create.css}">
-    <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/styte.css}">
 
+    <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
+    <!-- SCRIPT -->
 </head>
 
 <body>
@@ -277,8 +279,9 @@
                 Add Product
             </div>
             <div  class="box-body overflow-scroll">
-                <form id="product-form" th:action="@{/admin/product/add}" th:method="post" th:object="${product}">
+                <form th:action="@{/admin/product/add}" th:method="post" th:object="${product}" id="addProductForm">
                     <table>
+
                         <tr>
                             <th>
                                 <label>Name:</label>
@@ -375,61 +378,29 @@
                                 <input type="file" th:field="*{image5}">
                             </td>
                         </tr>
-                        <tr th:each="item : ${items}" th:if="${item.deleted == false}">
+                        <tr>
                             <th>
-                                <label>Item:</label>
+                                <label>Categories:</label>
                             </th>
                             <td>
-                                <select name="itemIDs" id="item" multiple="multiple">
-                                    <th:block >
-                                        <option th:value="${item.id}" th:text="${item.name}"></option>
-                                    </th:block >
-                                </select>
-                            </td>
-                            <th>
-                                <label>Quantity:</label>
-                            </th>
-                            <td>
-                                <input type="number" id="number-flower" name="numberFlower">
-                            </td>
-                        </tr>
-                        <tr th:each="category : ${categories}" th:if="${category.deleted == false}">
-                            <th>
-                                <label>Category:</label>
-                            </th>
-                            <td>
-                                <select name="categoryIDs" multiple="multiple">
-                                    <!-- Thêm các option từ danh sách categories -->
-                                    <th:block >
-                                        <option th:value="${category.id}" th:text="${category.name}"></option>
+                                <div class="category">
+                                    <th:block th:each="cate : ${categories}">
+                                        <div class="column_category">
+                                            <input type="button"
+                                                   class="category_button"
+                                                   th:id="${'category_' + cate.id}"
+                                                   th:value="${cate.name}"
+                                                   th:attr="data-category-id=${cate.id}"
+                                                   th:class="${#lists.contains(categories, cate.id)} ? 'category_button selected' : 'category_button'"
+                                                   th:onclick="'toggleCategory(' + ${cate.id} + ')'" />
+                                        </div>
                                     </th:block>
-                                </select>
+                                </div>
                             </td>
                         </tr>
-
-
-
-                        <!--                        <tr>-->
-<!--                            <th>-->
-<!--                                <label>Number of Flower Type: </label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <input type="number" id="number-type" name="numberType">-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <th>-->
-<!--                                <label>Number of Flowers: </label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <input type="number" id="number-flower2" name="numberFlower">-->
-<!--                            </td>-->
-<!--                        </tr>-->
-                        <tr><div id="select-container"></div></tr>
                     </table>
-                    <button id="add-button" type="submit">ADD</button>
-
-
+                    <input type="hidden" name="categoryIds" id="categoryIdsInput">
+                    <button type="button" onclick="submitForm()">ADD</button>
                 </form>
             </div>
         </div>
@@ -440,103 +411,9 @@
     <!-- END MAIN CONTENT -->
 
     <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.getElementById('product-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Lấy danh sách các select box
-            var selectBoxes = document.querySelectorAll('select[name="itemIDs"]');
-
-            // Tạo mảng để lưu trữ các selectedItems
-            var selectedItems = [];
-
-            // Lặp qua mỗi select box
-            selectBoxes.forEach(function(selectBox) {
-                var id = selectBox.value;
-                var quantity = selectBox.closest('tr').querySelector('input[name="numberFlower"]').value;
-
-                // Kiểm tra xem đã chọn id và quantity chưa
-                if (id && quantity) {
-                    // Tạo đối tượng mới và thêm vào mảng selectedItems
-                    var selectedItem = {
-                        id: id,
-                        quantity: quantity
-                    };
-                    selectedItems.push(selectedItem);
-                }
-            });
-
-            // Lấy giá trị categoryIDs từ các option đã chọn
-            var categoryIDs = Array.from(document.querySelectorAll('select[name="categoryIDs"] option:checked')).map(option => option.value);
-
-            // Tạo đối tượng productDTO
-            var productDTO = {
-                product: {
-                    name: document.querySelector('input[name="name"]').value,
-                    original_price: document.querySelector('input[name="original_price"]').value,
-                    discount: document.querySelector('input[name="discount"]').value,
-                    description: document.querySelector('input[name="description"]').value,
-                    details: document.querySelector('input[name="details"]').value,
-                    delivery: document.querySelector('input[name="delivery"]').value,
-                    sub_info: document.querySelector('input[name="sub_info"]').value,
-                    image1: document.querySelector('input[name="image1"]').value,
-                    image2: document.querySelector('input[name="image2"]').value,
-                    image3: document.querySelector('input[name="image3"]').value,
-                    image4: document.querySelector('input[name="image4"]').value,
-                    image5: document.querySelector('input[name="image5"]').value,
-                },
-                selectedItems: selectedItems,
-                categoryIDs: categoryIDs
-            };
-
-            // Gửi dữ liệu đến API sử dụng Fetch API hoặc jQuery.ajax
-            fetch('/admin/product/add-product', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productDTO)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        });
-    </script>
-
-    <script>
-        document.getElementById('product-form').addEventListener('submit', function() {
-            var selectedItems = [];
-
-            // Lặp qua tất cả các select box
-            var selects = document.querySelectorAll('select[name^="flowerTypes"]');
-            selects.forEach(function(select) {
-                var selectedOption = select.options[select.selectedIndex];
-                selectedItems.push(selectedOption.value);
-            });
-
-            // Tạo một input ẩn để chứa danh sách các ID item
-            var input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'selectedItems';
-            input.value = JSON.stringify(selectedItems);
-
-            // Thêm input vào form
-            this.appendChild(input);
-        });
-    </script>
+    <script th:src="@{/js/AddProduct.js}"></script>
+<!--    <script th:src="@{/js/app.js}"></script>-->
 </div>
 </body>
-
 </html>

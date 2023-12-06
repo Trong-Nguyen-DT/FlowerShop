@@ -25,26 +25,26 @@ let category_options = {
 }
 
 // Gọi API lấy dữ liệu danh mục
-fetch('/admin/category-data')
-    .then(response => response.json())
-    .then(data => {
-        // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
-        const seriesData = data.map(item => item.quantity);
-        const labels = data.map(item => item.categoryName);
-
-        // Cập nhật category_options
-
-        category_options.series = seriesData;
-        category_options.labels = labels;
-
-
-
-        // Tạo hoặc cập nhật biểu đồ danh mục ở đây
-        let category_chart = new ApexCharts(document.querySelector("#category-chart"), category_options);
-        category_chart.render();
-    })
-    .catch(error => console.error(error));
-
+// fetch('/admin/category-data')
+//     .then(response => response.json())
+//     .then(data => {
+//         // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
+//         const seriesData = data.map(item => item.quantity);
+//         const labels = data.map(item => item.categoryName);
+//
+//         // Cập nhật category_options
+//
+//         category_options.series = seriesData;
+//         category_options.labels = labels;
+//
+//
+//
+//         // Tạo hoặc cập nhật biểu đồ danh mục ở đây
+//         let category_chart = new ApexCharts(document.querySelector("#category-chart"), category_options);
+//         category_chart.render();
+//     })
+//     .catch(error => console.error(error));
+//
 
 
 

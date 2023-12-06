@@ -14,6 +14,7 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/Image.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
@@ -280,6 +281,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Image</th>
                         <th>FullName</th>
                         <th>Phone</th>
                         <th>Address</th>
@@ -293,6 +295,7 @@
                     <tbody  th:each="user : ${users}" th:if="${user.deleted == false}"  >
                     <tr>
                         <td th:text="${user.id}"></td>
+                        <td> <img th:src="@{'/images/' + ${user.image}}"></td>
                         <td th:text="${user.fullName}"></td>
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.address}"></td>
