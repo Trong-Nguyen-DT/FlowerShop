@@ -23,9 +23,6 @@ public class ImageAPIController {
     @Value("${imagePathCustomer}")
     private String imagePathCustomer;
 
-    public ImageAPIController() {
-    }
-
 
     @GetMapping("/product/{filename:.+}")
     public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
