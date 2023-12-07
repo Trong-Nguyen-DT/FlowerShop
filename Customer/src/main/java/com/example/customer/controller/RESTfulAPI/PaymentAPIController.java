@@ -52,7 +52,6 @@ public class PaymentAPIController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         orderHistoryService.addOrder(name, orderId);
-        System.out.println("haizz");
         String response = fcmService.pushNotification(name, "payment_success");
         return ResponseEntity.ok(response);
     }
