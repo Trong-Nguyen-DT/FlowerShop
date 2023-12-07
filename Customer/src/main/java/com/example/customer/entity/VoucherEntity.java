@@ -18,7 +18,7 @@ public class VoucherEntity {
     private String title;
     private String icon;
     private String code;
-    private double percentage;
+    private Long percentage;
     private int usageLimit;
     private LocalDate startDate;
     private LocalDate endDate;

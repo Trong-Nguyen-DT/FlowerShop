@@ -1,4 +1,4 @@
-package com.example.customer.Payment;
+package com.example.customer.payment;
 
 import lombok.Getter;
 import lombok.Setter;

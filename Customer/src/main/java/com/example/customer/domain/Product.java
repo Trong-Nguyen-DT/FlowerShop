@@ -13,9 +13,9 @@ public class Product {
 
     private String name;
 
-    private double original_price;
+    private Long original_price;
 
-    private double price;
+    private Long price;
 
     private String description;
 
@@ -27,7 +27,7 @@ public class Product {
 
     private double overall_rating;
 
-    private double discount;
+    private Long discount;
 
     private String image1;
 

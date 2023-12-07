@@ -1,9 +1,8 @@
 package com.example.customer.remote;
 
-import com.example.customer.Payment.BodyRequest;
-import com.example.customer.domain.Order;
-import com.example.customer.Payment.BodyResponse;
-import com.example.customer.Payment.DataResponse;
+import com.example.customer.payment.BodyRequest;
+import com.example.customer.payment.BodyResponse;
+import com.example.customer.payment.DataResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

@@ -15,6 +15,7 @@ public class VoucherConverter {
         voucher.setEndDate(voucherEntity.getEndDate());
         voucher.setConditionPrice(voucherEntity.getConditionPrice());
         voucher.setExpired(voucherEntity.isExpired());
+        voucher.setType(voucherEntity.getType());
         return voucher;
     }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItemEntity, Long> {
     List<CartItemEntity> findAllByCartEntity(CartEntity cartEntity);
+
+    void deleteAllByCartEntity(CartEntity cartEntity);
 }

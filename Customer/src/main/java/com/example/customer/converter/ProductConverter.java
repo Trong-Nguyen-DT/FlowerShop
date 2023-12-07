@@ -24,8 +24,8 @@ public class ProductConverter {
         product.setImage5(productEntity.getImage5());
         product.setDeleted(productEntity.isDeleted());
         product.setCategoryEntities(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
-//        product.setReviewEntities(productEntity.getReviewEntities());
-//        product.setProductDetailEntities(productEntity.getProductDetailEntities());
+        product.setReviewEntities(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
+        product.setProductDetailEntities(productEntity.getProductDetailEntities().stream().map(ProductDetailConverter::toModel).toList());
         return product;
     }
 

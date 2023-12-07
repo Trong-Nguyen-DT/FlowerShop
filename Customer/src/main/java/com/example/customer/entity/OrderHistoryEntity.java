@@ -35,6 +35,14 @@ public class OrderHistoryEntity {
 
     private String emailCustomer;
 
+    private Long addressId;
+
+    private String address;
+
+    private String nameCustomerReceive;
+
+    private String phoneCustomerReceive;
+
     @OneToMany(mappedBy = "orderHistoryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailHistoryEntity> orderDetailHistoryEntities;
 }
