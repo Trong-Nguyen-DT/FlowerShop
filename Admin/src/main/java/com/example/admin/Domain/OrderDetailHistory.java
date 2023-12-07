@@ -1,5 +1,6 @@
 package com.example.admin.Domain;
 
+import com.example.admin.Entity.OrderHistoryEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import lombok.Setter;
 public class OrderDetailHistory {
     private Long id;
 
-    private Long orderHistory_id;
+    private OrderHistory orderHistory;
 
     private Long productId;
 

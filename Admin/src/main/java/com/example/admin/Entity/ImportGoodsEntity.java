@@ -18,11 +18,7 @@ public class ImportGoodsEntity {
 
     private LocalDateTime timeImport;
 
-    @ManyToOne
-    @JoinColumn(name = "item_id")
-    private ItemEntity itemEntity;
-
-    private int quantity;
+    private Long staff_id;
 
     private double totalPrice;
 }

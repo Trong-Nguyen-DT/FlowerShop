@@ -14,11 +14,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping()
-//    public String showListStaff(Model model) {
-//        List<User> users = userService.getAllStaff();
-//        return "Admin/StaffAdmin";
-//    }
 
     @GetMapping()
     public String listStaff(Model model) {

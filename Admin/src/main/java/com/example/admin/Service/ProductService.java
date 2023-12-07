@@ -8,13 +8,11 @@ import java.util.List;
 public interface ProductService {
     List<Product> getAllProduct();
 
-//    ProductEntity addProduct(Product product);
+    void addProduct(Product product);
 
-    ProductEntity getProductById(Long productId);
+    Product getProductById(Long productId);
 
-//    void updateProduct(Product product);
-
-//    void deleteProduct(Long productId);
+    void updateProduct(Product product);
 
     void deleteProductById(Long productId);
 

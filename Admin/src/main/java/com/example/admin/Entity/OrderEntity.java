@@ -37,6 +37,20 @@ public class OrderEntity {
 
     private OrderStatus orderStatus;
 
+    private boolean shipping;
+
+    private double shipPrice;
+
+    private boolean paymentOnline;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private AddressEntity addressEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "voucher_id")
+    private VoucherEntity voucherEntity;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;

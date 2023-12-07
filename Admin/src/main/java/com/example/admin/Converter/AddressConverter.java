@@ -1,44 +1,43 @@
 package com.example.admin.Converter;
 
 import com.example.admin.Domain.Address;
-import com.example.admin.Domain.City;
-import com.example.admin.Domain.District;
-import com.example.admin.Domain.Ward;
+import com.example.admin.Domain.Review;
 import com.example.admin.Entity.AddressEntity;
-import com.example.admin.Entity.CityEntity;
-import com.example.admin.Entity.DistrictEntity;
-import com.example.admin.Entity.WardEntity;
+import com.example.admin.Entity.ReviewEntity;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddressConverter {
-
     public static Address toModel(AddressEntity addressEntity) {
         Address address = new Address();
         address.setId(addressEntity.getId());
-        address.setCity(toModelCity(addressEntity.getCityEntity()));
-        address.setDistrict(toModelDistrict(addressEntity.getDistrictEntity()));
-        address.setWard(toModelWard(addressEntity.getWardEntity()));
+        address.setCity(addressEntity.getNameCity());
+        address.setDistrict(addressEntity.getNameDistrict());
+        address.setWard(addressEntity.getNameWard());
         address.setStreet(addressEntity.getStreet());
+        address.setNameCustomer(addressEntity.getNameCustomer());
+        address.setPhoneNumber(addressEntity.getPhoneNumber());
+//        address.setCustomer(CustomerConverter.toModel(addressEntity.getCustomerEntity()));
         return address;
     }
+    public static AddressEntity toEntity(Address address) {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setId(address.getId());
+        addressEntity.setStreet(address.getStreet());
+        addressEntity.setNameCustomer(address.getNameCustomer());
+        addressEntity.setPhoneNumber(address.getPhoneNumber());
+        addressEntity.setNameCity(address.getCity());
+        addressEntity.setNameWard(address.getWard());
+        addressEntity.setNameDistrict(address.getDistrict());
 
-    public static City toModelCity(CityEntity cityEntity) {
-        City city = new City();
-        city.setId(cityEntity.getId());
-        city.setName(cityEntity.getName());
-        return city;
+//        addressEntity.setCustomerEntity(CustomerConverter.toEntity(address.getCustomer()));
+
+        return addressEntity;
     }
-
-    public static District toModelDistrict(DistrictEntity districtEntity) {
-        District district = new District();
-        district.setId(districtEntity.getId());
-        district.setName(districtEntity.getName());
-        return district;
-    }
-
-    public static Ward toModelWard(WardEntity wardEntity) {
-        Ward ward = new Ward();
-        ward.setId(wardEntity.getId());
-        ward.setName(wardEntity.getName());
-        return ward;
+    public static List<AddressEntity> toEntityList(List<Address> addresses) {
+        return addresses.stream()
+                .map(AddressConverter::toEntity)
+                .collect(Collectors.toList());
     }
 }

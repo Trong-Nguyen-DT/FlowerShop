@@ -8,7 +8,6 @@ public class UserConverter {
         User user = new User();
         user.setId(userEntity.getId());
         user.setUsername(userEntity.getUsername());
-        user.setPassword(userEntity.getPassword());
         user.setFullName(userEntity.getFullName());
         user.setImage(userEntity.getImage());
         user.setPhone(userEntity.getPhone());
@@ -17,7 +16,8 @@ public class UserConverter {
         user.setSalary(userEntity.getSalary());
         user.setRole(userEntity.getRole());
         user.setDeleted(userEntity.getDeleted());
-//        user.setOrderEntities(userEntity.getOderEntities().stream().map(OderConverter::toModel).toList());
+        user.setOrders(userEntity.getOrderEntities().stream().map(OrderConverter::toModel).toList());
+
         return user;
     }
     public static UserEntity toEntity(User user){

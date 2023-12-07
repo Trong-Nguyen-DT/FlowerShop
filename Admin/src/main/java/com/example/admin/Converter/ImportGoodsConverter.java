@@ -8,9 +8,9 @@ public class ImportGoodsConverter {
         ImportGood importGood = new ImportGood();
         importGood.setId(importGoodsEntity.getId());
         importGood.setTimeImport(importGoodsEntity.getTimeImport());
-        importGood.setQuantity(importGoodsEntity.getQuantity());
+        importGood.setStaff_id(importGoodsEntity.getStaff_id());
         // Chuyển đổi thông tin từ ItemEntity (nếu có)
-        importGood.setItem(ItemConverter.toModel(importGoodsEntity.getItemEntity()));
+//        importGood.setItem(ItemConverter.toModel(importGoodsEntity.getItemEntity()));
         importGood.setTotalPrice(importGood.getTotalPrice());
 
         return importGood;
@@ -19,8 +19,8 @@ public class ImportGoodsConverter {
         ImportGoodsEntity importGoodsEntity = new ImportGoodsEntity();
         importGoodsEntity.setId(importGood.getId());
         importGoodsEntity.setTimeImport(importGood.getTimeImport());
-        importGoodsEntity.setQuantity(importGood.getQuantity());
-        importGoodsEntity.setItemEntity(ItemConverter.toEntity(importGood.getItem()));
+        importGoodsEntity.setStaff_id(importGood.getStaff_id());
+//        importGoodsEntity.setItemEntity(ItemConverter.toEntity(importGood.getItem()));
         importGoodsEntity.setTotalPrice(importGood.getTotalPrice());
 
         return importGoodsEntity;

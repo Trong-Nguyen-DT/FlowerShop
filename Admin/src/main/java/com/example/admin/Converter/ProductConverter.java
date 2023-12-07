@@ -3,6 +3,8 @@ package com.example.admin.Converter;
 import com.example.admin.Domain.Product;
 import com.example.admin.Entity.ProductEntity;
 
+import java.util.stream.Collectors;
+
 public class ProductConverter {
     public static Product toModel(ProductEntity productEntity) {
         Product product = new Product();
@@ -22,9 +24,11 @@ public class ProductConverter {
         product.setImage4(productEntity.getImage4());
         product.setImage5(productEntity.getImage5());
         product.setDeleted(productEntity.isDeleted());
-//        product.setCategoryEntities(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
-//        product.setReviewEntities(productEntity.getReviewEntities());
-//        product.setProductDetailEntities(productEntity.getProductDetailEntities());
+
+        product.setReviews(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).collect(Collectors.toList()));
+        product.setCategories(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).collect(Collectors.toList()));
+        product.setProductDetails(productEntity.getProductDetailEntities().stream().map(ProductDetailConverter::toModel).collect(Collectors.toList()));
+
         return product;
     }
 
@@ -45,6 +49,13 @@ public class ProductConverter {
         entity.setImage4(product.getImage4());
         entity.setImage5(product.getImage5());
         entity.setDeleted(false);
+
+//        entity.setReviewEntities(ReviewConverter.toEntityList(product.getReviews()));
+        entity.setCategoryEntities(product.getCategories().stream().map(CategoryConverter::toEntity).collect(Collectors.toList()));
+        entity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
+
+
         return entity;
     }
+
 }

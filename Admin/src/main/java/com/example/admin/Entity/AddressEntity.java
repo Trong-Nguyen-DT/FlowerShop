@@ -1,12 +1,8 @@
 package com.example.admin.Entity;
-
-
-import com.example.admin.Domain.District;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -21,18 +17,16 @@ public class AddressEntity {
     @JoinColumn(name = "customer_id")
     private CustomerEntity customerEntity;
 
-    @OneToOne
-    @JoinColumn(name = "city_id")
-    private CityEntity cityEntity;
+    private String nameCity;
 
-    @OneToOne
-    @JoinColumn(name = "district_id")
-    private DistrictEntity districtEntity;
+    private String nameDistrict;
 
-    @OneToOne
-    @JoinColumn(name = "ward_id")
-    private WardEntity wardEntity;
+    private String nameWard;
 
     private String street;
+
+    private String nameCustomer;
+
+    private String phoneNumber;
 
 }

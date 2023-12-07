@@ -6,16 +6,27 @@ import lombok.Setter;
 import java.util.List;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+
 @Getter
 @Setter
 public class Address {
     private Long id;
 
-    private City city;
+    private Customer customer;
 
-    private District district;
+    private String city;
 
-    private Ward ward;
+    private String district;
+
+    private String ward;
 
     private String street;
+
+    private String nameCustomer;
+
+    private String phoneNumber;
 }
