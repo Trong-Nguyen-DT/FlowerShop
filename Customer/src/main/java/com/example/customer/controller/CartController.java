@@ -11,4 +11,10 @@ public class CartController {
     {
         return "cart";
     }
+
+    @GetMapping("checkout")
+    public String checkout()
+    {
+        return "checkout";
+    }
 }
