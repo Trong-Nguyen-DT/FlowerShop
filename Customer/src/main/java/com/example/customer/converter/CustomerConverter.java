@@ -20,8 +20,6 @@ public class CustomerConverter {
         customer.setEmail(customerEntity.getEmail());
         customer.setSex(customerEntity.isSex());
         customer.setBirthday(customerEntity.getBirthday());
-        customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
-        customer.setReviews((customerEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList()));
         return customer;
     }
 

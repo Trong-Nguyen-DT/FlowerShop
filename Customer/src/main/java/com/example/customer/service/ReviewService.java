@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ReviewService {
     List<Review> getAllReviewByProduct(Long productId);
+
+    void addReview(Review review, String name);
 }

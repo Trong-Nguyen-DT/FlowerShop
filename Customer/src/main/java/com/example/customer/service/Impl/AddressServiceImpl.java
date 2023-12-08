@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public void addAddress(String name, Address address) {
+    public Address addAddress(String name, Address address) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
         AddressEntity addressEntity = new AddressEntity();
         addressEntity.setCustomerEntity(customerEntity);
@@ -36,6 +36,6 @@ public class AddressServiceImpl implements AddressService {
         addressEntity.setNameCustomer(address.getNameCustomer());
         addressEntity.setPhoneNumber(address.getPhoneNumber());
         addressEntity.setStreet(address.getStreet());
-        addressRepository.save(addressEntity);
+        return AddressConverter.toModel(addressRepository.save(addressEntity));
     }
 }
