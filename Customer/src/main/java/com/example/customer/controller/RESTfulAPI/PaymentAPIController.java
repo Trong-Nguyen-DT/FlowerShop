@@ -56,6 +56,7 @@ public class PaymentAPIController {
         return ResponseEntity.ok(response);
     }
 
+    @Transactional
     @GetMapping("failed")
     public ResponseEntity<String> failed() {
         String name = customerValidate.validateCustomer();

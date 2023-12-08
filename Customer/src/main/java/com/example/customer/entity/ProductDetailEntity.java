@@ -23,4 +23,6 @@ public class ProductDetailEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity productEntity;
+
+    private boolean reviewed;
 }

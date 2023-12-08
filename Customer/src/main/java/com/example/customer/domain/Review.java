@@ -10,16 +10,10 @@ import java.time.LocalDate;
 @Setter
 public class Review {
     private Long id;
-
-    private Product product;
-
+    private Long productId;
     private int rate;
-
     private String content;
-
     private String name;
-
     private LocalDate date;
-
     private Customer customer;
 }
