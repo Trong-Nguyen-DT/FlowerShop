@@ -10,7 +10,7 @@ public class ProductConverter {
         Product product = new Product();
         product.setId(productEntity.getId());
         product.setName(productEntity.getName());
-        product.setOriginal_price(productEntity.getOriginal_price());
+        product.setOriginalPrice(productEntity.getOriginal_price());
         product.setPrice(productEntity.getPrice());
         product.setDescription(productEntity.getDescription());
         product.setDetails(productEntity.getDetails());
@@ -35,7 +35,7 @@ public class ProductConverter {
     public static ProductEntity toEntity(Product product) {
         ProductEntity entity = new ProductEntity();
         entity.setId(product.getId());
-        entity.setOriginal_price(product.getOriginal_price());
+        entity.setOriginal_price(product.getOriginalPrice());
         entity.setPrice(product.getPrice());
         entity.setDescription(product.getDescription());
         entity.setDetails(product.getDetails());

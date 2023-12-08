@@ -2,6 +2,7 @@ package com.example.admin.Controller.Admin;
 
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Service.CategoryService;
 import com.example.admin.Service.ItemService;
@@ -32,9 +33,6 @@ public class ProductController {
     private ProductService productService;
 
     @Autowired
-    private ItemService itemService;
-
-    @Autowired
     private ProductDetailService productDetailService;
 
     @Autowired
@@ -54,16 +52,36 @@ public class ProductController {
 
         return "Admin/AddProductAdmin";
     }
-    @PostMapping("add")
-    public String addProduct(@ModelAttribute Product product){
-        productService.addProduct(product);
-        return "redirect:/admin/product";
+//    @PostMapping("add")
+//    public String addProduct(@ModelAttribute Product product){
+//        productService.addProduct(product);
+//        return "redirect:/admin/product";
+//    }
+
+    @Transactional
+    @PostMapping("/add")
+    public String addProduct(@ModelAttribute ProductDTO productDto) {
+        System.out.println("vào được");
+        // Example: Print received data to the console
+        System.out.println("Name: " + productDto.getName());
+        System.out.println("Original Price: " + productDto.getOriginalPrice());
+        System.out.println("Category IDs: " + productDto.getCategoryIds());
+
+        // Add your business logic to save the product and its associated categories
+        ProductEntity productEntity = productService.createProduct(productDto);
+        productService.setCategories(productEntity, productDto);
+        // Redirect to a success page or return a response accordingly
+        return "redirect:/success-page";
     }
+
+
 
     @GetMapping("edit/{id}")
     public String showEditProduct(@PathVariable String id, Model model) {
+        List<Category> categories = categoryService.getAllCategory();
         Long productId = Long.parseLong(id);
         model.addAttribute("product", productService.getProductById(productId));
+        model.addAttribute("categories", categories);
         return "Admin/EditProductAdmin";
     }
 

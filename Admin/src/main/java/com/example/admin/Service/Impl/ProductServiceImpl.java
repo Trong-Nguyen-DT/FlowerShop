@@ -6,6 +6,7 @@ import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Converter.UserConverter;
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Domain.User;
 import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.ProductEntity;
@@ -13,9 +14,14 @@ import com.example.admin.Repository.CategoryRepository;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.CategoryService;
 import com.example.admin.Service.ProductService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +33,10 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
     private CategoryRepository categoryRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<Product> getAllProduct() {
@@ -43,7 +49,6 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long productId) {
         return ProductConverter.toModel(productRepository.findById(productId).orElseThrow());
     }
-
     @Override
     public void updateProduct(Product product) {
         // Lấy ProductEntity từ cơ sở dữ liệu hoặc ném ngoại lệ nếu không tìm thấy
@@ -52,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
         // Cập nhật tất cả các trường từ Product
         productEntity.setName(product.getName());
-        productEntity.setOriginal_price(product.getOriginal_price());
+        productEntity.setOriginal_price(product.getOriginalPrice());
         productEntity.setPrice(product.getPrice());
         productEntity.setDescription(product.getDescription());
         productEntity.setDetails(product.getDetails());
@@ -85,5 +90,28 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity productEntity = productRepository.findById(productId).orElseThrow();
         productEntity.setDeleted(false);
         productRepository.save(productEntity);
+    }
+
+    @Override
+    public ProductEntity createProduct(ProductDTO productDto) {
+        ProductEntity entity = new ProductEntity();
+        entity.setName(productDto.getName());
+        entity.setOriginal_price(productDto.getOriginalPrice());
+        entity.setDiscount(productDto.getDiscount());
+        entity.setPrice(newPrice(productDto.getOriginalPrice(), productDto.getDiscount()));
+        return productRepository.save(entity);
+//
+    }
+
+    private Long newPrice(Long originalPrice, Long discount) {
+        return((100-discount)* originalPrice) / 100;
+    }
+
+    @Override
+    public void setCategories(ProductEntity entity, ProductDTO productDto) {
+        System.out.println("id" + entity.getId());
+        entity.setCategoryEntities(categoryRepository.findAllByIdIn(productDto.getCategoryIds()));
+        System.out.println("size 2: " + entity.getCategoryEntities().size());
+//        productRepository.
     }
 }

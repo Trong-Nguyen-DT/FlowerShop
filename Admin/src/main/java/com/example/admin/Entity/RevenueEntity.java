@@ -19,5 +19,5 @@ public class RevenueEntity {
 
     private LocalDate date;
 
-    private double totalRevenue;
+    private Long totalRevenue;
 }
