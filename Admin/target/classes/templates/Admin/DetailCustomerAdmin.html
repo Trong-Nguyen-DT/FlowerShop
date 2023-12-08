@@ -64,6 +64,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/revenue}">
+                <i class='bx bx-chart'></i>
+                <span>Revenue</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/orders}">
                 <i class='bx bx-chart'></i>
                 <span>order history</span>
@@ -293,8 +299,8 @@
                     <tbody>
                     <tr>
                         <td th:text="${customer.id}"></td>
-                        <td th:text="${customer.full_name}"></td>
-                        <td th:text="${customer.address}"></td>
+                        <td th:text="${customer.fullName}"></td>
+                        <td th:text="${customer.addresses}"></td>
                         <td th:text="${customer.phone}"></td>
                         <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
                         <td th:text="${customer.email}"></td>

@@ -18,4 +18,6 @@ public interface ProductService {
 
     void restoreProductById(Long productId);
 
+    Product getById(Long id);
+
 }

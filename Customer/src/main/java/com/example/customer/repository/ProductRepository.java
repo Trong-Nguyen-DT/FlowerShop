@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
-//    List<ProductEntity> findAllByCategoryEntities(CategoryEntity categoryEntity);
-
     @Query("SELECT DISTINCT p FROM ProductEntity p JOIN p.categoryEntities c WHERE c.id = :categoryId")
     List<ProductEntity> findAllByCategoryId(@Param("categoryId") Long categoryId);
 }

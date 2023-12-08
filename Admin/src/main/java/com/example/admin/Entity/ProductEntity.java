@@ -19,9 +19,9 @@ public class ProductEntity {
 
     private String name;
 
-    private double original_price;
+    private Long original_price;
 
-    private double price;
+    private Long price;
 
     private String description;
 
@@ -33,7 +33,7 @@ public class ProductEntity {
 
     private double overall_rating;
 
-    private double discount;
+    private Long discount;
 
     private String image1;
 
@@ -50,7 +50,11 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewEntity> reviewEntities;
 
-    @ManyToMany(mappedBy = "productEntities", fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "category_product_mapping",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<CategoryEntity> categoryEntities;
 
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
