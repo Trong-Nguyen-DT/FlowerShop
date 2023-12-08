@@ -7,14 +7,10 @@ import lombok.Setter;
 @Setter
 public class OrderDetailHistory {
     private Long id;
-
     private Long orderHistory_id;
-
     private Long productId;
-
     private String nameProduct;
-
-    private double priceProduct;
-
+    private Long priceProduct;
     private int quantity;
+    private boolean reviewed;
 }

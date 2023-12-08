@@ -1,10 +1,15 @@
 package com.example.customer.service.Impl;
 
+import com.example.customer.converter.OrderConverter;
+import com.example.customer.domain.Order;
+import com.example.customer.domain.OrderHistory;
 import com.example.customer.entity.*;
 import com.example.customer.repository.*;
 import com.example.customer.service.OrderHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrderHistoryServiceImpl implements OrderHistoryService {
@@ -30,6 +35,18 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
         OrderHistoryEntity orderHistoryEntity = saveOrderHistory(orderEntity);
         saveOrderDetailHistory(orderEntity ,orderHistoryEntity);
         deleteCartItem(name);
+    }
+
+    @Override
+    public List<OrderHistory> getOrderByCustomer(String name) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        return orderHistoryRepository.findAllByCustomerId(customerEntity.getId()).stream().map(OrderConverter::toModelOrderHistory).toList();
+    }
+
+    @Override
+    public OrderHistory getOrderByOrderId(Long orderId, String name) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        return OrderConverter.toModelOrderHistory(orderHistoryRepository.findByIdAndCustomerId(orderId, customerEntity.getId()));
     }
 
     private void deleteCartItem(String name) {
@@ -65,6 +82,9 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
         orderHistoryEntity.setAddress(orderEntity.getAddressEntity().getStreet() + ", " + orderEntity.getAddressEntity().getNameWard() + ", " + orderEntity.getAddressEntity().getNameDistrict() + ", " + orderEntity.getAddressEntity().getNameCity());
         orderHistoryEntity.setNameCustomerReceive(orderEntity.getAddressEntity().getNameCustomer());
         orderHistoryEntity.setPhoneCustomerReceive(orderEntity.getAddressEntity().getPhoneNumber());
+        orderHistoryEntity.setOrderStatus(orderEntity.getOrderStatus());
+        orderHistoryEntity.setPaymentOnline(orderEntity.isPaymentOnline());
+        orderHistoryEntity.setShipPrice(orderEntity.getShipPrice());
         return orderHistoryRepository.save(orderHistoryEntity);
     }
 }

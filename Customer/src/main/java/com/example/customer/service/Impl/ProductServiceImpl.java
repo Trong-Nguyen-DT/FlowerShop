@@ -28,8 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProductByCategory(Long categoryId) {
-        CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow();
-        return productRepository.findAllByCategoryEntities(categoryEntity).stream().map(ProductConverter::toModel).toList();
+        return productRepository.findAllByCategoryId(categoryId).stream().map(ProductConverter::toModel).toList();
     }
 
     @Override

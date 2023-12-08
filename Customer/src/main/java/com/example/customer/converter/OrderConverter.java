@@ -28,8 +28,24 @@ public class OrderConverter {
         return order;
     }
 
-    public static OrderHistory toModelOrderHistory(OrderHistoryEntity orderHistoryEntity) {
+    public static OrderHistory toModelOrderHistory(OrderHistoryEntity entity) {
         OrderHistory orderHistory = new OrderHistory();
+        orderHistory.setId(entity.getId());
+        orderHistory.setOrderDateTime(entity.getOrderDateTime());
+        orderHistory.setTotalPrice(entity.getTotalPrice());
+        orderHistory.setDiscount(entity.getDiscount());
+        orderHistory.setAmount(entity.getAmount());
+        orderHistory.setCustomerId(entity.getCustomerId());
+        orderHistory.setFullNameCustomer(entity.getFullNameCustomer());
+        orderHistory.setPhoneCustomer(entity.getPhoneCustomer());
+        orderHistory.setEmailCustomer(entity.getEmailCustomer());
+        orderHistory.setOrderStatus(entity.getOrderStatus());
+        orderHistory.setNameCustomerReceive(entity.getNameCustomerReceive());
+        orderHistory.setPhoneCustomerReceive(entity.getPhoneCustomerReceive());
+        orderHistory.setAddress(entity.getAddress());
+        orderHistory.setPaymentOnline(entity.isPaymentOnline());
+        orderHistory.setShipPrice(entity.getShipPrice());
+        orderHistory.setOrderDetailHistories(entity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
         return orderHistory;
     }
 

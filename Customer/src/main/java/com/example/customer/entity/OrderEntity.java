@@ -18,31 +18,18 @@ public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDateTime orderDateTime;
-
     private Long totalPrice;
-
     private Long discount;
-
     private Long amount;
-
     private Boolean confirmed;
-
     private Boolean status;
-
     private String note;
-
     private String informationRelated;
-
     private OrderStatus orderStatus;
-
     private boolean shipping;
-
     private Long shipPrice;
-
     private boolean paymentOnline;
-
     @ManyToOne
     @JoinColumn(name = "address_id")
     private AddressEntity addressEntity;

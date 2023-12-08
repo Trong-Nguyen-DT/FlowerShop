@@ -20,7 +20,9 @@ public class OrderDetailHistoryEntity {
 
     private String nameProduct;
 
-    private double priceProduct;
+    private Long priceProduct;
 
     private int quantity;
+
+    private boolean reviewed;
 }
