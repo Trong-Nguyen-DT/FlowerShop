@@ -14,9 +14,10 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
-    <link rel="stylesheet" th:href="@{/css/Image.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -230,7 +231,7 @@
         <li>
             <a th:href="@{/admin/inventory}">
                 <i class='bx bx-mail-send'></i>
-                <span>inventory</span>
+                <span>Inventory</span>
             </a>
         </li>
         <li>
@@ -280,63 +281,40 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Products
+                Review
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
-<!--                        <th>ID-->
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Original Price</th>
-                        <th>Price</th>
-                        <th>Discount</th>
-                        <th>Description</th>
-                        <th>Details</th>
-                        <th>Delivery</th>
-                        <th>Sub Info</th>
-                        <th>Overall Rating</th>
-                        <th>Product details</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>ID</th>
+                        <th>Date </th>
+                        <th>Revenue</th>
 
                     </tr>
                     </thead>
-                    <tbody  th:each="prod : ${products}" th:if="${prod.deleted == false}"  >
+                    <tbody  th:each="revenue : ${revenues}"  >
                     <tr>
-<!--                        <td th:text="${prod.id}"></td>-->
-                        <td> <img th:src="@{'/images/' + ${prod.image1}}"></td>
-                        <td th:text="${prod.name}"></td>
-                        <td th:text="${prod.original_price}"></td>
-                        <td th:text="${prod.price}"></td>
-                        <td th:text="${prod.discount}"></td>
-                        <td th:text="${prod.description}"></td>
-                        <td th:text="${prod.details}"></td>
-                        <td th:text="${prod.delivery}"></td>
-                        <td th:text="${prod.sub_info}"></td>
-                        <td th:text="${prod.overall_rating}"></td>
-                        <td><a th:href="@{'/admin/product/detail/' + ${prod.id}}" style="color: blue"> Details  </a> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${prod.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
-                        <td><button class="btn-click"> <a th:href="@{'/admin/product/delete/' + ${prod.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
+                        <td th:text="${revenue.id}"></td>
+                        <td th:text="${revenue.date}"></td>
+                        <td th:text="${revenue.totalRevenue}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <!-- END ORDERS TABLE -->
+
+        <!-- END MAIN CONTENT -->
+
+        <div class="overlay"></div>
+        <!-- SCRIPT -->
+        <!-- APEX CHART -->
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <!-- APP JS -->
+        <script th:src="@{/js/app.js}"></script>
 
     </div>
-    <!-- END ORDERS TABLE -->
-
-<!-- END MAIN CONTENT -->
-
-<div class="overlay"></div>
-
-<!-- SCRIPT -->
-<!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
 </div>
 </body>
 
