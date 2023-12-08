@@ -1,6 +1,7 @@
 package com.example.admin.Service;
 
 import com.example.admin.Domain.Customer;
+import com.example.admin.Entity.CustomerEntity;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public interface CustomerService {
     Customer getCustomerById(Long customerId);
 
     void detailCustomer(Customer customer);
+
+    List<CustomerEntity> findAll();
 
 //    void deleteCustomerById(Long customerId);
 //

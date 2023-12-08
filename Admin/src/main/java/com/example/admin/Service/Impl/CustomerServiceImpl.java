@@ -2,6 +2,7 @@ package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.CustomerConverter;
 import com.example.admin.Domain.Customer;
+import com.example.admin.Entity.CustomerEntity;
 import com.example.admin.Repository.CustomerRepository;
 import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class CustomerServiceImpl implements CustomerService {
         customer.getPassword();
         customer.getPhone();
         customer.getUsername();
+    }
+
+    @Override
+    public List<CustomerEntity> findAll() {
+        return customerRepository.findAll();
     }
 
 //    public void updateCustomer(Customer customer) {

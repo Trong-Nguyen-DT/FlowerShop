@@ -86,4 +86,11 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setDeleted(false);
         productRepository.save(productEntity);
     }
+
+    @Override
+    public Product getById(Long id) {
+        ProductEntity productEntity = productRepository.findById(id).get();
+        Product product = ProductConverter.toModel(productEntity);
+        return product;
+    }
 }

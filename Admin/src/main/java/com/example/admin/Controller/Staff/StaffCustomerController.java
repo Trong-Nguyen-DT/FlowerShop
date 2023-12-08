@@ -1,29 +1,32 @@
 package com.example.admin.Controller.Staff;
 
+import com.example.admin.Entity.CustomerEntity;
 import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("staff")
 public class StaffCustomerController {
+
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("customer")
-    public String listCustomer(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomer());
-        return "Staff/Customers";
+    @GetMapping("/customer")
+    public String showStaffHome(Model model){
+        return "Staff/StaffCustomer";
     }
 
-    @GetMapping("customer/{id}")
-    public String customerDetail(@PathVariable String id, Model model) {
-        Long customerId = Long.parseLong(id);
-        return "Staff/CustomerDetail";
-
+    @GetMapping("/all-customer")
+    public ResponseEntity<?> findAll(){
+        List<CustomerEntity> result = customerService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }
