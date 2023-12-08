@@ -1,5 +1,7 @@
 package com.example.customer.service.Impl;
 
+import com.example.customer.domain.Cart;
+import com.example.customer.domain.CartItem;
 import com.example.customer.payment.BodyRequest;
 import com.example.customer.payment.DataRequest;
 import com.example.customer.converter.*;
@@ -40,9 +42,6 @@ public class OrderServiceImpl implements OrderService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private CurrencyConverterRemote currencyConverterRemote;
-
-    @Autowired
     private PaymentRemote paymentRemote;
 
     @Override
@@ -62,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order checkoutOrder(Order orderRequest, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
-        orderRequest.setCartItems(customerEntity.getCartEntity().getCartItemEntities().stream().map(CartItemConverter::toModel).toList());
+        orderRequest.setCartItems(CartConverter.toModel(customerEntity.getCartEntity()).getCartItems());
         Long totalPrice = getTotalPrice(customerEntity);
         orderRequest.setTotalPrice(totalPrice);
 
@@ -72,10 +71,10 @@ public class OrderServiceImpl implements OrderService {
             orderRequest.setVouchers(voucherRepository.findAllByExpiredFalseAndConditionPriceLessThanEqual(totalPrice).stream().map(VoucherConverter::toModel).toList());
         }
         Long discount = 0L;
-        orderRequest.setShipPrice(1L);
+        orderRequest.setShipPrice(30000L);
         if (orderRequest.getVoucherId() != null) {
             if (voucherRepository.findById(orderRequest.getVoucherId()).orElseThrow().getType() == VoucherType.FREESHIP) {
-                discount = 1L;
+                discount = 30000L;
             } else {
                 discount = getMoneyByDiscount(totalPrice, voucherRepository.findById(orderRequest.getVoucherId()).orElseThrow());
             }
@@ -106,6 +105,39 @@ public class OrderServiceImpl implements OrderService {
         return payment;
     }
 
+    @Override
+    public String createUrlPayment(Long orderId) {
+        OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow();
+        BodyRequest bodyRequest = setNewOrder(orderEntity);
+        return paymentRemote.getQrFromOtherClient(bodyRequest).getCheckoutUrl();
+    }
+
+    private BodyRequest setNewOrder(OrderEntity orderEntity) {
+        BodyRequest order = new BodyRequest();
+        order.setOrderCode(1000 + orderEntity.getId());
+        order.setAmount(orderEntity.getAmount());
+        order.setDescription("hoa hồng");
+        order.setCustomer_id(orderEntity.getCustomerEntity().getId());
+        order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
+        order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
+        order.setReturnUrl("http://localhost:80/payment/success");
+        order.setCancelUrl("http://localhost:80/payment/failed");
+        order.setExpiredAt(getUnixTimestamp());
+        order.setItems(setItems(orderEntity));
+        Map<String, String> params = Map.of(
+                "amount", String.valueOf(order.getAmount()),
+                "cancelUrl", order.getCancelUrl(),
+                "description", order.getDescription(),
+                "orderCode", String.valueOf(order.getOrderCode()),
+                "returnUrl", order.getReturnUrl()
+        );
+
+        String ChecksumKey = "22ee21ab306b80fac1782bb426e6140498bc4b5b9f483f30d4883f320731e29e";
+        String signature = SignatureGenerator.generateSignature(params, ChecksumKey);
+        order.setSignature(signature);
+        return order;
+    }
+
     private OrderEntity saveOrder(Order order, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
         OrderEntity orderEntity = new OrderEntity();
@@ -113,12 +145,12 @@ public class OrderServiceImpl implements OrderService {
         Long totalPrice = getTotalPrice(customerEntity);
         orderEntity.setTotalPrice(totalPrice);
         Long discount = 0L;
-        orderEntity.setShipPrice(1L);
+        orderEntity.setShipPrice(30000L);
         if (order.getVoucherId() != null) {
             VoucherEntity voucherEntity = voucherRepository.findById(order.getVoucherId()).orElseThrow();
             orderEntity.setVoucherEntity(voucherEntity);
             if (voucherRepository.findById(order.getVoucherId()).orElseThrow().getType() == VoucherType.FREESHIP) {
-                discount = 1L;
+                discount = 30000L;
             } else {
                 discount = getMoneyByDiscount(totalPrice, voucherRepository.findById(order.getVoucherId()).orElseThrow());
             }
@@ -157,9 +189,8 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://localhost:80/api/payment/" + orderEntity.getId() + "/success");
-        System.out.println("url: " + order.getReturnUrl());
-        order.setCancelUrl("http://localhost:80/api/payment/" + orderEntity.getId() + "/failed");
+        order.setReturnUrl("http://localhost:80/api/payment/success");
+        order.setCancelUrl("http://localhost:80/api/payment/failed");
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(

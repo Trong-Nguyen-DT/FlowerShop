@@ -26,6 +26,9 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderDetailRepository orderDetailRepository;
+
+    @Autowired
     private CartItemRepository cartItemRepository;
 
 
@@ -51,11 +54,14 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 
     private void deleteCartItem(String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
-        cartItemRepository.deleteAllByCartEntity(customerEntity.getCartEntity());
+        for (CartItemEntity entity: customerEntity.getCartEntity().getCartItemEntities()) {
+            entity.setQuantity(0);
+            cartItemRepository.save(entity);
+        }
     }
 
     private void saveOrderDetailHistory(OrderEntity orderEntity, OrderHistoryEntity orderHistoryEntity) {
-        for (OrderDetailEntity entity: orderEntity.getOrderDetails()) {
+        for (OrderDetailEntity entity: orderDetailRepository.findAllByOrderEntity(orderEntity)) {
             OrderDetailHistoryEntity orderDetailHistoryEntity = new OrderDetailHistoryEntity();
             orderDetailHistoryEntity.setOrderHistoryEntity(orderHistoryEntity);
             orderDetailHistoryEntity.setId(entity.getId());

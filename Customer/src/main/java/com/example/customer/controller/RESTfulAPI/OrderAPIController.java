@@ -30,10 +30,6 @@ public class OrderAPIController {
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        List<OrderHistory> orderHistories = orderHistoryService.getOrderByCustomer(name);
-        for (OrderHistory orderHistory: orderHistories) {
-            System.out.println("order: " + orderHistory.getOrderStatus());
-        }
         return ResponseEntity.ok(orderHistoryService.getOrderByCustomer(name));
     }
 

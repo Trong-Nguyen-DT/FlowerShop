@@ -39,7 +39,24 @@ public class PaymentAPIController {
         if (payment.getOrder().isPaymentOnline()) {
             payment.setUrlQR(orderService.createQrPayment(orderId));
         }
+        orderHistoryService.addOrder(name, orderId);
         return ResponseEntity.ok(payment);
+    }
+
+    @PostMapping("web")
+    public ResponseEntity<String> paymentWeb(@RequestBody Order order) {
+        String name = customerValidate.validateCustomer();
+        if (name == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        Long orderId = orderService.createOrder(order, name);
+        ResponsePayment payment = orderService.createResponsePayment(orderId);
+        String url ="http://localhost/payment/success";
+        if (payment.getOrder().isPaymentOnline()) {
+            url = orderService.createUrlPayment(orderId);
+        }
+        orderHistoryService.addOrder(name, orderId);
+        return ResponseEntity.ok(url);
     }
 
     @Transactional
@@ -49,7 +66,6 @@ public class PaymentAPIController {
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        orderHistoryService.addOrder(name, orderId);
         String response = fcmService.pushNotification(name, "payment_success");
         return ResponseEntity.ok(response);
     }
