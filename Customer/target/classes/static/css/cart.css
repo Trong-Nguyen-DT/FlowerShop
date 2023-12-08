@@ -1,0 +1,24 @@
+main
+{
+    /*display: flex;*/
+    justify-content: center;
+}
+.container_main
+{
+    width: 90%;
+    justify-content: center;
+}
+.panel p
+{
+    font-weight: 800;
+    font-size: 14pt;
+    color: #e81243;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+}
+table img
+{
+    width: 10px;
+    height: 100px;
+}
