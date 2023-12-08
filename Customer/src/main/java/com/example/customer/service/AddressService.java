@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface AddressService {
     List<Address> getAllAddressByCustomer(String name);
-    void addAddress(String name, Address address);
+    Address addAddress(String name, Address address);
 }

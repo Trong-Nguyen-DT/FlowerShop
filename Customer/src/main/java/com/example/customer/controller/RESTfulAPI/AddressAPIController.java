@@ -39,4 +39,13 @@ public class AddressAPIController {
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+
+    @PostMapping("add-address")
+    public ResponseEntity<Address> addAddress(@RequestBody Address address){
+        String name = customerValidate.validateCustomer();
+        if (name != null) {
+            return ResponseEntity.ok(addressService.addAddress(name, address));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 }
