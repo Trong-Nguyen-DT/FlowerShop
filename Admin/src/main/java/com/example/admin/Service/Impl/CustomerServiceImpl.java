@@ -31,13 +31,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void detailCustomer(Customer customer) {
-//        CustomerEntity customerEntity = customerRepository.findById(customer.getId()).orElseThrow();
-        customer.getFullName();
-        customer.getEmail();
-        customer.getAvatar();
-        customer.getPassword();
-        customer.getPhone();
-        customer.getUsername();
     }
 
 //    public void updateCustomer(Customer customer) {
