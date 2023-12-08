@@ -64,6 +64,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/revenue}">
+                <i class='bx bx-chart'></i>
+                <span>Revenue</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/orders}">
                 <i class='bx bx-chart'></i>
                 <span>order history</span>
@@ -277,7 +283,7 @@
                 Edit Product
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}">
+                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" id="editProductForm">
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>
@@ -293,7 +299,7 @@
                                 <label>Original price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{original_price}">
+                                <input type="text" th:field="*{originalPrice}">
                             </td>
                         </tr>
                         <tr>
@@ -352,7 +358,28 @@
                                 <input type="text" th:field="*{details}">
                             </td>
                         </tr>
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Categories:</label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <div class="category">-->
+<!--                                    <th:block th:each="cate : ${categories}">-->
+<!--                                        <div class="column_category">-->
+<!--                                            <input type="button"-->
+<!--                                                   class="category_button"-->
+<!--                                                   th:id="${'category_' + cate.id}"-->
+<!--                                                   th:value="${cate.name}"-->
+<!--                                                   th:attr="data-category-id=${cate.id}"-->
+<!--                                                   th:class="${#lists.contains(categories, cate.id)} ? 'category_button selected' : 'category_button'"-->
+<!--                                                   th:onclick="'toggleCategory(' + ${cate.id} + ')'" />-->
+<!--                                        </div>-->
+<!--                                    </th:block>-->
+<!--                                </div>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                     </table>
+<!--                    <input type="hidden" name="categoryIds" id="categoryIdsInput">-->
                     <button type="submit">Update</button>
                 </form>
             </div>
@@ -370,6 +397,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
+<!--    <script th:src="@{/js/AddProduct.js}"></script>-->
 </div>
 </body>
 

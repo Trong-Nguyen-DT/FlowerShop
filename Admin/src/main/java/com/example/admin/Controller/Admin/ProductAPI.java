@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("admin/product")
 public class ProductAPI {
 
-    @PostMapping("add-product")
-    public String addProduct(@RequestBody ProductDTO productDTO) {
-        System.out.println(productDTO.getProduct().getName());
-        System.out.println(productDTO.getProduct().getDescription());
-        for (ItemDTO itemDTO: productDTO.getSelectedItems()) {
-            System.out.println(itemDTO.getId());
-            System.out.println(itemDTO.getQuantity());
-        }
-        for (Long id: productDTO.getCategoryIDs()) {
-            System.out.println(id);
-        }
-        return "";
-    }
+//    @PostMapping("add-product")
+//    public String addProduct(@RequestBody ProductDTO productDTO) {
+//        System.out.println(productDTO.getProduct().getName());
+//        System.out.println(productDTO.getProduct().getDescription());
+//        for (ItemDTO itemDTO: productDTO.getSelectedItems()) {
+//            System.out.println(itemDTO.getId());
+//            System.out.println(itemDTO.getQuantity());
+//        }
+//        for (Long id: productDTO.getCategoryIDs()) {
+//            System.out.println(id);
+//        }
+//        return "";
+//    }
 }

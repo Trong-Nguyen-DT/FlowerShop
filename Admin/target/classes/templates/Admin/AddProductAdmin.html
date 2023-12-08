@@ -66,6 +66,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/revenue}">
+                <i class='bx bx-chart'></i>
+                <span>Revenue</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/orders}">
                 <i class='bx bx-chart'></i>
                 <span>order history</span>
@@ -295,7 +301,7 @@
                                 <label>Original Price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{original_price}">
+                                <input type="text" th:field="*{originalPrice}">
                             </td>
                         </tr>
                         <tr>
