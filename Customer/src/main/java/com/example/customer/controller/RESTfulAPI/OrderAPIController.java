@@ -1,5 +1,6 @@
 package com.example.customer.controller.RESTfulAPI;
 
+import com.example.customer.domain.OrderDetailHistory;
 import com.example.customer.domain.OrderHistory;
 import com.example.customer.service.OrderHistoryService;
 import com.example.customer.validator.CustomerValidate;
@@ -28,6 +29,10 @@ public class OrderAPIController {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<OrderHistory> orderHistories = orderHistoryService.getOrderByCustomer(name);
+        for (OrderHistory orderHistory: orderHistories) {
+            System.out.println("order: " + orderHistory.getOrderStatus());
         }
         return ResponseEntity.ok(orderHistoryService.getOrderByCustomer(name));
     }

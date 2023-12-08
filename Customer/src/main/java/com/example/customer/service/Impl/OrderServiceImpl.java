@@ -128,11 +128,11 @@ public class OrderServiceImpl implements OrderService {
         orderEntity.setConfirmed(false);
         orderEntity.setStatus(false);
         if (order.getNote() == null) {
-            orderEntity.setNote("rỗng");
+            orderEntity.setNote("khách lẻ");
         } else {
             orderEntity.setNote(order.getNote());
         }
-        orderEntity.setOrderStatus(OrderStatus.WAITTING);
+        orderEntity.setOrderStatus(OrderStatus.WAITING);
         orderEntity.setAddressEntity(addressRepository.findById(order.getAddressId()).orElseThrow());
         orderEntity.setPaymentOnline(order.isPaymentOnline());
         orderEntity.setCustomerEntity(customerEntity);

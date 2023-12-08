@@ -62,6 +62,7 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
             orderDetailHistoryEntity.setProductId(entity.getProductEntity().getId());
             orderDetailHistoryEntity.setNameProduct(entity.getProductEntity().getName());
             orderDetailHistoryEntity.setPriceProduct(entity.getProductEntity().getPrice());
+            orderDetailHistoryEntity.setImage(entity.getProductEntity().getImage1());
             orderDetailHistoryEntity.setQuantity(entity.getQuantity());
             orderDetailHistoryRepository.save(orderDetailHistoryEntity);
         }

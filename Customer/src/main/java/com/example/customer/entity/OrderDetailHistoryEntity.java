@@ -22,6 +22,8 @@ public class OrderDetailHistoryEntity {
 
     private Long priceProduct;
 
+    private String image;
+
     private int quantity;
 
     private boolean reviewed;
