@@ -60,8 +60,8 @@ public class PaymentAPIController {
     }
 
     @Transactional
-    @GetMapping("{orderId}/success")
-    public ResponseEntity<String> success(@PathVariable Long orderId) {
+    @GetMapping("success")
+    public ResponseEntity<String> success() {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

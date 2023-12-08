@@ -173,11 +173,13 @@ public class OrderServiceImpl implements OrderService {
 
     private void saveOrderDetail(OrderEntity orderEntity) {
         for (CartItemEntity entity: orderEntity.getCustomerEntity().getCartEntity().getCartItemEntities() ) {
-            OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
-            orderDetailEntity.setOrderEntity(orderEntity);
-            orderDetailEntity.setProductEntity(entity.getProductEntity());
-            orderDetailEntity.setQuantity(entity.getQuantity());
-            orderDetailRepository.save(orderDetailEntity);
+            if (entity.getQuantity() != 0) {
+                OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+                orderDetailEntity.setOrderEntity(orderEntity);
+                orderDetailEntity.setProductEntity(entity.getProductEntity());
+                orderDetailEntity.setQuantity(entity.getQuantity());
+                orderDetailRepository.save(orderDetailEntity);
+            }
         }
     }
 
