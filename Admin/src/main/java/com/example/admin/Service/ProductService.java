@@ -1,6 +1,7 @@
 package com.example.admin.Service;
 
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Entity.ProductEntity;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface ProductService {
 
     Product getById(Long id);
 
+    ProductEntity createProduct(ProductDTO productDto);
+
+    void setCategories(ProductEntity productEntity, ProductDTO productDto);
 }

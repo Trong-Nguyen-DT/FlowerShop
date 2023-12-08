@@ -358,26 +358,6 @@
                                 <input type="text" th:field="*{details}">
                             </td>
                         </tr>
-<!--                        <tr>-->
-<!--                            <th>-->
-<!--                                <label>Categories:</label>-->
-<!--                            </th>-->
-<!--                            <td>-->
-<!--                                <div class="category">-->
-<!--                                    <th:block th:each="cate : ${categories}">-->
-<!--                                        <div class="column_category">-->
-<!--                                            <input type="button"-->
-<!--                                                   class="category_button"-->
-<!--                                                   th:id="${'category_' + cate.id}"-->
-<!--                                                   th:value="${cate.name}"-->
-<!--                                                   th:attr="data-category-id=${cate.id}"-->
-<!--                                                   th:class="${#lists.contains(categories, cate.id)} ? 'category_button selected' : 'category_button'"-->
-<!--                                                   th:onclick="'toggleCategory(' + ${cate.id} + ')'" />-->
-<!--                                        </div>-->
-<!--                                    </th:block>-->
-<!--                                </div>-->
-<!--                            </td>-->
-<!--                        </tr>-->
                     </table>
 <!--                    <input type="hidden" name="categoryIds" id="categoryIdsInput">-->
                     <button type="submit">Update</button>

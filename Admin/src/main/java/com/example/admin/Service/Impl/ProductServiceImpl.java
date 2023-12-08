@@ -6,6 +6,7 @@ import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Converter.UserConverter;
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Domain.User;
 import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.ProductEntity;
@@ -52,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 
         // Cập nhật tất cả các trường từ Product
         productEntity.setName(product.getName());
-        productEntity.setOriginal_price(product.getOriginal_price());
+        productEntity.setOriginal_price(product.getOriginalPrice());
         productEntity.setPrice(product.getPrice());
         productEntity.setDescription(product.getDescription());
         productEntity.setDetails(product.getDetails());
@@ -67,8 +68,8 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setImage5(product.getImage5());
         productEntity.setDeleted(product.isDeleted());
 
-        productEntity.setCategoryEntities(product.getCategories().stream().map(CategoryConverter::toEntity).collect(Collectors.toList()));
-        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
+//        productEntity.setCategoryEntities(product.getCategories().stream().map(CategoryConverter::toEntity).collect(Collectors.toList()));
+//        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
 
         // Lưu ProductEntity đã cập nhật vào cơ sở dữ liệu
         productRepository.save(productEntity);
@@ -86,11 +87,32 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setDeleted(false);
         productRepository.save(productEntity);
     }
-
+    @Override
+    public ProductEntity createProduct(ProductDTO productDto) {
+        ProductEntity entity = new ProductEntity();
+        entity.setName(productDto.getName());
+        entity.setOriginal_price(productDto.getOriginalPrice());
+        entity.setDiscount(productDto.getDiscount());
+        entity.setPrice(newPrice(productDto.getOriginalPrice(), productDto.getDiscount()));
+        return productRepository.save(entity);
+//
+    }
     @Override
     public Product getById(Long id) {
         ProductEntity productEntity = productRepository.findById(id).get();
         Product product = ProductConverter.toModel(productEntity);
         return product;
     }
+    private Long newPrice(Long originalPrice, Long discount) {
+        return((100-discount)* originalPrice) / 100;
+    }
+
+    @Override
+    public void setCategories(ProductEntity entity, ProductDTO productDto) {
+        System.out.println("id" + entity.getId());
+        entity.setCategoryEntities(categoryRepository.findAllByIdIn(productDto.getCategoryIds()));
+        System.out.println("size 2: " + entity.getCategoryEntities().size());
+//        productRepository.
+    }
+
 }
