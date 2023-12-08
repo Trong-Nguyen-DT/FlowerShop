@@ -296,8 +296,8 @@
                     <tbody th:each="proDetail : ${productDetails}">
                     <tr>
                         <td th:text="${proDetail.id}"></td>
-                        <td th:each="item : ${items}" th:if="${proDetail.itemId == item.id}" th:text="${item.name}"></td>
-                        <td th:each="prod : ${products}" th:if="${proDetail.productId == prod.id}" th:text="${prod.name}"></td>
+                        <td th:each="item : ${items}" th:if="${proDetail.item == item.id}" th:text="${item.name}"></td>
+                        <td th:each="prod : ${products}" th:if="${proDetail.product == prod.id}" th:text="${prod.name}"></td>
                         <td th:text="${proDetail.quantity}"></td>
 <!--                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${proDetail.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>-->
 <!--                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>-->
