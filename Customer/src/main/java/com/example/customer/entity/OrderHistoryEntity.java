@@ -48,7 +48,10 @@ public class OrderHistoryEntity {
     private OrderStatus orderStatus;
 
     private boolean paymentOnline;
+
     private Long shipPrice;
+
+    private boolean reviewed;
 
     @OneToMany(mappedBy = "orderHistoryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailHistoryEntity> orderDetailHistoryEntities;

@@ -45,6 +45,7 @@ public class OrderConverter {
         orderHistory.setAddress(entity.getAddress());
         orderHistory.setPaymentOnline(entity.isPaymentOnline());
         orderHistory.setShipPrice(entity.getShipPrice());
+        orderHistory.setReviewed(entity.isReviewed());
         orderHistory.setOrderDetailHistories(entity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
         return orderHistory;
     }

@@ -25,6 +25,4 @@ public class OrderDetailHistoryEntity {
     private String image;
 
     private int quantity;
-
-    private boolean reviewed;
 }

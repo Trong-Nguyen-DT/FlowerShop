@@ -287,7 +287,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Image</th>
+<!--                        <th>Image</th>-->
                         <th>Detail</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -297,7 +297,7 @@
                     <tr>
                         <td th:text="${cate.id}"></td>
                         <td th:text="${cate.name}"></td>
-                        <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
+<!--                        <td> <img th:src="@{'/images/' + ${cate.image}}"></td>-->
                         <td th:text="${cate.detail}"></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
