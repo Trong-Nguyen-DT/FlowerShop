@@ -50,12 +50,12 @@
                 <span>dashboard</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-shopping-bag'></i>
-                <span>sales</span>
-            </a>
-        </li>
+<!--        <li>-->
+<!--            <a href="#">-->
+<!--                <i class='bx bx-shopping-bag'></i>-->
+<!--                <span>sales</span>-->
+<!--            </a>-->
+<!--        </li>-->
         <li>
             <a th:href="@{/admin/importGood}">
                 <!--            <a th:href="@{/admin/importGood/add}">-->
@@ -293,7 +293,6 @@
                         <th>Avatar</th>
                         <th>Email</th>
                         <th>Username</th>
-                        <th>Password</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -305,7 +304,6 @@
                         <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
                         <td th:text="${customer.email}"></td>
                         <td th:text="${customer.username}"></td>
-                        <td th:text="${customer.password}"></td>
                     </tr>
                     </tbody>
                 </table>

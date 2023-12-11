@@ -2,6 +2,7 @@ package com.example.customer.controller.RESTfulAPI;
 
 
 import com.example.customer.domain.Address;
+import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.service.AddressService;
 import com.example.customer.validator.CustomerValidate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,14 @@ public class AddressAPIController {
     }
 
     @PostMapping("create-address")
-    public ResponseEntity<List<Address>> createAddress(@RequestBody Address address){
+    public ResponseEntity<BodyResponse> createAddress(@RequestBody Address address){
         String name = customerValidate.validateCustomer();
+        BodyResponse response = new BodyResponse();
         if (name != null) {
             addressService.addAddress(name, address);
-            return ResponseEntity.ok(addressService.getAllAddressByCustomer(name));
+            response.setSuccess(true);
+            response.setMessage("success");
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

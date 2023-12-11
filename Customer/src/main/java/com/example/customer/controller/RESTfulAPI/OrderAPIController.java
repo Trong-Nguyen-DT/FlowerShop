@@ -1,5 +1,6 @@
 package com.example.customer.controller.RESTfulAPI;
 
+import com.example.customer.domain.OrderDetailHistory;
 import com.example.customer.domain.OrderHistory;
 import com.example.customer.service.OrderHistoryService;
 import com.example.customer.validator.CustomerValidate;

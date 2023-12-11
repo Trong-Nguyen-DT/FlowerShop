@@ -20,6 +20,7 @@ public class OrderDetailConverter {
         orderDetailHistory.setNameProduct(entity.getNameProduct());
         orderDetailHistory.setPriceProduct(entity.getPriceProduct());
         orderDetailHistory.setQuantity(entity.getQuantity());
+        orderDetailHistory.setImage(entity.getImage());
         orderDetailHistory.setReviewed(entity.isReviewed());
         return orderDetailHistory;
     }

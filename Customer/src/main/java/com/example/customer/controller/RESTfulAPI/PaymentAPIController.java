@@ -9,10 +9,8 @@ import com.example.customer.validator.CustomerValidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.socket.WebSocketSession;
 
 @RestController
 @RequestMapping("api/payment")
@@ -41,17 +39,33 @@ public class PaymentAPIController {
         if (payment.getOrder().isPaymentOnline()) {
             payment.setUrlQR(orderService.createQrPayment(orderId));
         }
+        orderHistoryService.addOrder(name, orderId);
         return ResponseEntity.ok(payment);
     }
 
-    @Transactional
-    @GetMapping("{orderId}/success")
-    public ResponseEntity<String> success(@PathVariable Long orderId) {
+    @PostMapping("web")
+    public ResponseEntity<String> paymentWeb(@RequestBody Order order) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+        Long orderId = orderService.createOrder(order, name);
+        ResponsePayment payment = orderService.createResponsePayment(orderId);
+        String url ="http://localhost/payment/success";
+        if (payment.getOrder().isPaymentOnline()) {
+            url = orderService.createUrlPayment(orderId);
+        }
         orderHistoryService.addOrder(name, orderId);
+        return ResponseEntity.ok(url);
+    }
+
+    @Transactional
+    @GetMapping("success")
+    public ResponseEntity<String> success() {
+        String name = customerValidate.validateCustomer();
+        if (name == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         String response = fcmService.pushNotification(name, "payment_success");
         return ResponseEntity.ok(response);
     }

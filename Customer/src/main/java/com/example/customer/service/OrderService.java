@@ -11,4 +11,6 @@ public interface OrderService {
     Order checkoutOrder(Order orderRequest, String name);
 
     ResponsePayment createResponsePayment(Long orderId);
+
+    String createUrlPayment(Long orderId);
 }
