@@ -4,6 +4,7 @@ import com.example.admin.Service.OrderDetailService;
 import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Service.OrderService;
 import com.example.admin.Service.CustomerService;
+import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +25,14 @@ public class OrderController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private UserService userService;
 
     @GetMapping()
     public String listOrderHistory(Model model) {
         model.addAttribute("orders", orderService.getAllOrderHistory());
         model.addAttribute("customers",customerService.getAllCustomer());
+        model.addAttribute("users",userService.getAllStaff());
         return "Admin/OrderHistoryAdmin";
     }
     @GetMapping("/search")
@@ -37,6 +41,7 @@ public class OrderController {
         List<OrderHistory> orderHistories = orderService.getOrderByTime(startTime,endTime);
         model.addAttribute("orders", orderHistories );
         model.addAttribute("customers",customerService.getAllCustomer());
+        model.addAttribute("users",userService.getAllStaff());
         return "Admin/OrderHistorySearchAdmin";
     }
 

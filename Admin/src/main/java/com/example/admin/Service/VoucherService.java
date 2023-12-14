@@ -8,7 +8,9 @@ import java.util.List;
 
 @Service
 public interface VoucherService {
-    List<Voucher> getAllVoucherByConditions();
+//    List<Voucher> getAllVoucherByConditions();
+//
+    List<Voucher> getAllVoucher();
     void addVoucher(Voucher voucher);
 
     Voucher getVoucherById(Long voucherId);

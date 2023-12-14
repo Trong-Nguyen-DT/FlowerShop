@@ -8,7 +8,9 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -22,24 +24,21 @@
 </head>
 
 <body>
-
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <!-- <img src="./images/logo-lg.png" alt="Comapny logo"> -->
         <div class="sidebar-close" id="sidebar-close">
-            <i class='bx bx-left-arrow-alt'></i>
+            <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
     <div class="sidebar-user">
         <div class="sidebar-user-info">
-            <!-- <img src="./images/user-image.jpg" alt="User picture" class="profile-image"> -->
             <div class="sidebar-user-name">
                 Admin
             </div>
         </div>
         <button class="btn btn-outline">
-            <a href="perform_logout">
+            <a th:href="@{/perform_logout}">
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </a>
         </button>
@@ -47,23 +46,13 @@
     <!-- SIDEBAR MENU -->
     <ul class="sidebar-menu">
         <li>
-            <a href="file:///F:/code/apex-admin-dashboard-main/index.html#" class="active">
+            <a th:href="@{/admin}" class="active">
                 <i class='bx bx-home'></i>
                 <span>dashboard</span>
             </a>
         </li>
-<<<<<<< HEAD
-<!--        <li>-->
-<!--            <a href="#">-->
-<!--                <i class='bx bx-shopping-bag'></i>-->
-<!--                <span>sales</span>-->
-<!--            </a>-->
-<!--        </li>-->
-=======
->>>>>>> ProductVS2
         <li>
             <a th:href="@{/admin/importGood}">
-                <!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -76,13 +65,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i><img th:src="@{'/images/file.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/categorization.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -97,7 +86,6 @@
                         Add Category
                     </a>
                 </li>
-
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
@@ -131,7 +119,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/list-items.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-cube'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -155,7 +143,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/order.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-package'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -179,7 +167,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/voucher.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-bookmark'></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -196,33 +184,9 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
-                <span>e-commerce</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/product}" >
-                        list products
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/create}">
-                        add product
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/restore}">
-                        restore products
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i><img th:src="@{'/images/satisfaction.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-user-check'></i>
                 <span>Customer</span>
             </a>
         </li>
@@ -234,7 +198,7 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i><img th:src="@{'/images/inventory.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-barcode'></i>
                 <span>Inventory</span>
             </a>
         </li>
@@ -258,9 +222,9 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                        darkmode
-                        <span class="darkmode-switch"></span>
+                    <a href="#" class="dark_mode-toggle" id="dark_mode-toggle">
+                        Dark mode
+                        <span class="dark_mode-switch"></span>
                     </a>
                 </li>
             </ul>
@@ -281,7 +245,7 @@
         </div>
     </div>
 
-    <!-- ORDERS TABLE -->
+    <!-- ORDERS HISTORY TABLE -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
@@ -289,7 +253,7 @@
             </div>
             <div class="form_search">
                 <form th:action="@{/admin/orders/search}" method="get">
-                    <p>Từ:</p>  <input type="datetime-local" name="startTime" required><br>
+                    <p>Từ:</p> <input type="datetime-local" name="startTime" required><br>
                     <p>Đến:</p> <input type="datetime-local" name="endTime" required><br>
                     <button type="submit">Search</button>
                 </form>
@@ -300,44 +264,47 @@
                     <tr>
                         <th>ID</th>
                         <th>Customer Name</th>
+                        <th>Staff Name</th>
                         <th>Phone Customer</th>
-                        <th>Order Date</th>
+                        <th>Order date time</th>
                         <th>Amount</th>
                         <th>Total Price</th>
-                        <th>Details</th>
+<!--                        <th>Details</th>-->
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                     <tr th:each="order : ${orders}">
                         <td th:text="${order.id}"></td>
                         <td th:if="${order.getCustomerId() == null}"></td>
                         <td th:unless="${order.getCustomerId() == null}">
-                            <span th:each="cus:${customers}" th:if="${cus.id== order.customerId}" th:text="${cus.fullName}"></span>
+                                    <span th:each="cus:${customers}" th:if="${cus.id== order.customerId}"
+                                          th:text="${cus.fullName}"></span>
+                        </td>
+                        <td th:if="${order.getUserId() == null}"></td>
+                        <td th:unless="${order.getUserId() == null}">
+                                    <span th:each="user:${users}" th:if="${user.id== order.userId}"
+                                          th:text="${user.fullName}"></span>
                         </td>
                         <td th:text="${order.phoneCustomer}"></td>
                         <td th:text="${order.orderDateTime}"></td>
                         <td th:text="${order.amount}"></td>
                         <td th:text="${order.totalPrice}"></td>
-<!--                        <td><a th:href="@{'/admin/orderdetail/' + ${order.id}}"><i class="fa-solid fa-magnifying-glass"></i></a> </td>-->
+                        <!--                        <td><a th:href="@{'/admin/orderdetail/' + ${order.id}}"><i class="fa-solid fa-magnifying-glass"></i></a> </td>-->
                     </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-        <!-- END ORDERS TABLE -->
-
-        <!-- END MAIN CONTENT -->
-
-        <div class="overlay"></div>
-
-        <!-- SCRIPT -->
-        <!-- APEX CHART -->
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <!-- APP JS -->
-        <script th:src="@{/js/app.js}"></script>
     </div>
 </div>
+<!-- END ORDERS HISTORY TABLE -->
+<!-- END MAIN CONTENT -->
+<div class="overlay"></div>
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- APP JS -->
+<script th:src="@{/js/app.js}"></script>
 </body>
-
 </html>

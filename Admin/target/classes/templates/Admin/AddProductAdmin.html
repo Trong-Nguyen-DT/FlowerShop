@@ -8,7 +8,9 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -22,24 +24,21 @@
 </head>
 
 <body>
-
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <!-- <img src="./images/logo-lg.png" alt="Comapny logo"> -->
         <div class="sidebar-close" id="sidebar-close">
-            <i class='bx bx-left-arrow-alt'></i>
+            <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
     <div class="sidebar-user">
         <div class="sidebar-user-info">
-            <!-- <img src="./images/user-image.jpg" alt="User picture" class="profile-image"> -->
             <div class="sidebar-user-name">
                 Admin
             </div>
         </div>
         <button class="btn btn-outline">
-            <a href="perform_logout">
+            <a th:href="@{/perform_logout}">
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </a>
         </button>
@@ -47,33 +46,17 @@
     <!-- SIDEBAR MENU -->
     <ul class="sidebar-menu">
         <li>
-            <a href="file:///F:/code/apex-admin-dashboard-main/index.html#" class="active">
+            <a th:href="@{/admin}" class="active">
                 <i class='bx bx-home'></i>
                 <span>dashboard</span>
             </a>
         </li>
         <li>
-<<<<<<< HEAD
-            <a href="#">
-                <i class='bx bx-shopping-bag'></i>
-                <span>sales</span>
-            </a>
-        </li>
-<!--        <li>-->
-<!--            <a th:href="@{/admin/importGood}">-->
-<!--                &lt;!&ndash;            <a th:href="@{/admin/importGood/add}">&ndash;&gt;-->
-<!--                <i class='bx bx-shopping-bag'></i>-->
-<!--                <span>Import Goods</span>-->
-<!--            </a>-->
-<!--        </li>-->
-=======
             <a th:href="@{/admin/importGood}">
-                <!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
         </li>
->>>>>>> ProductVS2
         <li>
             <a th:href="@{/admin/revenue}">
                 <i class='bx bx-chart'></i>
@@ -82,13 +65,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i><img th:src="@{'/images/file.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/categorization.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -103,7 +86,6 @@
                         Add Category
                     </a>
                 </li>
-
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
@@ -137,7 +119,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/list-items.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-cube'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -161,7 +143,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/order.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-package'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -185,7 +167,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/voucher.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-bookmark'></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -202,33 +184,9 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
-                <span>e-commerce</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/product}" >
-                        list products
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/create}">
-                        add product
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/restore}">
-                        restore products
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i><img th:src="@{'/images/satisfaction.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-user-check'></i>
                 <span>Customer</span>
             </a>
         </li>
@@ -240,7 +198,7 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i><img th:src="@{'/images/inventory.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-barcode'></i>
                 <span>Inventory</span>
             </a>
         </li>
@@ -264,9 +222,9 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                        darkmode
-                        <span class="darkmode-switch"></span>
+                    <a href="#" class="dark_mode-toggle" id="dark_mode-toggle">
+                        Dark mode
+                        <span class="dark_mode-switch"></span>
                     </a>
                 </li>
             </ul>
@@ -286,23 +244,22 @@
             dashboard
         </div>
     </div>
-
-    <!-- ORDERS TABLE -->
+    <!-- PRODUCTS TABLE -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
                 Add Product
             </div>
-            <div  class="box-body overflow-scroll">
+            <div class="box-body overflow-scroll">
                 <form th:action="@{/admin/product/add}" th:method="post" th:object="${product}" id="addProductForm">
                     <table>
-
                         <tr>
                             <th>
                                 <label>Name:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{name}">
+                                <input type="text" th:field="*{name}" id="name">
+                                <span id="nameError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -310,7 +267,8 @@
                                 <label>Original Price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{originalPrice}">
+                                <input type="text" th:field="*{originalPrice}" id="originalPrice">
+                                <span id="originalPriceError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -318,7 +276,8 @@
                                 <label>Discount:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{discount}">
+                                <input type="text" th:field="*{discount}" id="discount">
+                                <span id="discountError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -326,7 +285,8 @@
                                 <label>Description:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{description}">
+                                <input type="text" th:field="*{description}" id="description">
+                                <span id="descriptionError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -334,7 +294,8 @@
                                 <label>Detail:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{details}">
+                                <input type="text" th:field="*{details}" id="details">
+                                <span id="detailsError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -342,7 +303,8 @@
                                 <label>Delivery:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{delivery}">
+                                <input type="text" th:field="*{delivery}" id="delivery">
+                                <span id="deliveryError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -350,7 +312,8 @@
                                 <label>Sub Info:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{sub_info}">
+                                <input type="text" th:field="*{sub_info}" id="sub_info">
+                                <span id="sub_infoError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -358,7 +321,8 @@
                                 <label>Image 1:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image1}">
+                                <input type="file" th:field="*{image1}" id="image1">
+                                <span id="image1Error" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -366,7 +330,8 @@
                                 <label>Image 2:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image2}">
+                                <input type="file" th:field="*{image2}" id="image2">
+                                <span id="image2Error" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -374,7 +339,8 @@
                                 <label>Image 3:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image3}">
+                                <input type="file" th:field="*{image3}" id="image3">
+                                <span id="image3Error" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -382,7 +348,8 @@
                                 <label>Image 4:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image4}">
+                                <input type="file" th:field="*{image4}" id="image4">
+                                <span id="image4Error" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -390,7 +357,8 @@
                                 <label>Image 5:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image5}">
+                                <input type="file" th:field="*{image5}" id="image5">
+                                <span id="image5Error" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -401,10 +369,8 @@
                                 <div class="category">
                                     <th:block th:each="cate : ${categories}">
                                         <div class="column_category">
-                                            <input type="button"
-                                                   class="category_button"
-                                                   th:id="${'category_' + cate.id}"
-                                                   th:value="${cate.name}"
+                                            <input type="button" class="category_button"
+                                                   th:id="${'category_' + cate.id}" th:value="${cate.name}"
                                                    th:attr="data-category-id=${cate.id}"
                                                    th:class="${#lists.contains(categories, cate.id)} ? 'category_button selected' : 'category_button'"
                                                    th:onclick="'toggleCategory(' + ${cate.id} + ')'" />
@@ -419,16 +385,14 @@
                 </form>
             </div>
         </div>
-
     </div>
-    <!-- END ORDERS TABLE -->
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-    <!-- APP JS -->
-    <script th:src="@{/js/AddProduct.js}"></script>
-<!--    <script th:src="@{/js/app.js}"></script>-->
 </div>
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- APP JS -->
+<script th:src="@{/js/AddProduct.js}"></script>
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

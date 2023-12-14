@@ -25,26 +25,26 @@ let category_options = {
 }
 
 // Gọi API lấy dữ liệu danh mục
-// fetch('/admin/category-data')
-//     .then(response => response.json())
-//     .then(data => {
-//         // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
-//         const seriesData = data.map(item => item.quantity);
-//         const labels = data.map(item => item.categoryName);
-//
-//         // Cập nhật category_options
-//
-//         category_options.series = seriesData;
-//         category_options.labels = labels;
-//
-//
-//
-//         // Tạo hoặc cập nhật biểu đồ danh mục ở đây
-//         let category_chart = new ApexCharts(document.querySelector("#category-chart"), category_options);
-//         category_chart.render();
-//     })
-//     .catch(error => console.error(error));
-//
+fetch('/admin/category-data')
+    .then(response => response.json())
+    .then(data => {
+        // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
+        const seriesData = data.map(item => item.quantity);
+        const labels = data.map(item => item.categoryName);
+
+        // Cập nhật category_options
+
+        category_options.series = seriesData;
+        category_options.labels = labels;
+
+
+
+        // Tạo hoặc cập nhật biểu đồ danh mục ở đây
+        let category_chart = new ApexCharts(document.querySelector("#category-chart"), category_options);
+        category_chart.render();
+    })
+    .catch(error => console.error(error));
+
 
 
 
@@ -81,32 +81,32 @@ let customer_options = {
 }
 
 
-// fetch('/admin/amount-data')
-//     .then(response => response.json())
-//     .then(data => {
-//         // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
-//         console.log(data);
-//
-//         const Data = data.map(item => item.amount);
-//         const categories = data.map(item => item.month);
-//
-//
-//         customer_options.series[0].data = Data;
-//         // customer_options.xaxis.categories= categories;
-//
-//
-//         // });
-//
-//
-//
-//
-//
-//         let customer_chart = new ApexCharts(document.querySelector("#customer-chart"), customer_options)
-//         customer_chart.render()
-//
-//
-//     })
-//     .catch(error => console.error(error));
+fetch('/admin/amount-data')
+    .then(response => response.json())
+    .then(data => {
+        // Chuyển dữ liệu từ API thành dạng thích hợp cho biểu đồ
+        console.log(data);
+
+        const Data = data.map(item => item.amount);
+        const categories = data.map(item => item.month);
+
+
+        customer_options.series[0].data = Data;
+        // customer_options.xaxis.categories= categories;
+
+
+        // });
+
+
+
+
+
+        let customer_chart = new ApexCharts(document.querySelector("#customer-chart"), customer_options)
+        customer_chart.render()
+
+
+    })
+    .catch(error => console.error(error));
 
 
 let customer_chart = new ApexCharts(document.querySelector("#customer-chart"), customer_options)
@@ -124,12 +124,12 @@ setDarkChart = (dark) => {
 }
 
 // DARK MODE TOGGLE
-let darkmode_toggle = document.querySelector('#darkmode-toggle')
+let dark_mode_toggle = document.querySelector('#dark_mode-toggle')
 
-darkmode_toggle.onclick = (e) => {
+dark_mode_toggle.onclick = (e) => {
     e.preventDefault()
     document.querySelector('body').classList.toggle('dark')
-    darkmode_toggle.querySelector('.darkmode-switch').classList.toggle('active')
+    dark_mode_toggle.querySelector('.dark_mode-switch').classList.toggle('active')
     setDarkChart(document.querySelector('body').classList.contains('dark'))
 }
 

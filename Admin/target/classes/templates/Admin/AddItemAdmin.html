@@ -22,88 +22,35 @@
 </head>
 
 <body>
-
-<<!-- SIDEBAR -->
+<!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <!-- <img src="./images/logo-lg.png" alt="Comapny logo"> -->
         <div class="sidebar-close" id="sidebar-close">
-            <i class='bx bx-left-arrow-alt'></i>
+            <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
     <div class="sidebar-user">
         <div class="sidebar-user-info">
-            <!-- <img src="./images/user-image.jpg" alt="User picture" class="profile-image"> -->
             <div class="sidebar-user-name">
                 Admin
             </div>
         </div>
         <button class="btn btn-outline">
-            <a href="perform_logout">
+            <a th:href="@{/perform_logout}">
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </a>
         </button>
     </div>
-<<<<<<< HEAD
-    <button class="btn btn-outline">
-      <a th:href="@{/perform_logout}">
-        <i class='bx bx-log-out bx-flip-horizontal'></i>
-      </a>
-    </button>
-  </div>
-  <!-- SIDEBAR MENU -->
-  <ul class="sidebar-menu">
-    <li>
-      <a th:href="@{/admin}" class="active">
-        <i class='bx bx-home'></i>
-        <span>dashboard</span>
-      </a>
-    </li>
-<!--    <li>-->
-<!--      <a href="#">-->
-<!--        <i class='bx bx-shopping-bag'></i>-->
-<!--        <span>sales</span>-->
-<!--      </a>-->
-<!--    </li>-->
-    <li>
-      <a th:href="@{/admin/importGood}">
-        <!--            <a th:href="@{/admin/importGood/add}">-->
-        <i class='bx bx-shopping-bag'></i>
-        <span>Import Goods</span>
-      </a>
-    </li>
-    <li>
-      <a th:href="@{/admin/revenue}">
-        <i class='bx bx-chart'></i>
-        <span>Revenue</span>
-      </a>
-    </li>
-    <li>
-      <a th:href="@{/admin/orders}">
-        <i class='bx bx-chart'></i>
-        <span>order history</span>
-      </a>
-    </li>
-    <li class="sidebar-submenu">
-      <a href="#" class="sidebar-menu-dropdown">
-        <i class='bx bx-user-circle'></i>
-        <span>Category</span>
-        <div class="dropdown-icon"></div>
-      </a>
-      <ul class="sidebar-menu sidebar-menu-dropdown-content">
-=======
     <!-- SIDEBAR MENU -->
     <ul class="sidebar-menu">
->>>>>>> ProductVS2
         <li>
-            <a href="file:///F:/code/apex-admin-dashboard-main/index.html#" class="active">
+            <a th:href="@{/admin}" class="active">
                 <i class='bx bx-home'></i>
                 <span>dashboard</span>
             </a>
         </li>
         <li>
             <a th:href="@{/admin/importGood}">
-                <!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -116,13 +63,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i><img th:src="@{'/images/file.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/categorization.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -137,7 +84,6 @@
                         Add Category
                     </a>
                 </li>
-
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
@@ -171,7 +117,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/list-items.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-cube'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -195,7 +141,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/order.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-package'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -219,7 +165,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i><img th:src="@{'/images/voucher.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-bookmark'></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -236,33 +182,9 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
-                <span>e-commerce</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/product}" >
-                        list products
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/create}">
-                        add product
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/restore}">
-                        restore products
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i><img th:src="@{'/images/satisfaction.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-user-check'></i>
                 <span>Customer</span>
             </a>
         </li>
@@ -274,7 +196,7 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i><img th:src="@{'/images/inventory.png'}" width="23px" height="23px"></i>
+                <i class='bx bx-barcode'></i>
                 <span>Inventory</span>
             </a>
         </li>
@@ -298,9 +220,9 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                        darkmode
-                        <span class="darkmode-switch"></span>
+                    <a href="#" class="dark_mode-toggle" id="dark_mode-toggle">
+                        Dark mode
+                        <span class="dark_mode-switch"></span>
                     </a>
                 </li>
             </ul>
@@ -311,48 +233,50 @@
 <!-- END SIDEBAR -->
 
 <!-- MAIN CONTENT -->
-<div class="box">
-    <div class="box-body overflow-scroll">
-        <div class="box-header">
-            Add Item
+<div class="main">
+    <div class="main-header">
+        <div class="mobile-toggle" id="mobile-toggle">
+            <i class='bx bx-menu-alt-right'></i>
         </div>
+        <div class="main-title">
+            dashboard
+        </div>
+    </div>
+    <!-- ITEM TABLE -->
+    <div class="box">
         <div class="box-body overflow-scroll">
-            <form th:action="@{/admin/item/add}" th:method="post" th:object="${item}" onsubmit="return validateForm()">
-                <!-- Thêm div container cho thông báo lỗi -->
-<!--                <div id="alertContainer" th:if="${error}" class="alert alert-danger" role="alert">-->
-<!--                    <p th:text="${error}"></p>-->
-<!--                </div>-->
-                <table>
-                    <tr>
-                        <th>
-                            <label for="nameItem">Name:</label>
-                        </th>
-                        <td>
-<!--                            <input type="text" th:field="*{name}" id="nameItem" onblur="checkDuplicate()">-->
-                            <input type="text" th:field="*{name}" id="nameItem">
-                            <span id="nameError" style="color: red;"></span>
-                        </td>
-                    </tr>
-                </table>
-                <button type="submit">ADD</button>
-            </form>
+            <div class="box-header">
+                Add Item
+            </div>
+            <div class="box-body overflow-scroll">
+                <form th:action="@{/admin/item/add}" th:method="post" th:object="${item}"
+                      onsubmit="return validateForm()">
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="nameItem">Name:</label>
+                            </th>
+                            <td>
+                                <input type="text" th:field="*{name}" id="nameItem">
+                                <span id="nameError" style="color: red;"></span>
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit">ADD</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-    <!-- END ORDERS TABLE -->
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
-    <script th:src="@{/js/addAndEditItem.js}"></script>
+<!-- END ORDERS TABLE -->
+<!-- END MAIN CONTENT -->
+<div class="overlay"></div>
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- APP JS -->
+<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/addAndEditItem.js}"></script>
 </body>
-
 </html>
