@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAllStaff();
-    void addStaff(User user);
+    boolean addStaff(User user);
 
     User getStaffById(Long userId);
 
@@ -17,4 +17,6 @@ public interface UserService {
     void deleteStaffById(Long userId);
 
     void restoreStaffById(Long userId);
+
+    void resetPassword(User user);
 }

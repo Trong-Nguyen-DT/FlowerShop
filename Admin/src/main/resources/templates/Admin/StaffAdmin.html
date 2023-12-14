@@ -9,14 +9,18 @@
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha384-o55Gw7/D6HY5p1JcyKZc4FpVoqGawI7eT8IlqWjORnDtr5Szkbe5XWZAkdO+J3Ju" crossorigin="anonymous">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" th:href="@{/css/Image.css}">
+    <link rel="stylesheet" th:href="@{/css/styte.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -37,7 +41,7 @@
             </div>
         </div>
         <button class="btn btn-outline">
-            <a th:href="@{/perform_logout}">
+            <a href="perform_logout">
                 <i class='bx bx-log-out bx-flip-horizontal'></i>
             </a>
         </button>
@@ -45,15 +49,9 @@
     <!-- SIDEBAR MENU -->
     <ul class="sidebar-menu">
         <li>
-            <a th:href="@{/admin}" class="active">
+            <a href="file:///F:/code/apex-admin-dashboard-main/index.html#" class="active">
                 <i class='bx bx-home'></i>
                 <span>dashboard</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-shopping-bag'></i>
-                <span>sales</span>
             </a>
         </li>
         <li>
@@ -71,13 +69,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i class='bx bx-chart'></i>
-                <span>order history</span>
+                <i><img th:src="@{'/images/file.png'}" width="23px" height="23px"></i>
+                <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
+                <i><img th:src="@{'/images/categorization.png'}" width="23px" height="23px"></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -126,7 +124,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i><img th:src="@{'/images/list-items.png'}" width="23px" height="23px"></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -150,7 +148,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i><img th:src="@{'/images/order.png'}" width="23px" height="23px"></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -174,7 +172,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i><img th:src="@{'/images/voucher.png'}" width="23px" height="23px"></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -199,7 +197,7 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#">
+                    <a th:href="@{/admin/product}" >
                         list products
                     </a>
                 </li>
@@ -210,15 +208,15 @@
                 </li>
                 <li>
                     <a th:href="@{/admin/product/restore}">
-                        restore <products></products>
+                        restore products
                     </a>
                 </li>
             </ul>
         </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i class='bx bx-mail-send'></i>
-                <span>customer</span>
+                <i><img th:src="@{'/images/satisfaction.png'}" width="23px" height="23px"></i>
+                <span>Customer</span>
             </a>
         </li>
         <li>
@@ -229,16 +227,16 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i class='bx bx-mail-send'></i>
+                <i><img th:src="@{'/images/inventory.png'}" width="23px" height="23px"></i>
                 <span>Inventory</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-chat'></i>
-                <span>chat</span>
-            </a>
-        </li>
+        <!--        <li>-->
+        <!--            <a href="#">-->
+        <!--                <i class='bx bx-chat'></i>-->
+        <!--                <span>chat</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
         <li>
             <a href="#">
                 <i class='bx bx-calendar'></i>
@@ -294,11 +292,12 @@
                         <th>Salary</th>
                         <th>Detail</th>
                         <th>Edit</th>
+                        <th>Reset</th>
                         <th>Delete</th>
 
                     </tr>
                     </thead>
-                    <tbody  th:each="user : ${users}" th:if="${user.deleted == false}"  >
+                    <tbody  th:each="user : ${users}" th:if="${user.deleted == false} and ${user.role} == 'ROLE_STAFF'" >
                     <tr>
                         <td th:text="${user.id}"></td>
                         <td> <img th:src="@{'/images/' + ${user.image}}"></td>
@@ -308,13 +307,14 @@
                         <td th:text="${user.salary}"></td>
                         <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> Detail  </a> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/edit/' + ${user.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
+                        <td><button class="btn-click" onclick="confirmReset(this)" data-url="@{/reset-password/{id}(id=${user.id})}" data-userid="${user.id}"> <a > <i class="fa fa-refresh"></i>  </a></button> </td>
+<!--                        <td><button class="btn-click" > <a th:href="@{'/admin/staff/reset-password/' + ${user.id}}"> <i class="fa fa-refresh"></i>  </a></button> </td>-->
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
     <!-- END ORDERS TABLE -->
 
@@ -327,6 +327,18 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- APP JS -->
     <script th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/ResetPassword.js}"></script>
+
+</div>
+<!-- Thêm vào cuối thẻ body -->
+<div class="overlay" id="overlay">
+    <div class="confirmation-container">
+        <h2>Are you sure you want to reset the password?</h2>
+        <div class="buttons">
+            <button id="confirmBtn" onclick="confirmReset()">OK</button>
+            <button id="cancelBtn" onclick="cancelReset()">No</button>
+        </div>
+    </div>
 </div>
 </body>
 

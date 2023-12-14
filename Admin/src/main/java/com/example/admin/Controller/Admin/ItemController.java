@@ -1,11 +1,15 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Domain.Category;
+import com.example.admin.Service.Impl.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.admin.Domain.Item;
 import com.example.admin.Service.ItemService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("admin/item")
@@ -24,8 +28,18 @@ public class ItemController {
     }
     @PostMapping("add")
     public String addItem(@ModelAttribute Item item) {
-        itemService.addItem(item);
-        return "redirect:/admin/item";
+        if (itemService.addItem(item)) {
+            return "redirect:/admin/item";
+        }
+//        return "redirect:/admin/item/add";
+        return "Admin/AddItemAdmin";
+
+    }
+    @GetMapping("/checkDuplicate")
+    @ResponseBody
+    public boolean checkDuplicate(@RequestParam String name) {
+        // Kiểm tra xem tên đã tồn tại hay không và trả về kết quả
+        return itemService.existsByName(name);
     }
     @GetMapping("edit/{id}")
     public String showEditItem(@PathVariable String id, Model model) {
@@ -57,5 +71,4 @@ public class ItemController {
         itemService.restoreItemById(itemId);
         return "redirect:/admin/item/restore";
     }
-
 }
