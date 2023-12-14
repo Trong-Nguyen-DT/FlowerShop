@@ -8,7 +8,9 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -16,7 +18,6 @@
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" th:href="@{/css/create.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -265,20 +266,14 @@
 </div>
 <!-- END SIDEBAR -->
 
-<!-- MAIN CONTENT -->
-<div class="main">
-    <div class="main-header">
-        <div class="mobile-toggle" id="mobile-toggle">
-            <i class='bx bx-menu-alt-right'></i>
+<!-- ORDERS TABLE -->
+<div class="box">
+    <div class="box-body overflow-scroll">
+        <div class="box-header">
+            Edit Product
         </div>
-        <div class="main-title">
-            dashboard
-        </div>
-    </div>
-
-    <!-- ORDERS TABLE -->
-    <div class="box">
         <div class="box-body overflow-scroll">
+<<<<<<< HEAD
             <div class="box-header">
                 Edit Product
             </div>
@@ -363,22 +358,103 @@
                     <button type="submit">Update</button>
                 </form>
             </div>
+=======
+            <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" id="editProductForm">
+                <table>
+                    <input type="hidden" th:field="*{id}">
+                    <tr>
+                        <th>
+                            <label>Name:</label>
+                        </th>
+                        <td>
+                            <input type="text" th:field="*{name}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Original price:</label>
+                        </th>
+                        <td>
+                            <input type="text" th:field="*{originalPrice}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Discount:</label>
+                        </th>
+                        <td>
+                            <input type="text" th:field="*{discount}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Image 1:</label>
+                        </th>
+                        <td>
+                            <input type="file" th:field="*{image1}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Image 2:</label>
+                        </th>
+                        <td>
+                            <input type="file" th:field="*{image2}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Image 3:</label>
+                        </th>
+                        <td>
+                            <input type="file" th:field="*{image3}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Image 4:</label>
+                        </th>
+                        <td>
+                            <input type="file" th:field="*{image4}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Image 5:</label>
+                        </th>
+                        <td>
+                            <input type="file" th:field="*{image5}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label>Detail:</label>
+                        </th>
+                        <td>
+                            <input type="text" th:field="*{details}">
+                        </td>
+                    </tr>
+                </table>
+                <!--                    <input type="hidden" name="categoryIds" id="categoryIdsInput">-->
+                <button type="submit">Update</button>
+            </form>
+>>>>>>> ProductVS2
         </div>
-
     </div>
-    <!-- END ORDERS TABLE -->
 
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
-<!--    <script th:src="@{/js/AddProduct.js}"></script>-->
 </div>
+<!-- END ORDERS TABLE -->
+
+<!-- END MAIN CONTENT -->
+
+<div class="overlay"></div>
+
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- APP JS -->
+<script th:src="@{/js/app.js}"></script>
+<!--    <script th:src="@{/js/AddProduct.js}"></script>-->
 </body>
 
 </html>

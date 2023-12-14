@@ -29,10 +29,11 @@ public class CategoryController {
 
     @PostMapping("add")
     public String addCategory(@ModelAttribute Category category) {
-        categoryService.addCategory(category);
-        return "redirect:/admin/category";
+        if(categoryService.addCategory(category)){
+            return "redirect:/admin/category";
+        }
+        return "Admin/AddCategoryAdmin";
     }
-
     @GetMapping("edit/{id}")
     public String showEditCategory(@PathVariable String id, Model model) {
         Long categoryId = Long.parseLong(id);
