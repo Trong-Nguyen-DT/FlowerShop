@@ -1,4 +1,4 @@
-package com.example.admin.Converter;
+package com.example.admin.Domain;
 
 import lombok.Getter;
 import lombok.Setter;

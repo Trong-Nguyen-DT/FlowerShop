@@ -2,9 +2,11 @@ package com.example.admin.Service.Impl;
 
 
 import com.example.admin.Converter.OrderHistoryConverter;
+import com.example.admin.Domain.AmountData;
 import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Domain.OrderNote;
 import com.example.admin.Entity.OrderEntity;
+import com.example.admin.Entity.OrderHistoryEntity;
 import com.example.admin.Repository.OrderHistoryRepository;
 import com.example.admin.Repository.OrderRepository;
 import com.example.admin.Service.OrderService;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +44,16 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderHistory> getOrderByTime(LocalDateTime startTime, LocalDateTime endTime) {
         return orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(startTime, endTime).stream().map(OrderHistoryConverter::toModel).toList();
     }
+    @Override
+    public double getAllTotalByTime(LocalDateTime start, LocalDateTime end) {
+        List<OrderHistory> orderHistories = orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(start, end).stream().map(OrderHistoryConverter::toModel).toList();
+        double totalAmount = 0L;
+        for (OrderHistory orderHistory : orderHistories){
+            totalAmount += orderHistory.getAmount();
+        }
 
+        return totalAmount;
+    }
     @Override
     public List<OrderEntity> findAllList(Date from, Date to) {
         List<OrderEntity> list = null;
@@ -94,6 +106,20 @@ public class OrderServiceImpl implements OrderService {
             e.printStackTrace();
         }
     }
-
-
+    @Override
+    public List<AmountData> getAmountByMonth() {
+        List<AmountData> amountDataList = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            AmountData amountData = new AmountData();
+            List<OrderHistoryEntity> orderHistoryEntities = orderHistoryRepository.findOrdersByMonthAndYear(i, LocalDateTime.now().getYear());
+            double amountMonth = 0L;
+            for (OrderHistoryEntity orderHistoryEntity : orderHistoryEntities) {
+                amountMonth += orderHistoryEntity.getAmount();
+            }
+            amountData.setAmount(amountMonth);
+            amountData.setMonth(String.valueOf(i));
+            amountDataList.add(amountData);
+        }
+        return amountDataList;
+    }
 }
