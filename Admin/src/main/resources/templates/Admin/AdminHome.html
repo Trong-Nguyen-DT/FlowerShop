@@ -251,8 +251,8 @@
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-<!--                                <h4 th:text="${quantityOrder}"></h4>-->
-                                <h4>50000</h4>
+                                <h4 th:text="${quantityOrder}"></h4>
+<!--                                <h4>50000</h4>-->
                             </div>
                             <i class='bx bx-shopping-bag'></i>
                         </div>
@@ -286,8 +286,8 @@
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-<!--                                <h4 th:text="${totalAmount} + ' VNĐ'"></h4>-->
-                                <h4>1000000$</h4>
+                                <h4 th:text="${totalAmount} + ' VNĐ'"></h4>
+<!--                                <h4>1000000$</h4>-->
                             </div>
                             <i class='bx bx-line-chart'></i>
                         </div>
@@ -304,8 +304,8 @@
                         </div>
                         <div class="counter-info">
                             <div class="counter-count">
-<!--                                <h4 th:text="${quantityCustomer}"></h4>-->
-                                <h4>100</h4>
+                                <h4 th:text="${quantityCustomer}"></h4>
+<!--                                <h4>100</h4>-->
                             </div>
                             <i class='bx bx-user'></i>
                         </div>
@@ -328,7 +328,7 @@
                                 <div class="item-info">
                                     <!-- <img src="./images/thumb-7.jpg" alt="product image"> -->
                                     <div class="item-name">
-                                        <div class="product-name" th:text="${pro.title}"></div>
+                                        <div class="product-name" th:text="${pro.name}"></div>
                                         <div class="text-second">price</div>
                                     </div>
                                 </div>
@@ -364,7 +364,6 @@
                 <!-- END CUSTOMERS CHART -->
             </div>
             <div class="col-12">
-
             </div>
         </div>
     </div>
@@ -374,8 +373,10 @@
 <div class="overlay"></div>
 
 <!-- SCRIPT -->
-<!-- APEX CHART -->
+<!-- Include ApexCharts library -->
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- Your script using ApexCharts -->
+<script src="path/to/your/script.js"></script>
 <!-- APP JS -->
 <script th:src="@{/js/app.js}"></script>
 

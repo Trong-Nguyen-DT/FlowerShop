@@ -251,7 +251,7 @@
             </div>
             <div class="box-body overflow-scroll">
                 <form th:action="@{/admin/staff/edit}" th:method="post" th:object="${user}"
-                      onsubmit="return validateForm())">
+                      onsubmit="return validateForm()">
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>

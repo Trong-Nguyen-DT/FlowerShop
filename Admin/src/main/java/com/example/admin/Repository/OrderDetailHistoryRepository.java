@@ -8,15 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface OrderDetailHistoryRepository extends JpaRepository<OrderDetailHistoryEntity, Long> {
-//    @Query("SELECT od.productId, SUM(od.quantity) AS totalQuantity " +
-//            "FROM OrderDetailHistoryEntity od " +
-//            "GROUP BY od.productId " +
-//            "ORDER BY totalQuantity DESC ")
-//    List<Object[]> findTop4SellingProducts();
-//
-//    default List<Object[]> findTop4SellingProductsLimited() {
-//        return findTop4SellingProducts().subList(0, 4);
-//    }
-//
-//    List<OrderDetailHistoryEntity> findAllByOrderHistoryEntity(OrderHistoryEntity orderHistoryEntity);
+    @Query("SELECT od.productId, SUM(od.quantity) AS totalQuantity " +
+            "FROM OrderDetailHistoryEntity od " +
+            "GROUP BY od.productId " +
+            "ORDER BY totalQuantity DESC ")
+    List<Object[]> findTop4SellingProducts();
+
+    default List<Object[]> findTop4SellingProductsLimited() {
+        return findTop4SellingProducts().subList(0, 4);
+    }
+    List<OrderDetailHistoryEntity> findAllByOrderHistoryEntity(OrderHistoryEntity orderHistoryEntity);
 }
