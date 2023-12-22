@@ -7,6 +7,5 @@ import lombok.Setter;
 @Setter
 public class BodyResponse {
     private boolean success;
-
     private String message;
 }
