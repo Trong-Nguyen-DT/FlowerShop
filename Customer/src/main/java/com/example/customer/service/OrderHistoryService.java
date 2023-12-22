@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface OrderHistoryService
 {
-    void addOrder(String name, Long orderId);
+    Long addOrder(String name, Long orderId);
 
     List<OrderHistory> getOrderByCustomer(String name);
 
     OrderHistory getOrderByOrderId(Long orderId, String name);
+
+    void setReviewed(Long orderId);
 }

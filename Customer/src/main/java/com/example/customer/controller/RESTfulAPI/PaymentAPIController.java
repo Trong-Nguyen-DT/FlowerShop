@@ -1,12 +1,15 @@
 package com.example.customer.controller.RESTfulAPI;
 
 import com.example.customer.domain.Order;
+import com.example.customer.enums.TitleType;
 import com.example.customer.responseBody.ResponsePayment;
 import com.example.customer.service.Impl.FCMService;
+import com.example.customer.service.NotificationService;
 import com.example.customer.service.OrderHistoryService;
 import com.example.customer.service.OrderService;
 import com.example.customer.validator.CustomerValidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +31,11 @@ public class PaymentAPIController {
     @Autowired
     private OrderHistoryService orderHistoryService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @PostMapping("app")
-    public ResponseEntity<ResponsePayment> paymentApp(@RequestBody Order order) {
+    public ResponseEntity<ResponsePayment> paymentApp(@RequestBody Order order, @RequestHeader HttpHeaders headers) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -39,7 +45,9 @@ public class PaymentAPIController {
         if (payment.getOrder().isPaymentOnline()) {
             payment.setUrlQR(orderService.createQrPayment(orderId));
         }
-        orderHistoryService.addOrder(name, orderId);
+        Long id = orderHistoryService.addOrder(name, orderId);
+        Long notifyId = notificationService.addNotifyOrder(name, id);
+        notificationService.sendNotifyOrder(headers, name, notifyId, id);
         return ResponseEntity.ok(payment);
     }
 

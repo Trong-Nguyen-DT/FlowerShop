@@ -1,5 +1,6 @@
 package com.example.customer.repository;
 
+import com.example.customer.entity.CustomerEntity;
 import com.example.customer.entity.ProductEntity;
 import com.example.customer.entity.ReviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
 
     List<ReviewEntity> findAllByProductEntity(ProductEntity productEntity);
+
+    List<ReviewEntity> findAllByCustomerEntity(CustomerEntity customerEntity);
 }
