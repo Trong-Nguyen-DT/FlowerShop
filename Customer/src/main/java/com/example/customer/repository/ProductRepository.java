@@ -16,3 +16,4 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
     List<ProductEntity> findByFlashSaleEntityExpiredFalse();
 }
+

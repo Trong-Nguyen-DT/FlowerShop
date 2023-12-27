@@ -16,4 +16,6 @@ public interface ProductService {
     void updateExpiredFlashSale();
 
     List<Product> getProductBestSeller();
+
+    List<Product> getAllProductNonSale();
 }

@@ -17,7 +17,7 @@ public class ProductAPIController {
 
     @GetMapping()
     public ResponseEntity<List<Product>> getAllProduct() {
-        List<Product> products = productService.getAllProduct();
+        List<Product> products = productService.getAllProductNonSale();
         return ResponseEntity.ok().body(products);
     }
     @GetMapping("flash-sale")

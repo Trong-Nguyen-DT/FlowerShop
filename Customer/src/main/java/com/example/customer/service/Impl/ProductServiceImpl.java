@@ -76,4 +76,16 @@ public class ProductServiceImpl implements ProductService {
         }
         return topProducts;
     }
+
+    @Override
+    public List<Product> getAllProductNonSale() {
+        List<ProductEntity> productEntities = productRepository.findAll();
+        List<ProductEntity> productNonSales = new ArrayList<>();
+        for (ProductEntity entity : productEntities) {
+            if (entity.getFlashSaleEntity() == null || entity.getFlashSaleEntity().isExpired()) {
+                productNonSales.add(entity);
+            }
+        }
+        return productNonSales.stream().map(ProductConverter::toModel).toList();
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.customer.controller.RESTfulAPI;
 
 import com.example.customer.domain.Order;
-import com.example.customer.enums.TitleType;
 import com.example.customer.responseBody.ResponsePayment;
 import com.example.customer.service.Impl.FCMService;
 import com.example.customer.service.NotificationService;
