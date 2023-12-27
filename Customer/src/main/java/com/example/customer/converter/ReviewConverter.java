@@ -11,7 +11,6 @@ public class ReviewConverter {
         review.setDate(entity.getDate());
         review.setContent(entity.getContent());
         review.setRate(entity.getRate());
-        System.out.println(entity.getId() + "   " + entity.getCustomerEntity().getFullName());
         review.setCustomer(CustomerConverter.toModel(entity.getCustomerEntity()));
         return review;
     }
