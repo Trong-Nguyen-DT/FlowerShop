@@ -46,7 +46,7 @@ public class PaymentAPIController {
         }
         Long id = orderHistoryService.addOrder(name, orderId);
         Long notifyId = notificationService.addNotifyOrder(name, id);
-        notificationService.sendNotifyOrder(headers, name, notifyId, id);
+        notificationService.sendNotifyOrder(headers, notifyId, id);
         return ResponseEntity.ok(payment);
     }
 
@@ -68,10 +68,17 @@ public class PaymentAPIController {
 
     @Transactional
     @GetMapping("success")
-    public ResponseEntity<String> success() {
+    public ResponseEntity<String> success(@RequestHeader HttpHeaders headers) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        Long notifyId = notificationService.addNotifyPayment(name, true);
+        notificationService.sendNotifyPayment(headers, notifyId, true);
+        if (headers.containsKey("Set-Cookie")) {
+            System.out.println(headers.getFirst("Set-Cookie"));
+        } else {
+            System.out.println("không có");
         }
         String response = fcmService.pushNotification(name, "payment_success");
         return ResponseEntity.ok(response);

@@ -10,7 +10,11 @@ public class ProductConverter {
         product.setId(productEntity.getId());
         product.setName(productEntity.getName());
         product.setOriginal_price(productEntity.getOriginal_price());
-        product.setPrice(productEntity.getPrice());
+        if (productEntity.getFlashSaleEntity() != null && !productEntity.getFlashSaleEntity().isExpired()) {
+            product.setPrice(productEntity.getFlashSaleEntity().getPriceSale());
+        } else {
+            product.setPrice(productEntity.getPrice());
+        }
         product.setDescription(productEntity.getDescription());
         product.setDetails(productEntity.getDetails());
         product.setDelivery(productEntity.getDelivery());
@@ -66,8 +70,6 @@ public class ProductConverter {
         product.setImage4(entity.getImage4());
         product.setImage5(entity.getImage5());
         product.setDeleted(entity.isDeleted());
-//        product.setCategoryEntities(entity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
-//        product.setReviewEntities(entity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
         product.setFlashSale(FlashSaleConverter.toModel(entity.getFlashSaleEntity()));
         return product;
     }

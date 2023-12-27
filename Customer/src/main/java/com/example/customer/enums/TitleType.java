@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TitleType {
     SALE,
+    PAYMENT,
     WAITING,
     CONFIRMED,
     SENT,

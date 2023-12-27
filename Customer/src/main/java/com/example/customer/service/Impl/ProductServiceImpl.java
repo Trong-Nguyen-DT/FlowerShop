@@ -5,7 +5,6 @@ import com.example.customer.domain.Product;
 import com.example.customer.entity.CategoryEntity;
 import com.example.customer.entity.FlashSaleEntity;
 import com.example.customer.entity.ProductEntity;
-import com.example.customer.repository.CategoryRepository;
 import com.example.customer.repository.FlashSaleRepository;
 import com.example.customer.repository.OrderDetailHistoryRepository;
 import com.example.customer.repository.ProductRepository;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -87,5 +87,32 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         return productNonSales.stream().map(ProductConverter::toModel).toList();
+    }
+
+    @Override
+    public List<Product> getAllProductRelated(Long id) {
+        ProductEntity productEntity = productRepository.findById(id).orElseThrow();
+        List<CategoryEntity> categoryEntities = productEntity.getCategoryEntities();
+        List<ProductEntity> productRelated = new ArrayList<>();
+        // Kiểm tra xem danh sách danh mục có rỗng hay không
+        if (categoryEntities != null && !categoryEntities.isEmpty()) {
+            // Duyệt qua danh sách danh mục để kiểm tra tên danh mục
+            for (CategoryEntity categoryEntity : categoryEntities) {
+                if ("Gift".equals(categoryEntity.getName())) {
+                    // Nếu tìm thấy danh mục có tên là "Gift", thực hiện xử lý tương ứng
+                    // Ví dụ: Trả về danh sách sản phẩm liên quan
+                    List<ProductEntity> productEntities = productRepository.findAll();
+                    Collections.shuffle(productEntities);
+                    productRelated = productEntities.subList(0, Math.min(6, productEntities.size()));
+                    return productRelated.stream().map(ProductConverter::toModel).toList();
+                } else {
+                    List<ProductEntity> productEntities = productRepository.findAllByCategoryName("Gift");
+                    Collections.shuffle(productEntities);
+                    productRelated = productEntities.subList(0, Math.min(6, productEntities.size()));
+                    return productRelated.stream().map(ProductConverter::toModel).toList();
+                }
+            }
+        }
+        return null;
     }
 }

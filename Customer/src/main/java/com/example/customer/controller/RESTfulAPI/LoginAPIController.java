@@ -3,6 +3,7 @@ package com.example.customer.controller.RESTfulAPI;
 
 import com.example.customer.domain.Customer;
 import com.example.customer.remote.LoginRemote;
+import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.responseBody.CustomerResponse;
 import com.example.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,7 @@ public class LoginAPIController {
 
         if (customerTrue != null) {
             HttpHeaders loginHeaders = loginRemote.sendPostRequestLogin(customer.getUsername(), customer.getPassword());
-
-
+            customerService.saveToken(customer);
             // Set cookie if present
             if (loginHeaders.containsKey("Set-Cookie")) {
                 String cookie = loginHeaders.getFirst("Set-Cookie");
@@ -46,6 +46,15 @@ public class LoginAPIController {
 
         // Return the ResponseEntity with the custom headers and the body
         return ResponseEntity.ok().headers(responseHeaders).body(customerResponse);
+    }
+
+    @PostMapping("token")
+    public ResponseEntity<BodyResponse> saveToken(@RequestBody String token) {
+        BodyResponse bodyResponse = new BodyResponse();
+        System.out.println(token);
+        bodyResponse.setSuccess(true);
+        bodyResponse.setMessage("success");
+        return ResponseEntity.ok(bodyResponse);
     }
 
 }

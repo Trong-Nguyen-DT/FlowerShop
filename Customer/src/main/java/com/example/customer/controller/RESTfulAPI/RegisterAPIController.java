@@ -16,7 +16,6 @@ public class RegisterAPIController {
 
     @PostMapping()
     public ResponseEntity<BodyResponse> register(@RequestBody Customer customer) {
-        System.out.println("api");
         BodyResponse registerRequest = new BodyResponse();
         if (customerService.checkUsername(customer.getUsername())) {
             customerService.createCustomer(customer);

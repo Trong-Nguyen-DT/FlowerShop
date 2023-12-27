@@ -116,4 +116,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return false;
     }
+
+    @Override
+    public void saveToken(Customer customer) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(customer.getUsername()).orElseThrow();
+        customerEntity.setToken(customer.getToken());
+        customerRepository.save(customerEntity);
+    }
 }

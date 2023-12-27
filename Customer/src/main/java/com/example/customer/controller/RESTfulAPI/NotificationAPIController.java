@@ -44,7 +44,6 @@ public class NotificationAPIController {
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        System.out.println("name " + name);
         return ResponseEntity.ok(firebaseMessaging.sendNotificationByToken(notificationMessaging, name));
     }
 }

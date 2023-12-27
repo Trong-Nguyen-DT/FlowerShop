@@ -58,7 +58,7 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void sendNotifyOrder(HttpHeaders headers, String name, Long notifyId, Long orderId) {
+    public void sendNotifyOrder(HttpHeaders headers, Long notifyId, Long orderId) {
         NotificationEntity notificationEntity = notificationRepository.findById(notifyId).orElseThrow();
         OrderHistoryEntity orderEntity = orderHistoryRepository.findById(orderId).orElseThrow();
         NotificationMessaging notificationMessaging = new NotificationMessaging();
@@ -68,5 +68,40 @@ public class NotificationServiceImpl implements NotificationService {
         notificationMessaging.setData(NotificationConverter.toModel(notificationEntity));
         notificationRemote.sendNotification(notificationMessaging, headers);
 
+    }
+
+    @Override
+    public Long addNotifyPayment(String name, boolean success) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        NotificationEntity notificationEntity = new NotificationEntity();
+        notificationEntity.setCustomerEntity(customerEntity);
+        notificationEntity.setDatetime(LocalDateTime.now());
+        notificationEntity.setType(TitleType.PAYMENT);
+        if (success) {
+            notificationEntity.setTitle("Thanh toán thành công");
+            notificationEntity.setContent("Đơn hàng của bạn đã được thanh toán thành công, vui lòng chờ shop xác nhận");
+        } else {
+            notificationEntity.setTitle("Thanh toán thất bại");
+            notificationEntity.setContent("Đơn hàng của bạn không được thanh toán, vui lòng chọn lại phương thức thanh toán và đặt hàng");
+        }
+        notificationEntity.setHaveRead(false);
+        return notificationRepository.save(notificationEntity).getId();
+    }
+
+    @Override
+    public void sendNotifyPayment(HttpHeaders headers, Long notifyId, boolean success) {
+        NotificationEntity notificationEntity = notificationRepository.findById(notifyId).orElseThrow();
+        NotificationMessaging notificationMessaging = new NotificationMessaging();
+        if (success) {
+            notificationMessaging.setTitle("PAYMENT_SUCCESS");
+            notificationMessaging.setBody("Đơn hàng của bạn đã được thanh toán thành công, vui lòng chờ shop xác nhận");
+            notificationMessaging.setImage("lỗi");
+        } else {
+            notificationMessaging.setTitle("PAYMENT_FAILED");
+            notificationMessaging.setBody("Đơn hàng của bạn không được thanh toán, vui lòng chọn lại phương thức thanh toán và đặt hàng");
+            notificationMessaging.setImage("lỗi");
+        }
+        notificationMessaging.setData(NotificationConverter.toModel(notificationEntity));
+        notificationRemote.sendNotification(notificationMessaging, headers);
     }
 }

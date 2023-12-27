@@ -1,7 +1,6 @@
 package com.example.customer.service;
 
 import com.example.customer.domain.Notification;
-import com.example.customer.enums.TitleType;
 import org.springframework.http.HttpHeaders;
 
 import java.util.List;
@@ -11,5 +10,9 @@ public interface NotificationService {
 
     Long addNotifyOrder(String name, Long id);
 
-    void sendNotifyOrder(HttpHeaders headers, String name, Long notifyId, Long orderId);
+    void sendNotifyOrder(HttpHeaders headers, Long notifyId, Long orderId);
+
+    Long addNotifyPayment(String name, boolean success);
+
+    void sendNotifyPayment(HttpHeaders headers, Long notifyId, boolean success);
 }

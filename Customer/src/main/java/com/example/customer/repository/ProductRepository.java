@@ -15,5 +15,8 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     List<ProductEntity> findAllByCategoryId(@Param("categoryId") Long categoryId);
 
     List<ProductEntity> findByFlashSaleEntityExpiredFalse();
+
+    @Query("SELECT DISTINCT p FROM ProductEntity p JOIN p.categoryEntities c WHERE c.name = :categoryName")
+    List<ProductEntity> findAllByCategoryName(@Param("categoryName") String categoryName);
 }
 

@@ -17,8 +17,7 @@ public class ProductAPIController {
 
     @GetMapping()
     public ResponseEntity<List<Product>> getAllProduct() {
-        List<Product> products = productService.getAllProductNonSale();
-        return ResponseEntity.ok().body(products);
+        return ResponseEntity.ok().body(productService.getAllProductNonSale());
     }
     @GetMapping("flash-sale")
     public ResponseEntity<List<Product>> getAllProductFlashSale() {
@@ -27,19 +26,19 @@ public class ProductAPIController {
     }
     @GetMapping("best-seller")
     public ResponseEntity<List<Product>> getAllProductBestSeller() {
-        List<Product> products = productService.getProductBestSeller();
-        return ResponseEntity.ok(products);
+        return ResponseEntity.ok(productService.getProductBestSeller());
+    }
+    @GetMapping("related/{id}")
+    public ResponseEntity<List<Product>> getAllProductRelated(@PathVariable Long id) {
+        return ResponseEntity.ok(productService.getAllProductRelated(id));
     }
     @GetMapping("{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        Product product = productService.getProductById(id);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok(productService.getProductById(id));
     }
     @GetMapping("search-category/{id}")
     public ResponseEntity<List<Product>> getAllProductByCategory(@PathVariable Long id) {
-//        Long categoryId = (long) id;
-        List<Product> products = productService.getAllProductByCategory(id);
-        return ResponseEntity.ok().body(products);
+        return ResponseEntity.ok().body(productService.getAllProductByCategory(id));
     }
 
 

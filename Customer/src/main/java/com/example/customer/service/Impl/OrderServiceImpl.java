@@ -230,10 +230,10 @@ public class OrderServiceImpl implements OrderService {
     private Long getTotalPrice(CustomerEntity customerEntity) {
         Long totalPrice = 0L;
         for (CartItemEntity entity: customerEntity.getCartEntity().getCartItemEntities()) {
-            if (entity.getProductEntity().getFlashSaleEntity().isExpired()) {
-                totalPrice += entity.getProductEntity().getPrice() * entity.getQuantity();
-            } else {
+            if (entity.getProductEntity().getFlashSaleEntity() != null && !entity.getProductEntity().getFlashSaleEntity().isExpired()) {
                 totalPrice += entity.getProductEntity().getFlashSaleEntity().getPriceSale() * entity.getQuantity();
+            } else {
+                totalPrice += entity.getProductEntity().getPrice() * entity.getQuantity();
             }
         }
         return totalPrice;

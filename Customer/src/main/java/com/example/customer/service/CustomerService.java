@@ -20,4 +20,6 @@ public interface CustomerService {
     Customer updateCustomer(String name, CustomerRequest newCustomer);
 
     boolean updatePassword(String name, PasswordRequest passwordRequest);
+
+    void saveToken(Customer customer);
 }

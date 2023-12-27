@@ -18,4 +18,6 @@ public interface ProductService {
     List<Product> getProductBestSeller();
 
     List<Product> getAllProductNonSale();
+
+    List<Product> getAllProductRelated(Long id);
 }
