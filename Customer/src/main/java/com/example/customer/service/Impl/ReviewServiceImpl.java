@@ -7,6 +7,7 @@ import com.example.customer.entity.ReviewEntity;
 import com.example.customer.repository.CustomerRepository;
 import com.example.customer.repository.ProductRepository;
 import com.example.customer.repository.ReviewRepository;
+import com.example.customer.requestBody.ReviewRequest;
 import com.example.customer.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,19 +37,27 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void addReview(Review review, String name) {
+    public void addReview(ReviewRequest reviews, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
-        reviewRepository.save(createReviewEntity(review, customerEntity));
+        saveReview(reviews.getReviews(), customerEntity);
     }
 
-    private ReviewEntity createReviewEntity(Review review, CustomerEntity customerEntity) {
-        ReviewEntity entity = new ReviewEntity();
-        entity.setCustomerEntity(customerEntity);
-        entity.setName(customerEntity.getFullName());
-        entity.setDate(LocalDate.now());
-        entity.setProductEntity(productRepository.findById(review.getProductId()).orElseThrow());
-        entity.setRate(entity.getRate());
-        entity.setContent(review.getContent());
-        return entity;
+    @Override
+    public List<Review> getAllReviewByCustomer(String name) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        return reviewRepository.findAllByCustomerEntity(customerEntity).stream().map(ReviewConverter::toModel).toList();
+    }
+
+    private void saveReview(List<Review> reviews, CustomerEntity customerEntity) {
+        for (Review review : reviews) {
+            ReviewEntity entity = new ReviewEntity();
+            entity.setCustomerEntity(customerEntity);
+            entity.setName(customerEntity.getFullName());
+            entity.setDate(LocalDate.now());
+            entity.setProductEntity(productRepository.findById(review.getProductId()).orElseThrow());
+            entity.setRate(review.getRate());
+            entity.setContent(review.getContent());
+            reviewRepository.save(entity);
+        }
     }
 }

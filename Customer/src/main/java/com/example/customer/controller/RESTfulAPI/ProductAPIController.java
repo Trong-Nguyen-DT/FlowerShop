@@ -8,28 +8,39 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-    @RestController
-    @RequestMapping("api/product")
-    public class ProductAPIController {
+@RestController
+@RequestMapping("api/product")
+public class ProductAPIController {
 
-        @Autowired
-        private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-        @GetMapping()
-        public ResponseEntity<List<Product>> getAllProduct() {
-            List<Product> products = productService.getAllProduct();
-            return ResponseEntity.ok().body(products);
-        }
+    @GetMapping()
+    public ResponseEntity<List<Product>> getAllProduct() {
+        List<Product> products = productService.getAllProductNonSale();
+        return ResponseEntity.ok().body(products);
+    }
+    @GetMapping("flash-sale")
+    public ResponseEntity<List<Product>> getAllProductFlashSale() {
+        productService.updateExpiredFlashSale();
+        return ResponseEntity.ok(productService.getAllProductSale());
+    }
+    @GetMapping("best-seller")
+    public ResponseEntity<List<Product>> getAllProductBestSeller() {
+        List<Product> products = productService.getProductBestSeller();
+        return ResponseEntity.ok(products);
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+    @GetMapping("search-category/{id}")
+    public ResponseEntity<List<Product>> getAllProductByCategory(@PathVariable Long id) {
+//        Long categoryId = (long) id;
+        List<Product> products = productService.getAllProductByCategory(id);
+        return ResponseEntity.ok().body(products);
+    }
 
-        @GetMapping("{id}")
-        public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-            Product product = productService.getProductById(id);
-            return ResponseEntity.ok(product);
-        }
-        @GetMapping("search-category/{id}")
-        public ResponseEntity<List<Product>> getAllProductByCategory(@PathVariable Long id) {
-    //        Long categoryId = (long) id;
-            List<Product> products = productService.getAllProductByCategory(id);
-            return ResponseEntity.ok().body(products);
-        }
+
 }

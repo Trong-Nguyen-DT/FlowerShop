@@ -17,9 +17,9 @@ public class VoucherServiceImpl implements VoucherService {
     @Autowired
     private VoucherRepository voucherRepository;
     @Override
-    public List<Voucher>  getAllVoucherByConditions() {
-        updateExpiredVoucherByDate();
-        return voucherRepository.findAllByExpiredFalse().stream().map(VoucherConverter::toModel).toList();
+    public List<Voucher>  getAllVoucher() {
+//        updateExpiredVoucherByDate();
+        return voucherRepository.findAll().stream().map(VoucherConverter::toModel).toList();
     }
     @Override
     public void addVoucher(Voucher voucher) {
@@ -46,11 +46,6 @@ public class VoucherServiceImpl implements VoucherService {
         voucherEntity.setType(voucher.getType());
         voucherRepository.save(voucherEntity);
     }
-
-//    @Override
-//    public VoucherType[] getAllVoucherType() {
-//        return VoucherType.values();
-//    }
 
     private void updateExpiredVoucherByDate() {
         List<VoucherEntity> voucherEntities = voucherRepository.findAllByExpiredFalse();

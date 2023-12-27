@@ -18,7 +18,8 @@ public class VoucherController {
 
     @GetMapping()
     public String listVoucher(Model model) {
-        model.addAttribute("vouchers", voucherService.getAllVoucherByConditions());
+//        model.addAttribute("vouchers", voucherService.getAllVoucherByConditions());
+        model.addAttribute("vouchers", voucherService.getAllVoucher());
         return "Admin/VoucherAdmin";
     }
 

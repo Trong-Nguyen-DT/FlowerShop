@@ -53,7 +53,7 @@ public class ProductEntity {
     @ManyToMany(mappedBy = "productEntities", fetch = FetchType.EAGER)
     private List<CategoryEntity> categoryEntities;
 
-    @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductDetailEntity> productDetailEntities;
+    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.ALL)
+    private FlashSaleEntity flashSaleEntity;
 
 }

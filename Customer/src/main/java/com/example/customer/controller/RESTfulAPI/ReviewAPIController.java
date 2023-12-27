@@ -2,6 +2,9 @@ package com.example.customer.controller.RESTfulAPI;
 
 
 import com.example.customer.domain.Review;
+import com.example.customer.requestBody.ReviewRequest;
+import com.example.customer.responseBody.BodyResponse;
+import com.example.customer.service.OrderHistoryService;
 import com.example.customer.service.ReviewService;
 import com.example.customer.validator.CustomerValidate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +24,25 @@ public class ReviewAPIController {
     @Autowired
     private CustomerValidate customerValidate;
 
+    @Autowired
+    private OrderHistoryService orderHistoryService;
+
     @GetMapping("{productId}")
     public ResponseEntity<List<Review>> getReviewByProduct(@PathVariable Long productId) {
         return ResponseEntity.ok(reviewService.getAllReviewByProduct(productId));
     }
 
-    @PostMapping("add-review")
-    public ResponseEntity<List<Review>> addReview(@RequestBody Review review) {
+    @PostMapping("add-review/{order_id}")
+    public ResponseEntity<BodyResponse> addReview(@RequestBody ReviewRequest reviews, @PathVariable Long order_id) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        reviewService.addReview(review, name);
-        return ResponseEntity.ok(reviewService.getAllReviewByProduct(review.getProductId()));
+        reviewService.addReview(reviews, name);
+        orderHistoryService.setReviewed(order_id);
+        BodyResponse response = new BodyResponse();
+        response.setSuccess(true);
+        response.setMessage("success");
+        return ResponseEntity.ok(response);
     }
-
-
 }

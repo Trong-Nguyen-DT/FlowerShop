@@ -31,6 +31,8 @@ public class Customer {
 
     private LocalDate birthday;
 
+    private String token;
+
     private List<OrderHistory> orders;
 
     private List<Review> reviews;

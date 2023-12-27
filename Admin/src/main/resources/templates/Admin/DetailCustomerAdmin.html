@@ -8,30 +8,30 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" th:href="@{/css/create.css}">
+    <link rel="stylesheet" th:href="@{/css/Customer.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <!-- <img src="./images/logo-lg.png" alt="Comapny logo"> -->
         <div class="sidebar-close" id="sidebar-close">
-            <i class='bx bx-left-arrow-alt'></i>
+            <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
     <div class="sidebar-user">
         <div class="sidebar-user-info">
-            <!-- <img src="./images/user-image.jpg" alt="User picture" class="profile-image"> -->
             <div class="sidebar-user-name">
                 Admin
             </div>
@@ -50,15 +50,8 @@
                 <span>dashboard</span>
             </a>
         </li>
-<!--        <li>-->
-<!--            <a href="#">-->
-<!--                <i class='bx bx-shopping-bag'></i>-->
-<!--                <span>sales</span>-->
-<!--            </a>-->
-<!--        </li>-->
         <li>
             <a th:href="@{/admin/importGood}">
-                <!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -71,13 +64,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i class='bx bx-chart'></i>
-                <span>order history</span>
+                <i class='bx bx-history'></i>
+                <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
+                <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -92,7 +85,6 @@
                         Add Category
                     </a>
                 </li>
-
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
@@ -126,7 +118,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-cube'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -150,7 +142,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-package'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -174,7 +166,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-bookmark'></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -191,34 +183,10 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
-                <span>e-commerce</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a href="#">
-                        list products
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/create}">
-                        add product
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/restore}">
-                        restore <products></products>
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i class='bx bx-mail-send'></i>
-                <span>customer</span>
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
             </a>
         </li>
         <li>
@@ -229,16 +197,16 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i class='bx bx-mail-send'></i>
+                <i class='bx bx-barcode'></i>
                 <span>Inventory</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-chat'></i>
-                <span>chat</span>
-            </a>
-        </li>
+        <!--        <li>-->
+        <!--            <a href="#">-->
+        <!--                <i class='bx bx-chat'></i>-->
+        <!--                <span>chat</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
         <li>
             <a href="#">
                 <i class='bx bx-calendar'></i>
@@ -253,9 +221,9 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                        darkmode
-                        <span class="darkmode-switch"></span>
+                    <a href="#" class="dark_mode-toggle" id="dark_mode-toggle">
+                        Dark mode
+                        <span class="dark_mode-switch"></span>
                     </a>
                 </li>
             </ul>
@@ -272,57 +240,87 @@
             <i class='bx bx-menu-alt-right'></i>
         </div>
         <div class="main-title">
-            dashboard
+            Dashboard
         </div>
     </div>
 
-    <!-- ORDERS TABLE -->
+    <!-- CUSTOMER DETAILS -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
                 Detail Customer
             </div>
-            <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Avatar</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${customer.id}"></td>
-                        <td th:text="${customer.fullName}"></td>
-                        <td th:text="${customer.addresses}"></td>
-                        <td th:text="${customer.phone}"></td>
-                        <td> <img th:src="@{'/images/' + ${customer.avatar}}"></td>
-                        <td th:text="${customer.email}"></td>
-                        <td th:text="${customer.username}"></td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="customer-details">
+                <div class="avatar-section">
+                    <img class="avatar" th:src="@{'/images/' + ${customer.avatar}}" alt="Avatar">
+                </div>
+                <div class="info-section">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>ID:</label>
+                            </td>
+                            <td th:text="${customer.id}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Full Name:</label>
+                            </td>
+                            <td th:text="${customer.fullName}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Sex:</label>
+                            </td>
+                            <td th:text="${customer.sex ? 'Nam' : 'Nữ'}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Address:</label>
+                            </td>
+                            <td th:text="${customer.addresses}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Phone:</label>
+                            </td>
+                            <td th:text="${customer.phone}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Birthday:</label>
+                            </td>
+                            <td th:text="${customer.birthday}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Email:</label>
+                            </td>
+                            <td th:text="${customer.email}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Username:</label>
+                            </td>
+                            <td th:text="${customer.username}"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-
     </div>
-    <!-- END ORDERS TABLE -->
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
 </div>
+<!-- END ORDERS TABLE -->
+
+<!-- END MAIN CONTENT -->
+
+<div class="overlay"></div>
+
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- APP JS -->
+<script th:src="@{/js/app.js}"></script>
 </body>
 
 </html>

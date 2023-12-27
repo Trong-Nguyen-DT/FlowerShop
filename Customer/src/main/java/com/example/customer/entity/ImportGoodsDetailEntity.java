@@ -17,6 +17,10 @@ public class ImportGoodsDetailEntity {
     @JoinColumn(name = "item_id")
     private ItemEntity itemEntity;
 
+    @ManyToOne
+    @JoinColumn(name = "importGoods_id")
+    private ImportGoodsEntity importGoodsEntity;
+
     private double itemPrice;
 
     private int quantity;

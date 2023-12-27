@@ -56,7 +56,7 @@ a {
 }
 
 .dark .sidebar {
-    border-right: 2px solid var(--border-color);
+    border-right: 5px solid var(--border-color);
 }
 
 .sidebar-logo {
@@ -69,13 +69,20 @@ a {
 }
 
 .sidebar-logo img {
-    height: var(--sidebar-logo-img-size);
+    height: calc(var(--sidebar-logo-img-size) + 50px);
     max-width: 100%;
 }
-
-.sidebar-close {
-    display: none;
+.sidebar-logo:hover .sidebar-close {
+    display: block;
 }
+
+/*.sidebar-close {*/
+/*    display: none;*/
+/*    cursor: pointer; !* Thêm dòng này để biểu thị rằng đó là một phần có thể nhấp chuột *!*/
+/*}*/
+/*.sidebar-close {*/
+/*    display: none;*/
+/*}*/
 
 .sidebar-user {
     display: flex;
@@ -226,13 +233,13 @@ a {
     padding-left: 50px;
 }
 
-.darkmode-toggle {
+.dark_mode-toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.darkmode-switch {
+.dark_mode-switch {
     --height: var(--darkmode-toggle-size);
     --width: calc(var(--height) * 2);
     height: var(--height);
@@ -242,7 +249,7 @@ a {
     position: relative;
 }
 
-.darkmode-switch::before {
+.dark_mode-switch::before {
     content: "";
     --height: 20px;
     --main-color: #0652dd;
@@ -255,7 +262,7 @@ a {
     transition: left 0.3s ease-in-out;
 }
 
-.darkmode-switch.active::before {
+.dark_mode-switch.active::before {
     left: 50%;
 }
 

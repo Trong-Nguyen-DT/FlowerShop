@@ -1,7 +1,5 @@
 package com.example.customer.service.Impl;
 
-import com.example.customer.domain.Cart;
-import com.example.customer.domain.CartItem;
 import com.example.customer.payment.BodyRequest;
 import com.example.customer.payment.DataRequest;
 import com.example.customer.converter.*;
@@ -9,7 +7,6 @@ import com.example.customer.domain.Order;
 import com.example.customer.entity.*;
 import com.example.customer.enums.OrderStatus;
 import com.example.customer.enums.VoucherType;
-import com.example.customer.remote.CurrencyConverterRemote;
 import com.example.customer.remote.PaymentRemote;
 import com.example.customer.repository.*;
 import com.example.customer.responseBody.ResponsePayment;
@@ -233,7 +230,11 @@ public class OrderServiceImpl implements OrderService {
     private Long getTotalPrice(CustomerEntity customerEntity) {
         Long totalPrice = 0L;
         for (CartItemEntity entity: customerEntity.getCartEntity().getCartItemEntities()) {
-            totalPrice += entity.getProductEntity().getPrice() * entity.getQuantity();
+            if (entity.getProductEntity().getFlashSaleEntity().isExpired()) {
+                totalPrice += entity.getProductEntity().getPrice() * entity.getQuantity();
+            } else {
+                totalPrice += entity.getProductEntity().getFlashSaleEntity().getPriceSale() * entity.getQuantity();
+            }
         }
         return totalPrice;
     }

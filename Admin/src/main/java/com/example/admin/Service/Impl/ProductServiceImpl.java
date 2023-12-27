@@ -70,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
 
 //        productEntity.setCategoryEntities(product.getCategories().stream().map(CategoryConverter::toEntity).collect(Collectors.toList()));
 //        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
+        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
 
         // Lưu ProductEntity đã cập nhật vào cơ sở dữ liệu
         productRepository.save(productEntity);
@@ -109,10 +110,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void setCategories(ProductEntity entity, ProductDTO productDto) {
-        System.out.println("id" + entity.getId());
+//        System.out.println("id" + entity.getId());
         entity.setCategoryEntities(categoryRepository.findAllByIdIn(productDto.getCategoryIds()));
-        System.out.println("size 2: " + entity.getCategoryEntities().size());
-//        productRepository.
+//        System.out.println("size 2: " + entity.getCategoryEntities().size());
     }
 
 }

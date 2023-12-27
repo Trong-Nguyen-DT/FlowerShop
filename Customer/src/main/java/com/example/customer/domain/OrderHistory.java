@@ -28,5 +28,6 @@ public class OrderHistory {
     private String address;
     private boolean paymentOnline;
     private Long shipPrice;
+    private boolean reviewed;
     private List<OrderDetailHistory> orderDetailHistories;
 }

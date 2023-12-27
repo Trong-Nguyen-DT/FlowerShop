@@ -13,5 +13,4 @@ public class OrderDetailHistory {
     private Long priceProduct;
     private String image;
     private int quantity;
-    private boolean reviewed;
 }

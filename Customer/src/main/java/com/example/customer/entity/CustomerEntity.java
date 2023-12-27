@@ -47,4 +47,7 @@ public class CustomerEntity {
 
     @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL)
     private CartEntity cartEntity;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotificationEntity> notificationEntities;
 }

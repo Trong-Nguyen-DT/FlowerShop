@@ -8,7 +8,9 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -21,18 +23,15 @@
 </head>
 
 <body>
-
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <!-- <img src="./images/logo-lg.png" alt="Comapny logo"> -->
         <div class="sidebar-close" id="sidebar-close">
-            <i class='bx bx-left-arrow-alt'></i>
+            <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
     <div class="sidebar-user">
         <div class="sidebar-user-info">
-            <!-- <img src="./images/user-image.jpg" alt="User picture" class="profile-image"> -->
             <div class="sidebar-user-name">
                 Admin
             </div>
@@ -51,15 +50,8 @@
                 <span>dashboard</span>
             </a>
         </li>
-<!--        <li>-->
-<!--            <a href="#">-->
-<!--                <i class='bx bx-shopping-bag'></i>-->
-<!--                <span>sales</span>-->
-<!--            </a>-->
-<!--        </li>-->
         <li>
             <a th:href="@{/admin/importGood}">
-<!--            <a th:href="@{/admin/importGood/add}">-->
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
             </a>
@@ -72,13 +64,13 @@
         </li>
         <li>
             <a th:href="@{/admin/orders}">
-                <i class='bx bx-chart'></i>
-                <span>order history</span>
+                <i class='bx bx-history'></i>
+                <span>Order History</span>
             </a>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
+                <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -93,7 +85,6 @@
                         Add Category
                     </a>
                 </li>
-
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
@@ -127,7 +118,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-cube'></i>
                 <span>Item</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -151,7 +142,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-package'></i>
                 <span>Product</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -175,7 +166,7 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
+                <i class='bx bx-bookmark'></i>
                 <span>Voucher</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -192,34 +183,10 @@
                 </li>
             </ul>
         </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-category'></i>
-                <span>e-commerce</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a href="#">
-                        list products
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/create}">
-                        add product
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/product/restore}">
-                        restore <products></products>
-                    </a>
-                </li>
-            </ul>
-        </li>
         <li>
             <a th:href="@{/admin/customer}">
-                <i class='bx bx-mail-send'></i>
-                <span>customer</span>
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
             </a>
         </li>
         <li>
@@ -230,16 +197,16 @@
         </li>
         <li>
             <a th:href="@{/admin/inventory}">
-                <i class='bx bx-mail-send'></i>
+                <i class='bx bx-barcode'></i>
                 <span>Inventory</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class='bx bx-chat'></i>
-                <span>chat</span>
-            </a>
-        </li>
+        <!--        <li>-->
+        <!--            <a href="#">-->
+        <!--                <i class='bx bx-chat'></i>-->
+        <!--                <span>chat</span>-->
+        <!--            </a>-->
+        <!--        </li>-->
         <li>
             <a href="#">
                 <i class='bx bx-calendar'></i>
@@ -254,9 +221,9 @@
             </a>
             <ul class="sidebar-menu sidebar-menu-dropdown-content">
                 <li>
-                    <a href="#" class="darkmode-toggle" id="darkmode-toggle">
-                        darkmode
-                        <span class="darkmode-switch"></span>
+                    <a href="#" class="dark_mode-toggle" id="dark_mode-toggle">
+                        Dark mode
+                        <span class="dark_mode-switch"></span>
                     </a>
                 </li>
             </ul>
@@ -277,7 +244,7 @@
         </div>
     </div>
 
-    <!-- ORDERS TABLE -->
+    <!-- IMPORT GOODS TABLE -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
@@ -288,37 +255,33 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-<!--                        <th>Name Item</th>-->
+                        <th>Name staff</th>
                         <th>Time import</th>
-<!--                        <th>Quantity</th>-->
                         <th>Total price</th>
-
+                        <th>Detail</th>
                     </tr>
                     </thead>
-                    <tbody  th:each="importG : ${importGoods}"  >
+                    <tbody th:each="importG : ${importGoods}">
                     <tr>
                         <td th:text="${importG.id}"></td>
+                        <td th:text="${importG.staff_id}"></td>
                         <td th:text="${importG.timeImport}"></td>
-<!--                        <td th:text="${importG.quantity}"></td>-->
                         <td th:text="${importG.totalPrice}"></td>
-
+                        <td><a th:href="@{'/admin/importGood/detail/' + ${importG.id}}" style="color: blue"> <i class="fas fa-eye"></i> </a> </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-    </div>
-    <!-- END ORDERS TABLE -->
-
-    <!-- END MAIN CONTENT -->
-
-    <div class="overlay"></div>
-
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <!-- APP JS -->
-    <script th:src="@{/js/app.js}"></script>
+        </div>
     </div>
 </div>
+<!-- END IMPORT GOODS TABLE -->
+<!-- END MAIN CONTENT -->
+<div class="overlay"></div>
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- APP JS -->
+<script th:src="@{/js/app.js}"></script>
 </body>
 </html>

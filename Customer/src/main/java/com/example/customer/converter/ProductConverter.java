@@ -25,7 +25,6 @@ public class ProductConverter {
         product.setDeleted(productEntity.isDeleted());
         product.setCategoryEntities(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
         product.setReviewEntities(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
-        product.setProductDetailEntities(productEntity.getProductDetailEntities().stream().map(ProductDetailConverter::toModel).toList());
         return product;
     }
 
@@ -47,5 +46,29 @@ public class ProductConverter {
         product.setImage5(product.getImage5());
         product.setDeleted(false);
         return entity;
+    }
+
+    public static Product toModelSale(ProductEntity entity) {
+        Product product = new Product();
+        product.setId(entity.getId());
+        product.setName(entity.getName());
+        product.setOriginal_price(entity.getOriginal_price());
+        product.setPrice(entity.getFlashSaleEntity().getPriceSale());
+        product.setDescription(entity.getDescription());
+        product.setDetails(entity.getDetails());
+        product.setDelivery(entity.getDelivery());
+        product.setSub_info(entity.getSub_info());
+        product.setOverall_rating(entity.getOverall_rating());
+        product.setDiscount(entity.getFlashSaleEntity().getSale());
+        product.setImage1(entity.getImage1());
+        product.setImage2(entity.getImage2());
+        product.setImage3(entity.getImage3());
+        product.setImage4(entity.getImage4());
+        product.setImage5(entity.getImage5());
+        product.setDeleted(entity.isDeleted());
+//        product.setCategoryEntities(entity.getCategoryEntities().stream().map(CategoryConverter::toModel).toList());
+//        product.setReviewEntities(entity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
+        product.setFlashSale(FlashSaleConverter.toModel(entity.getFlashSaleEntity()));
+        return product;
     }
 }

@@ -33,11 +33,12 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
 
 
     @Override
-    public void addOrder(String name, Long orderId) {
+    public Long addOrder(String name, Long orderId) {
         OrderEntity orderEntity = orderRepository.findById(orderId).orElseThrow();
         OrderHistoryEntity orderHistoryEntity = saveOrderHistory(orderEntity);
         saveOrderDetailHistory(orderEntity ,orderHistoryEntity);
         deleteCartItem(name);
+        return orderHistoryEntity.getId();
     }
 
     @Override
@@ -50,6 +51,13 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
     public OrderHistory getOrderByOrderId(Long orderId, String name) {
         CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
         return OrderConverter.toModelOrderHistory(orderHistoryRepository.findByIdAndCustomerId(orderId, customerEntity.getId()));
+    }
+
+    @Override
+    public void setReviewed(Long orderId) {
+        OrderHistoryEntity orderHistoryEntity = orderHistoryRepository.findById(orderId).orElseThrow();
+        orderHistoryEntity.setReviewed(true);
+        orderHistoryRepository.save(orderHistoryEntity);
     }
 
     private void deleteCartItem(String name) {
@@ -92,6 +100,7 @@ public class OrderHistoryServiceImpl implements OrderHistoryService {
         orderHistoryEntity.setOrderStatus(orderEntity.getOrderStatus());
         orderHistoryEntity.setPaymentOnline(orderEntity.isPaymentOnline());
         orderHistoryEntity.setShipPrice(orderEntity.getShipPrice());
+        orderHistoryEntity.setReviewed(false);
         return orderHistoryRepository.save(orderHistoryEntity);
     }
 }

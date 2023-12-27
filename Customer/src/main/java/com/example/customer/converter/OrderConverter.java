@@ -8,6 +8,8 @@ import com.example.customer.entity.CartItemEntity;
 import com.example.customer.entity.OrderDetailEntity;
 import com.example.customer.entity.OrderEntity;
 import com.example.customer.entity.OrderHistoryEntity;
+import com.example.customer.enums.OrderStatus;
+import com.example.customer.enums.TitleType;
 
 public class OrderConverter {
     public static Order toModel(OrderEntity orderEntity) {
@@ -45,6 +47,7 @@ public class OrderConverter {
         orderHistory.setAddress(entity.getAddress());
         orderHistory.setPaymentOnline(entity.isPaymentOnline());
         orderHistory.setShipPrice(entity.getShipPrice());
+        orderHistory.setReviewed(entity.isReviewed());
         orderHistory.setOrderDetailHistories(entity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
         return orderHistory;
     }
@@ -54,5 +57,62 @@ public class OrderConverter {
         cartItem.setProduct(ProductConverter.toModel(entity.getProductEntity()));
         cartItem.setQuantity(entity.getQuantity());
         return cartItem;
+    }
+
+    public static TitleType toTitleType(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return TitleType.WAITING;
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return TitleType.CONFIRMED;
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return TitleType.SENT;
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return TitleType.RECEIVED;
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return TitleType.CANCELLED;
+        }
+        return TitleType.REJECT;
+    }
+
+    public static String orderStatusToString(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return "đang chờ xác nhận";
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return "đã được xác nhận";
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return "đang được gửi đi";
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return "đã được giao thành công";
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return "đã bị hủy";
+        }
+        return "không được xác nhận";
+    }
+
+    public static String orderStatusToTitle(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return "Đặt hàng thành công";
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return "Đã được xác nhận";
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return "Vận chuyển đơn hàng";
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return "Đã giao thành công";
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return "Đã bị hủy";
+        }
+        return "Không được xác nhận";
     }
 }

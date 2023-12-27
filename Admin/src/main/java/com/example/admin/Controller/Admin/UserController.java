@@ -14,7 +14,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping()
     public String listStaff(Model model) {
         model.addAttribute("users", userService.getAllStaff());
@@ -28,8 +27,10 @@ public class UserController {
     }
     @PostMapping("add")
     public String addStaff(@ModelAttribute User user) {
-        userService.addStaff(user);
-        return "redirect:/admin/staff";
+        if(userService.addStaff(user)){
+            return "redirect:/admin/staff";
+        }
+        return "Admin/AddStaffAdmin";
     }
     @GetMapping("detail/{id}")
     public String showDetailStaff(@PathVariable String id, Model model) {
@@ -48,7 +49,7 @@ public class UserController {
         model.addAttribute("user", userService.getStaffById(userId));
         return "Admin/EditStaffAdmin";
     }
-        @PostMapping("edit")
+    @PostMapping("edit")
     public String editStaff(@ModelAttribute User user) {
         userService.updateStaff(user);
         return "redirect:/admin/staff";
@@ -72,5 +73,11 @@ public class UserController {
         Long userId = Long.parseLong(id);
         userService.restoreStaffById(userId);
         return "redirect:/admin/staff/restore";
+    }
+    @CrossOrigin
+    @PostMapping("reset-password/{id}")
+    public String ResetPassword(@ModelAttribute User user) {
+        userService.resetPassword(user);
+        return "redirect:/admin/staff";
     }
 }
