@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/checkout.css}">
     <!--        <style>-->
     <!--            /* Initially set the form to be disabled */-->
     <!--            .column_right form {-->
@@ -18,7 +19,7 @@
     <!--        </style>-->
 </head>
 <body>
-<th:block th:replace="header.html"></th:block>
+<th:block th:replace="header1.html"></th:block>
 <main>
     <div class="container_main">
         <div class="panel">
@@ -35,70 +36,70 @@
                         <input class="form-control" type="text" placeholder="Điện thoại" aria-label="default input example">
                     </div>
 
-                    <div>
-                        <div>
-                            <select id="city">
-                                <option value="" selected>Chọn tỉnh thành</option>
-                            </select>
 
-                            <select id="district">
-                                <option value="" selected>Chọn quận huyện</option>
-                            </select>
+                    <div class="address">
+                        <select id="city">
+                            <option value="" selected>Chọn tỉnh thành</option>
+                        </select>
 
-                            <select id="ward">
-                                <option value="" selected>Chọn phường xã</option>
-                            </select>
-                        </div>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-                        <script>
-                            const host = "https://provinces.open-api.vn/api/";
-                            var callAPI = (api) => {
-                                return axios.get(api)
-                                    .then((response) => {
-                                        renderData(response.data, "city");
-                                    });
-                            }
-                            callAPI('https://provinces.open-api.vn/api/?depth=1');
-                            var callApiDistrict = (api) => {
-                                return axios.get(api)
-                                    .then((response) => {
-                                        renderData(response.data.districts, "district");
-                                    });
-                            }
-                            var callApiWard = (api) => {
-                                return axios.get(api)
-                                    .then((response) => {
-                                        renderData(response.data.wards, "ward");
-                                    });
-                            }
+                        <select id="district">
+                            <option value="" selected>Chọn quận huyện</option>
+                        </select>
 
-                            var renderData = (array, select) => {
-                                let row = ' <option disable value="">Chọn</option>';
-                                array.forEach(element => {
-                                    row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
-                                });
-                                document.querySelector("#" + select).innerHTML = row
-                            }
-
-                            $("#city").change(() => {
-                                callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
-                                printResult();
-                            });
-                            $("#district").change(() => {
-                                callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
-                                printResult();
-                            });
-                            $("#ward").change(() => {
-                                printResult();
-                            })
-
-                        </script>
+                        <select id="ward">
+                            <option value="" selected>Chọn phường xã</option>
+                        </select>
                     </div>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+                    <script>
+                        const host = "https://provinces.open-api.vn/api/";
+                        var callAPI = (api) => {
+                            return axios.get(api)
+                                .then((response) => {
+                                    renderData(response.data, "city");
+                                });
+                        }
+                        callAPI('https://provinces.open-api.vn/api/?depth=1');
+                        var callApiDistrict = (api) => {
+                            return axios.get(api)
+                                .then((response) => {
+                                    renderData(response.data.districts, "district");
+                                });
+                        }
+                        var callApiWard = (api) => {
+                            return axios.get(api)
+                                .then((response) => {
+                                    renderData(response.data.wards, "ward");
+                                });
+                        }
+
+                        var renderData = (array, select) => {
+                            let row = ' <option disable value="">Chọn</option>';
+                            array.forEach(element => {
+                                row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+                            });
+                            document.querySelector("#" + select).innerHTML = row
+                        }
+
+                        $("#city").change(() => {
+                            callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+                            printResult();
+                        });
+                        $("#district").change(() => {
+                            callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+                            printResult();
+                        });
+                        $("#ward").change(() => {
+                            printResult();
+                        })
+
+                    </script>
+
 
                     <div>
                         <label>* Đường</label>
-                        <input type="text" placeholder="Đường">
+                        <input class="form-control"  type="text" placeholder="Đường" aria-label="default input example">
                     </div>
 
                     <!--        <div>-->
@@ -107,7 +108,7 @@
                     <!--        </div>-->
 
                     <div>
-                        <button id="buttonAddress">Xác nhận</button>
+                        <button class="buttonAddress" id="buttonAddress">Xác nhận</button>
                     </div>
                 </form>
             </div>
@@ -116,11 +117,12 @@
                 <form id="checkout">
                     <h3>Chi tiết đơn hàng</h3>
                     <div>
-                        <table class="table">
+                        <table class="table" id="productTable">
                             <thead>
                             <tr>
                                 <th scope="col">Ảnh</th>
                                 <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Số lượng</th>
                                 <th scope="col">Tổng cộng</th>
                                 <th scope="col"></th>
                             </tr>
@@ -157,7 +159,7 @@
                         </div>
                     </div>
                     <div>
-                        <input type="submit" value="Xác nhận đơn hàng">
+                        <button class="buttonPayment" id="buttonPayment" value="Xác nhận đơn hàng">Thanh toán</button>
                     </div>
                 </form>
             </div>
@@ -168,59 +170,71 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const storedCartItems = localStorage.getItem('cartItems');
-        const cartItemsOnCheckout = storedCartItems ? JSON.parse(storedCartItems) : [];
+        // Hàm gọi API để xem giỏ hàng
+        function viewCart() {
+            const apiUrl = '/api/cart';
 
-        updateCheckoutTable(cartItemsOnCheckout);
-    });
-
-    function updateCheckoutTable(cartItemsOnCheckout) {
-        const tableBody = document.querySelector('.column_right table tbody');
-
-        // Clear existing data in the table
-        while (tableBody.firstChild) {
-            tableBody.removeChild(tableBody.firstChild);
+            fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Failed to fetch cart data');
+                })
+                .then(cartItems => {
+                    console.log('Cart items:', cartItems);
+                    updateCartTable(cartItems);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
 
-        let totalSum = 0;
+        // Hàm cập nhật nội dung bảng giỏ hàng
+        function updateCartTable(cartItems) {
+            const tableBody = document.getElementById('productTable').getElementsByTagName('tbody')[0];
 
-        cartItemsOnCheckout.forEach(item => {
-            const row = tableBody.insertRow();
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            const cell3 = row.insertCell(2);
-            const cell4 = row.insertCell(3);
+            // Xóa dữ liệu cũ trong bảng
+            while (tableBody.firstChild) {
+                tableBody.removeChild(tableBody.firstChild);
+            }
 
-            cell1.innerHTML = `<img src="/images/product/${item.product.image1}" alt="Hình ảnh" width="50" height="50">`;
-            cell2.innerHTML = item.product.name;
-            const productTotal = item.product.price * item.quantity;
-            cell3.innerHTML = productTotal;
+            let totalSum = 0;
 
-            totalSum += productTotal;
+            cartItems.forEach(item => {
+                const row = tableBody.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                const cell3 = row.insertCell(2);
+                const cell4 = row.insertCell(3);
+                // const cell5 = row.insertCell(4);
+                // const cell6 = row.insertCell(5);
 
-            const deleteButton = document.createElement('button');
-            deleteButton.innerText = 'Delete';
-            deleteButton.disabled = false;  // Set to true or false based on your condition
-            // Add an event listener to handle the delete action
-            deleteButton.addEventListener('click', () => {
-                // Your delete logic here
+                cell1.innerHTML = `<img src="/images/product/${item.product.image1}" alt="Hình ảnh" width="50" height="50">`;
+                cell2.innerHTML = item.product.name;
+                cell3.innerHTML = item.quantity;
+                const productTotal = item.product.price * item.quantity;
+                cell4.innerHTML = productTotal;
+
+                totalSum += productTotal;
             });
-
-            // Append the button to the cell
-            cell4.appendChild(deleteButton);
-        });
-
-        // Display the total sum
-        const totalRow = tableBody.insertRow();
-        totalRow.innerHTML = `<td colspan="2"></td><td>Total:</td><td>${totalSum}</td>`;
-    }
+            const totalRow = tableBody.insertRow();
+            totalRow.innerHTML = `<td colspan="3"></td><td>Thanh toán:</td><td>${totalSum}</td>`;
+        }
+        viewCart();
+    });
 </script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const buttonAddress = document.getElementById('buttonAddress');
         const checkoutForm = document.querySelector('.column_right form');
-        let idAddress;
+        let addressId;
         buttonAddress.addEventListener('click', function (event) {
 
             event.preventDefault();
@@ -259,12 +273,11 @@
                     throw new Error('Failed to create address');
                 })
                 .then(data => {
-                    // if (data && data.length > 0) {
-                    //     const firstAddress = data[0];
-                    //     idAddress = firstAddress.id;
-                    idAddress = data.id;
-                        console.log('Address created:', data);
-                        console.log('idAddress:', idAddress);
+
+                    addressId = data.id;
+                    console.log('Address created:', data);
+                    console.log('idAddress:', addressId);
+                    alert("Thêm địa chỉ thành công")
                     // } else {
                     //     console.error('Invalid data format from the server.');
                     // }
@@ -283,36 +296,37 @@
             const note = document.querySelector(".column_right textarea").value;
 
             const voucherInput = document.querySelector(".column_right input[type='text']");
-            const voucher = voucherInput ? voucherInput.value : '';
+            let voucher = voucherInput ? voucherInput.value : null;
+            voucher = voucher === '' ? null : voucher;
 
-            const paymentMethod = document.querySelector(".column_right input[name='flexRadioDefault']:checked").id === 'chuyenkhoan';
+            const paymentOnline = document.querySelector(".column_right input[name='flexRadioDefault']:checked").id === 'chuyenkhoan';
 
             const orderData = {
-                idAddress: idAddress,
+                addressId: addressId,
                 note: note,
                 voucher: voucher,
-                paymentMethod: paymentMethod,
+                paymentOnline: paymentOnline,
             };
 
             console.log(orderData)
 
-            fetch("/api/check-out", {
+            fetch("/api/payment/web", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(orderData),
             })
-                .then((response) => response.json())
+                .then((response) => response.text())
                 .then((data) => {
-                    // Xử lý dữ liệu phản hồi theo cách cần thiết.
                     console.log(data);
-                    // Bạn có thể thực hiện các hành động bổ sung dựa trên phản hồi.
+                    window.location.href = data
                 })
                 .catch((error) => {
                     console.error("Lỗi trong quá trình thanh toán:", error);
                 });
         });
+
     });
 </script>
 
