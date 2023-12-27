@@ -1,209 +1,146 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="catalog/view/stylesheet/fonts/fontawesome/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" th:href="@{/css/home.css}">
-    <script th:src="@{/js/home.js}" defer></script>
-
     <title>Trang chủ</title>
 </head>
 <body>
 <th:block th:replace="header.html"></th:block>
-    <main>
-        <div class="container_main">
-            <div class="panel">
-            <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
-            <img th:src="@{/images/panelHoa.png}">
+<section>
+    <div class="container_section">
+        <div class="image-slider">
+            <img th:src="@{/images/product/background.png}">
+            <img th:src="@{/images/product/background2.png}">
+        </div>
+    </div>
+</section>
+<nav>
+    <div class="container_nav">
+        <div class="nav_left">
+            <img th:src="@{/images/product/anhHoa4.png}">
         </div>
 
-            <div class="productList_Category" id="categoryTitleContainer">
-<!--                <h3 class="category" id="categoryTitle"></h3>-->
-<!--                <div class="item_ProductOfCategory" id="item_ProductOfCategory">-->
-<!--                    <ul id="category"></ul>-->
-<!--                <ul id="productList"></ul>-->
-
+        <div class="nav_right">
+            <div class="flowerImageLeft">
+                <img th:src="@{/images/product/anhHoa.png}">
+                <img th:src="@{/images/product/anhHoa2.png}">
+            </div>
+            <div class="flowerImageRight">
+                <img th:src="@{/images/product/anhHoa3.png}">
             </div>
         </div>
+    </div>
+
+    <div class="container_nav2">
+        <div class="panner">
+            <img th:src="@{/images/product/anhHoa5.png}">
         </div>
-    </main>
-
-<th:block th:replace="footerHome.html"></th:block>
-
+        <div class="panner2">
+            <img th:src="@{/images/product/anhHoa6.png}">
+        </div>
+    </div>
+    <div class="container_product">
+        <div class="div_product" id="productContainer">
+<!--            <ul class="product" id="product">-->
+<!--            </ul>-->
+        </div>
+    </div>
+    <div class="video-container">
+        <div class="video">
+        <video controls>
+            <source th:src="@{/images/product/clip.mp4}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        </div>
+    </div>
+    <div class="trending">
+        <img th:src="@{/images/product/trending.png}">
+    </div>
+    <div class="trend">
+        <img th:src="@{/images/product/trend.png}">
+    </div>
+</nav>
 </body>
-<!-- Your HTML code remains unchanged -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const imageSlider = document.querySelector('.image-slider');
 
-<!-- Your HTML code remains unchanged -->
+        function nextSlide() {
+            const firstSlide = imageSlider.firstElementChild;
+            imageSlider.style.transition = 'transform 1s ease-in-out';
+            imageSlider.style.transform = `translateX(-${firstSlide.offsetWidth}px)`;
+            setTimeout(function () {
+                imageSlider.appendChild(firstSlide);
+                imageSlider.style.transition = 'none';
+                imageSlider.style.transform = 'translateX(0)';
+            }, 1000);
+        }
 
-<!-- HTML của bạn không thay đổi -->
+        setInterval(nextSlide, 5000);
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const productContainer = document.getElementById('productContainer');
 
-<!--<script>-->
+        // Gọi API
+        fetch('/api/product')
+            .then(response => response.json())
+            .then(products => {
+                // Xử lý dữ liệu trả về
+                renderProducts(products);
+                enableProductSlider();
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+            });
 
-<!--    document.addEventListener('DOMContentLoaded', function () {-->
-<!--        const categoryApiUrl = 'api/category';-->
-<!--        const productApiUrl = 'api/product/search-category';-->
-<!--        const categoryTitleContainer = document.getElementById('categoryTitleContainer');-->
-<!--        const categoryList = document.getElementById('categoryList');-->
-<!--        const productListContainer = document.getElementById('productList');-->
+        // Hàm để hiển thị dữ liệu trong phần tử có id='productContainer'
+        function renderProducts(products) {
+            products.forEach((product, index) => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
 
-<!--        function fetchAndDisplayAllProducts() {-->
-<!--            fetch(categoryApiUrl)-->
-<!--                .then(response => response.json())-->
-<!--                .then(categories => {-->
-<!--                    categories.forEach(category => {-->
-<!--                        // Display categories-->
-<!--                        const categoryListItem = createCategoryListItem(category);-->
-<!--                        categoryList.appendChild(categoryListItem);-->
+                const productImage = document.createElement('img');
+                productImage.src = '/images/product/' + product.image1;
+                productImage.className = 'imageProduct';
+                productElement.appendChild(productImage);
 
-<!--                        fetch(`${productApiUrl}/${category.id}`)-->
-<!--                            .then(response => response.json())-->
-<!--                            .then(products => {-->
-<!--                                displayCategoryAndProducts(category, products);-->
-<!--                            })-->
-<!--                            .catch(error => console.error('Lỗi khi lấy sản phẩm:', error));-->
-<!--                    });-->
-<!--                })-->
-<!--                .catch(error => console.error('Lỗi khi lấy dữ liệu danh mục:', error));-->
-<!--        }-->
+                const productInfo = document.createElement('div');
+                productInfo.innerHTML = `<h3>${product.name}</h3><p>${product.price}</p>`;
+                productElement.appendChild(productInfo);
 
-<!--        function createCategoryListItem(category) {-->
-<!--            const listItem = document.createElement('li');-->
-<!--            listItem.className = 'nav-item';-->
+                productContainer.appendChild(productElement);
 
-<!--            const link = document.createElement('a');-->
-<!--            link.className = 'nav-link';-->
-<!--            link.href = '#';-->
-<!--            link.textContent = category.name;-->
+                // Ẩn tất cả sản phẩm ngoại trừ 4 sản phẩm đầu tiên
+                if (index >= 4) {
+                    productElement.style.display = 'none';
+                }
+            });
+        }
 
-<!--            // Sự kiện để fetch và hiển thị sản phẩm cho danh mục đã chọn-->
-<!--            link.addEventListener('click', function (event) {-->
-<!--                event.preventDefault();-->
-<!--                categoryTitleContainer.innerHTML = '';-->
-<!--                productListContainer.innerHTML = '';-->
+        function enableProductSlider() {
+            const productElements = document.querySelectorAll('.product');
+            let currentIndex = 0;
 
-<!--                const categoryTitle = createCategoryTitle(category);-->
-<!--                categoryTitleContainer.appendChild(categoryTitle);-->
+            function showNextProducts() {
+                // Ẩn tất cả sản phẩm
+                productElements.forEach(element => {
+                    element.style.display = 'none';
+                });
 
-<!--                fetchProductsAndDisplay(category.id);-->
-<!--            });-->
+                // Hiển thị 4 sản phẩm tiếp theo
+                for (let i = 0; i < 4; i++) {
+                    const nextIndex = (currentIndex + i) % productElements.length;
+                    productElements[nextIndex].style.display = 'inline-block';
+                }
 
+                currentIndex = (currentIndex + 4) % productElements.length;
+            }
 
-<!--            listItem.appendChild(link);-->
-<!--            return listItem;-->
-<!--        }-->
-
-
-<!--            function displayCategoryAndProducts(category, products) {-->
-<!--                const categoryTitle = createCategoryTitle(category);-->
-<!--                categoryTitleContainer.appendChild(categoryTitle);-->
-
-<!--                const categoryList = createCategoryList();-->
-
-<!--                products.forEach(product => {-->
-<!--                    const listItem = document.createElement('li');-->
-
-<!--                    listItem.addEventListener('click', function () {-->
-<!--                        redirectToProductDetail(product.id);-->
-<!--                    });-->
-
-<!--                    const productLink = document.createElement('a');-->
-
-<!--                    const productImage = document.createElement('img');-->
-<!--                    productImage.src = '/images/product/' + product.image1;-->
-<!--                    productImage.className = 'imageProduct';-->
-<!--                    productLink.appendChild(productImage);-->
-
-<!--                    const productName = document.createElement('p');-->
-<!--                    productName.textContent = product.name;-->
-<!--                    productName.className = 'nameProduct';-->
-<!--                    productLink.appendChild(productName);-->
-
-<!--                    const productPrice = document.createElement('p');-->
-<!--                    productPrice.textContent = product.price;-->
-<!--                    productPrice.className = 'priceProduct';-->
-<!--                    productLink.appendChild(productPrice);-->
-
-<!--                    const productButton = document.createElement('input');-->
-<!--                    productButton.type = 'button'-->
-<!--                    productButton.value = "ĐẶT HÀNG"-->
-<!--                    productLink.appendChild(productButton);-->
-
-<!--                    // <input type="button" value="ĐẶT HÀNG">-->
-
-<!--                    listItem.appendChild(productLink);-->
-<!--                    categoryList.appendChild(listItem);-->
-<!--                });-->
-
-<!--                categoryTitleContainer.appendChild(categoryList);-->
-<!--            }-->
-
-<!--        function redirectToProductDetail(productId) {-->
-<!--            // Gọi API để lấy thông tin sản phẩm-->
-<!--            fetch(`/api/product/${productId}`)-->
-<!--                .then(response => {-->
-<!--                    if (!response.ok) {-->
-<!--                        throw new Error(`HTTP error! Status: ${response.status}`);-->
-<!--                    }-->
-<!--                    return response.json();-->
-<!--                })-->
-<!--                .then(product => {-->
-<!--                    // Chuyển hướng đến trang chi tiết với thông tin sản phẩm-->
-<!--                    window.location.href = `/product/detail/${product.id}`;-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Lỗi khi gọi API để lấy thông tin sản phẩm:', error);-->
-<!--                    // Xử lý lỗi nếu cần-->
-<!--                });-->
-<!--        }-->
-
-
-<!--        function createCategoryList() {-->
-<!--            const categoryList = document.createElement('ul');-->
-<!--            categoryList.id = 'category';-->
-<!--            return categoryList;-->
-<!--        }-->
-
-<!--        function createCategoryTitle(category) {-->
-<!--            const categoryTitle = document.createElement('h3');-->
-<!--            categoryTitle.className = 'category';-->
-<!--            categoryTitle.textContent = category.name;-->
-<!--            return categoryTitle;-->
-<!--        }-->
-
-<!--        // Call fetchAndDisplayAllProducts to initiate the process-->
-<!--        fetchAndDisplayAllProducts();-->
-<!--    });-->
-
-<!--    var cartItemCount = 0;-->
-
-<!--    // Hàm để cập nhật số lượng hàng và hiển thị nó trên biểu tượng giỏ hàng-->
-<!--    function updateCartItemCount(count) {-->
-<!--        cartItemCount = count;-->
-<!--        document.getElementById('cartItemCount').innerText = cartItemCount;-->
-<!--    }-->
-
-<!--    // Bắt sự kiện khi thêm sản phẩm vào giỏ hàng-->
-<!--    document.getElementById('cartIcon').addEventListener('click', function() {-->
-<!--        // Gọi API hoặc thực hiện logic thêm sản phẩm vào giỏ hàng ở đây-->
-<!--        // Sau khi thành công, cập nhật số lượng hàng bằng cách gọi hàm updateCartItemCount-->
-<!--        // Ví dụ:-->
-<!--        var productId = 1;  // Đổi thành id sản phẩm thực tế-->
-<!--        addToCart(productId);-->
-<!--    });-->
-
-<!--    // Hàm thêm sản phẩm vào giỏ hàng (đoạn mã này là giả định, bạn cần thay thế bằng logic thực tế)-->
-<!--    function addToCart(productId) {-->
-<!--        // Gọi API hoặc thực hiện logic thêm sản phẩm vào giỏ hàng ở đây-->
-<!--        // Sau khi thành công, cập nhật số lượng hàng-->
-<!--        cartItemCount++;-->
-<!--        updateCartItemCount(cartItemCount);-->
-<!--    }-->
-
-
-<!--</script>-->
-
+            // Lướt qua tự động sau mỗi 5 giây
+            setInterval(showNextProducts, 1000);
+        }
+    });
+</script>
 </html>

@@ -45,6 +45,7 @@ public class PaymentAPIController {
 
     @PostMapping("web")
     public ResponseEntity<String> paymentWeb(@RequestBody Order order) {
+        System.out.println("address: " + order.getAddressId());
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

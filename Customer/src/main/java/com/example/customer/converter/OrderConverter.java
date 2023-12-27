@@ -21,7 +21,9 @@ public class OrderConverter {
         order.setShipPrice(orderEntity.getShipPrice());
         order.setPaymentOnline(orderEntity.isPaymentOnline());
         order.setAddressId(orderEntity.getAddressEntity().getId());
-        order.setVoucherId(orderEntity.getVoucherEntity().getId());
+        if (order.getVoucherId() != null) {
+            order.setVoucherId(orderEntity.getVoucherEntity().getId());
+        }
         order.setOrderStatus(orderEntity.getOrderStatus());
         order.setStatus(orderEntity.getStatus());
         order.setConfirmed(orderEntity.getConfirmed());

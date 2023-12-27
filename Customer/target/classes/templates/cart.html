@@ -12,7 +12,7 @@
     <title>Trang chủ</title>
 </head>
 <body>
-<th:block th:replace="header.html"></th:block>
+<th:block th:replace="header1.html"></th:block>
 <main>
     <div class="container_main">
         <div class="panel">
@@ -119,7 +119,6 @@
         const checkoutButton = document.querySelector('.checkout button');
 
         checkoutButton.addEventListener('click', function () {
-            // Navigate to the checkout page
             window.location.href = '/cart/checkout';
         });
     });
