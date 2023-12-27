@@ -46,4 +46,6 @@ public class Product {
     private List<Category> categoryEntities;
 
     private List<ProductDetail> productDetailEntities;
+
+    private FlashSale flashSale;
 }

@@ -10,4 +10,10 @@ public interface ProductService {
     List<Product> getAllProductByCategory(Long categoryId);
 
     Product getProductById(Long id);
+
+    List<Product> getAllProductSale();
+
+    void updateExpiredFlashSale();
+
+    List<Product> getProductBestSeller();
 }

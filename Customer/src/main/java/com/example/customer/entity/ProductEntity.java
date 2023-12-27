@@ -56,4 +56,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductDetailEntity> productDetailEntities;
 
+    @OneToOne(mappedBy = "productEntity", cascade = CascadeType.ALL)
+    private FlashSaleEntity flashSaleEntity;
+
 }
