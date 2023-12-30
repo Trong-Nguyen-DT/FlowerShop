@@ -119,27 +119,6 @@ public class ApiController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-//    @Transactional
-//    @PostMapping("/product-add")
-//    public ResponseEntity<Map<String, String>> addProductAPI(@RequestBody ProductDTO productDto) {
-//        try {
-//            // Add your business logic to save the product and its associated categories
-//            ProductEntity productEntity = productService.createProduct(productDto);
-//            productService.setCategories(productEntity, productDto);
-//
-//            // Construct the URL based on your logic
-//            String url = "/admin/product";  // Change this based on your requirements
-//            System.out.printf("successPageUrl" + url);
-//            System.out.println("successPageUrl" + ResponseEntity.EMPTY.getBody());
-//            Map<String, String> responseMap = Collections.singletonMap("url", url);
-//            // Return ResponseEntity with the URL as plain text in the body
-//            return ResponseEntity.ok().body(responseMap);
-//        } catch (Exception e) {
-//            // Handle exceptions if needed
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(Collections.singletonMap("error", "Internal Server Error"));
-//        }
-//    }
 
     @Transactional
     @PostMapping("/product-add")
@@ -171,7 +150,7 @@ public class ApiController {
         userService.resetPassword(id);
         System.out.println("Resetting password for user with id: " + id);
         // Sau khi reset password thành công, trả về đường dẫn mới (hoặc bất kỳ thông tin nào cần thiết)
-        String redirectUrl = "/admin/staff/detail/"; // Thay đổi thành đường dẫn mong muốn
+        String redirectUrl = "/admin/staff/detail/" + id; // Thay đổi thành đường dẫn mong muốn
         return ResponseEntity.ok(redirectUrl);
     }
 }

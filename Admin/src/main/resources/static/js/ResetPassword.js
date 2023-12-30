@@ -1,45 +1,3 @@
-// function confirmReset() {
-//     var overlay = document.getElementById("overlay");
-//     var resetPasswordUrl = overlay.dataset.resetPasswordUrl;
-//     var userId = overlay.dataset.userId;
-//
-//     // Sử dụng SweetAlert để hiển thị hộp thoại xác nhận
-//     Swal.fire({
-//         title: 'Are you sure?',
-//         text: 'You are about to reset the password.',
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonText: 'Yes, reset it!',
-//         cancelButtonText: 'No, cancel!',
-//         reverseButtons: true
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             // Nếu người dùng đồng ý, thực hiện reset password
-//             $.ajax({
-//                 type: "POST",
-//                 url: resetPasswordUrl.replace('{id}', userId),
-//                 data: { userId: userId },
-//                 success: function (response) {
-//                     // Xử lý khi yêu cầu thành công
-//                     Swal.fire('Password reset confirmed!', '', 'success');
-//                     hideOverlay();
-//                 },
-//                 error: function (error) {
-//                     // Xử lý khi có lỗi
-//                     console.error("Error resetting password:", error);
-//                     Swal.fire('Error!', 'An error occurred while resetting password.', 'error');
-//                     hideOverlay();
-//                 }
-//             });
-//         } else {
-//             // Nếu người dùng từ chối, ẩn hộp thoại
-//             hideOverlay();
-//         }
-//     });
-// }
-
-
-
 function confirmReset() {
     var overlay = document.getElementById("overlay");
     var resetPasswordUrl = overlay.dataset.resetPasswordUrl;
@@ -82,10 +40,6 @@ function confirmReset() {
         }
     });
 }
-
-
-
-
 function cancelReset() {
     // Người dùng không muốn reset, ẩn overlay
     hideOverlay();
