@@ -242,7 +242,6 @@
             dashboard
         </div>
     </div>
-
     <!-- EDIT STAFF TABLE -->
     <div class="box">
         <div class="box-body overflow-scroll">
@@ -251,7 +250,7 @@
             </div>
             <div class="box-body overflow-scroll">
                 <form th:action="@{/admin/staff/edit}" th:method="post" th:object="${user}"
-                      onsubmit="return validateForm()">
+                      onsubmit="return validateFormEditUser()">
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>
@@ -260,7 +259,7 @@
                             </th>
                             <td>
                                 <input type="text" th:field="*{username}" id="username">
-                                <span id="usernameError" style="color: red;"></span>
+                                <span id="usernameError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -269,7 +268,7 @@
                             </th>
                             <td>
                                 <input type="text" th:field="*{fullName}" id="fullName">
-                                <span id="fullNameError" style="color: red;"></span>
+                                <span id="fullNameError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -278,7 +277,7 @@
                             </th>
                             <td>
                                 <input type="file" th:field="*{image}" id="image">
-                                <span id="imageError" style="color: red;"></span>
+                                <span id="imageError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -287,7 +286,7 @@
                             </th>
                             <td>
                                 <input type="text" th:field="*{phone}" id="phone">
-                                <span id="phoneError" style="color: red;"></span>
+                                <span id="phoneError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -296,7 +295,7 @@
                             </th>
                             <td>
                                 <input type="text" th:field="*{address}" id="address">
-                                <span id="addressError" style="color: red;"></span>
+                                <span id="addressError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -304,8 +303,8 @@
                                 <label>Birthday:</label>
                             </th>
                             <td>
-                                <input type="date" th:field="*{birthday}" id="birthday">
-                                <span id="birthdayError" style="color: red;"></span>
+                                <input type="date" th:field="*{birthday}" id="birthday" >
+                                <span id="birthdayError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -314,7 +313,7 @@
                             </th>
                             <td>
                                 <input type="text" th:field="*{salary}" id="salary">
-                                <span id="salaryError" style="color: red;"></span>
+                                <span id="salaryError" style="color: red"></span>
                             </td>
                         </tr>
                         <tr>
@@ -344,9 +343,9 @@
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
-<script th:src="@{/js/addAndEditUser.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
+<script th:src="@{/js/EditStaff.js}"></script>
 </body>
 </html>

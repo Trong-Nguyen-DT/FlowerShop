@@ -11,12 +11,9 @@ import lombok.Setter;
 public class OrderDetail {
     private Long id;
 
-//    private OrderEntity orderEntity;
-    private Long orderId;
+    private Order order;
 
-//    private ProductEntity productEntity;
-    private Long productId;
-
+    private Product product;
 
     private int quantity;
 }

@@ -1,7 +1,5 @@
 package com.example.admin.Domain;
 
-import com.example.admin.Entity.AddressEntity;
-import com.example.admin.Entity.OrderEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,6 +27,8 @@ public class Customer {
     private String email;
 
     private boolean sex;
+
+    private String token;
 
     private LocalDate birthday;
 

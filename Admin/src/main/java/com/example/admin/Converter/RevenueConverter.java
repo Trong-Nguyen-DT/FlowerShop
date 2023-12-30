@@ -9,6 +9,7 @@ public class RevenueConverter {
         revenue.setId(revenueEntity.getId());
         revenue.setDate(revenueEntity.getDate());
         revenue.setTotalRevenue(revenueEntity.getTotalRevenue());
+
         return revenue;
     }
 }

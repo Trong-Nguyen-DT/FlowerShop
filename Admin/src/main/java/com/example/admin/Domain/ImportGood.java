@@ -12,9 +12,7 @@ public class ImportGood {
 
     private LocalDateTime timeImport;
 
-//    private Item item;
-
     private Long staff_id;
 
-    private double totalPrice;
+    private Long totalPrice;
 }

@@ -1,12 +1,9 @@
 package com.example.admin.Service.Impl;
 
-import com.example.admin.Converter.CategoryConverter;
 import com.example.admin.Converter.UserConverter;
 import com.example.admin.Domain.User;
-import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.UserEntity;
 import com.example.admin.Repository.StaffRepository;
-import com.example.admin.Repository.UserRepository;
 import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -92,18 +89,16 @@ public class UserServiceImpl implements UserService {
         staffRepository.save(userEntity);
     }
     @Override
-    public void resetPassword(User user) {
+    public void resetPassword(Long id) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        UserEntity userEntity = staffRepository.findById(id).orElseThrow();
 
         // Khôi phục mật khẩu thành mật khẩu mặc định (ví dụ: chuỗi rỗng)
         String defaultPassword = "1";
-        user.setPassword(passwordEncoder.encode(defaultPassword));
+        userEntity.setPassword(passwordEncoder.encode(defaultPassword));
 
         // Lưu lại thông tin người dùng
-        updateStaff(user);
-
-        // Hủy bỏ phiên làm việc của người dùng sau khi reset mật khẩu
-        SecurityContextHolder.clearContext();
+        staffRepository.save(userEntity);
 
         // Rest of your code...
         System.out.println("Reset password completed.");

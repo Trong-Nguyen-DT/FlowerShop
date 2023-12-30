@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 @Getter
 public class Otp {
     private Long id;
+
     private String otp;
+
     private LocalDateTime otpExpiration;
 }

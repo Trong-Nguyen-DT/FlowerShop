@@ -35,9 +35,4 @@ public class ReviewConverter {
 
         return reviewEntity;
     }
-//    public static List<ReviewEntity> toEntityList(List<Review> reviews) {
-//        return reviews.stream()
-//                .map(ReviewConverter::toEntity)
-//                .collect(Collectors.toList());
-//    }
 }

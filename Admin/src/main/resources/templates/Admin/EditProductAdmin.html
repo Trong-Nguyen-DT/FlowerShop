@@ -231,19 +231,24 @@
 </div>
 <!-- END SIDEBAR -->
 
-<!-- EDIT PRODUCT TABLE -->
-<div class="box">
-    <div class="box-body overflow-scroll">
-        <div class="box-header">
-            Edit Product
+<!-- MAIN CONTENT -->
+<div class="main">
+    <div class="main-header">
+        <div class="mobile-toggle" id="mobile-toggle">
+            <i class='bx bx-menu-alt-right'></i>
         </div>
+        <div class="main-title">
+            dashboard
+        </div>
+    </div>
+    <!-- PRODUCTS EDIT TABLE -->
+    <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
                 Edit Product
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}"
-                      id="editProductForm">
+                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" onsubmit="return validateFormEditProduct(); " >
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>
@@ -251,8 +256,8 @@
                                 <label>Name:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{name}" id="name">
-                                <span id="nameError" style="color: red;"></span>
+                                <input type="text" th:field="*{name}" id="nameEdit">
+                                <span id="nameEditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -260,8 +265,8 @@
                                 <label>Original Price:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{originalPrice}" id="originalPrice">
-                                <span id="originalPriceError" style="color: red;"></span>
+                                <input type="text" th:field="*{originalPrice}" id="originalPriceEdit">
+                                <span id="originalPriceEditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -269,8 +274,8 @@
                                 <label>Discount:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{discount}" id="discount">
-                                <span id="discountError" style="color: red;"></span>
+                                <input type="text" th:field="*{discount}" id="discountEdit">
+                                <span id="discountEditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -278,26 +283,26 @@
                                 <label>Description:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{description}" id="description">
-                                <span id="descriptionError" style="color: red;"></span>
+                                <input type="text" th:field="*{description}" id="descriptionEdit">
+                                <span id="descriptionEditError" style="color: red;"></span>
                             </td>
                         </tr>
-                        <tr>
-                            <th>
-                                <label>Detail:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{details}" id="details">
-                                <span id="detailsError" style="color: red;"></span>
-                            </td>
-                        </tr>
+                        <!--                        <tr>-->
+                        <!--                            <th>-->
+                        <!--                                <label>Detail:</label>-->
+                        <!--                            </th>-->
+                        <!--                            <td>-->
+                        <!--                                <input type="text" th:field="*{details}" id="details">-->
+                        <!--                                <span id="detailsError" style="color: red;"></span>-->
+                        <!--                            </td>-->
+                        <!--                        </tr>-->
                         <tr>
                             <th>
                                 <label>Delivery:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{delivery}" id="delivery">
-                                <span id="deliveryError" style="color: red;"></span>
+                                <input type="text" th:field="*{delivery}" id="deliveryEdit">
+                                <span id="deliveryEditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -305,8 +310,8 @@
                                 <label>Sub Info:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{sub_info}" id="sub_info">
-                                <span id="sub_infoError" style="color: red;"></span>
+                                <input type="text" th:field="*{sub_info}" id="sub_infoEdit">
+                                <span id="sub_infoEditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -314,8 +319,8 @@
                                 <label>Image 1:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image1}" id="image1">
-                                <span id="image1Error" style="color: red;"></span>
+                                <input type="file" th:field="*{image1}" id="image1Edit"  >
+                                <span id="image1EditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -323,8 +328,8 @@
                                 <label>Image 2:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image2}" id="image2">
-                                <span id="image2Error" style="color: red;"></span>
+                                <input type="file" th:field="*{image2}" id="image2Edit">
+                                <span id="image2EditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -332,8 +337,8 @@
                                 <label>Image 3:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image3}" id="image3">
-                                <span id="image3Error" style="color: red;"></span>
+                                <input type="file" th:field="*{image3}" id="image3Edit">
+                                <span id="image3EditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -341,8 +346,8 @@
                                 <label>Image 4:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image4}" id="image4">
-                                <span id="image4Error" style="color: red;"></span>
+                                <input type="file" th:field="*{image4}" id="image4Edit">
+                                <span id="image4EditError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>
@@ -350,8 +355,8 @@
                                 <label>Image 5:</label>
                             </th>
                             <td>
-                                <input type="file" th:field="*{image5}" id="image5">
-                                <span id="image5Error" style="color: red;"></span>
+                                <input type="file" th:field="*{image5}" id="image5Edit">
+                                <span id="image5EditError" style="color: red;"></span>
                             </td>
                         </tr>
                     </table>
@@ -366,10 +371,9 @@
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
-<script th:src="@{/js/AddProduct.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
+<script th:src="@{/js/EditProduct.js}"></script>
 </body>
-
 </html>

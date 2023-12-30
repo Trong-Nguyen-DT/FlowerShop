@@ -20,4 +20,9 @@ public interface OrderService {
     OrderEntity findById(Long id);
     void updateStatusOrder(OrderStatus orderStatus, Long orderId);
     List<AmountData> getAmountByMonth();
+    List<OrderHistory> getOrderByMonth(int month, int year);
+    double getPercentCompare(double totalThisMonth, double totalLastMonth);
+    Long getTotalAmountByOrder(List<OrderHistory> orderHistories);
+
+    Long getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime);
 }

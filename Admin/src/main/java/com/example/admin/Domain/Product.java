@@ -40,11 +40,11 @@ public class Product {
 
     private String image5;
 
+    private FlashSale flashSale;
+
     private boolean deleted;
 
     private List<Review> reviews;
 
     private List<Category> categories;
-
-    private List<ProductDetail> productDetails;
 }

@@ -15,7 +15,9 @@ public class OrderDetailHistory {
 
     private String nameProduct;
 
-    private double priceProduct;
+    private Long priceProduct;
+
+    private String image;
 
     private int quantity;
 }

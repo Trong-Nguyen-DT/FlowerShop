@@ -7,5 +7,6 @@ import lombok.Setter;
 @Getter
 public class ItemDTO {
     private Long id;
+
     private int quantity;
 }

@@ -18,9 +18,7 @@
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <link rel="stylesheet" th:href="@{/css/create.css}">
     <link rel="stylesheet" th:href="@{/css/styte.css}">
-
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    <!-- SCRIPT -->
 </head>
 
 <body>
@@ -251,7 +249,7 @@
                 Add Product
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/product/add}" th:method="post" th:object="${product}" id="addProductForm">
+                <form th:object="${product}" id="addProductForm" enctype="multipart/form-data" onsubmit="submitForm(); return false;">
                     <table>
                         <tr>
                             <th>
@@ -289,15 +287,15 @@
                                 <span id="descriptionError" style="color: red;"></span>
                             </td>
                         </tr>
-                        <tr>
-                            <th>
-                                <label>Detail:</label>
-                            </th>
-                            <td>
-                                <input type="text" th:field="*{details}" id="details">
-                                <span id="detailsError" style="color: red;"></span>
-                            </td>
-                        </tr>
+<!--                        <tr>-->
+<!--                            <th>-->
+<!--                                <label>Detail:</label>-->
+<!--                            </th>-->
+<!--                            <td>-->
+<!--                                <input type="text" th:field="*{details}" id="details">-->
+<!--                                <span id="detailsError" style="color: red;"></span>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         <tr>
                             <th>
                                 <label>Delivery:</label>
@@ -381,18 +379,21 @@
                         </tr>
                     </table>
                     <input type="hidden" name="categoryIds" id="categoryIdsInput">
-                    <button type="button" onclick="submitForm()">ADD</button>
+                    <button type="submit">ADD</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<!-- END ORDERS TABLE -->
+<!-- END MAIN CONTENT -->
+<div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- APP JS -->
+<script th:src="@{/js/appWeb.js}"></script>
 <script th:src="@{/js/AddProduct.js}"></script>
-<script th:src="@{/js/app.js}"></script>
 </body>
 </html>
