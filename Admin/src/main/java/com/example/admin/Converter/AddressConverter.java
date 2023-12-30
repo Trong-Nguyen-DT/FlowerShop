@@ -21,23 +21,4 @@ public class AddressConverter {
 //        address.setCustomer(CustomerConverter.toModel(addressEntity.getCustomerEntity()));
         return address;
     }
-    public static AddressEntity toEntity(Address address) {
-        AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setId(address.getId());
-        addressEntity.setStreet(address.getStreet());
-        addressEntity.setNameCustomer(address.getNameCustomer());
-        addressEntity.setPhoneNumber(address.getPhoneNumber());
-        addressEntity.setNameCity(address.getCity());
-        addressEntity.setNameWard(address.getWard());
-        addressEntity.setNameDistrict(address.getDistrict());
-
-//        addressEntity.setCustomerEntity(CustomerConverter.toEntity(address.getCustomer()));
-
-        return addressEntity;
-    }
-    public static List<AddressEntity> toEntityList(List<Address> addresses) {
-        return addresses.stream()
-                .map(AddressConverter::toEntity)
-                .collect(Collectors.toList());
-    }
 }

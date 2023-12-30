@@ -9,6 +9,5 @@ import java.util.List;
 @Setter
 public class Response {
     private List<OrderHistory> orderHistories;
-    private List<Product> products;
     private String url;
 }

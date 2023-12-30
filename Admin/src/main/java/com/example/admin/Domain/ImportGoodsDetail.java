@@ -14,5 +14,5 @@ public class ImportGoodsDetail {
 
     private int quantity;
 
-    private double price_Item;
+    private Long price_Item;
 }

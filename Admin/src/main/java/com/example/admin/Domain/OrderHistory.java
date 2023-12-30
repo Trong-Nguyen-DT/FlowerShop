@@ -1,5 +1,6 @@
 package com.example.admin.Domain;
 
+import com.example.admin.enums.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,11 +14,11 @@ public class OrderHistory {
 
     private LocalDateTime orderDateTime;
 
-    private double totalPrice;
+    private Long totalPrice;
 
-    private double discount;
+    private Long discount;
 
-    private double amount;
+    private Long amount;
 
     private Long userId;
 
@@ -30,6 +31,20 @@ public class OrderHistory {
     private String phoneCustomer;
 
     private String emailCustomer;
+
+    private OrderStatus orderStatus;
+
+    private String nameCustomerReceive;
+
+    private String phoneCustomerReceive;
+
+    private String address;
+
+    private boolean paymentOnline;
+
+    private Long shipPrice;
+
+    private boolean reviewed;
 
     private List<OrderDetailHistory> orderDetailHistories;
 }

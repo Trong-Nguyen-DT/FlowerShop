@@ -2,13 +2,9 @@ package com.example.admin.Service.Impl;
 
 
 import com.example.admin.Converter.CategoryConverter;
-import com.example.admin.Converter.ItemConverter;
-import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.CategoryData;
-import com.example.admin.Domain.ProductDetail;
 import com.example.admin.Entity.CategoryEntity;
-import com.example.admin.Entity.ItemEntity;
 import com.example.admin.Entity.OrderDetailHistoryEntity;
 import com.example.admin.Repository.CategoryRepository;
 import com.example.admin.Repository.OrderDetailHistoryRepository;

@@ -22,7 +22,7 @@ public interface OrderService {
     List<AmountData> getAmountByMonth();
     List<OrderHistory> getOrderByMonth(int month, int year);
     double getPercentCompare(double totalThisMonth, double totalLastMonth);
-    double getTotalAmountByOrder(List<OrderHistory> orderHistories);
+    Long getTotalAmountByOrder(List<OrderHistory> orderHistories);
 
-    double getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime);
+    Long getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime);
 }

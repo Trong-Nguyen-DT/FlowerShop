@@ -248,7 +248,7 @@
                 Edit Product
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" onsubmit="return validateFormEditProduct()">
+                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" onsubmit="return validateFormEditProduct(); " >
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>

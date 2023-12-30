@@ -9,5 +9,6 @@ import java.time.LocalDateTime;
 @Getter
 public class TimeRange {
     private LocalDateTime startTime;
+
     private LocalDateTime endTime;
 }

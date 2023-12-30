@@ -1,7 +1,7 @@
 package com.example.admin.Service.Impl;
 
 
-import com.example.admin.Converter.OrderHistoryConverter;
+import com.example.admin.Converter.OrderConverter;
 import com.example.admin.Domain.AmountData;
 import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Domain.OrderNote;
@@ -38,16 +38,16 @@ public class OrderServiceImpl implements OrderService {
     private MailService mailService;
     @Override
     public List<OrderHistory> getAllOrderHistory() {
-        return orderHistoryRepository.findAll().stream().map(OrderHistoryConverter::toModel).toList();
+        return orderHistoryRepository.findAll().stream().map(OrderConverter::toModelHistory).toList();
     }
     @Override
     public List<OrderHistory> getOrderByTime(LocalDateTime startTime, LocalDateTime endTime) {
-        return orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(startTime, endTime).stream().map(OrderHistoryConverter::toModel).toList();
+        return orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(startTime, endTime).stream().map(OrderConverter::toModelHistory).toList();
     }
     @Override
     public double getAllTotalByTime(LocalDateTime start, LocalDateTime end) {
-        List<OrderHistory> orderHistories = orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(start, end).stream().map(OrderHistoryConverter::toModel).toList();
-        double totalAmount = 0L;
+        List<OrderHistory> orderHistories = orderHistoryRepository.findOrderHistoryEntitiesByOrderDateTimeBetween(start, end).stream().map(OrderConverter::toModelHistory).toList();
+        Long totalAmount = 0L;
         for (OrderHistory orderHistory : orderHistories){
             totalAmount += orderHistory.getAmount();
         }
@@ -110,7 +110,7 @@ public class OrderServiceImpl implements OrderService {
         for (int i = 1; i <= 12; i++) {
             AmountData amountData = new AmountData();
             List<OrderHistoryEntity> orderHistoryEntities = orderHistoryRepository.findOrdersByMonthAndYear(i, LocalDateTime.now().getYear());
-            double amountMonth = 0L;
+            Long amountMonth = 0L;
             for (OrderHistoryEntity orderHistoryEntity : orderHistoryEntities) {
                 amountMonth += orderHistoryEntity.getAmount();
             }
@@ -122,7 +122,7 @@ public class OrderServiceImpl implements OrderService {
     }
     @Override
     public List<OrderHistory> getOrderByMonth(int month, int year) {
-        return orderHistoryRepository.findOrdersByMonthAndYear(month, year).stream().map(OrderHistoryConverter::toModel).toList();
+        return orderHistoryRepository.findOrdersByMonthAndYear(month, year).stream().map(OrderConverter::toModelHistory).toList();
     }
     @Override
     public double getPercentCompare(double totalThisMonth, double totalLastMonth) {
@@ -132,14 +132,14 @@ public class OrderServiceImpl implements OrderService {
         return Double.parseDouble(formattedPercentage);
     }
     @Override
-    public double getTotalAmountByOrder(List<OrderHistory> orderHistories) {
-        double totalAmount = 0L;
+    public Long getTotalAmountByOrder(List<OrderHistory> orderHistories) {
+        Long totalAmount = 0L;
         for (OrderHistory orderHistory : orderHistories){
             totalAmount += orderHistory.getAmount();
         }
         return totalAmount;
     }
-    public double getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime) {
+    public Long getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime) {
         return orderHistoryRepository.getTotalRevenueByTime(startTime, endTime);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.admin.Entity;
 
+import com.example.admin.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,11 +18,11 @@ public class OrderHistoryEntity {
 
     private LocalDateTime orderDateTime;
 
-    private double totalPrice;
+    private Long totalPrice;
 
-    private double discount;
+    private Long discount;
 
-    private double amount;
+    private Long amount;
 
     private Long userId;
 
@@ -34,6 +35,22 @@ public class OrderHistoryEntity {
     private String phoneCustomer;
 
     private String emailCustomer;
+
+    private Long addressId;
+
+    private String address;
+
+    private String nameCustomerReceive;
+
+    private String phoneCustomerReceive;
+
+    private OrderStatus orderStatus;
+
+    private boolean paymentOnline;
+
+    private Long shipPrice;
+
+    private boolean reviewed;
 
     @OneToMany(mappedBy = "orderHistoryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetailHistoryEntity> orderDetailHistoryEntities;

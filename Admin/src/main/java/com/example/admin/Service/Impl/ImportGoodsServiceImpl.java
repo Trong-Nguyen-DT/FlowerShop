@@ -1,9 +1,7 @@
 package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.ImportGoodsConverter;
-import com.example.admin.Converter.OrderHistoryConverter;
 import com.example.admin.Domain.ImportGood;
-import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Repository.ImportGoodsRepository;
 import com.example.admin.Service.ImportGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +23,12 @@ public class ImportGoodsServiceImpl implements ImportGoodsService {
     public List<ImportGood> getImportGoodByTime(LocalDateTime startTime, LocalDateTime endTime) {
         return importGoodsRepository.findImportGoodsEntitiesByTimeImportBetween(startTime, endTime).stream().map(ImportGoodsConverter::toModel).toList();
     }
-    public double getTotalImportAmountByTime(LocalDateTime startTime, LocalDateTime endTime) {
+    public Long getTotalImportAmountByTime(LocalDateTime startTime, LocalDateTime endTime) {
         try {
             return importGoodsRepository.getTotalImportAmountByTime(startTime, endTime);
         } catch (Exception ex) {
             // Handle the exception or log it
-            return 0;
+            return (long) 0;
         }
     }
 //    public List<String> searchItemNames(String term) {

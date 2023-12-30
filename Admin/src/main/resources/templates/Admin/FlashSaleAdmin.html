@@ -17,7 +17,6 @@
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -47,6 +46,30 @@
                 <i class='bx bx-home'></i>
                 <span>dashboard</span>
             </a>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-list-ul'></i>
+                <span>Category</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/importGood}">
@@ -242,26 +265,39 @@
         </div>
     </div>
 
-    <!-- INVENTORY TABLE -->
+    <!-- Flash sales TABLE -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Inventories
+                Flash sales
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name Item</th>
-                        <th>Quantity</th>
+                        <th>Start date</th>
+                        <th>End date</th>
+                        <th>Price sale</th>
+                        <th>Sale</th>
+                        <th>Name Product</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+
                     </tr>
                     </thead>
-                    <tbody th:each="inven : ${inventories}">
+                    <tbody th:each="flSale : ${flashSales}" th:if="${flSale.expired == false}">
                     <tr>
-                        <td th:text="${inven.id}"></td>
-                        <td th:text="${inven.itemId.name}"></td>
-                        <td th:text="${inven.quantity}"></td>
+                        <td th:text="${flSale.id}"></td>
+                        <td th:text="${flSale.startDate}"></td>
+                        <td th:text="${flSale.endDate}"></td>
+                        <td th:text="${flSale.priceSale}"></td>
+                        <td th:text="${flSale.sale}"></td>
+                        <td th:text="${flSale.product.name}"></td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/flash-sale/edit/' + ${flSale.id}}">
+                            <i class="fa-solid fa-pen"></i> </a></button> </td>
+                        <td><button class="btn-click"> <a th:href="@{'/admin/flash-sale/delete/' + ${flSale.id}}"> <i
+                                class="fa-solid fa-trash-can"></i> </a> </button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -269,7 +305,7 @@
         </div>
     </div>
 </div>
-<!-- END INVENTORIES TABLE -->
+<!-- END ORDERS TABLE -->
 <!-- END MAIN CONTENT -->
 <div class="overlay"></div>
 <!-- SCRIPT -->

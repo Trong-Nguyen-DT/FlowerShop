@@ -21,11 +21,11 @@ public class OrderEntity {
 
     private LocalDateTime orderDateTime;
 
-    private double totalPrice;
+    private Long totalPrice;
 
-    private double discount;
+    private Long discount;
 
-    private double amount;
+    private Long amount;
 
     private Boolean confirmed;
 
@@ -39,7 +39,7 @@ public class OrderEntity {
 
     private boolean shipping;
 
-    private double shipPrice;
+    private Long shipPrice;
 
     private boolean paymentOnline;
 

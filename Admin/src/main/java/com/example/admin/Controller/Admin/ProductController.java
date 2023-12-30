@@ -2,33 +2,13 @@ package com.example.admin.Controller.Admin;
 
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
-import com.example.admin.Domain.ProductDTO;
-import com.example.admin.Entity.ProductEntity;
 import com.example.admin.Service.CategoryService;
-import com.example.admin.Service.ItemService;
-import com.example.admin.Service.ProductDetailService;
 import com.example.admin.Service.ProductService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -37,9 +17,6 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
-
-    @Autowired
-    private ProductDetailService productDetailService;
 
     @Autowired
     private CategoryService categoryService;

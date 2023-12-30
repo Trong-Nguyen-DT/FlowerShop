@@ -28,9 +28,9 @@ public class ReportAdminController {
     @GetMapping("/search")
     public String viewReport (@RequestParam("startTime") LocalDateTime startTime,
                                       @RequestParam("endTime") LocalDateTime endTime,Model model){
-        double totalImportAmount = importGoodsService.getTotalImportAmountByTime(startTime, endTime);
-        double totalRevenue = orderService.getTotalRevenueByTime(startTime, endTime);
-        double profit = totalRevenue - totalImportAmount;
+        Long totalImportAmount = importGoodsService.getTotalImportAmountByTime(startTime, endTime);
+        Long totalRevenue = orderService.getTotalRevenueByTime(startTime, endTime);
+        Long profit = totalRevenue - totalImportAmount;
 
         model.addAttribute("totalImportAmount", totalImportAmount);
         model.addAttribute("totalRevenue", totalRevenue);

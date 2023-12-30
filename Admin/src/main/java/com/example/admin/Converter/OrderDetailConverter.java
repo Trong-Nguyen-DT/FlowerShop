@@ -9,8 +9,8 @@ public class OrderDetailConverter {
     public static OrderDetail toModel (OrderDetailEntity orderDetailEntity){
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setId(orderDetailEntity.getId());
-        orderDetail.setOrderId(orderDetailEntity.getOrderEntity().getId());
-        orderDetail.setProductId(orderDetailEntity.getProductEntity().getId());
+        orderDetail.setOrder(OrderConverter.toModel(orderDetailEntity.getOrderEntity()));
+        orderDetail.setProduct(ProductConverter.toModel(orderDetailEntity.getProductEntity()));
         orderDetail.setQuantity(orderDetailEntity.getQuantity());
         return orderDetail;
     }
@@ -18,20 +18,12 @@ public class OrderDetailConverter {
     public static OrderDetailHistory toOrderDetailHistory(OrderDetailHistoryEntity entity) {
         OrderDetailHistory orderDetailHistory = new OrderDetailHistory();
         orderDetailHistory.setId(entity.getId());
+        orderDetailHistory.setOrderHistory(OrderConverter.toModelHistory(entity.getOrderHistoryEntity()));
         orderDetailHistory.setProductId(entity.getProductId());
         orderDetailHistory.setNameProduct(entity.getNameProduct());
         orderDetailHistory.setPriceProduct(entity.getPriceProduct());
         orderDetailHistory.setQuantity(entity.getQuantity());
-        return orderDetailHistory;
-    }
-
-    public static OrderDetailHistory OrderDetailEntitytoOrderDetailHistory(OrderDetailEntity entity) {
-        OrderDetailHistory orderDetailHistory = new OrderDetailHistory();
-        orderDetailHistory.setId(entity.getId());
-        orderDetailHistory.setProductId(entity.getProductEntity().getId());
-        orderDetailHistory.setNameProduct(entity.getProductEntity().getName());
-        orderDetailHistory.setPriceProduct(entity.getProductEntity().getPrice());
-        orderDetailHistory.setQuantity(entity.getQuantity());
+        orderDetailHistory.setImage(entity.getImage());
         return orderDetailHistory;
     }
 }

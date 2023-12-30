@@ -1,7 +1,6 @@
 package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.ProductConverter;
-import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Domain.Product;
 import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Entity.ProductEntity;
@@ -11,8 +10,6 @@ import com.example.admin.Service.CategoryService;
 import com.example.admin.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +17,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -128,12 +124,12 @@ public class ProductServiceImpl implements ProductService {
                     entity.setImage5(productDto.getName() + "5.png");
                     break;
             }
-
         }
         entity.setDelivery(productDto.getDelivery());
         entity.setSub_info(productDto.getSubInfo());
         entity.setOriginal_price(productDto.getOriginalPrice());
         entity.setDiscount(productDto.getDiscount());
+        entity.setDescription(productDto.getDescription());
         entity.setPrice(newPrice(productDto.getOriginalPrice(), productDto.getDiscount()));
         System.out.println("lưu");
         return productRepository.save(entity);

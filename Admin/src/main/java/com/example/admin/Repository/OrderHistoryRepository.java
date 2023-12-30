@@ -14,6 +14,6 @@ public interface OrderHistoryRepository extends JpaRepository<OrderHistoryEntity
     @Query("SELECT o FROM OrderHistoryEntity o WHERE MONTH(o.orderDateTime) = :month AND YEAR(o.orderDateTime) = :year")
     List<OrderHistoryEntity> findOrdersByMonthAndYear(int month, int year);
     @Query("SELECT COALESCE(SUM(o.totalPrice), 0) FROM OrderHistoryEntity o WHERE o.orderDateTime BETWEEN :startTime AND :endTime")
-    double getTotalRevenueByTime(@Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+    Long getTotalRevenueByTime(@Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
     List<OrderHistoryEntity> findOrderHistoryEntitiesByUserIdAndOrderDateTimeBetween(Long id, LocalDateTime start, LocalDateTime end);
 }

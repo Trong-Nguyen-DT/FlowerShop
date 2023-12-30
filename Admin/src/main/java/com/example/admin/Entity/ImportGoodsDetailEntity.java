@@ -21,7 +21,7 @@ public class ImportGoodsDetailEntity {
     @JoinColumn(name = "imPortGood_id")
     private ImportGoodsEntity importGoodsEntity;
 
-    private double itemPrice;
+    private Long itemPrice;
 
     private int quantity;
 }

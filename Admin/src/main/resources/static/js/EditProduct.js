@@ -1,21 +1,21 @@
-var name = document.getElementById('nameEdit').value;
-var originalPrice = document.getElementById('originalPriceEdit').value;
-var discount = document.getElementById('discountEdit').value;
-var description = document.getElementById('descriptionEdit').value;
-var delivery = document.getElementById('deliveryEdit').value;
-var sub_info = document.getElementById('sub_infoEdit').value;
-var image1 = document.getElementById('image1Edit').value;
-var image2 = document.getElementById('image2Edit').value;
-var image3 = document.getElementById('image3Edit').value;
-var image4 = document.getElementById('image4Edit').value;
-var image5 = document.getElementById('image5Edit').value;
+
+function validateFormEditProduct() {
+    var name = document.getElementById('nameEdit').value;
+    var originalPrice = document.getElementById('originalPriceEdit').value;
+    var discount = document.getElementById('discountEdit').value;
+    var description = document.getElementById('descriptionEdit').value;
+    var delivery = document.getElementById('deliveryEdit').value;
+    var sub_info = document.getElementById('sub_infoEdit').value;
+    var image1 = document.getElementById('image1Edit').value;
+    var image2 = document.getElementById('image2Edit').value;
+    var image3 = document.getElementById('image3Edit').value;
+    var image4 = document.getElementById('image4Edit').value;
+    var image5 = document.getElementById('image5Edit').value;
 
 // Reset error messages
 
 
-var isValid = true;
-function validateFormEditProduct() {
-
+    var isValid = true;
 // Repeat similar lines for other fields
 
     document.getElementById('nameEditError').innerText = '';
