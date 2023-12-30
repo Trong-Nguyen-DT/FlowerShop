@@ -40,6 +40,14 @@
     cursor: pointer;
 }
 
+.radio-custom{
+    width: 100%;
+}
+
+.radio-role {
+    background: #0c4128;
+}
+
 .radio-custom {
     display: flex;
     align-items: center;

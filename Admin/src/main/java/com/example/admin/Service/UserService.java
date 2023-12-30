@@ -18,5 +18,5 @@ public interface UserService {
 
     void restoreStaffById(Long userId);
 
-    void resetPassword(User user);
+    void resetPassword(Long id);
 }

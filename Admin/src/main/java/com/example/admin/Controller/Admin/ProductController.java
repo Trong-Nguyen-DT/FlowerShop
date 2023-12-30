@@ -12,6 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,13 +26,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("admin/product")
 public class ProductController {
-
     @Autowired
     private ProductService productService;
 
@@ -41,7 +47,7 @@ public class ProductController {
     @GetMapping()
     public String listProduct(Model model) {
         model.addAttribute("products", productService.getAllProduct());
-        model.addAttribute("categories", categoryService.getAllCategory());
+//        model.addAttribute("categories", categoryService.getAllCategory());
         return "Admin/ProductAdmin";
     }
     @GetMapping("add")
@@ -49,33 +55,8 @@ public class ProductController {
         List<Category> categories = categoryService.getAllCategory();
         model.addAttribute("product", new Product()); // Thay vì new ProductController()
         model.addAttribute("categories", categories);
-
         return "Admin/AddProductAdmin";
     }
-//    @PostMapping("add")
-//    public String addProduct(@ModelAttribute Product product){
-//        productService.addProduct(product);
-//        return "redirect:/admin/product";
-//    }
-
-    @Transactional
-    @PostMapping("/add")
-    public String addProduct(@ModelAttribute ProductDTO productDto) {
-        System.out.println("vào được");
-        // Example: Print received data to the console
-        System.out.println("Name: " + productDto.getName());
-        System.out.println("Original Price: " + productDto.getOriginalPrice());
-        System.out.println("Category IDs: " + productDto.getCategoryIds());
-
-        // Add your business logic to save the product and its associated categories
-        ProductEntity productEntity = productService.createProduct(productDto);
-        productService.setCategories(productEntity, productDto);
-        // Redirect to a success page or return a response accordingly
-        return "redirect:/success-page";
-    }
-
-
-
     @GetMapping("edit/{id}")
     public String showEditProduct(@PathVariable String id, Model model) {
         List<Category> categories = categoryService.getAllCategory();
@@ -84,7 +65,6 @@ public class ProductController {
         model.addAttribute("categories", categories);
         return "Admin/EditProductAdmin";
     }
-
     @PostMapping("edit")
     public String editProduct(@ModelAttribute Product product) {
         productService.updateProduct(product);

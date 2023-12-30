@@ -1,14 +1,13 @@
 var selectedCategories = [];
-
 function toggleCategory(categoryId) {
-    var categoryButton = document.getElementById("category_" + categoryId);
+    let categoryButton = document.getElementById("category_" + categoryId);
     console.log(categoryId);
     categoryButton.classList.toggle("selected");
 
     if (categoryButton.classList.contains("selected")) {
         selectedCategories.push(categoryId);
     } else {
-        var index = selectedCategories.indexOf(categoryId);
+        let index = selectedCategories.indexOf(categoryId);
         if (index !== -1) {
             selectedCategories.splice(index, 1);
         }
@@ -20,105 +19,114 @@ function toggleCategory(categoryId) {
 function submitForm() {
     // Cập nhật giá trị của input ẩn với các danh mục đã chọn
     document.getElementById("categoryIdsInput").value = selectedCategories.join(',');
-
-    // Giả sử bạn có một hàm tên là sendDataToController
-    sendDataToController();
-}
-
-function sendDataToController() {
     // Thu thập dữ liệu biểu mẫu
-    var formData = new FormData(document.getElementById("addProductForm"));
-
-    // Thực hiện một yêu cầu AJAX
-    fetch('/admin/product/add', {
+    let formData = new FormData(document.getElementById("addProductForm"));
+    fetch('/admin/product-add', {
         method: 'POST',
         body: formData,
     })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            // Xử lý phản hồi từ máy chủ nếu cần
-            console.log(data);
+            if (data.success) {
+                // This line redirects to '/login'
+                console.log('Xác nhận đổi mật khẩu thành công. Đang chuyển hướng đến trang xác nhận đăng ký.');
+                window.location.replace('/admin/product');
+            }else {
+                console.error('Xác nhận đổi mật khẩu thất bại:', data.message);
+                alert("Thêm sản phẩm thất bại");
+            }
         })
         .catch(error => {
-            console.error('Lỗi:', error);
+            console.error('Error:', error);
+            alert("Lỗi khi xử lý response thông báo 2");
+            console.error('Error:', error);
+            window.location.href = 'admin/product';
         });
 }
 
-
 // THÔNG BÁO LỖI
 
+// function validateFormAddProduct() {
+//     var name = document.getElementById('name').value;
+//     var originalPrice = document.getElementById('originalPrice').value;
+//     var discount = document.getElementById('discount').value;
+//     var description = document.getElementById('description').value;
+//     var delivery = document.getElementById('delivery').value;
+//     var sub_info = document.getElementById('sub_info').value;
+//     var image1 = document.getElementById('image1').value;
+//     var image2 = document.getElementById('image2').value;
+//     var image3 = document.getElementById('image3').value;
+//     var image4 = document.getElementById('image4').value;
+//     var image5 = document.getElementById('image5').value;
+//
+//
+// // Reset error messages
+//     document.getElementById('nameError').innerText = '';
+//     document.getElementById('originalPriceError').innerText = '';
+//     document.getElementById('discountError').innerText = '';
+//     document.getElementById('descriptionError').innerText = '';
+//     document.getElementById('deliveryError').innerText = '';
+//     document.getElementById('sub_infoError').innerText = '';
+//     document.getElementById('image1Error').innerText = '';
+//     document.getElementById('image2Error').innerText = '';
+//     document.getElementById('image3Error').innerText = '';
+//     document.getElementById('image4Error').innerText = '';
+//     document.getElementById('image5Error').innerText = '';
+// // Repeat similar lines for other fields
+//
+//     var isValid = true;
+//     if (!name ) {
+//         document.getElementById('nameError').innerText = 'Vui lòng nhập tên đăng nhập.';
+//         isValid = false;
+//     }
+//     if (!originalPrice ) {
+//         document.getElementById('originalPriceError').innerText = 'Vui lòng nhập mật khẩu.';
+//         isValid = false;
+//     }
+//     if (!discount ) {
+//         document.getElementById('discountError').innerText = 'Vui lòng nhập họ và tên.';
+//         isValid = false;
+//     }
+//     if (!description) {
+//         document.getElementById('descriptionError').innerText = 'Vui lòng nhập số điện thoại.';
+//         isValid = false;
+//     }
+//     if (!delivery ) {
+//         document.getElementById('deliveryError').innerText = 'Vui lòng nhập địa chỉ.';
+//         isValid = false;
+//     }
+//     if (!sub_info ) {
+//         document.getElementById('sub_infoError').innerText = 'Vui lòng nhập ngày sinh.';
+//         isValid = false;
+//     }
+//     if (!image1 ) {
+//         document.getElementById('image1Error').innerText = 'Vui lòng nhập lương.';
+//         isValid = false;
+//     }
+//     if (!image2 ) {
+//         document.getElementById('image2Error').innerText = 'Vui lòng nhập phân quyền.';
+//         isValid = false;
+//     }
+//     if (!image3 ) {
+//         document.getElementById('image3Error').innerText = 'Vui lòng nhập phân quyền.';
+//         isValid = false;
+//     }
+//     if (!image4 ) {
+//         document.getElementById('image4Error').innerText = 'Vui lòng nhập phân quyền.';
+//         isValid = false;
+//     }
+//     if (!image5 ) {
+//         document.getElementById('image5Error').innerText = 'Vui lòng nhập phân quyền.';
+//         isValid = false;
+//     }
+//     return isValid;
+// }
 
-function validateForm() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-    var fullName = document.getElementById('fullName').value;
-    var image = document.getElementById('image').value;
-    var phone = document.getElementById('phone').value;
-    var address = document.getElementById('address').value;
-    var birthday = document.getElementById('birthday').value;
-    var salary = document.getElementById('salary').value;
-    var role = document.getElementById('role').value;
-
-// Reset error messages
-    document.getElementById('usernameError').innerText = '';
-    document.getElementById('passwordError').innerText = '';
-    document.getElementById('fullNameError').innerText = '';
-    document.getElementById('imageError').innerText = '';
-    document.getElementById('phoneError').innerText = '';
-    document.getElementById('addressError').innerText = '';
-    document.getElementById('birthdayError').innerText = '';
-    document.getElementById('salaryError').innerText = '';
-    document.getElementById('roleError').innerText = '';
-    // Repeat similar lines for other fields
-
-    var isValid = true;
-
-
-    if (!username ) {
-        document.getElementById('usernameError').innerText = 'Vui lòng nhập tên đăng nhập.';
-        isValid = false;
-    }
-    if (!password ) {
-        document.getElementById('passwordError').innerText = 'Vui lòng nhập mật khẩu.';
-        isValid = false;
-    }
-    if (!fullName ) {
-        document.getElementById('fullNameError').innerText = 'Vui lòng nhập họ và tên.';
-        isValid = false;
-    }
-    // if (!image ) {
-    //     document.getElementById('imageError').innerText = 'Vui lòng nhập image.';
-    //     isValid = false;
-    // }
-    if (!phone) {
-        document.getElementById('phoneError').innerText = 'Vui lòng nhập số điện thoại.';
-        isValid = false;
-    }
-    if (isValidPhoneNumber(phone) === false){
-        document.getElementById('phoneError').innerText = 'Vui lòng nhập đúng định dạng.';
-        isValid = false;
-    }
-    if (!address ) {
-        document.getElementById('addressError').innerText = 'Vui lòng nhập địa chỉ.';
-        isValid = false;
-    }
-    if (!birthday ) {
-        document.getElementById('birthdayError').innerText = 'Vui lòng nhập ngày sinh.';
-        isValid = false;
-    }
-    if (!salary ) {
-        document.getElementById('salaryError').innerText = 'Vui lòng nhập lương.';
-        isValid = false;
-    }
-    if (!role ) {
-        document.getElementById('roleError').innerText = 'Vui lòng nhập phân quyền.';
-        isValid = false;
-    }
-    return isValid;
-}
-function isValidPhoneNumber(phone) {
-    // Sử dụng biểu thức chính quy để kiểm tra
-    const phoneRegex = /^0[0-9]{9}$/;
-    return phoneRegex.test(phone);
-}
-
+window.addEventListener('unhandledrejection', event => {
+    console.error('Unhandled Promise Rejection:', event.reason);
+});

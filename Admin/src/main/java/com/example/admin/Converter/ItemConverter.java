@@ -10,6 +10,7 @@ public class ItemConverter {
         item.setName(itemEntity.getName());
 //        item.setImage(itemEntity.getImage());
         item.setDeleted(itemEntity.isDeleted());
+
         return item;
     }
     public static ItemEntity toEntity(Item item){

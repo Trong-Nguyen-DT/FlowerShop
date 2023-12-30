@@ -11,8 +11,6 @@
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-          integrity="sha384-o55Gw7/D6HY5p1JcyKZc4FpVoqGawI7eT8IlqWjORnDtr5Szkbe5XWZAkdO+J3Ju" crossorigin="anonymous">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -21,9 +19,7 @@
     <link rel="stylesheet" th:href="@{/css/Image.css}">
     <link rel="stylesheet" th:href="@{/css/styte.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -265,7 +261,6 @@
                         <th>Salary</th>
                         <th>Detail</th>
                         <th>Edit</th>
-                        <th>Reset</th>
                         <th>Delete</th>
 
                     </tr>
@@ -281,9 +276,12 @@
                         <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> <i class="fas fa-eye"></i> </a> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/edit/' + ${user.id}}"> <i
                                 class="fa-solid fa-pen"></i> </a></button> </td>
-                        <td><button class="btn-click" onclick="confirmReset(this)"
-                                    data-url="@{/reset-password/{id}(id=${user.id})}" data-userid="${user.id}"> <a>
-                            <i class="fa fa-refresh"></i> </a></button> </td>
+<!--                        <td><button class="btn-click" onclick="confirmReset(this)"-->
+<!--                                    data-url="@{/reset-password/{id}(id=${user.id})}" data-userid="${user.id}"> <a>-->
+<!--                            <i class="fa fa-refresh"></i> </a></button> </td>-->
+<!--                        <td>-->
+<!--                            <a th:href="@{'amdin/staff/reset-password/' + ${user.id}}"><button>reset</button></a>-->
+<!--                        </td>-->
                         <!--                        <td><button class="btn-click" > <a th:href="@{'/admin/staff/reset-password/' + ${user.id}}"> <i class="fa fa-refresh"></i>  </a></button> </td>-->
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i
                                 class="fa-solid fa-trash-can"></i> </a> </button></td>
@@ -294,24 +292,13 @@
         </div>
     </div>
 </div>
-<!-- Thêm vào cuối thẻ body -->
-<div class="overlay" id="overlay">
-    <div class="confirmation-container">
-        <h2>Are you sure you want to reset the password?</h2>
-        <div class="buttons">
-            <button id="confirmBtn" onclick="confirmReset()">OK</button>
-            <button id="cancelBtn" onclick="cancelReset()">No</button>
-        </div>
-    </div>
-</div>
 <!-- END ORDERS TABLE -->
 <!-- END MAIN CONTENT -->
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
-<script th:src="@{/js/ResetPassword.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
 </body>
 </html>

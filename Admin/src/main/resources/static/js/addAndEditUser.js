@@ -1,31 +1,26 @@
-
-
 function validateForm() {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var fullName = document.getElementById('fullName').value;
-    // var image = document.getElementById('image').value;
+    var image = document.getElementById('image').value;
     var phone = document.getElementById('phone').value;
     var address = document.getElementById('address').value;
     var birthday = document.getElementById('birthday').value;
     var salary = document.getElementById('salary').value;
-    // var role = document.getElementById('role').value;
+// var role = document.getElementById('role').value;
 
 // Reset error messages
     document.getElementById('usernameError').innerText = '';
     document.getElementById('passwordError').innerText = '';
     document.getElementById('fullNameError').innerText = '';
-    // document.getElementById('imageError').innerText = '';
+    document.getElementById('imageError').innerText = '';
     document.getElementById('phoneError').innerText = '';
     document.getElementById('addressError').innerText = '';
     document.getElementById('birthdayError').innerText = '';
     document.getElementById('salaryError').innerText = '';
-    // document.getElementById('roleError').innerText = '';
-    // Repeat similar lines for other fields
-
+// document.getElementById('roleError').innerText = '';
+// Repeat similar lines for other fields
     var isValid = true;
-
-
     if (!username ) {
         document.getElementById('usernameError').innerText = 'Vui lòng nhập tên đăng nhập.';
         isValid = false;
@@ -38,10 +33,10 @@ function validateForm() {
         document.getElementById('fullNameError').innerText = 'Vui lòng nhập họ và tên.';
         isValid = false;
     }
-    // if (!image ) {
-    //     document.getElementById('imageError').innerText = 'Vui lòng nhập image.';
-    //     isValid = false;
-    // }
+    if (!image ) {
+        document.getElementById('imageError').innerText = 'Vui lòng nhập image.';
+        isValid = false;
+    }
     if (!phone) {
         document.getElementById('phoneError').innerText = 'Vui lòng nhập số điện thoại.';
         isValid = false;
@@ -73,3 +68,4 @@ function isValidPhoneNumber(phone) {
     const phoneRegex = /^0[0-9]{9}$/;
     return phoneRegex.test(phone);
 }
+

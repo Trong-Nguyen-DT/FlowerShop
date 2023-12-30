@@ -72,9 +72,9 @@ a {
     height: calc(var(--sidebar-logo-img-size) + 50px);
     max-width: 100%;
 }
-.sidebar-logo:hover .sidebar-close {
-    display: block;
-}
+/*.sidebar-logo:hover .sidebar-close {*/
+/*    display: none;*/
+/*}*/
 
 /*.sidebar-close {*/
 /*    display: none;*/
@@ -505,4 +505,11 @@ table, table th {
         position: absolute;
         right: -15px;
     }
+}
+#category-chart{
+    width: 100%;
+    height: 50%;
+}
+#category-chart label{
+    font-size: 2px;
 }

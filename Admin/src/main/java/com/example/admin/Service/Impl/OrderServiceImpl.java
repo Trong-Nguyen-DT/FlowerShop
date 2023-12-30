@@ -51,7 +51,6 @@ public class OrderServiceImpl implements OrderService {
         for (OrderHistory orderHistory : orderHistories){
             totalAmount += orderHistory.getAmount();
         }
-
         return totalAmount;
     }
     @Override
@@ -67,7 +66,6 @@ public class OrderServiceImpl implements OrderService {
         }
         return list;
     }
-
     @Override
     public OrderEntity addNote(OrderNote orderNote) {
         Optional<OrderEntity> order = orderRepository.findById(orderNote.getOrderId());
@@ -121,5 +119,27 @@ public class OrderServiceImpl implements OrderService {
             amountDataList.add(amountData);
         }
         return amountDataList;
+    }
+    @Override
+    public List<OrderHistory> getOrderByMonth(int month, int year) {
+        return orderHistoryRepository.findOrdersByMonthAndYear(month, year).stream().map(OrderHistoryConverter::toModel).toList();
+    }
+    @Override
+    public double getPercentCompare(double totalThisMonth, double totalLastMonth) {
+        double percentage = (double) totalThisMonth / totalLastMonth * 100;
+        percentage -= 100;
+        String formattedPercentage = String.format("%.2f", percentage); // Định dạng số với tối đa 2 chữ số sau dấu phẩy
+        return Double.parseDouble(formattedPercentage);
+    }
+    @Override
+    public double getTotalAmountByOrder(List<OrderHistory> orderHistories) {
+        double totalAmount = 0L;
+        for (OrderHistory orderHistory : orderHistories){
+            totalAmount += orderHistory.getAmount();
+        }
+        return totalAmount;
+    }
+    public double getTotalRevenueByTime(LocalDateTime startTime, LocalDateTime endTime) {
+        return orderHistoryRepository.getTotalRevenueByTime(startTime, endTime);
     }
 }

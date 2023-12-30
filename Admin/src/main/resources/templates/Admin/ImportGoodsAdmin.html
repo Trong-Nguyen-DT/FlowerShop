@@ -16,10 +16,9 @@
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/formSearch.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -248,14 +247,21 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Add Import goods
+                Import Goods
+            </div>
+            <div class="form_search">
+                <form th:action="@{/admin/importGood/search}" method="get">
+                    <p>Từ:</p> <input type="datetime-local" name="startTime" required><br>
+                    <p>Đến:</p> <input type="datetime-local" name="endTime" required><br>
+                    <button type="submit">Search</button>
+                </form>
             </div>
             <div class="box-body overflow-scroll">
                 <table>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name staff</th>
+                        <th>Staff ID</th>
                         <th>Time import</th>
                         <th>Total price</th>
                         <th>Detail</th>
@@ -267,7 +273,7 @@
                         <td th:text="${importG.staff_id}"></td>
                         <td th:text="${importG.timeImport}"></td>
                         <td th:text="${importG.totalPrice}"></td>
-                        <td><a th:href="@{'/admin/importGood/detail/' + ${importG.id}}" style="color: blue"> <i class="fas fa-eye"></i> </a> </td>
+                        <td><a th:href="@{'/admin/importGoodsDetail/' + ${importG.id}}" style="color: blue"> <i class="fas fa-eye"></i> </a> </td>
                     </tr>
                     </tbody>
                 </table>
@@ -280,8 +286,8 @@
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
 </body>
 </html>
