@@ -40,10 +40,6 @@ function confirmReset() {
         }
     });
 }
-
-
-
-
 function cancelReset() {
     // Người dùng không muốn reset, ẩn overlay
     hideOverlay();
