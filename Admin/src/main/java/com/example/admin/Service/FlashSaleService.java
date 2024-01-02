@@ -1,9 +1,11 @@
 package com.example.admin.Service;
 
 import com.example.admin.Domain.FlashSale;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface FlashSaleService {
     List<FlashSale> getAllFlashSale();
 

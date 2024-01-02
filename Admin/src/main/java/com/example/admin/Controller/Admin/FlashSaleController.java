@@ -40,7 +40,7 @@ public class FlashSaleController {
             return "redirect:/admin/flash-sale";
         }
         System.out.println("Vào đây 1: ");
-        model.addAttribute("error", "Product đã tồn tại!!! Mời bạn nhập Product khác");
+        model.addAttribute("error", "Flash sale dành cho Product này đã tồn tại!!! Mời bạn nhập Product khác");
         return "Admin/AddFlashSaleAdmin";
     }
     @GetMapping("edit/{id}")
@@ -66,11 +66,4 @@ public class FlashSaleController {
         model.addAttribute("flashSales", flashSaleService.getAllFlashSale());
         return "Admin/RestoreFlashSaleAdmin";
     }
-
-//    @GetMapping("restore/{id}")
-//    public String restoreFlashSale(@PathVariable String id) {
-//        Long flashSaleId = Long.parseLong(id);
-//        flashSaleService.restoreFlashSaleIdById(flashSaleId);
-//        return "redirect:/admin/flash-sale/restore";
-//    }
 }

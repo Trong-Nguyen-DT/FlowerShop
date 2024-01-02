@@ -14,14 +14,6 @@ function showPurchaseHistory(button) {
         .then(response => response.json())
         .then(data => {
             console.log(data.url)
-            //
-            // // Kiểm tra xem đường dẫn chuyển hướng có bắt đầu bằng "/admin/report/" không
-            // if (redirectUrl.startsWith("/admin/orders/")) {
-            //     // Thêm domain vào trước đường dẫn
-            //     redirectUrl = window.location.origin + redirectUrl;
-            // }
-            //
-            // Chuyển hướng trình duyệt đến đường dẫn
             window.location.href = data.url;
         })
         .catch(error => console.error('Lỗi khi lấy đường dẫn chuyển hướng lịch sử mua hàng:', error));
@@ -42,14 +34,6 @@ function showPurchaseImportGoods(button) {
         .then(response => response.json())
         .then(data => {
             console.log(data.url)
-            //
-            // // Kiểm tra xem đường dẫn chuyển hướng có bắt đầu bằng "/admin/report/" không
-            // if (redirectUrl.startsWith("/admin/orders/")) {
-            //     // Thêm domain vào trước đường dẫn
-            //     redirectUrl = window.location.origin + redirectUrl;
-            // }
-            //
-            // Chuyển hướng trình duyệt đến đường dẫn
             window.location.href = data.url;
         })
         .catch(error => console.error('Lỗi khi lấy đường dẫn chuyển hướng lịch sử mua hàng:', error));

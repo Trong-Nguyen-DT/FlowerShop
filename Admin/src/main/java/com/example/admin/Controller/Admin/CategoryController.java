@@ -28,10 +28,11 @@ public class CategoryController {
     }
 
     @PostMapping("add")
-    public String addCategory(@ModelAttribute Category category) {
+    public String addCategory(@ModelAttribute Category category, Model model) {
         if(categoryService.addCategory(category)){
             return "redirect:/admin/category";
         }
+        model.addAttribute("error", "Category đã tồn tại !!! Mời bạn nhập lại!");
         return "Admin/AddCategoryAdmin";
     }
     @GetMapping("edit/{id}")

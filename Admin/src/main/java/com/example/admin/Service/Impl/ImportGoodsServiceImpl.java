@@ -25,10 +25,11 @@ public class ImportGoodsServiceImpl implements ImportGoodsService {
     }
     public Long getTotalImportAmountByTime(LocalDateTime startTime, LocalDateTime endTime) {
         try {
-            return importGoodsRepository.getTotalImportAmountByTime(startTime, endTime);
+            Long totalImportAmount = importGoodsRepository.getTotalImportAmountByTime(startTime, endTime);
+            return totalImportAmount != null ? totalImportAmount.longValue() : 0L;
         } catch (Exception ex) {
             // Handle the exception or log it
-            return (long) 0;
+            return 0L;
         }
     }
 //    public List<String> searchItemNames(String term) {

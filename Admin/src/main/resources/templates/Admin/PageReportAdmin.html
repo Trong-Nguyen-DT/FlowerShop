@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,15 +23,12 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
-
-
 </head>
-
 <body>
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-close" id="sidebar-close">
+        <div class="sidebar-close" >
             <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
@@ -57,9 +53,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/report}">
-                <i class='bx bxs-report'></i>
-                <span>Reports</span>
+            <a th:href="@{/admin/customer}">
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
             </a>
         </li>
         <li>
@@ -82,6 +78,30 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>Staff</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Staffs
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add Staff
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores Staff
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
@@ -100,30 +120,6 @@
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
-                <span>User</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/staff}">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/add}">
-                        Add User
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores User
                     </a>
                 </li>
             </ul>
@@ -195,11 +191,29 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a th:href="@{/admin/customer}">
-                <i class='bx bx-user-check'></i>
-                <span>Customer</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-discount'></i>
+                <span>Flash sale</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/review}">
@@ -208,21 +222,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/inventory}">
-                <i class='bx bx-barcode'></i>
-                <span>Inventory</span>
-            </a>
-        </li>
-        <!--        <li>-->
-        <!--            <a href="#">-->
-        <!--                <i class='bx bx-chat'></i>-->
-        <!--                <span>chat</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar'></i>
-                <span>calendar</span>
+            <a th:href="@{/admin/report}">
+                <i class='bx bxs-report'></i>
+                <span>Report</span>
             </a>
         </li>
         <li class="sidebar-submenu">
@@ -259,7 +261,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Reports
+                Report
             </div>
             <div class="form_search">
                 <form th:action="@{/admin/report/search}" method="get" >
@@ -281,11 +283,16 @@
                             <h2><u>Độc lập - Tự do - Hạnh Phúc</u></h2>
                         </div>
                         <h1>BÁO CÁO KẾT QUẢ THU CHI VÀ LỢI NHUẬN ĐẠT ĐƯỢC THEO NGÀY</h1>
-                        <div class="store-info">
+                        <div class="adminShop">
                             <p>Chủ Cửa Hàng: Trần Văn Phúc</p>
-                            <p>Địa Điểm: <span>05 - Ngô Sĩ Liên, Hòa Khánh, Liên Chiểu, TP Đà Nẵng, Việt Nam</span></p>
+                            <p>HOTLINE : 1900 633 045 | 0865 160 360</p>
                             <!-- Thêm thông tin cửa hàng khác nếu cần -->
                         </div>
+                    </div>
+                    <div class="store-info">
+                        <p><span style="font-weight: bold;">Chi nhánh 1: </span> <span>05 - Ngô Sĩ Liên, Hòa Khánh, Liên Chiểu, TP Đà Nẵng, Việt Nam</span></p>
+                        <p><span style="font-weight: bold;">Chi nhánh 2: </span> <span>13 - Hoàng Hoa Thám, Quận Nhất, TP Hồ Chí Minh, Việt Nam</span></p>
+                        <!-- Thêm thông tin cửa hàng khác nếu cần -->
                     </div>
                     <div class="report-content">
                         <table>
@@ -307,7 +314,7 @@
                                     <label>Tổng doanh thu:</label>
                                 </td>
                                 <td>
-                                    <label th:text="${totalRevenue} + ' VNĐ'"> VNĐ</label>
+                                    <label th:text="${totalRevenue} + ' VNĐ'"></label>
                                 </td>
                                 <td>
                                     <button class="btnReport-click" onclick="showPurchaseHistory(this)" th:attr="data-start-time=${startTime}, data-end-time=${endTime}">
@@ -331,7 +338,7 @@
                             <p><span class="bold-text">Đà Nẵng, </span> Ngày <span th:text="${#dates.format(#dates.createNow(), 'dd')}"></span> Tháng <span th:text="${#dates.format(#dates.createNow(), 'MM')}"></span> Năm <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span></p>
                         </div>
                         <div class="signature">
-                            <p><span class="bold-text">Prepared by:</span> Trần Văn Phúc</p>
+                            <p><span class="bold-text">Người viết:</span> Trần Văn Phúc</p>
                             <!-- Add more signature details if needed -->
                         </div>
                         <!-- Nội dung báo cáo -->

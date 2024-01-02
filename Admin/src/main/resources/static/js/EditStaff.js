@@ -52,10 +52,6 @@ function validateFormEditUser() {
         document.getElementById('salaryError').innerText = 'Vui lòng nhập lương.';
         isValid = false;
     }
-    // if (!role ) {
-    //     document.getElementById('roleError').innerText = 'Vui lòng nhập phân quyền.';
-    //     isValid = false;
-    // }
     return isValid;
 }
 function isValidPhoneNumber(phone) {

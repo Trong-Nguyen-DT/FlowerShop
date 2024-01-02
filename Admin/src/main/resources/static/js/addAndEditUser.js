@@ -1,5 +1,5 @@
 function validateForm() {
-    var username = document.getElementById('username').value;
+    var username = document.getElementById('userName').value;
     var password = document.getElementById('password').value;
     var fullName = document.getElementById('fullName').value;
     var image = document.getElementById('image').value;
@@ -7,7 +7,6 @@ function validateForm() {
     var address = document.getElementById('address').value;
     var birthday = document.getElementById('birthday').value;
     var salary = document.getElementById('salary').value;
-// var role = document.getElementById('role').value;
 
 // Reset error messages
     document.getElementById('usernameError').innerText = '';
@@ -18,7 +17,6 @@ function validateForm() {
     document.getElementById('addressError').innerText = '';
     document.getElementById('birthdayError').innerText = '';
     document.getElementById('salaryError').innerText = '';
-// document.getElementById('roleError').innerText = '';
 // Repeat similar lines for other fields
     var isValid = true;
     if (!username ) {
@@ -57,10 +55,6 @@ function validateForm() {
         document.getElementById('salaryError').innerText = 'Vui lòng nhập lương.';
         isValid = false;
     }
-    // if (!role ) {
-    //     document.getElementById('roleError').innerText = 'Vui lòng nhập phân quyền.';
-    //     isValid = false;
-    // }
     return isValid;
 }
 function isValidPhoneNumber(phone) {

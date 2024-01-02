@@ -28,10 +28,11 @@ public class UserController {
         return "Admin/AddStaffAdmin";
     }
     @PostMapping("add")
-    public String addStaff(@ModelAttribute User user) {
+    public String addStaff(@ModelAttribute User user, Model model) {
         if(userService.addStaff(user)){
             return "redirect:/admin/staff";
         }
+        model.addAttribute("error", "Staff đã tồn tại !!! Mời bạn nhập lại!");
         return "Admin/AddStaffAdmin";
     }
     @GetMapping("detail/{id}")
@@ -74,14 +75,6 @@ public class UserController {
         userService.restoreStaffById(userId);
         return "redirect:/admin/staff/restore";
     }
-//    @CrossOrigin
-//    @GetMapping("reset-password/{id}")
-//    public String ResetPassword(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-//        userService.resetPassword(id);
-//        redirectAttributes.addAttribute("id", id);
-//        return "redirect:/admin/staff/detail/{id}";
-//    }
-
     @CrossOrigin
     @GetMapping("reset-password/{id}")
     public ResponseEntity<String> ResetPassword(@PathVariable Long id, RedirectAttributes redirectAttributes) {

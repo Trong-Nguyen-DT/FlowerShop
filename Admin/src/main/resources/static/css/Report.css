@@ -1,7 +1,16 @@
 body {
     font-family: 'Times New Roman', serif;
 }
-
+@page {
+    size: A4;
+    margin: 2cm;
+}
+@media print {
+    /* Các kiểu CSS dành cho in ấn */
+    .report-container {
+        page-break-inside: avoid;
+    }
+}
 .report-container {
     width: 21cm;
     min-height: 29.7cm;
@@ -16,7 +25,7 @@ body {
 .report-header {
     text-align: center;
     margin-bottom: 20px;
-    margin-top: -10px;
+    margin-top: -100px;
 }
 .report-header h1, .report-header h2 {
     font-family: 'Times New Roman', serif;
@@ -24,9 +33,10 @@ body {
     font-size: 24px;
 }
 .thuongHieu {
-    display: flex;
-    flex-direction: column; /* Hiển thị các phần tử theo chiều dọc */
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-top: 20px !important;
 }
 
 .thuongHieu img {
@@ -40,10 +50,18 @@ body {
 .store-info {
     font-family: 'Times New Roman', serif;
     font-size: 18px;
-    font-weight: bold;
     margin-top: 10px;
 }
 .store-info p {
+    margin: 5px 0;
+}
+.adminShop {
+    font-family: 'Times New Roman', serif;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.adminShop p {
     margin: 5px 0;
 }
 .report-content table {
@@ -115,9 +133,9 @@ body {
     max-width: 40%;
     word-wrap: break-word;
 }
-.report-content {
-    position: relative;
-}
+/*.report-content {*/
+/*    position: relative;*/
+/*}*/
 
 .current-date {
     font-family: 'Times New Roman', serif;

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("admin/report")
-public class ReportAdminController {
+public class ReportController {
     @Autowired
     private ImportGoodsService importGoodsService;
 

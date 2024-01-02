@@ -8,4 +8,5 @@ import java.util.List;
 @Repository
 public interface VoucherRepository extends JpaRepository<VoucherEntity, Long> {
     List<VoucherEntity> findAllByExpiredFalse();
+    List<VoucherEntity> findAllByExpiredTrue();
 }

@@ -2,13 +2,9 @@ package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.FlashSaleConverter;
 import com.example.admin.Converter.ProductConverter;
-import com.example.admin.Converter.VoucherConverter;
 import com.example.admin.Domain.FlashSale;
-import com.example.admin.Domain.Voucher;
-import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.FlashSaleEntity;
 import com.example.admin.Entity.ProductEntity;
-import com.example.admin.Entity.VoucherEntity;
 import com.example.admin.Repository.FlashSaleRepository;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.FlashSaleService;
@@ -44,7 +40,6 @@ public class FlashSaleServiceImpl implements FlashSaleService {
     }
     @Override
     public void updateFlashSale(FlashSale flashSale) {
-        updateExpiredFlashSaleByDate();
         FlashSaleEntity flashSaleEntity = flashSaleRepository.findById(flashSale.getId()).orElseThrow();
         flashSaleEntity.setPriceSale(flashSale.getPriceSale());
         flashSaleEntity.setSale(flashSale.getSale());
@@ -80,10 +75,18 @@ public class FlashSaleServiceImpl implements FlashSaleService {
     }
     private void updateExpiredFlashSaleByDate() {
         List<FlashSaleEntity> flashSaleEntities = flashSaleRepository.findAllByExpiredFalse();
+        List<FlashSaleEntity> flashSaleEntityList = flashSaleRepository.findAllByExpiredTrue();
+
         for (FlashSaleEntity flashSaleEntity: flashSaleEntities) {
             if (flashSaleEntity.getEndDate().isBefore(LocalDate.now())) {
                 flashSaleEntity.setExpired(true);
                 flashSaleRepository.save(flashSaleEntity);
+            }
+        }
+        for (FlashSaleEntity flashSale: flashSaleEntityList) {
+            if (flashSale.getEndDate().isAfter(LocalDate.now())) {
+                flashSale.setExpired(false);
+                flashSaleRepository.save(flashSale);
             }
         }
     }

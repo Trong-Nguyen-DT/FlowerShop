@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,14 +21,12 @@
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
-
 <body>
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-close" id="sidebar-close">
+        <div class="sidebar-close" >
             <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
@@ -54,9 +51,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/report}">
-                <i class='bx bxs-report'></i>
-                <span>Reports</span>
+            <a th:href="@{/admin/customer}">
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
             </a>
         </li>
         <li>
@@ -79,6 +76,30 @@
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>Staff</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Staffs
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add Staff
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores Staff
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
                 <i class='bx bx-list-ul'></i>
                 <span>Category</span>
                 <div class="dropdown-icon"></div>
@@ -97,30 +118,6 @@
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
-                <span>User</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/staff}">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/add}">
-                        Add User
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores User
                     </a>
                 </li>
             </ul>
@@ -192,11 +189,29 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a th:href="@{/admin/customer}">
-                <i class='bx bx-user-check'></i>
-                <span>Customer</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-discount'></i>
+                <span>Flash sale</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/review}">
@@ -205,21 +220,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/inventory}">
-                <i class='bx bx-barcode'></i>
-                <span>Inventory</span>
-            </a>
-        </li>
-        <!--        <li>-->
-        <!--            <a href="#">-->
-        <!--                <i class='bx bx-chat'></i>-->
-        <!--                <span>chat</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar'></i>
-                <span>calendar</span>
+            <a th:href="@{/admin/report}">
+                <i class='bx bxs-report'></i>
+                <span>Report</span>
             </a>
         </li>
         <li class="sidebar-submenu">
@@ -256,7 +259,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Reports
+                Report
             </div>
             <div class="form_search">
                 <form th:action="@{/admin/report/search}" method="get">
@@ -265,62 +268,87 @@
                     <button type="submit">View Report</button>
                 </form>
             </div>
-<!--            <div class="box-body overflow-scroll">-->
-<!--                <table>-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>ID</th>-->
-<!--                        <th>Customer Name</th>-->
-<!--                        <th>Phone Customer</th>-->
-<!--                        <th>Order Date</th>-->
-<!--                        <th>Amount</th>-->
-<!--                        <th>Total Price</th>-->
-<!--                        &lt;!&ndash;                    <th>Details</th>&ndash;&gt;-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr th:each="order : ${orders}">-->
-<!--                        <td th:text="${order.id}"></td>-->
-<!--                        <td th:if="${order.getCustomerId() == null}"></td>-->
-<!--                        <td th:unless="${order.getCustomerId() == null}">-->
-<!--                                    <span th:each="cus:${customers}" th:if="${cus.id== order.customerId}"-->
-<!--                                          th:text="${cus.fullName}"></span>-->
-<!--                        </td>-->
-<!--                        <td th:if="${order.getUserId() == null}"></td>-->
-<!--                        <td th:unless="${order.getUserId() == null}">-->
-<!--                                    <span th:each="user:${users}" th:if="${user.id== order.userId}"-->
-<!--                                          th:text="${user.fullName}"></span>-->
-<!--                        </td>-->
-<!--                        <td th:text="${order.phoneCustomer}"></td>-->
-<!--                        <td th:text="${order.orderDateTime}"></td>-->
-<!--                        <td th:text="${order.amount}"></td>-->
-<!--                        <td th:text="${order.totalPrice}"></td>-->
-<!--                        &lt;!&ndash;                        <td><a th:href="@{'/admin/orderdetail/' + ${order.id}}"><i class="fa-solid fa-magnifying-glass"></i></a> </td>&ndash;&gt;-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
+            <!-- REPORTS -->
+            <div class="box">
+                <div class="box-body overflow-scroll report-container">
+                    <div class="report-header">
+                        <div class="thuongHieu">
+                            <img th:src="@{'/images/logo.png'}" alt="logo" width="300px" height="100px">
+                            <h1>BoCongAnh Flower Shop</h1>
+                        </div>
+                        <div class="quocHieu">
+                            <h1>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h1>
+                            <h2><u>Độc lập - Tự do - Hạnh Phúc</u></h2>
+                        </div>
+                        <h1>BÁO CÁO KẾT QUẢ THU CHI VÀ LỢI NHUẬN ĐẠT ĐƯỢC THEO NGÀY</h1>
+                        <div class="adminShop">
+                            <p>Chủ Cửa Hàng: Trần Văn Phúc</p>
+                            <p>HOTLINE : 1900 633 045 | 0865 160 360</p>
+                        </div>
+                    </div>
+                    <div class="store-info">
+                        <p><span style="font-weight: bold;">Chi nhánh 1: </span> <span>05 - Ngô Sĩ Liên, Hòa Khánh, Liên Chiểu, TP Đà Nẵng, Việt Nam</span></p>
+                        <p><span style="font-weight: bold;">Chi nhánh 2: </span> <span>13 - Hoàng Hoa Thám, Quận Nhất, TP Hồ Chí Minh, Việt Nam</span></p>
+                        <!-- Thêm thông tin cửa hàng khác nếu cần -->
+                    </div>
+                    <div class="report-content">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Tổng nhập hàng:</label>
+                                </td>
+                                <td>
+                                    <label> ... VNĐ</label>
+                                </td>
+                                <td>
+                                    <button class="btnReport-click" >
+                                        <i class="fa fa-refresh"></i> Detail
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Tổng doanh thu:</label>
+                                </td>
+                                <td>
+                                    <label> ... VNĐ</label>
+                                </td>
+                                <td>
+                                    <button class="btnReport-click" >
+                                        <i class="fa fa-refresh"></i> Detail
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Lợi nhuận:</label>
+                                </td>
+                                <td>
+                                    <label> ... VNĐ</label>
+                                </td>
+                                <td>
+                                    <button id="exportBtn">Xuất PDF</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="current-date">
+                            <p><span class="bold-text">Đà Nẵng, </span> Ngày <span th:text="${#dates.format(#dates.createNow(), 'dd')}"></span> Tháng <span th:text="${#dates.format(#dates.createNow(), 'MM')}"></span> Năm <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span></p>
+                        </div>
+                        <div class="signature">
+                            <p><span class="bold-text">Người viết:</span> Trần Văn Phúc</p>
+                            <!-- Add more signature details if needed -->
+                        </div>
+                        <!-- Nội dung báo cáo -->
+                        <!-- Định dạng và hiển thị thông tin doanh thu, nhập hàng, v.v. -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!-- END REPORTS TABLE -->
 <!-- END MAIN CONTENT -->
 <div class="overlay"></div>
-<!-- Thêm vào cuối thẻ body -->
-<!--<div class="overlay" id="overlay">-->
-<!--    <div class="confirmation-container">-->
-<!--        <h2>Are you sure you want to reset the password?</h2>-->
-<!--        <div class="buttons">-->
-<!--            <button id="confirmBtn" onclick="confirmReset()">OK</button>-->
-<!--            <button id="cancelBtn" onclick="cancelReset()">No</button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!-- SCRIPT -->
-<!-- APEX CHART -->
-<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
-<!-- APP JS -->
 <script th:src="@{/js/appWeb.js}"></script>
-<!--<script th:src="@{/js/ResetPassword.js}"></script>-->
 </body>
 </html>

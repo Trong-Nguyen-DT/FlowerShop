@@ -25,7 +25,7 @@ public class ProductConverter {
         product.setImage5(productEntity.getImage5());
         product.setDeleted(productEntity.isDeleted());
 
-        product.setReviews(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).collect(Collectors.toList()));
+//        product.setReviews(productEntity.getReviewEntities().stream().map(ReviewConverter::toModel).collect(Collectors.toList()));
         product.setCategories(productEntity.getCategoryEntities().stream().map(CategoryConverter::toModel).collect(Collectors.toList()));
 
         return product;

@@ -1,6 +1,7 @@
 .staff-details{
     display: flex;
     justify-content: space-between;
+    margin-right: 10px;
 }
 
 .avatar-section {
@@ -17,6 +18,7 @@
 
 .info-section {
     flex: 2;
+    width: 70%;
 }
 .box-header {
     margin-bottom: 40px; /* Thay đổi giá trị này tùy theo khoảng cách mong muốn */

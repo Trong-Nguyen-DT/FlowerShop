@@ -29,15 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private OrderDetailHistoryRepository orderDetailHistoryRepository;
 
-
     @Override
     public List<Category> getAllCategory() {
         return categoryRepository.findAll().stream().map(CategoryConverter::toModel).toList();
     }
-
-//    public List<Category> getAllCategoriesByProductId(Long productId) {
-//        return categoryRepository.findAllByProductEntities(productRepository.findById(productId).orElseThrow()).stream().map(CategoryConverter::toModel).toList();
-//    }
     @Override
     public boolean addCategory(Category category) {
         Optional<CategoryEntity> optionalCategory = categoryRepository.findAll().stream()

@@ -30,10 +30,12 @@ public class VoucherController {
         return "Admin/AddVoucherAdmin";
     }
     @PostMapping("add")
-    public String addVoucher(@ModelAttribute Voucher voucher) {
-        System.out.println("name: " + voucher.getType());
-        voucherService.addVoucher(voucher);
-        return "redirect:/admin/voucher";
+    public String addVoucher(@ModelAttribute Voucher voucher, Model model) {
+        if(voucherService.addVoucher(voucher)){
+            return "redirect:/admin/voucher";
+        }
+        model.addAttribute("error", "Voucher đã tồn tại !!! Mời bạn nhập lại!");
+        return "Admin/AddVoucherAdmin";
     }
     @GetMapping("edit/{id}")
     public String showEditVoucher(@PathVariable String id, Model model) {

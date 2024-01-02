@@ -38,6 +38,7 @@ public class AdminHomeController {
 
         List<OrderHistory> orderThisMonth = orderService.getOrderByMonth(
                 LocalDateTime.now().getMonth().getValue(), LocalDateTime.now().getYear());
+
         List<OrderHistory> orderLastMonth = orderService.getOrderByMonth(
                 LocalDateTime.now().getMonth().getValue() - 1, LocalDateTime.now().getYear());
 
@@ -47,12 +48,14 @@ public class AdminHomeController {
         //DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
         double totalThisMonth = orderService.getTotalAmountByOrder(orderThisMonth);
+
         String formattedTotal = String.format("%.2f", totalThisMonth);
 
         double totalLastMonth = orderService.getTotalAmountByOrder(orderLastMonth);
+        System.out.println("this: " + totalThisMonth);
+        System.out.println("last: " + totalLastMonth);
 
         double percent = orderService.getPercentCompare(totalThisMonth, totalLastMonth);
-
         model.addAttribute("percent", percent);
         model.addAttribute("totalAmount", formattedTotal);
         model.addAttribute("topProduct", orderDetailService.getTop4Product());

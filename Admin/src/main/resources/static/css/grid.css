@@ -20,15 +20,22 @@
 .col-3 {
     width: 25%;
 }
-
+.col-3:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
 .col-4 {
     width: 56.33%;
 }
-
-.col-5 {
-    width: 100%;
+.col-4:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
 }
-
+.col-5 {
+    width: 97%;
+    margin-left: 20px;
+}
+.col-5:hover {
+    transform: scale(1.05); /* Phóng to khi hover */
+}
 .col-6 {
     width: 50%;
 }
@@ -160,3 +167,4 @@
         width: 120%;
     }
 }
+

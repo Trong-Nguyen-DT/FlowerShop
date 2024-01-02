@@ -60,12 +60,6 @@ public class ApiController {
 
         return ResponseEntity.ok(data);
     }
-//    @GetMapping("/importGoods")
-//    public ResponseEntity<List<ImportGood>> getImportGoodsAmount(@RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime) {
-//        List<ImportGood> importGoods = importGoodsService.getAllImportGoodsByTime(startTime, endTime);
-//        return ResponseEntity.ok(importGoods);
-//    }
-
     @PostMapping("/purchase-history")
     public ResponseEntity<Response> postPurchaseHistory(@RequestBody TimeRange timeRange) {
         try {
@@ -152,5 +146,10 @@ public class ApiController {
         // Sau khi reset password thành công, trả về đường dẫn mới (hoặc bất kỳ thông tin nào cần thiết)
         String redirectUrl = "/admin/staff/detail/" + id; // Thay đổi thành đường dẫn mong muốn
         return ResponseEntity.ok(redirectUrl);
+    }
+    @GetMapping("/all-product-by-id")
+    public ResponseEntity<?> findById(@RequestParam("id") Long id){
+        Product result = productService.getById(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

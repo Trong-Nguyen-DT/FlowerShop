@@ -1,5 +1,6 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Service.OrderService;
 import com.example.admin.Service.RevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RevenueController {
     @Autowired
     RevenueService revenueService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping()
     public String listRevenue(Model model) {
