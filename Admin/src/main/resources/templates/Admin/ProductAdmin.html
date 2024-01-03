@@ -288,7 +288,7 @@
                         <td th:text="${prod.price}"></td>
                         <td th:text="${prod.discount}"></td>
                         <td th:text="${prod.overall_rating}"></td>
-                        <td><a id="detailLink" data-bs-toggle="modal" data-bs-target="#viewdetail" th:attr="data-proId=${prod.id}"><i class="fa fa-eye iconaction"></i></a></td>
+                        <td><a id="detailLink" data-bs-toggle="modal" data-bs-target="#viewdetail" th:attr="data-proId=${prod.id}"><i class="fa fa-eye icon-action"></i></a></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${prod.id}}"> <i class="fa-solid fa-pen"></i> </a></button> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/product/delete/' + ${prod.id}}"> <i class="fa-solid fa-trash-can"></i> </a> </button></td>
                     </tr>
@@ -308,29 +308,4 @@
 <script th:src="@{/js/appWeb.js}"></script>
 <script th:src="@{/js/DetailProduct.js}"></script>
 </body>
-<div class="modal fade" id="viewdetail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Product Detail</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <div class="modal-body">
-                <h4>Product Categories</h4>
-                <div id="listCategory"></div>
-                <br><h4>Images Product</h4>
-                <div class="row" id="listimgdetail">
-                    <div class="col-lg-2 col-md-3 col-sm-6">
-                        <img src="" style="width: 100%;">
-                    </div>
-                </div>
-                <br><h4>Description</h4>
-                <br><div id="despro"> </div>
-                <br><h4>Details</h4>
-                <div id="details"> </div>
-                <br><h4>Delivery</h4>
-                <div id="delivery"></div>
-                <br><h4>Sub Infor</h4>
-                <div id="subinfo"></div>
-            </div>
-        </div>
-    </div>
-</div>
 </html>

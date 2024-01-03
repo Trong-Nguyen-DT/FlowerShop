@@ -39,10 +39,6 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProduct() {
         return productRepository.findAll().stream().map(ProductConverter::toModel).toList();
     }
-//    public Page<ProductEntity> getAllProductsPaged(int page, int size) {
-//        PageRequest pageRequest = PageRequest.of(page, size);
-//        return productRepository.findAllProducts(pageRequest);
-//    }
     @Override
     public Product getProductById(Long productId) {
         return ProductConverter.toModel(productRepository.findById(productId).orElseThrow());
@@ -70,10 +66,6 @@ public class ProductServiceImpl implements ProductService {
         productEntity.setImage4(product.getImage4());
         productEntity.setImage5(product.getImage5());
         productEntity.setDeleted(product.isDeleted());
-
-//        productEntity.setCategoryEntities(product.getCategories().stream().map(CategoryConverter::toEntity).collect(Collectors.toList()));
-//        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
-//        productEntity.setProductDetailEntities(ProductDetailConverter.toEntityList(product.getProductDetails()));
 
         // Lưu ProductEntity đã cập nhật vào cơ sở dữ liệu
         productRepository.save(productEntity);

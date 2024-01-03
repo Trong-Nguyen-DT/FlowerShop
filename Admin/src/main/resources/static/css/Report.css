@@ -1,9 +1,11 @@
 body {
     font-family: 'Times New Roman', serif;
 }
+.form_search{
+    margin-bottom: 10px;
+}
 @page {
-    size: A4;
-    margin: 2cm;
+    size: 21cm 29.7cm; /* Đặt kích thước trang PDF */
 }
 @media print {
     /* Các kiểu CSS dành cho in ấn */
@@ -11,21 +13,45 @@ body {
         page-break-inside: avoid;
     }
 }
+/*@media print {*/
+/*    !* Các kiểu CSS dành cho in ấn *!*/
+/*    #report-page {*/
+/*        page-break-inside: avoid;*/
+/*    }*/
+/*}*/
 .report-container {
-    width: 21cm;
-    min-height: 29.7cm;
-    padding: 2cm;
+    width: 20cm;
+    height: 29.7cm;
+    max-height: 29.7cm;
+    padding-right: 2cm;
+    padding-left: 2cm;
     margin: auto;
     background-color: white;
+    overflow: auto;
     overflow-x: hidden;
+    page-break-inside: avoid;
 }
-.form_search{
-    margin-bottom: 30px;
-}
+
+/*#report-page {*/
+/*    width: 21cm;*/
+/*    height: 29.7cm;*/
+/*    min-height: 29.7cm;*/
+/*    padding-top: 0;*/
+/*    margin: auto;*/
+/*    background-color: white;*/
+/*    overflow: auto;*/
+/*    overflow-x: hidden;*/
+/*    page-break-inside: avoid;*/
+/*}*/
 .report-header {
     text-align: center;
     margin-bottom: 20px;
-    margin-top: -100px;
+    margin-top: -50px;
+}
+.report-header1 {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -40px;
 }
 .report-header h1, .report-header h2 {
     font-family: 'Times New Roman', serif;
@@ -33,14 +59,15 @@ body {
     font-size: 24px;
 }
 .thuongHieu {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    margin-top: 20px !important;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .thuongHieu img {
-    margin-bottom: -40px; /* Khoảng cách giữa hình ảnh và tiêu đề */
+    height: auto;
+    margin-bottom: -20px;
 }
 
 .report-header .quocHieu h1,
@@ -69,6 +96,7 @@ body {
     border-collapse: collapse;
     margin-top: 30px;
     margin-right: 0;
+    page-break-inside: auto;
 }
 
 .report-content th, .report-content td {
@@ -119,23 +147,23 @@ body {
     margin-top: 5px;
 }
 .report-content td:nth-child(1) {
-    width: 30%; /* Đặt độ rộng mong muốn cho cột thứ hai */
-    max-width: 20%; /* Cũng có thể sử dụng max-width để giữ cho cột không quá rộng */
+    width: 35%; /* Đặt độ rộng mong muốn cho cột thứ hai */
+    max-width: 25%; /* Cũng có thể sử dụng max-width để giữ cho cột không quá rộng */
     word-wrap: break-word; /* Cắt từ nếu nó quá dài */
 }
 .report-content td:nth-child(2) {
-    width: 30%; /* Đặt độ rộng mong muốn cho cột thứ hai */
-    max-width: 20%; /* Cũng có thể sử dụng max-width để giữ cho cột không quá rộng */
+    width: 35%; /* Đặt độ rộng mong muốn cho cột thứ hai */
+    max-width:25%; /* Cũng có thể sử dụng max-width để giữ cho cột không quá rộng */
     word-wrap: break-word; /* Cắt từ nếu nó quá dài */
 }
 .report-content td:nth-child(3) {
-    width: 40%;
-    max-width: 40%;
+    width: 30%;
+    max-width: 20%;
     word-wrap: break-word;
 }
-/*.report-content {*/
-/*    position: relative;*/
-/*}*/
+.report-content {
+    position: relative;
+}
 
 .current-date {
     font-family: 'Times New Roman', serif;
@@ -143,7 +171,7 @@ body {
     right: 0;
     text-align: right;
     font-size: 18px;
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
 .signature {
