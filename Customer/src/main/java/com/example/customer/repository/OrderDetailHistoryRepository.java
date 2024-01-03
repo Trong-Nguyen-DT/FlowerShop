@@ -16,6 +16,6 @@ public interface OrderDetailHistoryRepository extends JpaRepository<OrderDetailH
     List<Object[]> findTopSellingProducts();
 
     default List<Object[]> findTop10SellingProductsLimited() {
-        return findTopSellingProducts().subList(0, 10);
+        return findTopSellingProducts().subList(0, 3);
     }
 }
