@@ -9,6 +9,7 @@ import com.example.customer.repository.CustomerRepository;
 import com.example.customer.requestBody.CustomerRequest;
 import com.example.customer.requestBody.PasswordRequest;
 import com.example.customer.service.CustomerService;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -118,9 +119,15 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void saveToken(Customer customer) {
+    public void saveTokenAndCookie(Customer customer, String cookie) {
         CustomerEntity customerEntity = customerRepository.findByUsername(customer.getUsername()).orElseThrow();
         customerEntity.setToken(customer.getToken());
+        customerEntity.setCookie(cookie);
         customerRepository.save(customerEntity);
+    }
+
+    @Override
+    public String getCustomerByUserId(Long userId) {
+        return customerRepository.findById(userId).orElseThrow().getUsername();
     }
 }

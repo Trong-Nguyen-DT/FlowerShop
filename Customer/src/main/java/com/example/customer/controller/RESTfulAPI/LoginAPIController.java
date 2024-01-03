@@ -27,12 +27,14 @@ public class LoginAPIController {
         CustomerResponse customerResponse = new CustomerResponse();
         HttpHeaders responseHeaders = new HttpHeaders();
 
+
         if (customerTrue != null) {
             HttpHeaders loginHeaders = loginRemote.sendPostRequestLogin(customer.getUsername(), customer.getPassword());
-            customerService.saveToken(customer);
+
             // Set cookie if present
             if (loginHeaders.containsKey("Set-Cookie")) {
                 String cookie = loginHeaders.getFirst("Set-Cookie");
+                customerService.saveTokenAndCookie(customer, cookie);
                 responseHeaders.set("Set-Cookie", cookie);
             }
 

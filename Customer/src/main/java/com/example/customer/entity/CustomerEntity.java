@@ -36,6 +36,8 @@ public class CustomerEntity {
 
     private String token;
 
+    private String cookie;
+
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AddressEntity> addressEntities;
 

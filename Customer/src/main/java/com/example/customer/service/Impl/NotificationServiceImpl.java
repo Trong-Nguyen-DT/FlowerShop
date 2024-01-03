@@ -93,15 +93,34 @@ public class NotificationServiceImpl implements NotificationService {
         NotificationEntity notificationEntity = notificationRepository.findById(notifyId).orElseThrow();
         NotificationMessaging notificationMessaging = new NotificationMessaging();
         if (success) {
-            notificationMessaging.setTitle("PAYMENT_SUCCESS");
+            notificationMessaging.setTitle("Thanh toán thành công");
             notificationMessaging.setBody("Đơn hàng của bạn đã được thanh toán thành công, vui lòng chờ shop xác nhận");
             notificationMessaging.setImage("lỗi");
         } else {
-            notificationMessaging.setTitle("PAYMENT_FAILED");
+            notificationMessaging.setTitle("Thanh toán thất bại");
             notificationMessaging.setBody("Đơn hàng của bạn không được thanh toán, vui lòng chọn lại phương thức thanh toán và đặt hàng");
             notificationMessaging.setImage("lỗi");
         }
         notificationMessaging.setData(NotificationConverter.toModel(notificationEntity));
+        notificationRemote.sendNotification(notificationMessaging, headers);
+    }
+
+    @Override
+    public void sendNotifyPaymentApp(Long notifyId, boolean success) {
+        NotificationEntity notificationEntity = notificationRepository.findById(notifyId).orElseThrow();
+        NotificationMessaging notificationMessaging = new NotificationMessaging();
+        if (success) {
+            notificationMessaging.setTitle("Thanh toán thành công");
+            notificationMessaging.setBody("Đơn hàng của bạn đã được thanh toán thành công, vui lòng chờ shop xác nhận");
+            notificationMessaging.setImage("lỗi");
+        } else {
+            notificationMessaging.setTitle("Thanh toán thất bại");
+            notificationMessaging.setBody("Đơn hàng của bạn không được thanh toán, vui lòng chọn lại phương thức thanh toán và đặt hàng");
+            notificationMessaging.setImage("lỗi");
+        }
+        notificationMessaging.setData(NotificationConverter.toModel(notificationEntity));
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Cookie", notificationEntity.getCustomerEntity().getCookie());
         notificationRemote.sendNotification(notificationMessaging, headers);
     }
 }
