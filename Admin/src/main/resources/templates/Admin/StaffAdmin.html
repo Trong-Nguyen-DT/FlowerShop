@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +10,6 @@
     <link
             href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-          integrity="sha384-o55Gw7/D6HY5p1JcyKZc4FpVoqGawI7eT8IlqWjORnDtr5Szkbe5XWZAkdO+J3Ju" crossorigin="anonymous">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
@@ -21,16 +18,13 @@
     <link rel="stylesheet" th:href="@{/css/Image.css}">
     <link rel="stylesheet" th:href="@{/css/styte.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 </head>
-
 <body>
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-close" id="sidebar-close">
+        <div class="sidebar-close" >
             <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
@@ -55,6 +49,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/customer}">
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/importGood}">
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
@@ -71,6 +71,30 @@
                 <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>Staff</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Staffs
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add Staff
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores Staff
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
@@ -92,30 +116,6 @@
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
-                <span>User</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/staff}">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/add}">
-                        Add User
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores User
                     </a>
                 </li>
             </ul>
@@ -187,11 +187,29 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a th:href="@{/admin/customer}">
-                <i class='bx bx-user-check'></i>
-                <span>Customer</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-discount'></i>
+                <span>Flash sale</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/review}">
@@ -200,21 +218,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/inventory}">
-                <i class='bx bx-barcode'></i>
-                <span>Inventory</span>
-            </a>
-        </li>
-        <!--        <li>-->
-        <!--            <a href="#">-->
-        <!--                <i class='bx bx-chat'></i>-->
-        <!--                <span>chat</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar'></i>
-                <span>calendar</span>
+            <a th:href="@{/admin/report}">
+                <i class='bx bxs-report'></i>
+                <span>Report</span>
             </a>
         </li>
         <li class="sidebar-submenu">
@@ -252,7 +258,7 @@
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Users
+                Staffs
             </div>
             <div class="box-body overflow-scroll">
                 <table>
@@ -265,7 +271,6 @@
                         <th>Salary</th>
                         <th>Detail</th>
                         <th>Edit</th>
-                        <th>Reset</th>
                         <th>Delete</th>
 
                     </tr>
@@ -278,13 +283,9 @@
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.address}"></td>
                         <td th:text="${user.salary}"></td>
-                        <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}" style="color: blue"> <i class="fas fa-eye"></i> </a> </td>
+                        <td><a th:href="@{'/admin/staff/detail/' + ${user.id}}"><i class="fa fa-eye icon-action"></i></a> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/edit/' + ${user.id}}"> <i
                                 class="fa-solid fa-pen"></i> </a></button> </td>
-                        <td><button class="btn-click" onclick="confirmReset(this)"
-                                    data-url="@{/reset-password/{id}(id=${user.id})}" data-userid="${user.id}"> <a>
-                            <i class="fa fa-refresh"></i> </a></button> </td>
-                        <!--                        <td><button class="btn-click" > <a th:href="@{'/admin/staff/reset-password/' + ${user.id}}"> <i class="fa fa-refresh"></i>  </a></button> </td>-->
                         <td><button class="btn-click"> <a th:href="@{'/admin/staff/delete/' + ${user.id}}"> <i
                                 class="fa-solid fa-trash-can"></i> </a> </button></td>
                     </tr>
@@ -294,24 +295,13 @@
         </div>
     </div>
 </div>
-<!-- Thêm vào cuối thẻ body -->
-<div class="overlay" id="overlay">
-    <div class="confirmation-container">
-        <h2>Are you sure you want to reset the password?</h2>
-        <div class="buttons">
-            <button id="confirmBtn" onclick="confirmReset()">OK</button>
-            <button id="cancelBtn" onclick="cancelReset()">No</button>
-        </div>
-    </div>
-</div>
 <!-- END ORDERS TABLE -->
 <!-- END MAIN CONTENT -->
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
-<script th:src="@{/js/ResetPassword.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@ public interface VoucherService {
 //    List<Voucher> getAllVoucherByConditions();
 //
     List<Voucher> getAllVoucher();
-    void addVoucher(Voucher voucher);
+    boolean addVoucher(Voucher voucher);
 
     Voucher getVoucherById(Long voucherId);
 

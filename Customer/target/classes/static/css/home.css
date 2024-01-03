@@ -12,6 +12,7 @@ header {
 }
 
 .container_header {
+
     border-radius: 5px;
     width: 70%;
     background-color: #ef879d;
@@ -229,10 +230,19 @@ section {
 .trending img {
     width: 50%;
 }
+.container_product_trend
+{
+    width: 100%;
+    background-image: url('../css/trend.png');
+    height: 100vh;
 
-
-
-
-
-
-
+}
+.div_product_trend
+{
+    display: flex;
+    justify-items: center;
+}
+.container_product_trend img
+{
+    width: 70%;
+}

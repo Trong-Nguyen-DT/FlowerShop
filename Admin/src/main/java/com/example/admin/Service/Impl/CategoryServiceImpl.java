@@ -2,13 +2,9 @@ package com.example.admin.Service.Impl;
 
 
 import com.example.admin.Converter.CategoryConverter;
-import com.example.admin.Converter.ItemConverter;
-import com.example.admin.Converter.ProductDetailConverter;
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.CategoryData;
-import com.example.admin.Domain.ProductDetail;
 import com.example.admin.Entity.CategoryEntity;
-import com.example.admin.Entity.ItemEntity;
 import com.example.admin.Entity.OrderDetailHistoryEntity;
 import com.example.admin.Repository.CategoryRepository;
 import com.example.admin.Repository.OrderDetailHistoryRepository;
@@ -33,15 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private OrderDetailHistoryRepository orderDetailHistoryRepository;
 
-
     @Override
     public List<Category> getAllCategory() {
         return categoryRepository.findAll().stream().map(CategoryConverter::toModel).toList();
     }
-
-//    public List<Category> getAllCategoriesByProductId(Long productId) {
-//        return categoryRepository.findAllByProductEntities(productRepository.findById(productId).orElseThrow()).stream().map(CategoryConverter::toModel).toList();
-//    }
     @Override
     public boolean addCategory(Category category) {
         Optional<CategoryEntity> optionalCategory = categoryRepository.findAll().stream()

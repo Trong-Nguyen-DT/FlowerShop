@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <<<<<<< HEAD <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boss Sanctuary</title>
@@ -19,32 +18,14 @@
     <link rel="stylesheet" th:href="@{/css/Image.css}">
     <link rel="stylesheet" th:href="@{/css/Staff.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    =======
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boss Sanctuary</title>
-    <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-            rel="stylesheet">
-    <!-- BOXICONS -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <!-- APP CSS -->
-    <link rel="stylesheet" th:href="@{/css/grid.css}">
-    <link rel="stylesheet" th:href="@{/css/Image.css}">
-    <link rel="stylesheet" th:href="@{/css/app.css}">
-    <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
-    >>>>>>> ProductVS2
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-close" id="sidebar-close">
+        <div class="sidebar-close" >
             <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
@@ -69,6 +50,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/customer}">
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/importGood}">
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
@@ -85,6 +72,30 @@
                 <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>Staff</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Staffs
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add Staff
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores Staff
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
@@ -106,30 +117,6 @@
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
-                <span>User</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/staff}">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/add}">
-                        Add User
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores User
                     </a>
                 </li>
             </ul>
@@ -201,11 +188,29 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a th:href="@{/admin/customer}">
-                <i class='bx bx-user-check'></i>
-                <span>Customer</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-discount'></i>
+                <span>Flash sale</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/review}">
@@ -214,21 +219,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/inventory}">
-                <i class='bx bx-barcode'></i>
-                <span>Inventory</span>
-            </a>
-        </li>
-        <!--        <li>-->
-        <!--            <a href="#">-->
-        <!--                <i class='bx bx-chat'></i>-->
-        <!--                <span>chat</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar'></i>
-                <span>calendar</span>
+            <a th:href="@{/admin/report}">
+                <i class='bx bxs-report'></i>
+                <span>Report</span>
             </a>
         </li>
         <li class="sidebar-submenu">
@@ -271,6 +264,9 @@
             <div class="staff-details">
                 <div class="avatar-section">
                     <img class="avatar" th:src="@{'/images/' + ${user.image}}" alt="Staff Avatar">
+                    <button type="submit" class="btn-click" onclick="showConfirmation(this)" th:attr="data-userid=${user.id}">
+                        <i class="fa fa-refresh"></i> Reset password
+                    </button>
                 </div>
                 <div class="info-section">
                     <table>
@@ -331,10 +327,21 @@
 <!-- END ORDERS TABLE -->
 <!-- END MAIN CONTENT -->
 <div class="overlay"></div>
+<!-- Thêm vào cuối thẻ body -->
+<div class="overlay" id="overlay">
+    <div class="confirmation-container">
+        <h2>Are you sure you want to reset the password?</h2>
+        <div class="buttons">
+            <button id="confirmBtn" onclick="confirmReset()"></button>
+            <button id="cancelBtn" onclick="cancelReset()"></button>
+        </div>
+    </div>
+</div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
+<script th:src="@{/js/ResetPassword.js}"></script>
 </body>
 </html>

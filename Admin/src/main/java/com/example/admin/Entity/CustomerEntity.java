@@ -33,6 +33,8 @@ public class CustomerEntity {
 
     private LocalDate birthday;
 
+    private String token;
+
     @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AddressEntity> addressEntities;
 
@@ -44,4 +46,7 @@ public class CustomerEntity {
 
     @OneToOne(mappedBy = "customerEntity", cascade = CascadeType.ALL)
     private CartEntity cartEntity;
+
+    @OneToMany(mappedBy = "customerEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotificationEntity> notificationEntities;
 }

@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class AmountData {
     private String month;
-    private double amount;
+    private Long amount;
 }

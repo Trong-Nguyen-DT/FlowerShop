@@ -27,19 +27,13 @@ public class ItemController {
         return "Admin/AddItemAdmin";
     }
     @PostMapping("add")
-    public String addItem(@ModelAttribute Item item) {
+    public String addItem(@ModelAttribute Item item, Model model) {
         if (itemService.addItem(item)) {
             return "redirect:/admin/item";
         }
-//        return "redirect:/admin/item/add";
+        model.addAttribute("error", "Item đã tồn tại !!! Mời bạn nhập lại!");
         return "Admin/AddItemAdmin";
 
-    }
-    @GetMapping("/checkDuplicate")
-    @ResponseBody
-    public boolean checkDuplicate(@RequestParam String name) {
-        // Kiểm tra xem tên đã tồn tại hay không và trả về kết quả
-        return itemService.existsByName(name);
     }
     @GetMapping("edit/{id}")
     public String showEditItem(@PathVariable String id, Model model) {

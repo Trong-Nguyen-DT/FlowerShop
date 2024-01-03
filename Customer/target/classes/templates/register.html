@@ -14,16 +14,11 @@
 <th:block th:replace="header1.html"></th:block>
 <main>
     <div class="container_main">
-        <div class="panel">
-            <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
-        </div>
-
-        <div class="register_Login">
+        <div class="left">
             <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
             <h5>Nếu bạn đã có tài khoản với chúng tôi, vui lòng đăng nhập tại trang đăng nhập .</h5>
             <form class="register" id="registrationForm"  onsubmit="submitForm(); return false;">
                 <!--            <form class="register" id="registrationForm">-->
-                <h4>Thông tin cá nhân của bạn</h4>
                 <div class="login">
                     <h6>Họ tên</h6>
                     <input type="text" class="form-control" id="name"  name="username" aria-describedby="tkHelp"
@@ -38,7 +33,6 @@
                     <h6>Điện thoại</h6>
                     <input type="text" class="form-control" id="phone" name="phone" autocomplete="tel" aria-describedby="tkHelp" placeholder="Điện thoại" autofocus>
                 </div>
-                <h4>Mật khẩu của bạn</h4>
                 <div class="login">
                     <h6>Mật khẩu</h6>
                     <input type="password" class="form-control" id="pw" name="password" aria-describedby="pwHelp" placeholder="Mật khẩu" autocomplete="current-password">
@@ -67,11 +61,13 @@
             </form>
 
         </div>
+        <div class="right">
+            <img th:src="@{/images/product/anhHoa.png}">
+        </div>
     </div>
 
 </main>
 
-<th:block th:replace="footer.html"></th:block>
 <script>
 
     var registerData = {};

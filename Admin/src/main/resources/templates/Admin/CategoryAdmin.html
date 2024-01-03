@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,7 @@
 <!-- SIDEBAR -->
 <div class="sidebar">
     <div class="sidebar-logo">
-        <div class="sidebar-close" id="sidebar-close">
+        <div class="sidebar-close" >
             <img th:src="@{'/images/logo.png'}" alt="Company logo">
         </div>
     </div>
@@ -46,6 +45,12 @@
             </a>
         </li>
         <li>
+            <a th:href="@{/admin/customer}">
+                <i class='bx bx-user-check'></i>
+                <span>Customer</span>
+            </a>
+        </li>
+        <li>
             <a th:href="@{/admin/importGood}">
                 <i class='bx bx-shopping-bag'></i>
                 <span>Import Goods</span>
@@ -62,6 +67,30 @@
                 <i class='bx bx-history'></i>
                 <span>Order History</span>
             </a>
+        </li>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bx-user-circle'></i>
+                <span>Staff</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/staff}">
+                        Staffs
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/add}">
+                        Add Staff
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/staff/restore}">
+                        Restores Staff
+                    </a>
+                </li>
+            </ul>
         </li>
         <li class="sidebar-submenu">
             <a href="#" class="sidebar-menu-dropdown">
@@ -83,30 +112,6 @@
                 <li>
                     <a th:href="@{/admin/category/restore}">
                         Restores Category
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-submenu">
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class='bx bx-user-circle'></i>
-                <span>User</span>
-                <div class="dropdown-icon"></div>
-            </a>
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a th:href="@{/admin/staff}">
-                        Users
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/add}">
-                        Add User
-                    </a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/staff/restore}">
-                        Restores User
                     </a>
                 </li>
             </ul>
@@ -178,11 +183,29 @@
                 </li>
             </ul>
         </li>
-        <li>
-            <a th:href="@{/admin/customer}">
-                <i class='bx bx-user-check'></i>
-                <span>Customer</span>
+        <li class="sidebar-submenu">
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class='bx bxs-discount'></i>
+                <span>Flash sale</span>
+                <div class="dropdown-icon"></div>
             </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a th:href="@{/admin/flash-sale}">
+                        Flash sales
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/add}">
+                        Add Flash sale
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/flash-sale/restore}">
+                        Restores Flash sale
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a th:href="@{/admin/review}">
@@ -191,21 +214,9 @@
             </a>
         </li>
         <li>
-            <a th:href="@{/admin/inventory}">
-                <i class='bx bx-barcode'></i>
-                <span>Inventory</span>
-            </a>
-        </li>
-        <!--        <li>-->
-        <!--            <a href="#">-->
-        <!--                <i class='bx bx-chat'></i>-->
-        <!--                <span>chat</span>-->
-        <!--            </a>-->
-        <!--        </li>-->
-        <li>
-            <a href="#">
-                <i class='bx bx-calendar'></i>
-                <span>calendar</span>
+            <a th:href="@{/admin/report}">
+                <i class='bx bxs-report'></i>
+                <span>Report</span>
             </a>
         </li>
         <li class="sidebar-submenu">
@@ -249,9 +260,8 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
                         <th>Image</th>
+                        <th>Name</th>
                         <th>Detail</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -259,9 +269,8 @@
                     </thead>
                     <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == false}"  >
                     <tr>
-                        <td th:text="${cate.id}"></td>
-                        <td th:text="${cate.name}"></td>
                         <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
+                        <td th:text="${cate.name}"></td>
                         <td th:text="${cate.detail}"></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/delete/' + ${cate.id}}"> <i class="fa-solid fa-trash-can"></i>  </a> </button></td>
@@ -278,9 +287,9 @@
 <div class="overlay"></div>
 <!-- SCRIPT -->
 <!-- APEX CHART -->
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/app.js}"></script>
+<script th:src="@{/js/appWeb.js}"></script>
 </body>
 
 </html>

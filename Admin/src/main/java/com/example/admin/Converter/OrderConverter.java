@@ -1,11 +1,15 @@
 package com.example.admin.Converter;
 
+import com.example.admin.Domain.CartItem;
 import com.example.admin.Domain.Order;
 import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Domain.Review;
+import com.example.admin.Entity.OrderDetailEntity;
 import com.example.admin.Entity.OrderEntity;
 import com.example.admin.Entity.OrderHistoryEntity;
 import com.example.admin.Entity.ReviewEntity;
+import com.example.admin.enums.OrderStatus;
+import com.example.admin.enums.TitleType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,10 +28,9 @@ public class OrderConverter {
         orderHistory.setUserId(orderHistoryEntity.getUserId());
         orderHistory.setCustomerId(orderHistoryEntity.getCustomerId());
         orderHistory.setFullNameCustomer(orderHistoryEntity.getFullNameCustomer());
-        orderHistory.setOrderDetailHistories(orderHistoryEntity.getOrderDetailHistoryEntities().stream().map(OrderDetailHistoryConverter::toModel).toList());
+//        orderHistory.setOrderDetailHistories(orderHistoryEntity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
 
 //        orderHistory.setUser(UserConverter.toModel(orderHistoryEntity.getUserEntity()));
-//        orderHistory.setCustomer(CustomerConverter.toModel(orderHistoryEntity.getCustomerEntity()));
 
         return orderHistory;
     }
@@ -55,50 +58,66 @@ public class OrderConverter {
 
         return order;
     }
-    public static OrderEntity toEntity(Order order) {
-        OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setId(order.getId());
-        orderEntity.setAmount(order.getAmount());
-        orderEntity.setDiscount(order.getDiscount());
-        orderEntity.setTotalPrice(order.getTotalPrice());
-        orderEntity.setStatus(order.getStatus());
-        orderEntity.setConfirmed(order.getConfirmed());
-        orderEntity.setNote(order.getNote());
-        orderEntity.setOrderDateTime(order.getOrderDateTime());
-        orderEntity.setPaymentOnline(order.isPaymentOnline());
-        orderEntity.setShipPrice(order.getShipPrice());
-        orderEntity.setShipping(order.isShipping());
-        orderEntity.setInformationRelated(order.getInformationRelated());
-        orderEntity.setOrderStatus(order.getOrderStatus());
-
-//        orderEntity.setAddressEntity(AddressConverter.toEntity(order.getAddress()));
-//        orderEntity.setUserEntity(UserConverter.toEntity(order.getUser()));
-//        orderEntity.setCustomerEntity(CustomerConverter.toEntity(order.getCustomer()));
-//        orderEntity.setVoucherEntity(VoucherConverter.toEntity(order.getVoucher()));
-
-        return orderEntity;
+    public static CartItem orderDetailToCartItem(OrderDetailEntity entity) {
+        CartItem cartItem = new CartItem();
+        cartItem.setProduct(ProductConverter.toModel(entity.getProductEntity()));
+        cartItem.setQuantity(entity.getQuantity());
+        return cartItem;
     }
-    public static OrderHistory OrderEntitytoOrderHistory(OrderEntity orderEntity){
-        OrderHistory orderHistory = new OrderHistory();
-        orderHistory.setId(orderEntity.getId());
-        orderHistory.setOrderDateTime(orderEntity.getOrderDateTime());
-        orderHistory.setTotalPrice(orderEntity.getTotalPrice());
-        orderHistory.setDiscount(orderEntity.getDiscount());
-        orderHistory.setAmount(orderEntity.getAmount());
-        orderHistory.setUserId(orderEntity.getUserEntity().getId());
-        orderHistory.setFullNameStaff(orderEntity.getUserEntity().getFullName());
-        orderHistory.setCustomerId(orderEntity.getCustomerEntity().getId());
-        orderHistory.setFullNameCustomer(orderEntity.getCustomerEntity().getFullName());
-        orderHistory.setPhoneCustomer(orderEntity.getCustomerEntity().getPhone());
-        orderHistory.setEmailCustomer(orderEntity.getCustomerEntity().getEmail());
-        orderHistory.setOrderDetailHistories(orderEntity.getOrderDetails().stream().map(OrderDetailConverter::OrderDetailEntitytoOrderDetailHistory).toList());
-
-        return orderHistory;
-    }
-    public static List<OrderEntity> toEntityList(List<Order> orders) {
-        return orders.stream()
-                .map(OrderConverter::toEntity)
-                .collect(Collectors.toList());
+    public static TitleType toTitleType(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return TitleType.WAITING;
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return TitleType.CONFIRMED;
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return TitleType.SENT;
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return TitleType.RECEIVED;
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return TitleType.CANCELLED;
+        }
+        return TitleType.REJECT;
     }
 
+    public static String orderStatusToString(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return "đang chờ xác nhận";
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return "đã được xác nhận";
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return "đang được gửi đi";
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return "đã được giao thành công";
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return "đã bị hủy";
+        }
+        return "không được xác nhận";
+    }
+
+    public static String orderStatusToTitle(OrderStatus orderStatus) {
+        if (orderStatus == OrderStatus.WAITING) {
+            return "Đặt hàng thành công";
+        }
+        if (orderStatus == OrderStatus.CONFIRMED) {
+            return "Đã được xác nhận";
+        }
+        if (orderStatus == OrderStatus.SENT) {
+            return "Vận chuyển đơn hàng";
+        }
+        if (orderStatus == OrderStatus.RECEIVED) {
+            return "Đã giao thành công";
+        }
+        if (orderStatus == OrderStatus.CANCELLED) {
+            return "Đã bị hủy";
+        }
+        return "Không được xác nhận";
+    }
 }

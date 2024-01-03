@@ -33,7 +33,7 @@ public class UserConverter {
         userEntity.setSalary(user.getSalary());
         userEntity.setRole(user.getRole());
         userEntity.setDeleted(false);
+
         return  userEntity;
     }
-
 }

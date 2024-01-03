@@ -1,6 +1,8 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Domain.Address;
 import com.example.admin.Domain.Customer;
+import com.example.admin.Service.AddressService;
 import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,13 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private AddressService addressService;
+
     @GetMapping()
     public String listCustomer(Model model) {
         model.addAttribute("customers", customerService.getAllCustomer());
+        model.addAttribute("address", addressService.getAllAddress());
         return "Admin/CustomerAdmin";
     }
     @GetMapping("detail/{id}")

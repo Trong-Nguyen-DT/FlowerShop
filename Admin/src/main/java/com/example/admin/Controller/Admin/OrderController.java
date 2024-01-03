@@ -38,6 +38,8 @@ public class OrderController {
     @GetMapping("/search")
     public String searchOrderHistory (@RequestParam("startTime") LocalDateTime startTime,
                                       @RequestParam("endTime") LocalDateTime endTime,Model model){
+        System.out.println("Thời điểm bắt đầu 1: " + startTime);
+        System.out.println("Thời điểm kết thúc: " + endTime);
         List<OrderHistory> orderHistories = orderService.getOrderByTime(startTime,endTime);
         model.addAttribute("orders", orderHistories );
         model.addAttribute("customers",customerService.getAllCustomer());

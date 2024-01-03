@@ -11,7 +11,5 @@ public class Item {
 
     private String name;
 
-//    private String image;
-
     private boolean deleted;
 }

@@ -3,9 +3,11 @@ package com.example.admin.Controller.Admin;
 import com.example.admin.Domain.User;
 import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("admin/staff")
@@ -26,10 +28,11 @@ public class UserController {
         return "Admin/AddStaffAdmin";
     }
     @PostMapping("add")
-    public String addStaff(@ModelAttribute User user) {
+    public String addStaff(@ModelAttribute User user, Model model) {
         if(userService.addStaff(user)){
             return "redirect:/admin/staff";
         }
+        model.addAttribute("error", "Staff đã tồn tại !!! Mời bạn nhập lại!");
         return "Admin/AddStaffAdmin";
     }
     @GetMapping("detail/{id}")
@@ -61,13 +64,11 @@ public class UserController {
         userService.deleteStaffById(userId);
         return "redirect:/admin/staff";
     }
-
     @GetMapping("restore")
     public String listStaffRestore(Model model) {
         model.addAttribute("users", userService.getAllStaff());
         return "Admin/RestoreStaffAdmin";
     }
-
     @GetMapping("restore/{id}")
     public String restoreStaff(@PathVariable String id) {
         Long userId = Long.parseLong(id);
@@ -75,9 +76,11 @@ public class UserController {
         return "redirect:/admin/staff/restore";
     }
     @CrossOrigin
-    @PostMapping("reset-password/{id}")
-    public String ResetPassword(@ModelAttribute User user) {
-        userService.resetPassword(user);
-        return "redirect:/admin/staff";
+    @GetMapping("reset-password/{id}")
+    public ResponseEntity<String> ResetPassword(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        userService.resetPassword(id);
+        redirectAttributes.addAttribute("id", id);
+        String redirectUrl = "/admin/staff/detail/" + id;
+        return ResponseEntity.ok(redirectUrl);
     }
 }

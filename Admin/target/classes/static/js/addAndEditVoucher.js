@@ -1,4 +1,4 @@
-function validateForm() {
+function validateVoucherForm() {
     var code = document.getElementById('code').value;
     var conditionPrice = document.getElementById('conditionPrice').value;
     var startDate = document.getElementById('startDate').value;
@@ -7,7 +7,7 @@ function validateForm() {
     var usageLimit = document.getElementById('usageLimit').value;
     var voucherTypes = document.getElementById('voucherTypes').value;
 
-    // Reset error messages
+// Reset error messages
     document.getElementById('codeError').innerText = '';
     document.getElementById('conditionPriceError').innerText = '';
     document.getElementById('startDateError').innerText = '';
@@ -15,11 +15,9 @@ function validateForm() {
     document.getElementById('percentageError').innerText = '';
     document.getElementById('usageLimitError').innerText = '';
 
-    // Repeat similar lines for other fields
+// Repeat similar lines for other fields
 
     var isValid = true;
-
-
     if (!code ) {
         document.getElementById('codeError').innerText = 'Vui lòng nhập Code.';
         isValid = false;
@@ -36,7 +34,7 @@ function validateForm() {
         document.getElementById('endDateError').innerText = 'Vui lòng nhập End date.';
         isValid = false;
     }
-    if (parseFloat(percentage) === 0.0 ) {
+    if (!percentage ) {
         document.getElementById('percentageError').innerText = 'Vui lòng nhập Percentage.';
         isValid = false;
     }
