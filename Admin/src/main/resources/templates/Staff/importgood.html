@@ -117,7 +117,7 @@
       $('#example').DataTable().destroy();
       var from = document.getElementById("from").value
       var to = document.getElementById("to").value
-      var url = 'http://localhost:8080/staff/all-import-goods';
+      var url = 'http://103.153.72.198/:8080/staff/all-import-goods';
       if(from != "" && to != ""){
         url += "?from="+from+'&to='+to
       }
@@ -140,7 +140,7 @@
   }
 
   async function loadDetailImportGood(id) {
-      var url = 'http://localhost:8080/staff/detail-import-good-by-import-good?id='+id;
+      var url = 'http://103.153.72.198:8080/staff/detail-import-good-by-import-good?id='+id;
       const response = await fetch(url, {
       });
       var list = await response.json();
