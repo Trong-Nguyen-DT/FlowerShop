@@ -1,6 +1,7 @@
 package com.example.customer.service;
 
 import com.example.customer.domain.Product;
+import com.example.customer.domain.Review;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface ProductService {
     List<Product> getAllProductNonSale();
 
     List<Product> getAllProductRelated(Long id);
+
+    void updateRating(List<Review> reviews);
 }

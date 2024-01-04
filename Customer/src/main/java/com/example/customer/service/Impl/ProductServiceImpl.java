@@ -2,9 +2,8 @@ package com.example.customer.service.Impl;
 
 import com.example.customer.converter.ProductConverter;
 import com.example.customer.domain.Product;
-import com.example.customer.entity.CategoryEntity;
-import com.example.customer.entity.FlashSaleEntity;
-import com.example.customer.entity.ProductEntity;
+import com.example.customer.domain.Review;
+import com.example.customer.entity.*;
 import com.example.customer.repository.FlashSaleRepository;
 import com.example.customer.repository.OrderDetailHistoryRepository;
 import com.example.customer.repository.ProductRepository;
@@ -12,6 +11,7 @@ import com.example.customer.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -114,5 +114,37 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void updateRating(List<Review> reviews) {
+        for (Review review : reviews) {
+            ProductEntity productEntity = productRepository.findById(review.getProductId()).orElseThrow();
+            productEntity.setOverall_rating(calculateOverallRating(productEntity.getReviewEntities()));
+            productRepository.save(productEntity);
+        }
+
+    }
+
+    private double calculateOverallRating(List<ReviewEntity> reviews) {
+        double overallRating = 0.0;
+        if (reviews == null || reviews.isEmpty()) {
+            return overallRating;
+        }
+
+        double totalRating = 0.0;
+        int numberOfReviews = reviews.size();
+
+        for (ReviewEntity review : reviews) {
+            totalRating += review.getRate();
+        }
+
+        overallRating = totalRating / numberOfReviews;
+        return roundToTwoDecimalPlaces(overallRating);
+    }
+
+    private double roundToTwoDecimalPlaces(double value) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return Double.parseDouble(df.format(value));
     }
 }
