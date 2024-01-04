@@ -40,6 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Value("${imagePathProduct}")
     private String imagePath;
+
     @Override
     public List<Category> getAllCategory() {
         return categoryRepository.findAll().stream().map(CategoryConverter::toModel).toList();
