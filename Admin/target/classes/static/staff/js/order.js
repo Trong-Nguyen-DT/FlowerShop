@@ -51,10 +51,11 @@ async function loadDetailOrder(id) {
   for (i = 0; i < list.length; i++) {
   main += `<tr>
           <td>${list[i].id}</td>
-          <td><img src="http:${list[i].product.image1}" style="width:80px"></td>
-          <td>${list[i].product.id}</td>
-          <td>${list[i].product.name}</td>
-          <td>${formatmoney(list[i].product.price)}</td>
+          <td><img src="images/${list[i].image}" style="width:80px"></td>
+          <td>${list[i].productId}</td>
+          <td>ádasdsad</td>
+          <td>${list[i].nameProduct}</td>
+          <td>${formatmoney(list[i].productPrice)}</td>
           <td>${list[i].quantity}</td>
       </tr>`
   }
