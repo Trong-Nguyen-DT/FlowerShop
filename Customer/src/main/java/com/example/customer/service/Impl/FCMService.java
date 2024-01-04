@@ -65,8 +65,8 @@ public class FCMService{
                 .setNotification(notification)
                 .putAllData(data)
                 .build();
-
         try {
+            System.out.println("da vao");
             firebaseMessaging.send(message);
             return "send success";
         } catch(FirebaseMessagingException e) {

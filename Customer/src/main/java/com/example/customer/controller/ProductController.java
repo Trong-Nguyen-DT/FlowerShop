@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @GetMapping
+    public String product()
+    {
+        return "product";
+    }
 
     @GetMapping("/detail/{id}")
     public String productDetail(@PathVariable Long id, Model model) {

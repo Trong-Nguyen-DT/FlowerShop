@@ -21,5 +21,7 @@ public interface CustomerService {
 
     boolean updatePassword(String name, PasswordRequest passwordRequest);
 
-    void saveToken(Customer customer);
+    void saveTokenAndCookie(Customer customer, String cookie);
+
+    String getCustomerByUserId(Long userId);
 }

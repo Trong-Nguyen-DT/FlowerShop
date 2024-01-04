@@ -15,4 +15,6 @@ public interface NotificationService {
     Long addNotifyPayment(String name, boolean success);
 
     void sendNotifyPayment(HttpHeaders headers, Long notifyId, boolean success);
+
+    void sendNotifyPaymentApp(Long notifyId, boolean success);
 }

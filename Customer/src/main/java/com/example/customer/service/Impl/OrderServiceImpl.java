@@ -111,14 +111,14 @@ public class OrderServiceImpl implements OrderService {
 
     private BodyRequest setNewOrder(OrderEntity orderEntity) {
         BodyRequest order = new BodyRequest();
-        order.setOrderCode(1000 + orderEntity.getId());
+        order.setOrderCode(10000 + orderEntity.getId());
         order.setAmount(orderEntity.getAmount());
-        order.setDescription("hoa hồng");
+        order.setDescription("");
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://localhost:80/payment/success");
-        order.setCancelUrl("http://localhost:80/payment/failed");
+        order.setReturnUrl("http://localhost:80/payment/success-web");
+        order.setCancelUrl("http://localhost:80/payment/failed-web");
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(
@@ -182,14 +182,14 @@ public class OrderServiceImpl implements OrderService {
 
     private BodyRequest setOrder(OrderEntity orderEntity) {
         BodyRequest order = new BodyRequest();
-        order.setOrderCode(1000 + orderEntity.getId());
+        order.setOrderCode(10000 + orderEntity.getId());
         order.setAmount(orderEntity.getAmount());
-        order.setDescription("hoa hồng");
+        order.setDescription("");
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://localhost:80/api/payment/success");
-        order.setCancelUrl("http://localhost:80/api/payment/failed");
+        order.setReturnUrl("http://192.168.34.198:80/api/payment/success-app?id=" + orderEntity.getCustomerEntity().getId());
+        order.setCancelUrl("http://192.168.34.198:80/api/payment/failed-app?id=" + orderEntity.getCustomerEntity().getId());
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(

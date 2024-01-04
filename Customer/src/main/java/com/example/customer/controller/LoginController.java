@@ -14,7 +14,7 @@ public class LoginController {
     @GetMapping("/login")
     public String loginAdmin(Model model) {
         model.addAttribute("user", new UserEntity());
-        return "Login1";
+        return "Login";
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.customer.controller.RESTfulAPI;
 
 import com.example.customer.domain.Order;
+import com.example.customer.responseBody.BodyResponse;
 import com.example.customer.responseBody.ResponsePayment;
+import com.example.customer.service.CustomerService;
 import com.example.customer.service.Impl.FCMService;
 import com.example.customer.service.NotificationService;
 import com.example.customer.service.OrderHistoryService;
@@ -33,6 +35,9 @@ public class PaymentAPIController {
     @Autowired
     private NotificationService notificationService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @PostMapping("app")
     public ResponseEntity<ResponsePayment> paymentApp(@RequestBody Order order, @RequestHeader HttpHeaders headers) {
         String name = customerValidate.validateCustomer();
@@ -50,6 +55,30 @@ public class PaymentAPIController {
         return ResponseEntity.ok(payment);
     }
 
+    @Transactional
+    @GetMapping("success-app")
+    public ResponseEntity<BodyResponse> success(@RequestParam("id") Long userId) {
+        String name = customerService.getCustomerByUserId(userId);
+        Long notifyId = notificationService.addNotifyPayment(name, true);
+        notificationService.sendNotifyPaymentApp(notifyId, true);
+        BodyResponse bodyResponse = new BodyResponse();
+        bodyResponse.setSuccess(true);
+        bodyResponse.setMessage("success");
+        return ResponseEntity.ok(bodyResponse);
+    }
+
+    @Transactional
+    @GetMapping("failed-app")
+    public ResponseEntity<BodyResponse> failed(@RequestParam("id") Long userId) {
+        String name = customerService.getCustomerByUserId(userId);
+        Long notifyId = notificationService.addNotifyPayment(name, false);
+        notificationService.sendNotifyPaymentApp(notifyId, false);
+        BodyResponse bodyResponse = new BodyResponse();
+        bodyResponse.setSuccess(false);
+        bodyResponse.setMessage("error");
+        return ResponseEntity.ok(bodyResponse);
+    }
+
     @PostMapping("web")
     public ResponseEntity<String> paymentWeb(@RequestBody Order order) {
         String name = customerValidate.validateCustomer();
@@ -58,7 +87,7 @@ public class PaymentAPIController {
         }
         Long orderId = orderService.createOrder(order, name);
         ResponsePayment payment = orderService.createResponsePayment(orderId);
-        String url ="http://localhost/payment/success";
+        String url = "http://localhost/payment/success-web";
         if (payment.getOrder().isPaymentOnline()) {
             url = orderService.createUrlPayment(orderId);
         }
@@ -67,32 +96,32 @@ public class PaymentAPIController {
     }
 
     @Transactional
-    @GetMapping("success")
-    public ResponseEntity<String> success(@RequestHeader HttpHeaders headers) {
+    @GetMapping("success-web")
+    public ResponseEntity<BodyResponse> success(@RequestHeader HttpHeaders headers) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         Long notifyId = notificationService.addNotifyPayment(name, true);
         notificationService.sendNotifyPayment(headers, notifyId, true);
-        if (headers.containsKey("Set-Cookie")) {
-            System.out.println(headers.getFirst("Set-Cookie"));
-        } else {
-            System.out.println("không có");
-        }
-        String response = fcmService.pushNotification(name, "payment_success");
-        return ResponseEntity.ok(response);
+        BodyResponse bodyResponse = new BodyResponse();
+        bodyResponse.setSuccess(true);
+        bodyResponse.setMessage("success");
+        return ResponseEntity.ok(bodyResponse);
     }
 
     @Transactional
-    @GetMapping("failed")
-    public ResponseEntity<String> failed() {
+    @GetMapping("failed-web")
+    public ResponseEntity<BodyResponse> failed(@RequestHeader HttpHeaders headers) {
         String name = customerValidate.validateCustomer();
         if (name == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        String response = fcmService.pushNotification(name, "payment_failed");
-        return ResponseEntity.ok(response);
+        Long notifyId = notificationService.addNotifyPayment(name, false);
+        notificationService.sendNotifyPayment(headers, notifyId, false);
+        BodyResponse bodyResponse = new BodyResponse();
+        bodyResponse.setSuccess(false);
+        bodyResponse.setMessage("error");
+        return ResponseEntity.ok(bodyResponse);
     }
-
 }
