@@ -258,8 +258,7 @@
                 Edit Staff
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/staff/edit}" th:method="post" th:object="${user}"
-                      onsubmit="return validateFormEditUser()">
+                <form th:object="${user}" onsubmit="submitFormEdit(); return false;" id="editStaffForm" enctype="multipart/form-data">
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>

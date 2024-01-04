@@ -43,6 +43,9 @@ public class ApiController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private VoucherService voucherService;
+
     @GetMapping("api/items")
     public List<Item> getAllItem() {
         return itemService.getAllItem();
@@ -128,7 +131,117 @@ public class ApiController {
             } else {
                 System.out.println("vào đây");
                 response.setSuccess(false);
-                response.setMessage("Products that already exist");
+                response.setMessage("Product that already exist");
+            }
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Transactional
+    @PostMapping("/product-edit")
+    public ResponseEntity<String> editProduct(@ModelAttribute ProductDTO productDto) {
+        try {
+            productService.updateProduct(productDto);
+            String redirectUrl = "/admin/product";
+            return ResponseEntity.ok(redirectUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @Transactional
+    @PostMapping("/staff-edit")
+    public ResponseEntity<String> editStaff(@ModelAttribute StaffDTO staffDTO) {
+        try {
+            userService.updateStaff(staffDTO);
+            String redirectUrl = "/admin/staff";
+            return ResponseEntity.ok(redirectUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Transactional
+    @PostMapping("/staff-add")
+    public ResponseEntity<ResponseBody> addStaff(@ModelAttribute StaffDTO staffDTO) {
+        try {
+            ResponseBody response = new ResponseBody();
+            if (userService.addStaff(staffDTO)) {
+                System.out.println("vào đc");
+                response.setSuccess(true);
+                response.setMessage("success");
+            } else {
+                System.out.println("vào đây");
+                response.setSuccess(false);
+                response.setMessage("Staff that already exist");
+            }
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @Transactional
+    @PostMapping("/category-edit")
+    public ResponseEntity<String> editCategory(@ModelAttribute CategoryDTO categoryDTO) {
+        try {
+            categoryService.updateCategory(categoryDTO);
+            String redirectUrl = "/admin/category";
+            return ResponseEntity.ok(redirectUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Transactional
+    @PostMapping("/category-add")
+    public ResponseEntity<ResponseBody> addCategory(@ModelAttribute CategoryDTO categoryDTO) {
+        try {
+            ResponseBody response = new ResponseBody();
+            if (categoryService.addCategory(categoryDTO)) {
+                System.out.println("vào đc");
+                response.setSuccess(true);
+                response.setMessage("success");
+            } else {
+                System.out.println("vào đây");
+                response.setSuccess(false);
+                response.setMessage("category that already exist");
+            }
+            return ResponseEntity.ok().body(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Transactional
+    @PostMapping("/voucher-edit")
+    public ResponseEntity<String> editVoucher(@ModelAttribute VoucherDTO voucherDTO) {
+        try {
+            voucherService.updateVoucher(voucherDTO);
+            String redirectUrl = "/admin/voucher";
+            return ResponseEntity.ok(redirectUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @Transactional
+    @PostMapping("/voucher-add")
+    public ResponseEntity<ResponseBody> addVoucher(@ModelAttribute VoucherDTO voucherDTO) {
+        try {
+            ResponseBody response = new ResponseBody();
+            if (voucherService.addVoucher(voucherDTO)) {
+                System.out.println("vào đc");
+                response.setSuccess(true);
+                response.setMessage("success");
+            } else {
+                System.out.println("vào đây");
+                response.setSuccess(false);
+                response.setMessage("voucher that already exist");
             }
             return ResponseEntity.ok().body(response);
         } catch (Exception e) {

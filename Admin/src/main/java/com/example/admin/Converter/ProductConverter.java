@@ -1,6 +1,7 @@
 package com.example.admin.Converter;
 
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Entity.ProductEntity;
 
 import java.util.stream.Collectors;
@@ -54,6 +55,21 @@ public class ProductConverter {
 
 
         return entity;
+    }
+
+    public static ProductDTO toProductDTO(Product product) {
+        ProductDTO dto = new ProductDTO();
+        dto.setId(product.getId());
+        dto.setName(product.getName());
+        dto.setOriginalPrice(product.getOriginalPrice());
+        dto.setPrice(product.getPrice());
+        dto.setDescription(product.getDescription());
+        dto.setDetails(product.getDetails());
+        dto.setDelivery(product.getDelivery());
+        dto.setSubInfo(product.getSub_info());
+        dto.setOverall_rating(product.getOverall_rating());
+        dto.setDiscount(product.getDiscount());
+        return dto;
     }
 
 }

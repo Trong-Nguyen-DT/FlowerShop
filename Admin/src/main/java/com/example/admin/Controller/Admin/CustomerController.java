@@ -27,9 +27,10 @@ public class CustomerController {
         return "Admin/CustomerAdmin";
     }
     @GetMapping("detail/{id}")
-    public String showEditCustomer(@PathVariable String id, Model model) {
+    public String showDetailCustomer(@PathVariable String id, Model model) {
         Long customerId = Long.parseLong(id);
         model.addAttribute("customer", customerService.getCustomerById(customerId));
+        model.addAttribute("address", addressService.getAllAddress());
         return "Admin/DetailCustomerAdmin";
     }
     @PostMapping("detail")
@@ -37,68 +38,4 @@ public class CustomerController {
         customerService.detailCustomer(customer);
         return "redirect:/admin/customer";
     }
-
-//        @GetMapping("restore")
-//    public String listCustomerRestore(Model model) {
-//        model.addAttribute("customers", customerService.getAllCustomer());
-//        return "Admin/RestoreCustomerAdmin";
-//    }
-//
-//    @GetMapping("restore/{id}")
-//    public String restoreC(@PathVariable String id) {
-//        Long customerId = Long.parseLong(id);
-//        customerService.restoreCustomerById(customerId);
-//        return "redirect:/admin/customer/restore";
-//    }
-
-
-
-
-
-
-//    @GetMapping("add")
-//    public String showAddCustomer(Model model) {
-//        model.addAttribute("customer", new Customer());
-//        return "Admin/AddCustomerAdmin";
-//    }
-
-//    @PostMapping("add")
-//    public String addCustomer(@ModelAttribute Customer customer) {
-//        customerService.addCustomer(customer);
-////        return "redirect:/admin/cate";
-//        return "redirect:/admin/cus";
-//    }
-
-//    @GetMapping("edit/{id}")
-//    public String showEditCustomer(@PathVariable String id, Model model) {
-//        Long customerId = Long.parseLong(id);
-//        model.addAttribute("customer", customerService.getCustomerById(customerId));
-//        return "DetailCustomerAdmin";
-//    }
-
-//    @PostMapping("edit")
-//    public String editCustomer(@ModelAttribute Customer customer) {
-//        customerService.updateCustomer(customer);
-//        return "redirect:/admin/customer";
-//    }
-
-//    @GetMapping("delete/{id}")
-//    public String deleteCustomer(@PathVariable String id) {
-//        Long customerId = Long.parseLong(id);
-//        customerService.deleteCustomerById(customerId);
-//        return "redirect:/admin/customer";
-//    }
-
-//    @GetMapping("restore")
-//    public String listCustomerRestore(Model model) {
-//        model.addAttribute("customers", customerService.getAllCustomer());
-//        return "Admin/RestoreCustomerAdmin";
-//    }
-
-//    @GetMapping("restore/{id}")
-//    public String restoreC(@PathVariable String id) {
-//        Long customerId = Long.parseLong(id);
-//        customerService.restoreCustomerById(customerId);
-//        return "redirect:/admin/customer/restore";
-//    }
 }

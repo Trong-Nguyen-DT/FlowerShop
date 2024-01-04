@@ -278,7 +278,7 @@
                     <tbody th:each="user : ${users}"
                            th:if="${user.deleted == false} and ${user.role} == 'ROLE_STAFF'">
                     <tr>
-                        <td> <img th:src="@{'/images/' + ${user.image}}"></td>
+                        <td> <img th:src="@{'/images/' + ${user.image}}" alt="staff"></td>
                         <td th:text="${user.fullName}"></td>
                         <td th:text="${user.phone}"></td>
                         <td th:text="${user.address}"></td>

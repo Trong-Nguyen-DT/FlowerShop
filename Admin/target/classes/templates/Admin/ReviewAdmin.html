@@ -258,24 +258,26 @@
             <div class="box-header">
                 Review
             </div>
-            <div class="box-body overflow-scroll">
+            <div class="box-body overflow-scroll review-container">
                 <table>
                     <thead>
                     <tr>
                         <th>Name </th>
                         <th>Name product</th>
+                        <th>Name customer</th>
                         <th>Date</th>
                         <th>Rate</th>
-                        <th>Content</th>
+                        <th>Detail</th>
                     </tr>
                     </thead>
                     <tbody th:each="review : ${reviews}">
                     <tr>
                         <td th:text="${review.name}"></td>
                         <td th:text="${review.product.name}"></td>
+                        <td th:if="${review.customer.fullName != null}" th:text="${review.customer.fullName}"></td>
                         <td th:text="${review.date}"></td>
                         <td th:text="${review.rate}"></td>
-                        <td th:text="${review.content}"></td>
+                        <td><a th:href="@{'/admin/review/detail/' + ${review.id}}" ><i class="fa fa-eye icon-action"></i></a> </td>
                     </tr>
                     </tbody>
                 </table>

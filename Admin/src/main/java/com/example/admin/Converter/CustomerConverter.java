@@ -19,8 +19,8 @@ public class CustomerConverter {
         customer.setSex(customerEntity.isSex());
         customer.setBirthday(customerEntity.getBirthday());
 
-        customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
-        customer.setReviews(customerEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
+//        customer.setAddresses(customerEntity.getAddressEntities().stream().map(AddressConverter::toModel).toList());
+//        customer.setReviews(customerEntity.getReviewEntities().stream().map(ReviewConverter::toModel).toList());
         customer.setOrders(customerEntity.getOrderEntities().stream().map(OrderConverter::toModel).toList());
         return customer;
     }

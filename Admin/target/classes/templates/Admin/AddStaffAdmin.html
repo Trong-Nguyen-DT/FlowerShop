@@ -256,7 +256,7 @@
                 Add Staff
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/staff/add}" th:method="post" th:object="${user}" onsubmit="return validateForm()">
+                <form th:object="${user}" onsubmit="submitFormAdd(); return false;" id="addStaffForm" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <th>
@@ -360,7 +360,7 @@
 <!-- APEX CHART -->
 <!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/addAndEditUser.js}"></script>
+<script th:src="@{/js/AddStaff.js}"></script>
 <script th:src="@{/js/appWeb.js}"></script>
 </body>
 </html>

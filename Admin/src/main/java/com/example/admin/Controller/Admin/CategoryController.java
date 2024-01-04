@@ -1,6 +1,8 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Converter.CategoryConverter;
 import com.example.admin.Domain.Category;
+import com.example.admin.Domain.CategoryDTO;
 import com.example.admin.Service.CategoryService;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping("add")
-    public String addCategory(@ModelAttribute Category category, Model model) {
+    public String addCategory(@ModelAttribute CategoryDTO category, Model model) {
         if(categoryService.addCategory(category)){
             return "redirect:/admin/category";
         }
@@ -38,12 +40,12 @@ public class CategoryController {
     @GetMapping("edit/{id}")
     public String showEditCategory(@PathVariable String id, Model model) {
         Long categoryId = Long.parseLong(id);
-        model.addAttribute("category", categoryService.getCategoryById(categoryId));
+        model.addAttribute("category", CategoryConverter.toCategoryDTO(categoryService.getCategoryById(categoryId)));
         return "Admin/EditCategoryAdmin";
     }
 
     @PostMapping("edit")
-    public String editCategory(@ModelAttribute Category category) {
+    public String editCategory(@ModelAttribute CategoryDTO category) {
         categoryService.updateCategory(category);
         return "redirect:/admin/category";
     }

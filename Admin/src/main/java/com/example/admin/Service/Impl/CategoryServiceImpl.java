@@ -3,16 +3,25 @@ package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.CategoryConverter;
 import com.example.admin.Domain.Category;
+import com.example.admin.Domain.CategoryDTO;
 import com.example.admin.Domain.CategoryData;
+import com.example.admin.Domain.StaffDTO;
 import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.OrderDetailHistoryEntity;
+import com.example.admin.Entity.UserEntity;
 import com.example.admin.Repository.CategoryRepository;
 import com.example.admin.Repository.OrderDetailHistoryRepository;
 import com.example.admin.Repository.ProductRepository;
 import com.example.admin.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,19 +38,26 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private OrderDetailHistoryRepository orderDetailHistoryRepository;
 
+    @Value("${imagePathProduct}")
+    private String imagePath;
     @Override
     public List<Category> getAllCategory() {
         return categoryRepository.findAll().stream().map(CategoryConverter::toModel).toList();
     }
     @Override
-    public boolean addCategory(Category category) {
+    public boolean addCategory(CategoryDTO category) {
         Optional<CategoryEntity> optionalCategory = categoryRepository.findAll().stream()
                 .filter(entity -> entity.getName().equals(category.getName()))
                 .findFirst();
-        if (optionalCategory.isPresent()) {
+        CategoryEntity categoryEntity = new CategoryEntity();
+        if (optionalCategory.isPresent() || category.getName() == null) {
             return false;
         }else {
-            categoryRepository.save(CategoryConverter.toEntity(category));
+            categoryEntity.setName(category.getName());
+            forSaveImage(category, categoryEntity);
+            categoryEntity.setDeleted(false);
+            categoryEntity.setDetail(category.getDetail());
+            categoryRepository.save(categoryEntity);
             return true;
         }
 
@@ -53,14 +69,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void updateCategory(Category category) {
+    public void updateCategory(CategoryDTO category) {
         CategoryEntity categoryEntity = categoryRepository.findById(category.getId()).orElseThrow();
+        if(category.getImage() != null){
+            forSaveImage(category, categoryEntity);
+        }
+        categoryEntity.setId(category.getId());
+        categoryEntity.setName(category.getName());
+        categoryEntity.setDetail(category.getDetail());
 
-            categoryEntity.setName(category.getName());
-            categoryEntity.setImage(category.getImage());
-            categoryEntity.setDetail(category.getDetail());
-
-            categoryRepository.save(categoryEntity);
+        categoryRepository.save(categoryEntity);
     }
 
     @Override
@@ -109,5 +127,19 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryDataList;
     }
+    private void forSaveImage(CategoryDTO categoryDTO, CategoryEntity entity) {
+        File file = new File(imagePath + categoryDTO.getName() + ".png");
+        saveImageCategory(categoryDTO.getImage(), file);
+        entity.setImage(categoryDTO.getName() + ".png");
+    }
 
+    private void saveImageCategory(MultipartFile image, File file) {
+        try (OutputStream os = new FileOutputStream(file)) {
+            os.write(image.getBytes());
+            // Thêm dòng in để kiểm tra
+            System.out.println("File has been saved successfully");
+        } catch (IOException e) {
+            e.printStackTrace(); // Thêm dòng này để in ra thông báo lỗi chi tiết
+        }
+    }
 }

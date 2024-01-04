@@ -19,12 +19,6 @@ public class CustomerServiceImpl implements CustomerService {
     public List<Customer> getAllCustomer() {
         return customerRepository.findAll().stream().map(CustomerConverter::toModel).toList();
     }
-
-//    @Override
-//    public void addCustomer(Customer customer) {
-//        customerRepository.save(CustomerConverter.toEntity(customer));
-//    }
-
     @Override
     public Customer getCustomerById(Long customerId) {
         return CustomerConverter.toModel(customerRepository.findById(customerId).orElseThrow());

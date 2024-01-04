@@ -1,5 +1,7 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Converter.UserConverter;
+import com.example.admin.Domain.StaffDTO;
 import com.example.admin.Domain.User;
 import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class UserController {
         return "Admin/AddStaffAdmin";
     }
     @PostMapping("add")
-    public String addStaff(@ModelAttribute User user, Model model) {
+    public String addStaff(@ModelAttribute StaffDTO user, Model model) {
         if(userService.addStaff(user)){
             return "redirect:/admin/staff";
         }
@@ -49,11 +51,11 @@ public class UserController {
     @GetMapping("edit/{id}")
     public String showEditStaff(@PathVariable String id, Model model) {
         Long userId = Long.parseLong(id);
-        model.addAttribute("user", userService.getStaffById(userId));
+        model.addAttribute("user", UserConverter.toStaffDTO(userService.getStaffById(userId)));
         return "Admin/EditStaffAdmin";
     }
     @PostMapping("edit")
-    public String editStaff(@ModelAttribute User user) {
+    public String editStaff(@ModelAttribute StaffDTO user) {
         userService.updateStaff(user);
         return "redirect:/admin/staff";
     }

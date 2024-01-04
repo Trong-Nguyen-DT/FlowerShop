@@ -1,7 +1,9 @@
 package com.example.admin.Controller.Admin;
 
+import com.example.admin.Converter.ProductConverter;
 import com.example.admin.Domain.Category;
 import com.example.admin.Domain.Product;
+import com.example.admin.Domain.ProductDTO;
 import com.example.admin.Service.CategoryService;
 import com.example.admin.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +40,14 @@ public class ProductController {
     public String showEditProduct(@PathVariable String id, Model model) {
         List<Category> categories = categoryService.getAllCategory();
         Long productId = Long.parseLong(id);
-        model.addAttribute("product", productService.getProductById(productId));
+        model.addAttribute("productDTO", ProductConverter.toProductDTO(productService.getProductById(productId)));
         model.addAttribute("categories", categories);
         return "Admin/EditProductAdmin";
     }
     @PostMapping("edit")
-    public String editProduct(@ModelAttribute Product product) {
-        productService.updateProduct(product);
+    public String editProduct(@ModelAttribute ProductDTO productDTO) {
+        System.out.println("======");
+        productService.updateProduct(productDTO);
         return "redirect:/admin/product";
     }
     @GetMapping("delete/{id}")

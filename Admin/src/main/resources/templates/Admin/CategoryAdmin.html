@@ -269,7 +269,7 @@
                     </thead>
                     <tbody  th:each="cate : ${categories}" th:if="${cate.deleted == false}"  >
                     <tr>
-                        <td> <img th:src="@{'/images/' + ${cate.image}}"></td>
+                        <td> <img th:src="@{'/images/' + ${cate.image}}" alt="Category"></td>
                         <td th:text="${cate.name}"></td>
                         <td th:text="${cate.detail}"></td>
                         <td><button class="btn-click"> <a th:href="@{'/admin/category/edit/' + ${cate.id}}"> <i class="fa-solid fa-pen"></i>  </a></button> </td>

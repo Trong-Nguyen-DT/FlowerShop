@@ -23,8 +23,8 @@ body {
     width: 20cm;
     height: 29.7cm;
     max-height: 29.7cm;
-    padding-right: 2cm;
-    padding-left: 2cm;
+    padding-right: 1cm;
+    padding-left: 1cm;
     margin: auto;
     background-color: white;
     overflow: auto;
@@ -32,26 +32,10 @@ body {
     page-break-inside: avoid;
 }
 
-/*#report-page {*/
-/*    width: 21cm;*/
-/*    height: 29.7cm;*/
-/*    min-height: 29.7cm;*/
-/*    padding-top: 0;*/
-/*    margin: auto;*/
-/*    background-color: white;*/
-/*    overflow: auto;*/
-/*    overflow-x: hidden;*/
-/*    page-break-inside: avoid;*/
-/*}*/
 .report-header {
     text-align: center;
     margin-bottom: 20px;
-    margin-top: -50px;
-}
-.report-header1 {
-    text-align: center;
-    margin-bottom: 20px;
-    margin-top: -40px;
+    margin-top: -45px;
 }
 .report-header h1, .report-header h2 {
     font-family: 'Times New Roman', serif;

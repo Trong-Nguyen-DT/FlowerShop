@@ -45,28 +45,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(Product product) {
+    public void updateProduct(ProductDTO product) {
         // Lấy ProductEntity từ cơ sở dữ liệu hoặc ném ngoại lệ nếu không tìm thấy
         ProductEntity productEntity = productRepository.findById(product.getId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm với ID: " + product.getId()));
 
         // Cập nhật tất cả các trường từ Product
+        if (product.getImage1() != null && product.getImage2() != null && product.getImage3() != null && product.getImage4() != null && product.getImage5() != null) {
+            forSaveImage(product, productEntity);
+        }
         productEntity.setName(product.getName());
         productEntity.setOriginal_price(product.getOriginalPrice());
         productEntity.setPrice(newPrice(product.getOriginalPrice(), product.getDiscount()));
         productEntity.setDescription(product.getDescription());
         productEntity.setDetails(product.getDetails());
         productEntity.setDelivery(product.getDelivery());
-        productEntity.setSub_info(product.getSub_info());
+        productEntity.setSub_info(product.getSubInfo());
         productEntity.setOverall_rating(product.getOverall_rating());
         productEntity.setDiscount(product.getDiscount());
-        productEntity.setImage1(product.getImage1());
-        productEntity.setImage2(product.getImage2());
-        productEntity.setImage3(product.getImage3());
-        productEntity.setImage4(product.getImage4());
-        productEntity.setImage5(product.getImage5());
-        productEntity.setDeleted(product.isDeleted());
-
         // Lưu ProductEntity đã cập nhật vào cơ sở dữ liệu
         productRepository.save(productEntity);
     }
@@ -88,6 +84,19 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity entity = new ProductEntity();
         entity.setName(productDto.getName());
         entity.setDetails(productDto.getDetails());
+        forSaveImage(productDto, entity);
+        entity.setDelivery(productDto.getDelivery());
+        entity.setSub_info(productDto.getSubInfo());
+        entity.setOriginal_price(productDto.getOriginalPrice());
+        entity.setDiscount(productDto.getDiscount());
+        entity.setDescription(productDto.getDescription());
+        entity.setPrice(newPrice(productDto.getOriginalPrice(), productDto.getDiscount()));
+        System.out.println("lưu");
+        return productRepository.save(entity);
+//
+    }
+
+    private void forSaveImage(ProductDTO productDto, ProductEntity entity) {
         for (int i = 1; i <= 5; i++) {
             switch (i) {
                 case 1:
@@ -117,15 +126,6 @@ public class ProductServiceImpl implements ProductService {
                     break;
             }
         }
-        entity.setDelivery(productDto.getDelivery());
-        entity.setSub_info(productDto.getSubInfo());
-        entity.setOriginal_price(productDto.getOriginalPrice());
-        entity.setDiscount(productDto.getDiscount());
-        entity.setDescription(productDto.getDescription());
-        entity.setPrice(newPrice(productDto.getOriginalPrice(), productDto.getDiscount()));
-        System.out.println("lưu");
-        return productRepository.save(entity);
-//
     }
 
     private void saveImageProduct(MultipartFile image, File file) {

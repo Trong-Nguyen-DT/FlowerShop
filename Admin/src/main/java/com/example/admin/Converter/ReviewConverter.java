@@ -17,7 +17,7 @@ public class ReviewConverter {
         review.setContent(reviewEntity.getContent());
 
         review.setProduct(ProductConverter.toModel(reviewEntity.getProductEntity()));
-//        review.setCustomer(CustomerConverter.toModel(reviewEntity.getCustomerEntity()));
+        review.setCustomer(CustomerConverter.toModel(reviewEntity.getCustomerEntity()));
 
         return review;
     }

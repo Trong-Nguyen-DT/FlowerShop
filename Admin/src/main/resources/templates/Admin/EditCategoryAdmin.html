@@ -259,8 +259,7 @@
                 Edit Category
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/category/edit}" th:method="post" th:object="${category}"
-                      onsubmit=" return validateForm()">
+                <form th:object="${category}" onsubmit="submitFormEditCategory(); return false;" id="editCategoryForm" enctype="multipart/form-data">
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>
@@ -308,7 +307,7 @@
 <!-- APEX CHART -->
 <!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
 <!-- APP JS -->
-<script th:src="@{/js/addAndEditCategory.js}"></script>
+<script th:src="@{/js/EditCategory.js}"></script>
 <script th:src="@{/js/appWeb.js}"></script>
 </body>
 

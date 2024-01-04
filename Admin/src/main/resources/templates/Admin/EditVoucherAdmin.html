@@ -259,8 +259,7 @@
                 Edit Voucher
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/voucher/edit}" th:method="post" th:object="${voucher}"
-                      onsubmit="return validateVoucherForm();">
+                <form th:object="${voucher}" onsubmit="submitFormEditVoucher(); return false;" id="editVoucherForm" enctype="multipart/form-data">
                     <table>
                         <input type="hidden" name="id" th:value="${voucher.id}" />
                         <tr>
@@ -270,6 +269,15 @@
                             <td>
                                 <input type="text" th:field="*{code}" id="code">
                                 <span id="codeError" style="color: red;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <label>Icon:</label>
+                            </th>
+                            <td>
+                                <input type="file" th:field="*{icon}" id="icon">
+                                <span id="iconError" style="color: red;"></span>
                             </td>
                         </tr>
                         <tr>

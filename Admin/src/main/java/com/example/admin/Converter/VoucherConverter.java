@@ -1,6 +1,9 @@
 package com.example.admin.Converter;
 
+import com.example.admin.Domain.StaffDTO;
+import com.example.admin.Domain.User;
 import com.example.admin.Domain.Voucher;
+import com.example.admin.Domain.VoucherDTO;
 import com.example.admin.Entity.VoucherEntity;
 
 public class VoucherConverter {
@@ -34,6 +37,20 @@ public class VoucherConverter {
         voucherEntity.setExpired(voucher.isExpired());
         voucherEntity.setType(voucher.getType());
         return voucherEntity;
-
+    }
+    public static VoucherDTO toVoucherDTO(Voucher voucher) {
+        VoucherDTO dto = new VoucherDTO();;
+        dto.setId(voucher.getId());
+        dto.setTitle(voucher.getTitle());
+        dto.setCode(voucher.getCode());
+        dto.setConditionsPaymentOnline(voucher.isConditionsPaymentOnline());
+        dto.setPercentage(voucher.getPercentage());
+        dto.setUsageLimit(voucher.getUsageLimit());
+        dto.setStartDate(voucher.getStartDate());
+        dto.setEndDate(voucher.getEndDate());
+        dto.setConditionPrice(voucher.getConditionPrice());
+        dto.setExpired(voucher.isExpired());
+        dto.setType(voucher.getType());
+        return dto;
     }
 }

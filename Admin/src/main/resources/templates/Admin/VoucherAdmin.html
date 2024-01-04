@@ -261,7 +261,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Icon</th>
                         <th>Code</th>
                         <th>Condition Price</th>
                         <th>Start date</th>
@@ -274,7 +274,7 @@
                     </thead>
                     <tbody th:each="voucher : ${vouchers}">
                     <tr>
-                        <td th:text="${voucher.id}"></td>
+                        <td><img class="icon" th:src="@{'/images/' + ${voucher.icon}}" alt="voucher"></td>
                         <td th:text="${voucher.code}"></td>
                         <td th:text="${voucher.conditionPrice}"></td>
                         <td th:text="${voucher.startDate}"></td>

@@ -258,7 +258,7 @@
                 Edit Product
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/product/edit}" th:method="post" th:object="${product}" onsubmit="return validateFormEditProduct(); " >
+                <form id="editProductForm" enctype="multipart/form-data" th:object="${productDTO}" onsubmit="submitFormEdit(); return false;" >
                     <table>
                         <input type="hidden" th:field="*{id}">
                         <tr>
@@ -297,15 +297,6 @@
                                 <span id="descriptionEditError" style="color: red;"></span>
                             </td>
                         </tr>
-                        <!--                        <tr>-->
-                        <!--                            <th>-->
-                        <!--                                <label>Detail:</label>-->
-                        <!--                            </th>-->
-                        <!--                            <td>-->
-                        <!--                                <input type="text" th:field="*{details}" id="details">-->
-                        <!--                                <span id="detailsError" style="color: red;"></span>-->
-                        <!--                            </td>-->
-                        <!--                        </tr>-->
                         <tr>
                             <th>
                                 <label>Delivery:</label>
@@ -320,7 +311,7 @@
                                 <label>Sub Info:</label>
                             </th>
                             <td>
-                                <input type="text" th:field="*{sub_info}" id="sub_infoEdit">
+                                <input type="text" th:field="*{subInfo}" id="sub_infoEdit">
                                 <span id="sub_infoEditError" style="color: red;"></span>
                             </td>
                         </tr>

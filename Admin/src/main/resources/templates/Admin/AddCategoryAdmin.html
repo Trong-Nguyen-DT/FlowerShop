@@ -259,8 +259,7 @@
                 Add Category
             </div>
             <div class="box-body overflow-scroll">
-                <form th:action="@{/admin/category/add}" th:method="post" th:object="${category}"
-                      onsubmit="return validateForm()">
+                <form th:object="${category}" onsubmit="submitFormAddCatgory(); return false;" id="addCategoryForm" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <th>
@@ -306,6 +305,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- APP JS -->
 <script th:src="@{/js/appWeb.js}"></script>
-<script th:src="@{/js/addAndEditCategory.js}"></script>
+<script th:src="@{/js/AddCategory.js}"></script>
 </body>
 </html>

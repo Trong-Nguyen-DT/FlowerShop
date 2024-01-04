@@ -7,12 +7,15 @@
     <title>Boss Sanctuary</title>
     <!-- GOOGLE FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+            rel="stylesheet">
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <!-- APP CSS -->
     <link rel="stylesheet" th:href="@{/css/grid.css}">
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/Review.css}">
     <script src="https://kit.fontawesome.com/3edce6b09c.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -245,73 +248,75 @@
             <i class='bx bx-menu-alt-right'></i>
         </div>
         <div class="main-title">
-            dashboard
+            Dashboard
         </div>
     </div>
 
-    <!-- ORDERS TABLE -->
+    <!-- REVIEW DETAILS -->
     <div class="box">
         <div class="box-body overflow-scroll">
             <div class="box-header">
-                Detail Product
+                Detail Review
             </div>
-            <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Original price</th>
-                        <th>Discount</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                        <th>Overall rating</th>
-                        <th>Delivery</th>
-                        <th>Sub info</th>
-                        <th>Image1</th>
-                        <th>Image2</th>
-                        <th>Image3</th>
-                        <th>Image4</th>
-                        <th>Image5</th>
-                        <th>Details</th>
-<!--                        <th>Edit</th>-->
-<!--                        <th>Delete</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td th:text="${product.id}"></td>
-                        <td th:text="${product.name}"></td>
-                        <td th:text="${product.original_price}"></td>
-                        <td th:text="${product.discount}"></td>
-                        <td th:text="${product.price}"></td>
-                        <td th:text="${product.description}"></td>
-                        <td th:text="${product.overall_rating}"></td>
-                        <td th:text="${product.sub_info}"></td>
-                        <td th:text="${product.delivery}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image1}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image2}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image3}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image4}}"></td>
-                        <td> <img th:src="@{'/images/' + ${product.image5}}"></td>
-                        <td><a th:href="@{'/admin/productDetail/' + ${product.id}}" style="color: blue"> Detail  </a> </td>
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/product/edit/' + ${product.id}}"> <i class="fa-solid fa-pen"></i></a></button> </td>-->
-<!--                        <td><button class="btn-click"> <a th:href="@{'/admin/prodcut/delete/' + ${product.id}}"> <i class="fa-solid fa-trash-can"></i> </a></button></td>-->
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="review-details">
+                <div class="avatar-section">
+                    <img class="avatar" th:src="@{'/images/' + ${review.product.image1}}" alt="Avatar">
+                </div>
+                <div class="info-section">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Name:</label>
+                            </td>
+                            <td th:text="${review.name}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Name Product:</label>
+                            </td>
+                            <td th:text="${review.product.name}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>FullName Customer:</label>
+                            </td>
+                            <td th:text="${review.customer.fullName}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Date:</label>
+                            </td>
+                            <td th:text="${review.date}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Rate:</label>
+                            </td>
+                            <td th:text="${review.rate}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Content:</label>
+                            </td>
+                            <td th:text="${review.content}"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <!-- END ORDERS TABLE -->
-    <!-- END MAIN CONTENT -->
-    <div class="overlay"></div>
-    <!-- SCRIPT -->
-    <!-- APEX CHART -->
-<!--    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
-    <!-- APP JS -->
-    <script th:src="@{/js/appWeb.js}"></script>
 </div>
+<!-- END REVIEW TABLE -->
+
+<!-- END MAIN CONTENT -->
+
+<div class="overlay"></div>
+
+<!-- SCRIPT -->
+<!-- APEX CHART -->
+<!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
+<!-- APP JS -->
+<script th:src="@{/js/appWeb.js}"></script>
 </body>
 
 </html>

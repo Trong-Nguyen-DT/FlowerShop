@@ -1,7 +1,6 @@
 package com.example.admin.Converter;
 
-import com.example.admin.Domain.Category;
-import com.example.admin.Domain.Review;
+import com.example.admin.Domain.*;
 import com.example.admin.Entity.CategoryEntity;
 import com.example.admin.Entity.ReviewEntity;
 
@@ -22,6 +21,7 @@ public class CategoryConverter {
 
     public static CategoryEntity toEntity(Category category) {
         CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(category.getId());
         categoryEntity.setName(category.getName());
         categoryEntity.setImage(category.getImage());
         categoryEntity.setDeleted(false);
@@ -33,5 +33,13 @@ public class CategoryConverter {
         return categories.stream()
                 .map(CategoryConverter::toEntity)
                 .collect(Collectors.toList());
+    }
+    public static CategoryDTO toCategoryDTO(Category category) {
+        CategoryDTO dto = new CategoryDTO();;
+        dto.setId(category.getId());
+        dto.setName(category.getName());
+        dto.setDeleted(false);
+        dto.setDetail(category.getDetail());
+        return dto;
     }
 }
