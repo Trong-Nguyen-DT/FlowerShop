@@ -511,3 +511,7 @@ table, table th {
 #category-chart label{
     font-size: 2px;
 }
+.icon {
+    width: 45px;
+    height: 40px;
+}

@@ -1,50 +1,51 @@
-function validateVoucherForm() {
-    var code = document.getElementById('code').value;
-    var conditionPrice = document.getElementById('conditionPrice').value;
-    var startDate = document.getElementById('startDate').value;
-    var endDate = document.getElementById('endDate').value;
-    var percentage = document.getElementById('percentage').value;
-    var usageLimit = document.getElementById('usageLimit').value;
-    var voucherTypes = document.getElementById('voucherTypes').value;
+function submitFormAddVoucher() {
+    // Thu thập dữ liệu biểu mẫu
+    let formData = new FormData(document.getElementById("addVoucherForm"));
+    fetch('/admin/voucher-add', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP Error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                // This line redirects to '/login'
+                console.log('Xác nhận thêm voucher thành công. Đang chuyển hướng đến trang xem voucher.');
+                window.location.replace('/admin/voucher');
+            }else {
+                console.error('Xác nhận thêm danh mục thất bại:', data.message);
+                alert("Thêm voucher thất bại - voucher đã tồn tại \nHoặc bạn cần nhập đầy đủ thông tin");
 
-// Reset error messages
-    document.getElementById('codeError').innerText = '';
-    document.getElementById('conditionPriceError').innerText = '';
-    document.getElementById('startDateError').innerText = '';
-    document.getElementById('endDateError').innerText = '';
-    document.getElementById('percentageError').innerText = '';
-    document.getElementById('usageLimitError').innerText = '';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Bạn cần nhập đầy đủ thông tin");
+            console.error('Error:', error);
+        });
+}
 
-// Repeat similar lines for other fields
-
-    var isValid = true;
-    if (!code ) {
-        document.getElementById('codeError').innerText = 'Vui lòng nhập Code.';
-        isValid = false;
-    }
-    if (parseFloat(conditionPrice) === 0.0 ) {
-        document.getElementById('conditionPriceError').innerText = 'Vui lòng nhập Condition price.';
-        isValid = false;
-    }
-    if (!startDate ) {
-        document.getElementById('startDateError').innerText = 'Vui lòng nhập Start date.';
-        isValid = false;
-    }
-    if (!endDate ) {
-        document.getElementById('endDateError').innerText = 'Vui lòng nhập End date.';
-        isValid = false;
-    }
-    if (!percentage ) {
-        document.getElementById('percentageError').innerText = 'Vui lòng nhập Percentage.';
-        isValid = false;
-    }
-    if (parseInt(usageLimit) === 0 ) {
-        document.getElementById('usageLimitError').innerText = 'Vui lòng nhập Usage limit.';
-        isValid = false;
-    }
-    if (!voucherTypes ) {
-        document.getElementById('voucherTypesError').innerText = 'Vui lòng chọn Voucher types.';
-        isValid = false;
-    }
-    return isValid;
+function submitFormEditVoucher() {
+    // Thu thập dữ liệu biểu mẫu
+    let formData = new FormData(document.getElementById("editVoucherForm"));
+    fetch('/admin/voucher-edit', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.text())
+        .then(redirectUrl => {
+            // Xử lý đường dẫn trực tiếp từ server
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                console.error("Invalid redirect data");
+            }
+        })
+        .catch(error => {
+            console.error("Error :", error);
+        });
 }
