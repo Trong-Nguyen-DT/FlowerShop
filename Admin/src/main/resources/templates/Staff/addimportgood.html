@@ -84,7 +84,7 @@
     var listIt = [];
 
     async function loadItem() {
-        var url = 'http://localhost:8080/staff/all-item';
+        var url = 'http://103.153.72.198:8080/staff/all-item';
         const response = await fetch(url, {
         });
         var list = await response.json();
@@ -141,7 +141,7 @@
     }
 
     async function saveImportGood() {
-        var url = 'http://localhost:8080/staff/add-import-good';
+        var url = 'http://103.153.72.198:8080/staff/add-import-good';
         if(arrItem.length == 0){
             toastr.warning("Chưa chọn item nào");return;
         }

@@ -1,6 +1,6 @@
 async function findAllCustomer() {
   // $('#example').DataTable().destroy();
-  var url = 'http://localhost:8080/staff/all-customer';
+  var url = 'http://103.153.72.198:8080/staff/all-customer';
   const response = await fetch(url, {
     method: 'GET'
   });

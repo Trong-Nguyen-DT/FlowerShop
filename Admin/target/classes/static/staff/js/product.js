@@ -1,6 +1,6 @@
 async function findAllProduct() {
   $('#example').DataTable().destroy();
-  var url = 'http://localhost:8080/staff/all-product';
+  var url = 'http://103.153.72.198:8080/staff/all-product';
   const response = await fetch(url, {
     method: 'GET'
   });
@@ -26,7 +26,7 @@ async function findAllProduct() {
 
 
 async function loadAProduct(id) {
-  var url = 'http://localhost:8080/staff/all-product-by-id?id='+id;
+  var url = 'http://103.153.72.198:8080/staff/all-product-by-id?id='+id;
   const response = await fetch(url, {
     method: 'GET',
     headers: new Headers({

@@ -271,7 +271,7 @@
                     <tr>
                         <td th:text="${customer.id}"></td>
                         <td th:text="${customer.fullName}"></td>
-                        <td th:each="addr : ${address}" th:if="${addr.customer.id == customer.id}">
+                        <td th:each="addr : ${address}" th:if="${addr.customerId == customer.id}">
                             <p><span th:text="${addr.street}" ></span>, <span th:text="${addr.ward}"></span>, <span th:text="${addr.district}"></span>, <span th:text="${addr.city}"></span></p>
                         </td>
                         <td th:text="${customer.phone}"></td>
