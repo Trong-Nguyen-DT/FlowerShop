@@ -19,7 +19,7 @@ firebase.messaging().onBackgroundMessage(function (payload) {
     const notificationTitle = payload.notification.title;
     const notificationOptions = {
         body: payload.notification.body,
-        icon: 'http://localhost:8080/image/logo.svg',
+        icon: 'http://103.153.72.198:8080/images/Pink Watercolour Flower Shop Logo (2).png',
     };
     return self.registration.showNotification(notificationTitle, notificationOptions);
 });

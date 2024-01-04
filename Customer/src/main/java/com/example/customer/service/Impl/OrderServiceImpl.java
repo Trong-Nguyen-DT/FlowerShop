@@ -117,8 +117,8 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://localhost:80/payment/success-web");
-        order.setCancelUrl("http://localhost:80/payment/failed-web");
+        order.setReturnUrl("http://boconganhflowers.click/payment/success-web");
+        order.setCancelUrl("http://boconganhflowers.click/failed-web");
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(
@@ -182,14 +182,14 @@ public class OrderServiceImpl implements OrderService {
 
     private BodyRequest setOrder(OrderEntity orderEntity) {
         BodyRequest order = new BodyRequest();
-        order.setOrderCode(10000 + orderEntity.getId());
+        order.setOrderCode(100000 + orderEntity.getId());
         order.setAmount(orderEntity.getAmount());
         order.setDescription("");
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://192.168.34.198:80/api/payment/success-app?id=" + orderEntity.getCustomerEntity().getId());
-        order.setCancelUrl("http://192.168.34.198:80/api/payment/failed-app?id=" + orderEntity.getCustomerEntity().getId());
+        order.setReturnUrl("http://boconganhflowers.click/api/payment/success-app?id=" + orderEntity.getCustomerEntity().getId());
+        order.setCancelUrl("http://boconganhflowers.click/api/payment/failed-app?id=" + orderEntity.getCustomerEntity().getId());
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(

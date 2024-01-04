@@ -87,7 +87,7 @@ public class PaymentAPIController {
         }
         Long orderId = orderService.createOrder(order, name);
         ResponsePayment payment = orderService.createResponsePayment(orderId);
-        String url = "http://localhost/payment/success-web";
+        String url = "http://boconganhflowers.click/payment/success-web";
         if (payment.getOrder().isPaymentOnline()) {
             url = orderService.createUrlPayment(orderId);
         }

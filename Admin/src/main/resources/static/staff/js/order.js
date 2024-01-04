@@ -3,7 +3,7 @@ async function findAllPOrder() {
   var from = document.getElementById("from").value
   var to = document.getElementById("to").value
   var sta = document.getElementById("liststatussearch").value
-  var url = 'http://localhost:8080/staff/all-order?ce=oke';
+  var url = 'http://103.153.72.198:8080/staff/all-order?ce=oke';
   if(from != "" && to != ""){
       url += '&from='+from+'&to='+to;
   }
@@ -41,7 +41,7 @@ async function findAllPOrder() {
 
 
 async function loadDetailOrder(id) {
-  var url = 'http://localhost:8080/staff/order-detail-by-order?id='+id;
+  var url = 'http://103.153.72.198:8080/staff/order-detail-by-order?id='+id;
   const response = await fetch(url, {
     method: 'GET'
   });
@@ -82,7 +82,7 @@ async function loadOrderById(id) {
 }
 
 async function addNote() {
-  var url = 'http://localhost:8080/staff/add-order-note';
+  var url = 'http://103.153.72.198:8080/staff/add-order-note';
 
   var id = document.getElementById("idOrder").value
   var note = document.getElementById("noteorder").value
@@ -118,7 +118,7 @@ async function addNote() {
 }
 
 async function loadAllStatus() {
-  var url = 'http://localhost:8080/staff/get-all-status-order';
+  var url = 'http://103.153.72.198:8080/staff/get-all-status-order';
   const response = await fetch(url, {
     method: 'GET'
   });
@@ -141,7 +141,7 @@ function setIdUpdateStt(id, sttName){
 async function updateStatusOrder() {
   var id = document.getElementById("idOrderUpdate").value
   var statuso = document.getElementById("liststatus").value
-  var url = 'http://localhost:8080/staff/update-status-order?orderStatusName='+statuso+'&id='+id;
+  var url = 'http://103.153.72.198:8080/staff/update-status-order?orderStatusName='+statuso+'&id='+id;
   const response = await fetch(url, {
       method: 'POST'
   });

@@ -1,6 +1,6 @@
 async function findAllNotify() {
     // $('#example').DataTable().destroy();
-    var url = 'http://localhost:8080/staff/all-notify';
+    var url = 'http://103.153.72.198:8080/staff/all-notify';
     const response = await fetch(url, {
         method: 'GET'
     });

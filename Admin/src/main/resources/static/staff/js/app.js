@@ -42,7 +42,7 @@ messaging.onMessage(function(payload) {
 });
 
 async function capNhatToken(token){
-    var url = 'http://localhost:8080/api/notification/update-tokendevice?token='+token;
+    var url = 'http://103.153.72.198:8080/api/notification/update-tokendevice?token='+token;
     const response = await fetch(url, {
         method: 'POST',
         headers: new Headers({
