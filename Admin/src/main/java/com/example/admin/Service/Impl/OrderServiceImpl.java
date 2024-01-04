@@ -3,6 +3,7 @@ package com.example.admin.Service.Impl;
 
 import com.example.admin.Converter.OrderConverter;
 import com.example.admin.Domain.AmountData;
+import com.example.admin.Domain.Order;
 import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Domain.OrderNote;
 import com.example.admin.Entity.OrderEntity;
@@ -70,25 +71,54 @@ public class OrderServiceImpl implements OrderService {
         }
         return list;
     }
+
     @Override
-    public OrderEntity addNote(OrderNote orderNote) {
-        Optional<OrderEntity> order = orderRepository.findById(orderNote.getOrderId());
+    public List<OrderHistory> findAllListByStatus(Date from, Date to, String trangthai) {
+        List<OrderHistoryEntity> list = null;
+        if(from == null || to == null){
+            from = Date.valueOf("2000-01-01");
+            to = Date.valueOf("2100-01-01");
+        }
+        LocalDateTime datef = LocalDateTime.of(from.toLocalDate(), LocalTime.now());
+        LocalDateTime datet = LocalDateTime.of(to.toLocalDate(), LocalTime.now());
+        if(trangthai == null){
+            list = orderHistoryRepository.findByDate(datef, datet);
+        }
+        else{
+            OrderStatus orderStatus = null;
+            for (OrderStatus o : OrderStatus.values()) {
+                if(o.name().equals(trangthai)){
+                    orderStatus = o;
+                }
+            }
+            list = orderHistoryRepository.findByDateAndStatus(datef, datet, orderStatus);
+        }
+        List<OrderHistory> result = new ArrayList<>();
+        for(OrderHistoryEntity o : list){
+            result.add(OrderConverter.toModelHistory(o));
+        }
+        return result;
+    }
+
+    @Override
+    public OrderHistoryEntity addNote(OrderNote orderNote) {
+        Optional<OrderHistoryEntity> order = orderHistoryRepository.findById(orderNote.getOrderId());
         if (order.isEmpty()){
             throw new MessageException("order not found");
         }
         order.get().setNote(orderNote.getNote());
         order.get().setInformationRelated(orderNote.getInforRelated());
-        OrderEntity result = orderRepository.save(order.get());
+        OrderHistoryEntity result = orderHistoryRepository.save(order.get());
         return result;
     }
 
     @Override
-    public OrderEntity findById(Long id) {
+    public Order findById(Long id) {
         Optional<OrderEntity> order = orderRepository.findById(id);
         if (order.isEmpty()){
             throw new MessageException("order not found");
         }
-        return order.get();
+        return OrderConverter.toModel(order.get());
     }
 
     @Override

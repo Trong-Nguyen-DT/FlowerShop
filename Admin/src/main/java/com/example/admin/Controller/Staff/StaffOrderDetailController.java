@@ -1,6 +1,6 @@
 package com.example.admin.Controller.Staff;
 
-import com.example.admin.Entity.OrderDetailEntity;
+import com.example.admin.Domain.OrderDetail;
 import com.example.admin.Service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class StaffOrderDetailController {
 
     @GetMapping("/order-detail-by-order")
     public ResponseEntity<?> findByOrder(@RequestParam("id") Long orderId){
-        List<OrderDetailEntity> result = orderDetailService.findByOrder(orderId);
+        List<OrderDetail> result = orderDetailService.findByOrder(orderId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

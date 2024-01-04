@@ -37,6 +37,8 @@ public class UserEntity {
 
     private Boolean deleted;
 
+    private String tokenDevice;
+
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orderEntities;
 }

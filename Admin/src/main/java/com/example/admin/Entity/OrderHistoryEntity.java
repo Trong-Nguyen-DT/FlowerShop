@@ -40,6 +40,10 @@ public class OrderHistoryEntity {
 
     private String address;
 
+    private String note;
+
+    private String informationRelated;
+
     private String nameCustomerReceive;
 
     private String phoneCustomerReceive;

@@ -10,6 +10,8 @@ import com.example.admin.Repository.StaffRepository;
 import com.example.admin.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -135,5 +137,16 @@ public class UserServiceImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace(); // Thêm dòng này để in ra thông báo lỗi chi tiết
         }
+    }
+
+    @Override
+    public Optional<UserEntity> getUserWithAuthority() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            String currentUserName = authentication.getName();
+            Optional<UserEntity> user = staffRepository.findByUsername(currentUserName);
+            return user;
+        }
+        return null;
     }
 }

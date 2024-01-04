@@ -1,7 +1,10 @@
 package com.example.admin.Controller.Staff;
 
+import com.example.admin.Domain.Order;
+import com.example.admin.Domain.OrderHistory;
 import com.example.admin.Domain.OrderNote;
 import com.example.admin.Entity.OrderEntity;
+import com.example.admin.Entity.OrderHistoryEntity;
 import com.example.admin.Service.OrderService;
 import com.example.admin.enums.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +34,21 @@ public class StaffOrderController {
 
     @GetMapping("/all-order")
     public ResponseEntity<?> findAllList(@RequestParam(value = "from", required = false) Date from,
-                                         @RequestParam(value = "to", required = false) Date to){
-        List<OrderEntity> result = orderService.findAllList(from, to);
+                                         @RequestParam(value = "to", required = false) Date to,
+                                         @RequestParam(value = "trangthai", required = false) String trangthai){
+        List<OrderHistory> result = orderService.findAllListByStatus(from, to, trangthai);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping("/add-order-note")
     public ResponseEntity<?> addNote(@RequestBody OrderNote orderNote){
-        OrderEntity result = orderService.addNote(orderNote);
+        OrderHistoryEntity result = orderService.addNote(orderNote);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/get-order-by-id")
     public ResponseEntity<?> findById(@RequestParam Long id){
-        OrderEntity result = orderService.findById(id);
+        Order result = orderService.findById(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

@@ -1,6 +1,6 @@
 package com.example.admin.Controller.Staff;
 
-import com.example.admin.Entity.CustomerEntity;
+import com.example.admin.Domain.Customer;
 import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class StaffCustomerController {
 
     @GetMapping("/all-customer")
     public ResponseEntity<?> findAll(){
-        List<CustomerEntity> result = customerService.findAll();
+        List<Customer> result = customerService.findAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

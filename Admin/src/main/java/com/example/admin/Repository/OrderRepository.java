@@ -1,6 +1,7 @@
 package com.example.admin.Repository;
 
 import com.example.admin.Entity.OrderEntity;
+import com.example.admin.enums.OrderStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

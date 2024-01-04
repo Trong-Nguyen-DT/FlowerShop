@@ -1,5 +1,5 @@
 async function findAllCustomer() {
-  $('#example').DataTable().destroy();
+  // $('#example').DataTable().destroy();
   var url = 'http://localhost:8080/staff/all-customer';
   const response = await fetch(url, {
     method: 'GET'
@@ -7,10 +7,14 @@ async function findAllCustomer() {
   var list = await response.json();
   var main = '';
   for (i = 0; i < list.length; i++) {
+    var add = '';
+    for(j=0; j<list[i].addresses.length; j++){
+      add += list[i].addresses[j].street+", "+list[i].addresses[j].ward+", "+list[i].addresses[j].district+", "+list[i].addresses[j].city
+    }
     main += `<tr>
                   <td>${list[i].id}</td>
                   <td><img src="${list[i].avatar}" style="width: 100px"></td>
-                  <td>${list[i].address}</td>
+                  <td>${add}</td>
                   <td>${list[i].email}</td>
                   <td>${list[i].fullName}</td>
                   <td>${list[i].phone}</td>
@@ -18,5 +22,5 @@ async function findAllCustomer() {
               </tr>`
   }
   document.getElementById("listCustomer").innerHTML = main;
-  $('#example').DataTable();
+  // $('#example').DataTable();
 }

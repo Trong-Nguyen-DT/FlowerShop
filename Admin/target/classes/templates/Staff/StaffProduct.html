@@ -27,11 +27,14 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/product.js"></script>
   <script>
     window.onload = function() {
       findAllProduct();
+      thongbao();
     }
   </script>
 </head>
@@ -95,4 +98,25 @@
     </div>
   </div>
 </div>
+<script src="js/app.js"></script>
+<script>
+
+//  async function thongbao(){
+//    var url = 'http://localhost:8080/api/notification/send';
+//    var obj= {
+//      "title":"hehe",
+//      "message":"oke",
+//      "topic":"hiuhiu",
+//      "image":"http://localhost:8080/image/logo.svg",
+//      "token":"eXV7w3VRLJQHAQZUZh_HPf:APA91bFCF38PRa3fniF0lklytPTjWhwVY0xogleU5z33Xp9xpKE3EhJTsNsLeAUDGy_u0yOmY97KSZdo8cAwkiVCZ36qZkLmTpQ-Gp8rV4tXvwasAID2mEXRNZLvP_qIKvp6hfwY4kTb"
+//    }
+//    const response = await fetch(url, {
+//      method: 'POST',
+//      headers: new Headers({
+//        'Content-Type': 'application/json'
+//      }),
+//      body: JSON.stringify(obj)
+//    });
+//  }
+</script>
 </html>

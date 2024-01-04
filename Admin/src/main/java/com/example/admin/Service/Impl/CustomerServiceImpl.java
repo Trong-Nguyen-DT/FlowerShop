@@ -8,6 +8,7 @@ import com.example.admin.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,8 +30,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerEntity> findAll() {
-        return customerRepository.findAll();
+    public List<Customer> findAll() {
+        List<CustomerEntity> list =  customerRepository.findAll();
+        List<Customer> result = new ArrayList<>();
+        for(CustomerEntity c : list){
+            result.add(CustomerConverter.toModel(c));
+        }
+        return result;
     }
 
 //    public void updateCustomer(Customer customer) {

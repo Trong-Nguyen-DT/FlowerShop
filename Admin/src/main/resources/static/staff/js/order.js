@@ -2,9 +2,13 @@ async function findAllPOrder() {
   $('#example').DataTable().destroy();
   var from = document.getElementById("from").value
   var to = document.getElementById("to").value
-  var url = 'http://localhost:8080/staff/all-order';
+  var sta = document.getElementById("liststatussearch").value
+  var url = 'http://localhost:8080/staff/all-order?ce=oke';
   if(from != "" && to != ""){
-      url += '?from='+from+'&to='+to;
+      url += '&from='+from+'&to='+to;
+  }
+  if(sta != - 1){
+      url += '&trangthai='+sta
   }
   const response = await fetch(url, {
     method: 'GET'
@@ -35,6 +39,7 @@ async function findAllPOrder() {
 }
 
 
+
 async function loadDetailOrder(id) {
   var url = 'http://localhost:8080/staff/order-detail-by-order?id='+id;
   const response = await fetch(url, {
@@ -46,10 +51,10 @@ async function loadDetailOrder(id) {
   for (i = 0; i < list.length; i++) {
   main += `<tr>
           <td>${list[i].id}</td>
-          <td><img src="http:${list[i].productEntity.image1}" style="width:80px"></td>
-          <td>${list[i].productEntity.id}</td>
-          <td>${list[i].productEntity.name}</td>
-          <td>${formatmoney(list[i].productEntity.price)}</td>
+          <td><img src="http:${list[i].product.image1}" style="width:80px"></td>
+          <td>${list[i].product.id}</td>
+          <td>${list[i].product.name}</td>
+          <td>${formatmoney(list[i].product.price)}</td>
           <td>${list[i].quantity}</td>
       </tr>`
   }
@@ -118,10 +123,13 @@ async function loadAllStatus() {
   });
   var list = await response.json();
   var main = '';
+  var mains = '<option value="-1">Tất cả trạng thái</option>';
   for (i = 0; i < list.length; i++) {
   main += `<option value="${list[i]}">${list[i]}</option>`
+  mains += `<option value="${list[i]}">${list[i]}</option>`
   }
   document.getElementById("liststatus").innerHTML = main;
+  document.getElementById("liststatussearch").innerHTML = mains;
 }
 
 function setIdUpdateStt(id, sttName){
@@ -150,4 +158,22 @@ async function updateStatusOrder() {
   else {
       toastr.error("failure");
   }
+}
+
+
+function convertStatus(orderStatus){
+    if (orderStatus == (CANCELLED)){
+        return "Đã hủy";
+    }if (orderStatus==(CONFIRMED)){
+        return "Đã được xác nhận";
+    }if (orderStatus==(RECEIVED)){
+        return "Đã nhận";
+    }if (orderStatus==s(REJECT)){
+        return "Đã bị từ chối";
+    }if (orderStatus==(WAITING)){
+        return "Đang chờ";
+    }if (orderStatus==(SENT)){
+        return "Đã được gửi đi";
+    }
+    return "";
 }

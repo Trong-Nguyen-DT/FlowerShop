@@ -39,4 +39,5 @@ public class StaffProductController {
         Product result = productService.getById(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 }

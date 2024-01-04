@@ -27,6 +27,7 @@ public class OrderConverter {
         orderHistory.setTotalPrice(orderHistoryEntity.getTotalPrice());
         orderHistory.setUserId(orderHistoryEntity.getUserId());
         orderHistory.setCustomerId(orderHistoryEntity.getCustomerId());
+        orderHistory.setOrderStatus(orderHistoryEntity.getOrderStatus());
         orderHistory.setFullNameCustomer(orderHistoryEntity.getFullNameCustomer());
 //        orderHistory.setOrderDetailHistories(orderHistoryEntity.getOrderDetailHistoryEntities().stream().map(OrderDetailConverter::toOrderDetailHistory).toList());
 

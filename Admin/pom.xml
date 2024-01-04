@@ -83,7 +83,13 @@
             <artifactId>spring-boot-starter-mail</artifactId>
             <version>2.5.6</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>8.1.0</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

@@ -85,4 +85,9 @@ public class UserController {
         String redirectUrl = "/admin/staff/detail/" + id;
         return ResponseEntity.ok(redirectUrl);
     }
+
+    @GetMapping("send-message")
+    public String sendMess() {
+        return "Admin/SendMessageAdmin";
+    }
 }

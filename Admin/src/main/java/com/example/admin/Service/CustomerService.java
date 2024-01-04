@@ -14,7 +14,7 @@ public interface CustomerService {
 
     void detailCustomer(Customer customer);
 
-    List<CustomerEntity> findAll();
+    List<Customer> findAll();
 
 //    void deleteCustomerById(Long customerId);
 //

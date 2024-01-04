@@ -11,7 +11,7 @@ async function findAllProduct() {
     main += `<tr>
             <td>${list[i].id}</td>
             <td>${list[i].name}</td>
-            <td>${formatmoney(list[i].original_price)}</td>
+            <td>${formatmoney(list[i].originalPrice)}</td>
             <td>${formatmoney(list[i].price)}</td>
             <td>${list[i].overall_rating}</td>
             <td>${list[i].discount}</td>

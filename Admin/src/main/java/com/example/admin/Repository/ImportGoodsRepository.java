@@ -17,4 +17,7 @@ public interface ImportGoodsRepository extends JpaRepository<ImportGoodsEntity, 
     List<ImportGoodsEntity> findImportGoodsEntitiesByTimeImportBetween(LocalDateTime startTime, LocalDateTime endTime);
     @Query("SELECT SUM(i.totalPrice) FROM ImportGoodsEntity i WHERE i.timeImport BETWEEN :startTime AND :endTime")
     Long getTotalImportAmountByTime(@Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
+
+    @Query("select i from ImportGoodsEntity i where i.timeImport >= ?1 and i.timeImport <= ?2")
+    public List<ImportGoodsEntity> findByDate(LocalDateTime from, LocalDateTime to);
 }

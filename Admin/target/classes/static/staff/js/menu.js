@@ -1,5 +1,7 @@
 const exceptionCode = 417;
+var tokenFcm = "";
 $(document).ready(function() {
+
     loadmenu();
     function loadmenu() {
         var content =
@@ -22,6 +24,10 @@ $(document).ready(function() {
             <a class="nav-link" href="order">
                 <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart iconmenu"></i></div>
                 Order
+            </a>
+            <a class="nav-link" href="importgoods">
+                <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart iconmenu"></i></div>
+                Importgoods
             </a>
             <a class="nav-link" href="../perform_logout">
                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt iconmenu"></i></div>
