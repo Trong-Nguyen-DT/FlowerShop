@@ -35,19 +35,19 @@ async function loadAProduct(id) {
   var obj = await response.json();
   var mainimg = ''
   if(obj.image1 != null && obj.image1 != ""){
-    mainimg += `<div class="col-lg-2"><img src="http://${obj.image1}" style="width: 100%;"></div>`
+    mainimg += `<div class="col-lg-2"><img src="/images/${obj.image1}" style="width: 100%;"></div>`
   }
   if(obj.image2 != null && obj.image2 != ""){
-    mainimg += `<div class="col-lg-2"><img src="http://${obj.image2}" style="width: 100%;"></div>`
+    mainimg += `<div class="col-lg-2"><img src="/images/${obj.image2}" style="width: 100%;"></div>`
   }
   if(obj.image3 != null && obj.image3 != ""){
-    mainimg += `<div class="col-lg-2"><img src="http://${obj.image3}" style="width: 100%;"></div>`
+    mainimg += `<div class="col-lg-2"><img src="/images/${obj.image3}" style="width: 100%;"></div>`
   }
   if(obj.image4 != null && obj.image4!= ""){
-    mainimg += `<div class="col-lg-2"><img src="http://${obj.image4}" style="width: 100%;"></div>`
+    mainimg += `<div class="col-lg-2"><img src="/images/${obj.image4}" style="width: 100%;"></div>`
   }
   if(obj.image5 != null && obj.image5!= ""){
-    mainimg += `<div class="col-lg-2"><img src="http://${obj.image5}" style="width: 100%;"></div>`
+    mainimg += `<div class="col-lg-2"><img src="/images/${obj.image5}" style="width: 100%;"></div>`
   }
 
   document.getElementById("listimgdetail").innerHTML = mainimg;

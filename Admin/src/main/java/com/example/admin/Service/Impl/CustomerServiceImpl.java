@@ -32,11 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findAll() {
         List<CustomerEntity> list =  customerRepository.findAll();
-        List<Customer> result = new ArrayList<>();
-        for(CustomerEntity c : list){
-            result.add(CustomerConverter.toModel(c));
-        }
-        return result;
+        return list.stream().map(CustomerConverter::toModel).toList();
     }
 
 //    public void updateCustomer(Customer customer) {

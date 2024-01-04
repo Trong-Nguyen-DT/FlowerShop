@@ -4,6 +4,7 @@ package com.example.admin.Service.Impl;
 import com.example.admin.Converter.OrderDetailConverter;
 import com.example.admin.Converter.ProductConverter;
 import com.example.admin.Domain.OrderDetail;
+import com.example.admin.Domain.OrderDetailHistory;
 import com.example.admin.Domain.Product;
 import com.example.admin.Entity.*;
 import com.example.admin.Repository.*;
@@ -29,11 +30,11 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     private ProductRepository productRepository;
 
     @Override
-    public List<OrderDetail> findByOrder(Long orderId) {
-        List<OrderDetailEntity> list = orderDetailRepository.findByOrder(orderId);
-        List<OrderDetail> result = new ArrayList<>();
-        for(OrderDetailEntity o : list){
-            result.add(OrderDetailConverter.toModel(o));
+    public List<OrderDetailHistory> findByOrder(Long orderId) {
+        List<OrderDetailHistoryEntity> list = orderDetailHistoryRepository.findByOrder(orderId);
+        List<OrderDetailHistory> result = new ArrayList<>();
+        for(OrderDetailHistoryEntity o : list){
+            result.add(OrderDetailConverter.toOrderDetailHistory(o));
         }
         return result;
     }

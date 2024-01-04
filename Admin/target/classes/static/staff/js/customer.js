@@ -13,7 +13,7 @@ async function findAllCustomer() {
     }
     main += `<tr>
                   <td>${list[i].id}</td>
-                  <td><img src="${list[i].avatar}" style="width: 100px"></td>
+                  <td><img src="/customer/${list[i].avatar}" style="width: 100px"></td>
                   <td>${add}</td>
                   <td>${list[i].email}</td>
                   <td>${list[i].fullName}</td>

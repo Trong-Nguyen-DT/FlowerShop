@@ -18,4 +18,7 @@ public interface OrderDetailHistoryRepository extends JpaRepository<OrderDetailH
         return findTop4SellingProducts().subList(0, 4);
     }
     List<OrderDetailHistoryEntity> findAllByOrderHistoryEntity(OrderHistoryEntity orderHistoryEntity);
+
+    @Query("select o from OrderDetailHistoryEntity o where o.orderHistoryEntity.id = ?1")
+    public List<OrderDetailHistoryEntity> findByOrder(Long orderId);
 }

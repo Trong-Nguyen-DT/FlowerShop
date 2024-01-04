@@ -18,7 +18,6 @@ public class AddressConverter {
         address.setStreet(addressEntity.getStreet());
         address.setNameCustomer(addressEntity.getNameCustomer());
         address.setPhoneNumber(addressEntity.getPhoneNumber());
-        address.setCustomer(CustomerConverter.toModel(addressEntity.getCustomerEntity()));
         return address;
     }
 }

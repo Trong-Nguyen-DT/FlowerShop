@@ -13,7 +13,7 @@ $(document).ready(function() {
                 <div class="sb-nav-link-icon"><i class="fas fa-user-alt iconmenu"></i></div>
                 Product
             </a>
-            <a class="nav-link" href="danhmuc.html">
+            <a class="nav-link" href="notify">
                 <div class="sb-nav-link-icon"><i class="fas fa-table iconmenu"></i></div>
                 Notification
             </a>
