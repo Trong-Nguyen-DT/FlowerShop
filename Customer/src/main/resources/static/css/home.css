@@ -2,6 +2,13 @@ body {
     max-width: 1240px;
     margin: 0 auto; /* Để căn giữa nội dung theo chiều ngang */
 }
+#notificationModal {
+    /* các style khác cho modal */
+}
+
+.hidden {
+    display: none;
+}
 
 header {
     display: flex;
@@ -15,7 +22,7 @@ header {
 
     border-radius: 5px;
     width: 70%;
-    background-color: #ef879d;
+    background-color: #f1c4ca;
     display: flex;
     justify-content: center; /* Canh giữa .container_header theo chiều ngang */
     align-items: center;
@@ -35,7 +42,7 @@ header {
 .container-fluid {
     color: white;
     font-weight: bolder;
-    background-color: #ef879d;
+    background-color: #f1c4ca;
 }
 
 .container-fluid li {
@@ -44,6 +51,10 @@ header {
 
 .container-fluid a {
     color: white;
+}
+.container-fluid a:hover
+{
+    color: #fa8196;
 }
 
 .logo img {
@@ -83,7 +94,7 @@ section {
 
 .image-slider {
     display: flex;
-    width: 200%;
+    width: 400%;
     transition: transform 1s ease-in-out;
 }
 
@@ -139,7 +150,11 @@ section {
     justify-content: center;
     width: 100%;
 }
-
+.login_register a
+{
+    color: white;
+    font-weight: bolder;
+}
 .container_nav2 .panner {
     justify-content: center;
     align-items: center; /* Canh giữa theo chiều dọc */
@@ -246,3 +261,77 @@ section {
 {
     width: 70%;
 }
+.slider-container {
+    position: relative; /* Parent container must be relative */
+    display: flex;
+    align-items: center;
+}
+
+.product-container {
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative; /* Needed for absolute positioning of products inside */
+}
+
+.slider-btn {
+    position: absolute; /* Absolute positioning for the buttons */
+    z-index: 10; /* Ensures buttons are above the product items */
+    top: 50%; /* Aligns buttons vertically */
+    transform: translateY(-50%); /* Center buttons vertically */
+    cursor: pointer;
+}
+
+#prevBtn {
+    left: 0; /* Aligns the 'Prev' button to the left */
+}
+
+#nextBtn {
+    right: 0; /* Aligns the 'Next' button to the right */
+}
+.slider-container button
+{
+    border: none;
+    font-weight: bolder;
+}
+#cartIcon {
+    position: relative;
+    display: inline-block; /* or 'block' depending on your layout */
+}
+
+#cartItemCount {
+    position: absolute;
+    bottom: -5px; /* Adjust as needed */
+    right: -5px; /* Adjust as needed */
+    background-color: red; /* for visibility, change as needed */
+    color: white; /* for visibility, change as needed */
+    border-radius: 50%; /* to make it round */
+    padding: 2px 5px; /* adjust padding as needed */
+    font-size: 0.75em; /* adjust size as needed */
+}
+.sub-menu {
+    display: none;
+    /* Your additional styling here */
+}
+.sub-menu li
+{
+    list-style:none;
+}
+.sub-menu li .sub-menu-item
+{
+    text-decoration:none;
+    color: red;
+    font-weight:bolder;
+}
+#usernameSection {
+    position: relative;
+}
+
+.sub-menu {
+    width: 150%;
+    display: none;
+    position: absolute;
+    top: 100%; /* Align the top of the sub-menu with the bottom of the userDropdown */
+    right: 0; /* Align the right edge of the sub-menu with the right edge of userDropdown */
+    /* Add other styling rules for the sub-menu here */
+}
+

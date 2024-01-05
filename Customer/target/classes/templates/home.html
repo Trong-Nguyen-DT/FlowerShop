@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Trang chủ</title>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-messaging.js"></script>
+    <script th:src="@{/js/firebase.js}" defer></script>
 </head>
 <body>
 <th:block th:replace="header.html"></th:block>
 <section>
     <div class="container_section">
         <div class="image-slider">
-            <img th:src="@{/images/product/background.png}">
             <img th:src="@{/images/product/background2.png}">
+            <img th:src="@{/images/product/panner2.png}">
+            <img th:src="@{/images/product/panner3.png}">
+            <img th:src="@{/images/product/panner4.png}">
         </div>
     </div>
 </section>
@@ -39,12 +44,14 @@
             <img th:src="@{/images/product/anhHoa6.png}">
         </div>
     </div>
-    <div class="container_product">
-        <div class="div_product" id="productContainer">
-            <!--            <ul class="product" id="product">-->
-            <!--            </ul>-->
+    <div class="slider-container">
+        <button id="prevBtn" class="slider-btn"><</button>
+        <div id="productContainer" class="product-container">
+            <!-- Product items will be here -->
         </div>
+        <button id="nextBtn" class="slider-btn">></button>
     </div>
+
     <div class="video-container">
         <div class="video">
             <video controls>
@@ -53,19 +60,20 @@
             </video>
         </div>
     </div>
-    <div class="trending">
-        <img th:src="@{/images/product/trending.png}">
-    </div>
+<!--    <div class="trending">-->
+<!--        <img th:src="@{/images/product/trending.png}">-->
+<!--    </div>-->
 <!--    <div class="trend">-->
 <!--        <img th:src="@{/images/product/trend.png}">-->
 <!--    </div>-->
-    <div class="container_product_trend">
-        <div class="div_product_trend" id="productTrendContainer">
-            <!--            <ul class="product" id="product">-->
-            <!--            </ul>-->
-        </div>
-    </div>
+<!--    <div class="container_product_trend">-->
+<!--        <div class="div_product_trend" id="productTrendContainer">-->
+<!--            &lt;!&ndash;            <ul class="product" id="product">&ndash;&gt;-->
+<!--            &lt;!&ndash;            </ul>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
 </nav>
+<th:block th:replace="footer.html"></th:block>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -82,7 +90,7 @@
             }, 1000);
         }
 
-        setInterval(nextSlide, 5000);
+        setInterval(nextSlide, 3000);
     });
 </script>
 <script>
@@ -129,23 +137,51 @@
             const productElements = document.querySelectorAll('.product');
             let currentIndex = 0;
 
-            function showNextProducts() {
-                // Ẩn tất cả sản phẩm
+            function showProducts(startIndex) {
+                // Hide all products
                 productElements.forEach(element => {
                     element.style.display = 'none';
                 });
 
-                // Hiển thị 4 sản phẩm tiếp theo
+                // Show next set of products
                 for (let i = 0; i < 4; i++) {
-                    const nextIndex = (currentIndex + i) % productElements.length;
-                    productElements[nextIndex].style.display = 'inline-block';
+                    const index = (startIndex + i) % productElements.length;
+                    productElements[index].style.display = 'inline-block';
                 }
-
-                currentIndex = (currentIndex + 4) % productElements.length;
             }
 
-            // Lướt qua tự động sau mỗi 5 giây
-            setInterval(showNextProducts, 1000);
+            function showNextProducts() {
+                currentIndex = (currentIndex + 4) % productElements.length;
+                showProducts(currentIndex);
+            }
+
+            function showPrevProducts() {
+                currentIndex = (currentIndex - 4 + productElements.length) % productElements.length;
+                showProducts(currentIndex);
+            }
+
+            // Automatic slide every 3 seconds
+            const sliderInterval = setInterval(showNextProducts, 3000);
+
+            // Event Listeners for Next and Prev buttons
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+
+            nextBtn.addEventListener('click', () => {
+                showNextProducts();
+                resetInterval();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                showPrevProducts();
+                resetInterval();
+            });
+
+            // Reset the interval when buttons are clicked
+            function resetInterval() {
+                clearInterval(sliderInterval);
+                setInterval(showNextProducts, 5000);
+            }
         }
     });
 </script>

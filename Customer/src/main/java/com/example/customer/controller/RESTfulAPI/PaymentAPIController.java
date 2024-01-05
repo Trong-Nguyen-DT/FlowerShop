@@ -91,37 +91,10 @@ public class PaymentAPIController {
         if (payment.getOrder().isPaymentOnline()) {
             url = orderService.createUrlPayment(orderId);
         }
+        System.out.println("vào đc ");
         orderHistoryService.addOrder(name, orderId);
         return ResponseEntity.ok(url);
     }
 
-    @Transactional
-    @GetMapping("success-web")
-    public ResponseEntity<BodyResponse> success(@RequestHeader HttpHeaders headers) {
-        String name = customerValidate.validateCustomer();
-        if (name == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        Long notifyId = notificationService.addNotifyPayment(name, true);
-        notificationService.sendNotifyPayment(headers, notifyId, true);
-        BodyResponse bodyResponse = new BodyResponse();
-        bodyResponse.setSuccess(true);
-        bodyResponse.setMessage("success");
-        return ResponseEntity.ok(bodyResponse);
-    }
 
-    @Transactional
-    @GetMapping("failed-web")
-    public ResponseEntity<BodyResponse> failed(@RequestHeader HttpHeaders headers) {
-        String name = customerValidate.validateCustomer();
-        if (name == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        Long notifyId = notificationService.addNotifyPayment(name, false);
-        notificationService.sendNotifyPayment(headers, notifyId, false);
-        BodyResponse bodyResponse = new BodyResponse();
-        bodyResponse.setSuccess(false);
-        bodyResponse.setMessage("error");
-        return ResponseEntity.ok(bodyResponse);
-    }
 }

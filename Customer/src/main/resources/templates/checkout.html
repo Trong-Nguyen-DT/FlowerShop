@@ -19,16 +19,21 @@
     <!--        </style>-->
 </head>
 <body>
-<th:block th:replace="header1.html"></th:block>
+<th:block th:replace="header.html"></th:block>
 <main>
     <div class="container_main">
-        <div class="panel">
-            <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
-        </div>
-        <div class="checkout">
+<!--        <div class="checkout">-->
             <div class="column_left">
+                <h3>Thông tin người nhận</h3>
+                <div class="getAddress">
+                    <select id="addressOption">
+                        <option value="" selected>Chọn địa chỉ</option>
+                    </select>
+                    <button class="addAddress"> Thêm người nhận</button>
+                </div>
                 <form id="address">
-                    <h3>Thông tin người nhận</h3>
+<!--                    <h3>Thông tin người nhận</h3>-->
+
                     <div>
                         <label>* Họ tên</label>
                         <input class="form-control"  type="text" placeholder="Họ tên" aria-label="default input example">
@@ -36,8 +41,7 @@
                         <input class="form-control" type="text" placeholder="Điện thoại" aria-label="default input example">
                     </div>
 
-
-                    <div class="address">
+                        <div class="address">
                         <select id="city">
                             <option value="" selected>Chọn tỉnh thành</option>
                         </select>
@@ -164,9 +168,9 @@
                 </form>
             </div>
         </div>
-    </div>
+<!--    </div>-->
 </main>
-<th:block th:replace="footer.html"></th:block>
+<!--<th:block th:replace="footer.html"></th:block>-->
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -231,104 +235,155 @@
 </script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const buttonAddress = document.getElementById('buttonAddress');
-        const checkoutForm = document.querySelector('.column_right form');
-        let addressId;
-        buttonAddress.addEventListener('click', function (event) {
 
-            event.preventDefault();
-            // checkoutForm.classList.add('enable-form');
+        document.addEventListener('DOMContentLoaded', function () {
+            const getAddressDiv = document.querySelector('.getAddress');
+            const addressDiv = document.getElementById('address');
+            const addressSelect = document.getElementById('addressOption');
+            const buttonAddress = document.getElementById('buttonAddress');
+            const checkoutForm = document.querySelector('.column_right form');
+            let addressId;
 
-            const nameCustomer = document.querySelector('#address input[placeholder="Họ tên"]').value;
-            const phoneNumber = document.querySelector('#address input[placeholder="Điện thoại"]').value;
-            const city = document.querySelector('#city').value;
-            const district = document.querySelector('#district').value;
-            const ward = document.querySelector('#ward').value;
-            const street = document.querySelector('#address input[placeholder="Đường"]').value;
-
-            // Tạo đối tượng JSON chứa thông tin địa chỉ
-            const addressData = {
-                nameCustomer: nameCustomer,
-                phoneNumber: phoneNumber,
-                city: city,
-                district: district,
-                ward: ward,
-                street: street
-            };
-
-            // Gửi POST request đến API
-            fetch('/api/address/add-address', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(addressData),
-            })
-                .then(response => {
-                    if (response.ok) {
-                        // checkoutForm.classList.add('enable-form');
-                        return response.json();
+            // Function to fetch and display existing addresses
+            function fetchAndDisplayAddresses() {
+                fetch('/api/address', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
                     }
-                    throw new Error('Failed to create address');
                 })
-                .then(data => {
+                    .then(response => response.json())
+                    .then(addresses => {
+                        if (addresses && addresses.length > 0) {
+                            getAddressDiv.style.display = 'block';
+                            addressDiv.style.display = 'none';
+                            addresses.forEach(address => {
+                                const option = document.createElement('option');
+                                option.value = address.id; // Assuming each address has an 'id'
+                                option.textContent = address.nameCustomer+"," +address.city +","+address.district+","+address.ward; // Replace with your actual address field
+                                addressSelect.appendChild(option);
+                            });
+                        } else {
+                            getAddressDiv.style.display = 'none';
+                            addressDiv.style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
 
-                    addressId = data.id;
-                    console.log('Address created:', data);
-                    console.log('idAddress:', addressId);
-                    alert("Thêm địa chỉ thành công")
-                    // } else {
-                    //     console.error('Invalid data format from the server.');
-                    // }
+            // Event listener for the address select change
+            addressSelect.addEventListener('change', function () {
+                addressId = this.value;
+            });
+            buttonAddress.addEventListener('click', function (event) {
+
+                event.preventDefault();
+                // checkoutForm.classList.add('enable-form');
+
+                const nameCustomer = document.querySelector('#address input[placeholder="Họ tên"]').value;
+                const phoneNumber = document.querySelector('#address input[placeholder="Điện thoại"]').value;
+                const city = document.querySelector('#city').value;
+                const district = document.querySelector('#district').value;
+                const ward = document.querySelector('#ward').value;
+                const street = document.querySelector('#address input[placeholder="Đường"]').value;
+
+                // Tạo đối tượng JSON chứa thông tin địa chỉ
+                const addressData = {
+                    nameCustomer: nameCustomer,
+                    phoneNumber: phoneNumber,
+                    city: city,
+                    district: district,
+                    ward: ward,
+                    street: street
+                };
+
+                // Gửi POST request đến API
+                fetch('/api/address/add-address', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(addressData),
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                    .then(response => {
+                        if (response.ok) {
+                            // checkoutForm.classList.add('enable-form');
+                            return response.json();
+                        }
+                        throw new Error('Failed to create address');
+                    })
+                    .then(data => {
+
+                        addressId = data.id;
+                        console.log('Address created:', data);
+                        console.log('idAddress:', addressId);
+                        alert("Thêm địa chỉ thành công")
+                        // } else {
+                        //     console.error('Invalid data format from the server.');
+                        // }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+
+
+            checkoutForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                if (addressSelect.value) {
+                    addressId = addressSelect.value;
+                }
+                // Lấy dữ liệu từ biểu mẫu
+                // const address = document.querySelector("#address input[placeholder='Họ tên']").value;
+                const note = document.querySelector(".column_right textarea").value;
+
+                const voucherInput = document.querySelector(".column_right input[type='text']");
+                let voucher = voucherInput ? voucherInput.value : null;
+                voucher = voucher === '' ? null : voucher;
+
+                const paymentOnline = document.querySelector(".column_right input[name='flexRadioDefault']:checked").id === 'chuyenkhoan';
+
+                const orderData = {
+                    addressId: addressId,
+                    note: note,
+                    voucher: voucher,
+                    paymentOnline: paymentOnline,
+                };
+
+                console.log(orderData)
+
+                fetch("/api/payment/web", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(orderData),
+                })
+                    .then((response) => response.text())
+                    .then((data) => {
+                        console.log(data);
+                        window.location.href = data
+                    })
+                    .catch((error) => {
+                        console.error("Lỗi trong quá trình thanh toán:", error);
+                    });
+            });
+            fetchAndDisplayAddresses();
         });
 
+</script>
 
-        checkoutForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            // Lấy dữ liệu từ biểu mẫu
-            // const address = document.querySelector("#address input[placeholder='Họ tên']").value;
-            const note = document.querySelector(".column_right textarea").value;
-
-            const voucherInput = document.querySelector(".column_right input[type='text']");
-            let voucher = voucherInput ? voucherInput.value : null;
-            voucher = voucher === '' ? null : voucher;
-
-            const paymentOnline = document.querySelector(".column_right input[name='flexRadioDefault']:checked").id === 'chuyenkhoan';
-
-            const orderData = {
-                addressId: addressId,
-                note: note,
-                voucher: voucher,
-                paymentOnline: paymentOnline,
-            };
-
-            console.log(orderData)
-
-            fetch("/api/payment/web", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(orderData),
-            })
-                .then((response) => response.text())
-                .then((data) => {
-                    console.log(data);
-                    window.location.href = data
-                })
-                .catch((error) => {
-                    console.error("Lỗi trong quá trình thanh toán:", error);
-                });
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector('.addAddress').addEventListener('click', function() {
+            document.querySelector('.getAddress').style.display = 'none';
+            document.querySelector('#address').style.display = 'block';
         });
-
     });
 </script>
+
 
 </body>
 </html>
