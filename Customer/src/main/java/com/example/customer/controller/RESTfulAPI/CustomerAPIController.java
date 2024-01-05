@@ -25,6 +25,7 @@ public class CustomerAPIController {
 
     @GetMapping
     public ResponseEntity<CustomerResponse> viewInfo() {
+        System.out.println("in");
         String name = customerValidate.validateCustomer();
         if (name != null) {
             Customer customer = customerService.getCustomerByUsername(name);

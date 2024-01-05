@@ -1,6 +1,7 @@
 package com.example.customer.service;
 
 import com.example.customer.domain.OrderHistory;
+import com.example.customer.entity.OrderHistoryEntity;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface OrderHistoryService
     OrderHistory getOrderByOrderId(Long orderId, String name);
 
     void setReviewed(Long orderId);
+
 }

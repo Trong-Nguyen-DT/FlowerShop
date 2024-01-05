@@ -10,6 +10,7 @@ main
 }
 .container_main
 {
+    display: flex;
     padding-top: 120px;
     width: 90%;
     justify-content: center;
@@ -170,4 +171,8 @@ main button
 .group-button
 {
     float: right;
+}
+.buttonAddress
+{
+    margin-top: 10px;
 }

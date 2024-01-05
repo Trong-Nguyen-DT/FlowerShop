@@ -1,7 +1,6 @@
 package com.example.customer.service.Impl;
 
 import com.example.customer.converter.OrderConverter;
-import com.example.customer.domain.Order;
 import com.example.customer.domain.OrderHistory;
 import com.example.customer.entity.*;
 import com.example.customer.repository.*;
