@@ -20,7 +20,7 @@ public interface OrderService {
     List<OrderEntity> findAllList(Date from, Date to);
     List<OrderHistory> findAllListByStatus(Date from, Date to, String trangthai);
     OrderHistoryEntity addNote(OrderNote orderNote);
-    Order findById(Long id);
+    OrderHistory findById(Long id);
     void updateStatusOrder(OrderStatus orderStatus, Long orderId);
     List<AmountData> getAmountByMonth();
     List<OrderHistory> getOrderByMonth(int month, int year);

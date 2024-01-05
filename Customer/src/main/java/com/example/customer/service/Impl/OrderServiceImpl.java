@@ -120,8 +120,8 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://boconganhflowers.click//payment/success-web");
-        order.setCancelUrl("http://boconganhflowers.click//payment/failed-web");
+        order.setReturnUrl("http://boconganhflowers.click/payment/success-web");
+        order.setCancelUrl("http://boconganhflowers.click/payment/failed-web");
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(
@@ -191,8 +191,8 @@ public class OrderServiceImpl implements OrderService {
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
-        order.setReturnUrl("http://boconganhflowers.click//api/payment/success-app?id=" + orderEntity.getCustomerEntity().getId());
-        order.setCancelUrl("http://boconganhflowers.click//api/payment/failed-app?id=" + orderEntity.getCustomerEntity().getId());
+        order.setReturnUrl("http://boconganhflowers.click/api/payment/success-app?id=" + orderEntity.getCustomerEntity().getId());
+        order.setCancelUrl("http://boconganhflowers.click/api/payment/failed-app?id=" + orderEntity.getCustomerEntity().getId());
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(

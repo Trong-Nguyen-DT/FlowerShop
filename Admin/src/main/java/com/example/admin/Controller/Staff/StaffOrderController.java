@@ -48,7 +48,7 @@ public class StaffOrderController {
 
     @GetMapping("/get-order-by-id")
     public ResponseEntity<?> findById(@RequestParam Long id){
-        Order result = orderService.findById(id);
+        OrderHistory result = orderService.findById(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
