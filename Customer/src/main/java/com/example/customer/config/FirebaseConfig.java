@@ -18,24 +18,11 @@ public class FirebaseConfig {
     @Value("${app.firebase-configuration-file}")
     private String configPath;
 
-    @PostConstruct
-    public void initialize() {
-        try {
-            FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(new ClassPathResource(configPath).getInputStream())).build();
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-            }
-        } catch (IOException e) {
-            System.out.println("lỗi: " + e);
-        }
-    }
-
     @Bean
     FirebaseMessaging firebaseMessaging() throws IOException {
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(new ClassPathResource(configPath).getInputStream())).build();
-        FirebaseApp app = FirebaseApp.initializeApp(options, "myApp");
+        FirebaseApp app = FirebaseApp.initializeApp(options, "my-app");
         return FirebaseMessaging.getInstance(app);
     }
 

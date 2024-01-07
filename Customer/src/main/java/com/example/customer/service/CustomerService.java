@@ -24,4 +24,6 @@ public interface CustomerService {
     void saveTokenAndCookie(Customer customer, String cookie);
 
     String getCustomerByUserId(Long userId);
+
+    void saveToken(String name, String token);
 }

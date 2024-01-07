@@ -130,4 +130,11 @@ public class CustomerServiceImpl implements CustomerService {
     public String getCustomerByUserId(Long userId) {
         return customerRepository.findById(userId).orElseThrow().getUsername();
     }
+
+    @Override
+    public void saveToken(String name, String token) {
+        CustomerEntity customerEntity = customerRepository.findByUsername(name).orElseThrow();
+        customerEntity.setToken(token);
+        customerRepository.save(customerEntity);
+    }
 }

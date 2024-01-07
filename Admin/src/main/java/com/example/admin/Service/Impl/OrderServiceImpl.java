@@ -113,24 +113,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order findById(Long id) {
-        Optional<OrderEntity> order = orderRepository.findById(id);
+    public OrderHistory findById(Long id) {
+        Optional<OrderHistoryEntity> order = orderHistoryRepository.findById(id);
         if (order.isEmpty()){
             throw new MessageException("order not found");
         }
-        return OrderConverter.toModel(order.get());
+        return OrderConverter.toModelHistory(order.get());
     }
 
     @Override
     public void updateStatusOrder(OrderStatus orderStatus, Long orderId) {
         String sttname = orderStatus.name();
-        Optional<OrderEntity> order = orderRepository.findById(orderId);
+        Optional<OrderHistoryEntity> order = orderHistoryRepository.findById(orderId);
         if (order.isEmpty()){
             throw new MessageException("order not found");
         }
         order.get().setOrderStatus(orderStatus);
-        orderRepository.save(order.get());
-        String mail = order.get().getCustomerEntity().getEmail();
+        orderHistoryRepository.save(order.get());
+        String mail = order.get().getEmailCustomer();
         try {
             mailService.sendEmail(mail,"Update status order flower web","Your order"+order.get().getId()+" has been updated to "+order.get().getOrderStatus().name()+" status",
                     false, false);

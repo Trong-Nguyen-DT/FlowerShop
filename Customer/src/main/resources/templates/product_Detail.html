@@ -8,18 +8,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="catalog/view/stylesheet/fonts/fontawesome/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" th:href="@{/css/product_Detail.css}">
-    <script th:src="@{/js/home.js}" defer></script>
     <title>Trang chủ</title>
 </head>
 <body>
-<th:block th:replace="header1.html"></th:block>
+<th:block th:replace="header.html"></th:block>
 <main>
     <div class="container_main">
-        <div class="panel">
-            <p>HẠNH  PHÚC LÀ ĐƯỢC CẦM HOA TRÊN TAY! </p>
-        </div>
-
-
         <div class="product_Detail">
             <div class="column_left">
                 <input type="hidden" th:value="${product.id}" id="id">
@@ -64,9 +58,10 @@
                 <p>Vận chuyển: Miễn phí giao hoa khu vực nội thành TP.HCM & Hà Nội</p>
 
                 <div class="group-button">
-                    <input class="form-control form-control-mg" type="number" placeholder="1" aria-label=".form-control-lg example">
-                    <button id="cartButton" type="submit" onclick="submitForm()">Giỏ Hàng</button>
-                    <!--            <button type="submit" onclick="submitForm()">Đặt Hàng</button>-->
+<!--                    <button class="prev" id="prev">-</button>-->
+<!--                    <span class="quality" id="quality">1</span>-->
+<!--                    <button class="next" id="next">+</button>-->
+                    <button class="cartButton" id="cartButton" type="submit" onclick="submitForm()">Giỏ Hàng</button>
                 </div>
             </div>
         </div>
@@ -90,73 +85,82 @@
         </div>
     </div>
 </main>
-<th:block th:replace="footer.html"></th:block>
-<!--<script>-->
-<!--    document.addEventListener('DOMContentLoaded', function() {-->
 
-<!--        // Hàm gọi API để thêm sản phẩm vào giỏ hàng-->
-<!--        function addToCart(productId) {-->
-<!--            const apiUrl = '/api/cart/add/';-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // const prevButton = document.getElementById('prev');
+        // const nextButton = document.getElementById('next');
+        // const qualitySpan = document.getElementById('quality');
+        //
+        // prevButton.addEventListener('click', function () {
+        //     let quality = parseInt(qualitySpan.textContent, 10);
+        //     if (quality > 1) {
+        //         quality -= 1;
+        //         qualitySpan.textContent = quality;
+        //     }
+        // });
+        //
+        // nextButton.addEventListener('click', function () {
+        //     let quality = parseInt(qualitySpan.textContent, 10);
+        //     quality += 1;
+        //     qualitySpan.textContent = quality;
+        // });
 
-<!--            return fetch(apiUrl + productId, {-->
-<!--                method: 'GET',-->
-<!--            })-->
-<!--                .then(response => response.json())-->
-<!--                .then(data => {-->
-<!--                    if (data.success) {-->
-<!--                        console.log('Item added to the cart successfully');-->
-<!--                    } else {-->
-<!--                        console.log('Failed to add item to the cart');-->
-<!--                    }-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Error:', error);-->
-<!--                    console.log('An error occurred while adding the item to the cart');-->
-<!--                });-->
-<!--        }-->
+        const cartButton = document.getElementById('cartButton');
+        cartButton.addEventListener('click', function () {
+            const productId = document.getElementById('id').value; // Get the product ID
+            // let quality = parseInt(qualitySpan.textContent, 10); // Get the current quantity
+            submitForm(productId);
+        });
 
-<!--        // Hàm gọi API để xem giỏ hàng và cập nhật số lượng sản phẩm trong giỏ hàng-->
-<!--        function viewCart() {-->
-<!--            const apiUrl = '/api/cart';-->
+        function submitForm(productId) {
+            const apiUrl = '/api/cart/add/' + productId ; // Include quantity in the API call
 
-<!--            return fetch(apiUrl, {-->
-<!--                method: 'GET',-->
-<!--                headers: {-->
-<!--                    'Content-Type': 'application/json',-->
-<!--                },-->
-<!--            })-->
-<!--                .then(response => {-->
-<!--                    if (response.ok) {-->
-<!--                        return response.json();-->
-<!--                    }-->
-<!--                    throw new Error('Failed to fetch cart data');-->
-<!--                })-->
-<!--                .then(cartItems => {-->
-<!--                    console.log('Cart items:', cartItems);-->
-<!--                    const totalQuantity = cartItems.reduce((total, item) => total + item.quality, 0);-->
+            fetch(apiUrl, {
+                method: 'GET', // Consider using 'POST' or 'PUT' if appropriate
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // console.log('Item added to the cart successfully with quantity:', quantity);
+                    } else {
+                        console.log('Failed to add item to the cart');
+                    }
+                    viewCart(); // Update cart view
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    console.log('An error occurred while adding the item to the cart');
+                });
+        }
+    function viewCart() {
+            const apiUrl = '/api/cart';
 
-<!--                    document.getElementById('cartItemCount').innerText = totalQuantity.toString();-->
-<!--                    console.log('Tổng số lượng sản phẩm trong giỏ hàng: ' + totalQuantity);-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    console.error('Error:', error);-->
-<!--                });-->
-<!--        }-->
+            return fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Failed to fetch cart data');
+                })
+                .then(cartItems => {
+                    console.log('Cart items:', cartItems);
+                    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-<!--        viewCart();-->
+                    document.getElementById('cartItemCount').innerText = totalQuantity.toString();
+                    console.log('Tổng số lượng sản phẩm trong giỏ hàng: ' + totalQuantity);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    });
 
-<!--        document.getElementById('cartButton').addEventListener('click', function() {-->
-<!--            var productId = document.getElementById('id').value;-->
-<!--            console.log("id:", productId);-->
-<!--            addToCart(productId);-->
-<!--        });-->
-
-<!--        document.getElementById('cartIcon').addEventListener('click', function() {-->
-<!--            viewCart();-->
-<!--            window.location.href = '/cart';-->
-<!--        });-->
-<!--    });-->
-
-<!--</script>-->
+</script>
 </body>
 </html>

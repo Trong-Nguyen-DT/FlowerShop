@@ -92,7 +92,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = OrderConverter.toModel(orderEntity);
         order.setCartItems(orderDetailRepository.findAllByOrderEntity(orderEntity).stream().map(OrderConverter::orderDetailToCartItem).toList());
         payment.setOrder(order);
-        payment.setVoucher(VoucherConverter.toModel(orderEntity.getVoucherEntity()));
+        if (orderEntity.getVoucherEntity() != null) {
+            payment.setVoucher(VoucherConverter.toModel(orderEntity.getVoucherEntity()));
+        }
+
         payment.setAddress(AddressConverter.toModel(orderEntity.getAddressEntity()));
         if (orderEntity.isPaymentOnline()) {
             payment.setMethodPayment("online");
@@ -118,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
         order.setBuyerName(orderEntity.getCustomerEntity().getFullName());
         order.setBuyerPhone(orderEntity.getCustomerEntity().getPhone());
         order.setReturnUrl("http://boconganhflowers.click/payment/success-web");
-        order.setCancelUrl("http://boconganhflowers.click/failed-web");
+        order.setCancelUrl("http://boconganhflowers.click/payment/failed-web");
         order.setExpiredAt(getUnixTimestamp());
         order.setItems(setItems(orderEntity));
         Map<String, String> params = Map.of(
@@ -182,7 +185,7 @@ public class OrderServiceImpl implements OrderService {
 
     private BodyRequest setOrder(OrderEntity orderEntity) {
         BodyRequest order = new BodyRequest();
-        order.setOrderCode(100000 + orderEntity.getId());
+        order.setOrderCode(10000 + orderEntity.getId());
         order.setAmount(orderEntity.getAmount());
         order.setDescription("");
         order.setCustomer_id(orderEntity.getCustomerEntity().getId());

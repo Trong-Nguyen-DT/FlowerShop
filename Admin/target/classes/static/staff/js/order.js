@@ -55,7 +55,7 @@ async function loadDetailOrder(id) {
           <td>${list[i].productId}</td>
           <td>ádasdsad</td>
           <td>${list[i].nameProduct}</td>
-          <td>${formatmoney(list[i].productPrice)}</td>
+          <td>${formatmoney(list[i].priceProduct)}</td>
           <td>${list[i].quantity}</td>
       </tr>`
   }
@@ -65,7 +65,7 @@ async function loadDetailOrder(id) {
 
 async function loadOrderById(id) {
   document.getElementById("idOrder").value = id;
-  var url = 'http://localhost:8080/staff/get-order-by-id?id='+id;
+  var url = 'http://103.153.72.198:8080/staff/get-order-by-id?id='+id;
   const response = await fetch(url, {
     method: 'GET'
   });

@@ -14,7 +14,7 @@
     <div class="container_header">
 
         <div class="logo">
-            <a> <img th:src="@{/images/product/logo.png}"></a>
+            <a> <img th:src="@{/images/product/logo1.png}"></a>
         </div>
 
         <div>
@@ -28,10 +28,10 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="#">Trang chủ</a>
+                                <a class="nav-link" aria-current="page" th:href="@{/}">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sản phẩm</a>
+                                <a class="nav-link" th:href="@{/product}">Sản phẩm</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Ưu đãi</a>
@@ -51,19 +51,211 @@
         <div class="cart">
             <ul>
                 <li>
-                    <a th:href="@{/login}"><span class="material-symbols-outlined">person</span></a>
+                    <div class="login_register" th:if="${!isLoggedIn}">
+                        <a id="userOptions" th:href="@{/login}">
+                            <span class="material-symbols-outlined">person</span>
+                        </a>
+                    </div>
+                        <div class="username" id="usernameSection" th:if="${isLoggedIn}">
+                            <a class="nav-link" href="#" id="userDropdown">
+                                <span class="material-symbols-outlined">person</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><a class="sub-menu-item" href="/customer/info">Tài khoản</a></li>
+                                <li><a class="sub-menu-item" href="/perform_logout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                </li>
+                <li>
+                    <a><span class="material-symbols-outlined" id="notificationIcon">notifications</span></a>
                 </li>
                 <li>
                     <a id="cartIcon">
                         <span class="material-symbols-outlined">shopping_cart</span>
-                        <span class="material-symbols-outlined">notifications</span>
                         <span id="cartItemCount"></span>
                     </a>
                 </li>
             </ul>
         </div>
-
     </div>
+    <div class="modal" tabindex="-1" id="notificationModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thông báo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="notificationContent">Modal body text goes here.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Xem tất cả thông báo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </header>
+<script>
+    document.getElementById('notificationIcon').addEventListener('click', function() {
+        showNotificationForm();
+    });
+    function showNotificationForm() {
+        document.getElementById('notificationModal').style.display = 'block';
+
+    }
+    messaging.onMessage(function(payload) {
+        console.log("Message received. ", payload);
+
+        // Extracting message details
+        var title = payload.notification.title;
+        var image = payload.notification.image; // Assuming it's a URL to an image
+
+        // Update the modal content
+        var modalContent = document.getElementById('notificationContent');
+        modalContent.innerHTML = `<h4>${title}</p><img src="${image}" alt="Notification Image">`;
+
+        // Show the modal
+       showNotificationForm();
+    });
+
+</script>
+<script>
+
+
+    var categoryApiUrl = 'api/category';
+    var productApiUrl = 'api/product/search-category';
+    var categoryTitleContainer = document.getElementById('categoryTitleContainer');
+    var categoryList = document.getElementById('categoryList');
+    var productListContainer = document.getElementById('productList');
+
+    function handleSelection(selectElement) {
+        var selectedValue = selectElement.value;
+        if (selectedValue === 'login') {
+            window.location.href = '/login';
+        } else if (selectedValue === 'register') {
+            window.location.href = '/register';
+        } else {
+            // Xử lý các trường hợp khác khi cần thiết
+        }
+    }
+
+    function fetchAndDisplayAllProducts() {
+        fetch(categoryApiUrl)
+            .then(response => response.json())
+            .then(categories => {
+                categories.forEach(category => {
+                    var categoryListItem = createCategoryListItem(category);
+                    categoryList.appendChild(categoryListItem);
+
+                    fetch(`${productApiUrl}/${category.id}`)
+                        .then(response => response.json())
+                        .then(products => {
+                            displayCategoryAndProducts(category, products);
+                        })
+                        .catch(error => console.error('Lỗi khi lấy sản phẩm:', error));
+                });
+            })
+            .catch(error => console.error('Lỗi khi lấy dữ liệu danh mục:', error));
+    }
+
+    function createCategoryListItem(category) {
+        var listItem = document.createElement('li');
+        listItem.className = 'nav-item';
+
+        var link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = '#';
+        link.textContent = category.name;
+
+        // Sự kiện để fetch và hiển thị sản phẩm cho danh mục đã chọn
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            categoryTitleContainer.innerHTML = '';
+            productListContainer.innerHTML = '';
+
+            var categoryTitle = createCategoryTitle(category);
+            categoryTitleContainer.appendChild(categoryTitle);
+
+            fetchProductsAndDisplay(category.id);
+        });
+
+        listItem.appendChild(link);
+        return listItem;
+    }
+    document.addEventListener('DOMContentLoaded', fetchAndDisplayAllProducts);
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            var productId = document.getElementById('id').value;
+            console.log("id:", productId);
+            viewCart();
+        });
+        function viewCart() {
+            const apiUrl = '/api/cart';
+
+            return fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Failed to fetch cart data');
+                })
+                .then(cartItems => {
+                    console.log('Cart items:', cartItems);
+                    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+                    document.getElementById('cartItemCount').innerText = totalQuantity.toString();
+                    console.log('Tổng số lượng sản phẩm trong giỏ hàng: ' + totalQuantity);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+        viewCart();
+
+        // document.getElementById('cartButton').addEventListener('click', function() {
+        //     var productId = document.getElementById('id').value;
+        //     console.log("id:", productId);
+        //     addToCart(productId);
+        //     viewCart();
+        // });
+        document.getElementById('cartIcon').addEventListener('click', function() {
+            viewCart();
+            window.location.href = '/cart';
+        });
+    });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var userDropdown = document.getElementById('userDropdown');
+        var subMenu = document.querySelector('.sub-menu');
+        subMenu.style.display = 'none';
+
+        userDropdown.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevents the default link behavior
+            // Toggle the display property
+            subMenu.style.display = subMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Optional: Close the sub-menu if clicked outside
+        document.addEventListener('click', function(event) {
+            if (!userDropdown.contains(event.target) && !subMenu.contains(event.target)) {
+                subMenu.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+
+
 </body>
 </html>

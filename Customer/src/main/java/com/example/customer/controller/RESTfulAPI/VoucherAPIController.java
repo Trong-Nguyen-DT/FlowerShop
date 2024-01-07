@@ -15,13 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/voucher")
 public class VoucherAPIController {
-
     @Autowired
     private CustomerValidate customerValidate;
-
     @Autowired
     private VoucherService voucherService;
-
     @GetMapping()
     public ResponseEntity<List<Voucher>> getVoucher() {
         String name = customerValidate.validateCustomer();

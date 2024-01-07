@@ -13,6 +13,11 @@ main
     width: 100%;
     display: flex;
 }
+.success
+{
+    padding-top: 35%;
+    color: #fa8196;
+}
 .left
 {
     width: 50%;
